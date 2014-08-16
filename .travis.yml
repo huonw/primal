@@ -4,6 +4,6 @@ env:
 install:
   - curl https://static.rust-lang.org/rustup.sh | sudo sh -
 script:
-  - cargo build --verbose && cargo test --verbose && cargo doc --verbose
+  - cargo build --verbose && cargo test --verbose && cargo doc --verbose && mv target/doc doc
 after_script:
   - curl http://www.rust-ci.org/artifacts/put?t=$RUSTCI_TOKEN | sh
