@@ -10,10 +10,11 @@ pub struct Primes {
     v: Bitv
 }
 
-pub type PrimeIterator<'a> = iter::Chain<
-    option::Item<uint>,
-    iter::FilterMap<'static, (uint, bool), uint,
-       iter::Enumerate<bitv::Bits<'a>>>>;
+/// Iterator over the primes stored in a sieve.
+pub struct PrimeIterator<'a> {
+    two: bool,
+    iter: iter::Enumerate<bitv::Bits<'a>>,
+}
 
 pub type Factorisation = Vec<(uint, u32)>;
 
@@ -70,14 +71,10 @@ impl Primes {
 
     /// Iterator over the primes stored in this map.
     pub fn primes<'a>(&'a self) -> PrimeIterator<'a> {
-        Some(2).move_iter()
-            .chain(self.v.iter().enumerate().filter_map(|(i, is_prime)| {
-                if is_prime {
-                    Some(2 * i + 1)
-                } else {
-                    None
-                }
-            }))
+        PrimeIterator {
+            two: true,
+            iter: self.v.iter().enumerate()
+        }
     }
 
     /// Factorise `n` into (prime, exponent pairs).
@@ -103,6 +100,30 @@ impl Primes {
         // FIXME handle errors properly
         assert!(n == 1);
         ret
+    }
+}
+
+impl<'a> Iterator<uint> for PrimeIterator<'a> {
+    #[inline]
+    fn next(&mut self) -> Option<uint> {
+        if self.two {
+            self.two = false;
+            Some(2)
+        } else {
+            for (i, is_prime) in self.iter {
+                if is_prime {
+                    return Some(2 * i + 1)
+                }
+            }
+            None
+        }
+    }
+
+    fn size_hint(&self) -> (uint, Option<uint>) {
+        // very loose bounds, could use prime number theorem etc. to
+        // give more precise ones.
+        let (_lo, hi) = self.iter.size_hint();
+        (self.two as uint, hi)
     }
 }
 
@@ -178,4 +199,17 @@ mod tests {
     fn sieve_large(b: &mut Bencher) {
         b.iter(|| Primes::sieve(100_000))
     }
+
+    fn bench_iterate(b: &mut Bencher, upto: uint) {
+        let sieve = Primes::sieve(upto);
+
+        b.iter(|| {
+            sieve.primes().count()
+        })
+    }
+
+    #[bench]
+    fn iterate_small(b: &mut Bencher) { bench_iterate(b, 100) }
+    #[bench]
+    fn iterate_large(b: &mut Bencher) { bench_iterate(b, 100_000) }
 }
