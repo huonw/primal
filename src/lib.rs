@@ -139,17 +139,17 @@ mod tests {
     #[test]
     fn primes_iterator() {
         let primes = Primes::sieve(1000);
-        let expected = &[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
+        let expected = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
 
         assert_eq!(primes.primes().take(expected.len()).collect::<Vec<uint>>().as_slice(),
-                   expected);
+                   expected.as_slice());
     }
 
     #[test]
     fn factor() {
         let primes = Primes::sieve(1000);
 
-        let tests = [
+        let tests: &[(uint, &[(uint, u32)])] = &[
             (1, &[]),
             (2, &[(2u, 1u32)]),
             (3, &[(3, 1)]),
