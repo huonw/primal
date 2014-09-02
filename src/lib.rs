@@ -154,6 +154,23 @@ impl<'a> Iterator<uint> for PrimeIterator<'a> {
     }
 }
 
+impl<'a> DoubleEndedIterator<uint> for PrimeIterator<'a> {
+    #[inline]
+    fn next_back(&mut self) -> Option<uint> {
+        loop {
+            match self.iter.next_back() {
+                Some((i, true)) => return Some(2 * i + 1),
+                Some((_, false)) => {/* continue */}
+                None if self.two => {
+                    self.two = false;
+                    return Some(2)
+                }
+                None => return None
+            }
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     extern crate test;
@@ -186,10 +203,14 @@ mod tests {
 
     #[test]
     fn primes_iterator() {
-        let primes = Primes::sieve(1000);
-        let expected = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
+        let primes = Primes::sieve(50);
+        let mut expected = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
 
-        assert_eq!(primes.primes().take(expected.len()).collect::<Vec<uint>>().as_slice(),
+        assert_eq!(primes.primes().collect::<Vec<uint>>().as_slice(),
+                   expected.as_slice());
+
+        expected.reverse();
+        assert_eq!(primes.primes().rev().collect::<Vec<uint>>().as_slice(),
                    expected.as_slice());
     }
 
