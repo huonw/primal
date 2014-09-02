@@ -1,6 +1,6 @@
 //! Slow and basic handling of primes.
 
-use std::{iter, option, cmp};
+use std::{iter, cmp};
 use std::collections::{Bitv, bitv};
 
 /// Stores information about primes.
@@ -15,8 +15,6 @@ pub struct PrimeIterator<'a> {
     two: bool,
     iter: iter::Enumerate<bitv::Bits<'a>>,
 }
-
-pub type Factorisation = Vec<(uint, u32)>;
 
 impl Primes {
     /// Construct a `Primes` via a sieve, stopping at `upto`.
@@ -77,12 +75,14 @@ impl Primes {
         }
     }
 
-    /// Factorise `n` into (prime, exponent pairs).
+    /// Factorise `n` into (prime, exponent) pairs.
     ///
-    /// Will fail if n has any factors large than the upper bound of
-    /// this `Primes` instance.
-    pub fn factor(&self, mut n: uint) -> Vec<(uint, u32)> {
-        assert!(n > 0);
+    /// Returns None if `n` cannot be factored, specifically if `n` is
+    /// zero, or if `n` has primes factors larger than the largest
+    /// stored in this sieve.
+    pub fn factor(&self, mut n: uint) -> Option<Vec<(uint, u32)>> {
+        if n == 0 { return None }
+
         let mut ret = Vec::new();
 
         for p in self.primes() {
@@ -97,9 +97,13 @@ impl Primes {
                 ret.push((p,count));
             }
         }
-        // FIXME handle errors properly
-        assert!(n == 1);
-        ret
+
+        if n == 1 {
+            Some(ret)
+        } else {
+            // large factors! :(
+            None
+        }
     }
 }
 
@@ -183,10 +187,17 @@ mod tests {
             (10, &[(2, 1), (5, 1)]),
             ];
         for &(n, expected) in tests.iter() {
-            assert_eq!(primes.factor(n), expected.to_vec());
+            assert_eq!(primes.factor(n), Some(expected.to_vec()));
         }
     }
 
+    #[test]
+    fn factor_failures() {
+        let primes = Primes::sieve(30);
+
+        assert_eq!(primes.factor(0), None);
+        assert_eq!(primes.factor(97), None);
+    }
     #[bench]
     fn sieve_small(b: &mut Bencher) {
         b.iter(|| Primes::sieve(100))
