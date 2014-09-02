@@ -147,10 +147,19 @@ impl<'a> Iterator<uint> for PrimeIterator<'a> {
     }
 
     fn size_hint(&self) -> (uint, Option<uint>) {
-        // very loose bounds, could use prime number theorem etc. to
-        // give more precise ones.
-        let (_lo, hi) = self.iter.size_hint();
-        (self.two as uint, hi)
+        let mut iter = *self;
+        // TODO: this doesn't run in constant time, is it super-bad?
+        match (iter.next(), iter.next_back()) {
+            (Some(lo), Some(hi)) => {
+                let (below_hi, above_hi) = estimate_prime_pi(hi);
+                let (below_lo, above_lo) = estimate_prime_pi(lo);
+
+                (below_hi - cmp::min(above_lo, below_hi),
+                 Some(above_hi - below_lo + 1))
+            }
+            (Some(_), None) => (1, Some(1)),
+            (None, _) => (0, Some(0))
+        }
     }
 }
 
@@ -175,6 +184,7 @@ impl<'a> DoubleEndedIterator<uint> for PrimeIterator<'a> {
 mod tests {
     extern crate test;
 
+    use std::iter::range_step;
     use super::{Primes, estimate_prime_pi};
     use self::test::Bencher;
 
@@ -241,6 +251,33 @@ mod tests {
 
         assert_eq!(primes.factor(0), None);
         assert_eq!(primes.factor(97), None);
+    }
+
+    #[test]
+    fn size_hint() {
+        for i in range_step(0, 1000, 100) {
+            let sieve = Primes::sieve(i);
+
+            let mut primes = sieve.primes();
+
+            // check the size hint at each and every iteration
+            loop {
+                let (lo, hi) = primes.size_hint();
+
+                let mut copy = primes;
+                let len = copy.count();
+
+                let next = primes.next();
+
+                assert!(lo <= len && len <= hi.unwrap(),
+                        "found failing size_hint for {} to {}, should satisfy: {} <= {} <= {}",
+                        next, i, lo, len, hi);
+
+                if next.is_none() {
+                    break
+                }
+            }
+        }
     }
 
     #[test]
