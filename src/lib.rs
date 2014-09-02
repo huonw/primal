@@ -282,17 +282,44 @@ mod tests {
 
     #[test]
     fn prime_pi() {
+        fn check(n: u64, pi: u64) {
+            let (lo, hi) = estimate_prime_pi(n);
+            assert!(lo <= pi && pi <= hi,
+                    "found failing estimate at {}, should satisfy: {} <= {} <= {}",
+                    n, lo, pi, hi)
+        }
         let primes = Primes::sieve(1_000_000);
 
         let mut last = 0;
         for (i, p) in primes.primes().enumerate() {
             for j in range(last, p) {
-                let (lo, hi) = estimate_prime_pi(j);
-                assert!(lo <= i && i <= hi,
-                        "found failing estimate at {}, should satisfy: {} <= {} <= {}",
-                        j, lo, i, hi)
+                check(j as u64, i as u64);
             }
             last = p;
+        }
+
+        let sporadic = [
+            (1, 4),
+            (2, 25),
+            (3, 168),
+            (4, 1229),
+            (5, 9592),
+            (6, 78498),
+            (7, 664579),
+            (8, 5761455),
+            (9, 50847534),
+            (10, 455052511),
+            (11, 4118054813),
+            (12, 37607912018),
+            (13, 346065536839),
+            (14, 3204941750802),
+            (15, 29844570422669),
+            (16, 279238341033925),
+            (17, 2623557157654233),
+            ];
+        for &(exponent, real) in sporadic.iter() {
+            let n = num::pow(10, exponent);
+            check(n, real);
         }
     }
 
