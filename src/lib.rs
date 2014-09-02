@@ -107,6 +107,29 @@ impl Primes {
     }
 }
 
+/// Returns estimated bounds for π(n), the number of primes less than
+/// or equal to `n`.
+///
+/// That is, if `(a, b) = estimate_prime_pi(n)`, `a ≤ π(n) ≤ b`.
+pub fn estimate_prime_pi(n: uint) -> (uint, uint) {
+    if n >= 55 {
+        let n = n as f64;
+        let lg = n.ln();
+
+        ((n / (lg + 2.0)) as uint, (n / (lg - 4.0)) as uint)
+    } else {
+        static SMALL_PRIME_PI: [uint, .. 55] =
+            [0, 0, /*2*/1, /*3*/2, 2, /*5*/3, 3, /*7*/ 4, 4, 4,
+             4, /*11*/5, 5, /*13*/ 6, 6, 6, 6, /*17*/ 7, 7, /*19*/8,
+             8, 8, 8, /*23*/9, 9, 9, 9, 9, 9, /*29*/10,
+             10, /*31*/11, 11, 11, 11, 11, 11, /*37*/12, 12, 12,
+             12, /*41*/13, 13, /*43*/14, 14, 14, 14, /*47*/15, 15, 15,
+             15, 15, 15, /*53*/16, 16];
+        let x = SMALL_PRIME_PI[n];
+        (x, x)
+    }
+}
+
 impl<'a> Iterator<uint> for PrimeIterator<'a> {
     #[inline]
     fn next(&mut self) -> Option<uint> {
@@ -135,7 +158,7 @@ impl<'a> Iterator<uint> for PrimeIterator<'a> {
 mod tests {
     extern crate test;
 
-    use super::Primes;
+    use super::{Primes, estimate_prime_pi};
     use self::test::Bencher;
 
     #[test]
@@ -198,6 +221,23 @@ mod tests {
         assert_eq!(primes.factor(0), None);
         assert_eq!(primes.factor(97), None);
     }
+
+    #[test]
+    fn prime_pi() {
+        let primes = Primes::sieve(1_000_000);
+
+        let mut last = 0;
+        for (i, p) in primes.primes().enumerate() {
+            for j in range(last, p) {
+                let (lo, hi) = estimate_prime_pi(j);
+                assert!(lo <= i && i <= hi,
+                        "found failing estimate at {}, should satisfy: {} <= {} <= {}",
+                        j, lo, i, hi)
+            }
+            last = p;
+        }
+    }
+
     #[bench]
     fn sieve_small(b: &mut Bencher) {
         b.iter(|| Primes::sieve(100))
