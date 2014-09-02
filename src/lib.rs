@@ -116,7 +116,7 @@ impl Primes {
 /// than or equal to `n`.
 ///
 /// That is, if (*a*, *b*) = `estimate_prime_pi(n)`, *a* ≤ π(*n*) ≤
-/// *b*. The bounds used are proved in [1] and [2, Theorem 1.10].
+/// *b*. The bounds used are proved in [1] and [2, Théorème 1.10].
 ///
 /// [1]: Barkley Rosser (January 1941). "Explicit Bounds for Some
 /// Functions of Prime Numbers". American Journal of Mathematics 63
@@ -174,8 +174,8 @@ pub fn estimate_prime_pi(n: u64) -> (u64, u64) {
 /// 1-indexed (i.e. *p<sub>1</sub>* = 2, *p<sub>2</sub>* = 3).
 ///
 /// That is, if (<i>a</i>,<i>b</i>) = `estimate_nth_prime(n)`, *a* ≤
-/// *p<sub>n</sub>* ≤ *b*. The bounds used are proved in [1], pages 31
-/// and 32.
+/// *p<sub>n</sub>* ≤ *b*. The bounds used are proved in [1, Théorèmes
+/// 1.6–1.8].
 ///
 /// [1]: Dusart, Pierre. ["Autour de la fonction qui compte le nombre
 /// de nombres premiers."][pdf] PhD diss., Université de Limoges, 1998.
