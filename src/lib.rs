@@ -110,19 +110,18 @@ impl Primes {
     }
 }
 
-// fixme track down Barkley & cite correctly.
-
 /// Returns estimated bounds for π(*n*), the number of primes less
 /// than or equal to `n`.
 ///
 /// That is, if (*a*, *b*) = `estimate_prime_pi(n)`, *a* ≤ π(*n*) ≤
-/// *b*. The bounds used are proved in [1] and [2, Théorème 1.10].
+/// *b*. The bounds used are proved in [1] and [2, Théorème 1.10],
+/// and are summarised in [2, pp. 14–15].
 ///
-/// [1]: Barkley Rosser (January 1941). "Explicit Bounds for Some
-/// Functions of Prime Numbers". American Journal of Mathematics 63
-/// (1): 211–232. doi:10.2307/2371291. JSTOR 2371291.
+/// [1]: Barkley Rosser. "Explicit Bounds for Some Functions of Prime
+/// Numbers". American Journal of Mathematics 63 (1):
+/// 211–232. 1941. doi:[10.2307/2371291](http://dx.doi.org/10.2307/2371291).
 ///
-/// [2]: Dusart, Pierre. ["Autour de la fonction qui compte le nombre
+///  [2]: Dusart, Pierre. ["Autour de la fonction qui compte le nombre
 /// de nombres premiers."][pdf] PhD diss., Université de Limoges,
 /// 1998.
 ///
@@ -162,7 +161,7 @@ pub fn estimate_prime_pi(n: u64) -> (u64, u64) {
             // 4.
             n_ / (lg - 1.1)
         } else {
-            // 2. (is this better than n/(log n - 4.0)?)
+            // 2.
             n_lg * (1.0 + 1.2762 * inv_lg)
         };
 
@@ -174,10 +173,15 @@ pub fn estimate_prime_pi(n: u64) -> (u64, u64) {
 /// 1-indexed (i.e. *p<sub>1</sub>* = 2, *p<sub>2</sub>* = 3).
 ///
 /// That is, if (<i>a</i>,<i>b</i>) = `estimate_nth_prime(n)`, *a* ≤
-/// *p<sub>n</sub>* ≤ *b*. The bounds used are proved in [1, Théorèmes
-/// 1.6–1.8].
+/// *p<sub>n</sub>* ≤ *b*. The bounds used are proved in [1] and [2,
+/// Théorèmes 1.6–1.8], and are summarised in [2, pp. 14–15].
 ///
-/// [1]: Dusart, Pierre. ["Autour de la fonction qui compte le nombre
+/// [1]: Massias, Jean-Pierre; Robin, Guy. ["Bornes effectives pour
+/// certaines fonctions concernant les nombres
+/// premiers."](http://eudml.org/doc/247826) Journal de théorie des
+/// nombres de Bordeaux 8.1 (1996): 215-242.
+///
+/// [2]: Dusart, Pierre. ["Autour de la fonction qui compte le nombre
 /// de nombres premiers."][pdf] PhD diss., Université de Limoges, 1998.
 ///
 /// [pdf]: http://www.unilim.fr/laco/theses/1998/T1998_01.html
@@ -194,19 +198,27 @@ pub fn estimate_nth_prime(n: u64) -> (u64, u64) {
         let lglg = lg.ln();
 
         let lo = lg + lglg - 1.0 + if n > 13196 {
-            // Theorem 1.6
+            // [2] Theorem 1.6
             (lglg - 2.25) / lg
         } else {
+            // [1] Theorem A (ii)
             0.0
         };
 
         let hi = lg + lglg + if n >= 39017 {
-            // Theorem 1.8
+            // [2] Theorem 1.8
             -0.9484
         } else if n >= 27076 {
-            // Theorem 1.7
+            // [2] Theorem 1.7
             -1.0 + (lglg - 1.8) / lg
+        } else if n >= 15985 {
+            // [1] Theorem A (v)
+            -0.9427
+        } else if n >= 13 {
+            // [1] Theorem A (v)
+            -1.0 + 1.8 * lglg / lg
         } else {
+            // [1] Theorem A (iv)
             0.0
         };
         ((n_ * lo) as u64, (n_ * hi) as u64)
