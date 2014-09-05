@@ -22,6 +22,18 @@ pub struct PrimeIterator<'a> {
 impl Primes {
     /// Construct a `Primes` via a sieve, stopping at `upto`.
     pub fn sieve(upto: uint) -> Primes {
+        // having this out-of-line like this is faster (130 us/iter
+        // vs. 111 us/iter on sieve_large), and using a manual while
+        // rather than a `range_step` is a similar speedup.
+        #[inline(never)]
+        fn filter(is_prime: &mut Bitv, upto: uint, check: uint, p: uint) {
+            let mut zero = 2 * check * (check + 1);
+            while zero < upto / 2 {
+                is_prime.set(zero, false);
+                zero += p;
+            }
+        }
+
         // bad stuff happens for very small bounds.
         let upto = cmp::max(10, upto);
 
@@ -31,19 +43,16 @@ impl Primes {
 
         // multiples of 3 aren't prime (3 is handled separately, so
         // the ticking works properly)
-        for i in iter::range_step(4, upto / 2, 3) {
-            is_prime.set(i, false);
-        }
+        filter(&mut is_prime, upto, 1, 3);
 
-        let mut check = 2; // 5
-        let mut tick = 1; // step by 2 to get 7
         let bound = (upto as f64).sqrt() as uint + 1;
+        // skip 2.
+        let mut check = 2;
+        let mut tick = if check % 3 == 1 {2} else {1};
+
         while check <= bound {
             if is_prime[check] {
-                let p = 2 * check + 1;
-                for zero in iter::range_step(2 * check * (check + 1), upto / 2, p) {
-                    is_prime.set(zero, false);
-                }
+                filter(&mut is_prime, upto, check, 2 * check + 1)
             }
 
             check += tick;
