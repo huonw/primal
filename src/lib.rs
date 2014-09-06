@@ -64,7 +64,7 @@ impl Primes {
 
     /// The largest number stored.
     pub fn upper_bound(&self) -> uint {
-        self.v.len() * 2 + 1
+        (self.v.len() - 1) * 2 + 1
     }
 
     /// Check if `n` is prime, failing if `n` is larger than the upper
@@ -314,6 +314,19 @@ mod tests {
         for &(n, expected) in tests.iter() {
             assert_eq!(primes.is_prime(n), expected);
         }
+    }
+
+    #[test]
+    fn upper_bound() {
+        let primes = Primes::sieve(30);
+        assert_eq!(primes.upper_bound(), 29);
+        let primes = Primes::sieve(31);
+        assert_eq!(primes.upper_bound(), 31);
+
+        let primes = Primes::sieve(30000);
+        assert_eq!(primes.upper_bound(), 29999);
+        let primes = Primes::sieve(30001);
+        assert_eq!(primes.upper_bound(), 30001);
     }
 
     #[test]
