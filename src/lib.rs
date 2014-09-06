@@ -6,7 +6,9 @@ use std::collections::{Bitv, bitv};
 #[allow(dead_code)]
 mod tables;
 
-/// Stores information about primes.
+/// Stores information about primes up to some limit.
+///
+/// This uses at least `limit / 16 + O(1)` bytes of storage.
 pub struct Primes {
     // This only stores odd numbers, since even numbers are mostly
     // non-prime.
@@ -24,39 +26,44 @@ pub struct PrimeIterator<'a> {
 pub type Factors = Vec<(uint, uint)>;
 
 impl Primes {
-    /// Construct a `Primes` via a sieve, stopping at `upto`.
-    pub fn sieve(upto: uint) -> Primes {
+    /// Construct a `Primes` via a sieve up to at least `limit`.
+    ///
+    /// This stores all primes less than `limit` (and possibly some
+    /// more), allowing for very efficient iteration and primality
+    /// testing below this, and guarantees that all numbers up to
+    /// `limit^2` can be factorised.
+    pub fn sieve(limit: uint) -> Primes {
         // having this out-of-line like this is faster (130 us/iter
         // vs. 111 us/iter on sieve_large), and using a manual while
         // rather than a `range_step` is a similar speedup.
         #[inline(never)]
-        fn filter(is_prime: &mut Bitv, upto: uint, check: uint, p: uint) {
+        fn filter(is_prime: &mut Bitv, limit: uint, check: uint, p: uint) {
             let mut zero = 2 * check * (check + 1);
-            while zero < upto / 2 {
+            while zero < limit / 2 {
                 is_prime.set(zero, false);
                 zero += p;
             }
         }
 
         // bad stuff happens for very small bounds.
-        let upto = cmp::max(10, upto);
+        let limit = cmp::max(10, limit);
 
-        let mut is_prime = Bitv::with_capacity((upto + 1) / 2, true);
+        let mut is_prime = Bitv::with_capacity((limit + 1) / 2, true);
         // 1 isn't prime
         is_prime.set(0, false);
 
         // multiples of 3 aren't prime (3 is handled separately, so
         // the ticking works properly)
-        filter(&mut is_prime, upto, 1, 3);
+        filter(&mut is_prime, limit, 1, 3);
 
-        let bound = (upto as f64).sqrt() as uint + 1;
+        let bound = (limit as f64).sqrt() as uint + 1;
         // skip 2.
         let mut check = 2;
         let mut tick = if check % 3 == 1 {2} else {1};
 
         while check <= bound {
             if is_prime[check] {
-                filter(&mut is_prime, upto, check, 2 * check + 1)
+                filter(&mut is_prime, limit, check, 2 * check + 1)
             }
 
             check += tick;
@@ -71,14 +78,14 @@ impl Primes {
         (self.v.len() - 1) * 2 + 1
     }
 
-    /// Check if `n` is prime, failing if `n` is larger than the upper
-    /// bound of this Primes instance.
+    /// Check if `n` is prime, possibly failing if `n` is larger than
+    /// the upper bound of this Primes instance.
     pub fn is_prime(&self, n: uint) -> bool {
-        assert!(n <= self.upper_bound());
         if n % 2 == 0 {
             // 2 is the evenest prime.
             n == 2
         } else {
+            assert!(n <= self.upper_bound());
             self.v[n / 2]
         }
     }
