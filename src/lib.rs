@@ -90,8 +90,18 @@ impl Primes {
     /// Factorise `n` into (prime, exponent) pairs.
     ///
     /// Returns None if `n` cannot be factored, specifically if `n` is
-    /// zero, or if `n` has primes factors larger than the largest
-    /// stored in this sieve.
+    /// zero, or if the prime factors of `n` are too large, which is
+    /// either:
+    ///
+    /// - a prime factor larger than `U^2`
+    /// - more than one prime factor between `U` and `U^2`
+    ///
+    /// where `U` is the upper bound of the primes stored in this
+    /// sieve.
+    ///
+    /// Notably, any number between `U` and `U^2` can always be fully
+    /// factored, since these numbers are guaranteed to only have zero
+    /// or one prime factors larger than `U`.
     pub fn factor(&self, mut n: uint) -> Option<Vec<(uint, u32)>> {
         if n == 0 { return None }
 
@@ -109,13 +119,20 @@ impl Primes {
                 ret.push((p,count));
             }
         }
-
-        if n == 1 {
-            Some(ret)
-        } else {
-            // large factors! :(
-            None
+        if n != 1 {
+            let b = self.upper_bound();
+            if b * b >= n {
+                // n is not divisible by anything from 1...sqrt(n), so
+                // must be prime itself! (That is, even though we
+                // don't know this prime specifically, we can infer
+                // that it must be prime.)
+                ret.push((n, 1));
+            } else {
+                // large factors :(
+                return None
+            }
         }
+        Some(ret)
     }
 }
 
@@ -357,9 +374,53 @@ mod tests {
             (8, &[(2, 3)]),
             (9, &[(3, 2)]),
             (10, &[(2, 1), (5, 1)]),
+
+            (2*2*2*2*2 * 3*3*3*3*3, &[(2, 5), (3,5)]),
+            (2*3*5*7*11*13*17*19, &[(2,1), (3,1), (5,1), (7,1), (11,1), (13,1), (17,1), (19,1)]),
+            // a factor larger than that stored in the map
+            (7561, &[(7561, 1)]),
+            (2*7561, &[(2, 1), (7561, 1)]),
+            (4*5*7561, &[(2, 2), (5,1), (7561, 1)]),
             ];
         for &(n, expected) in tests.iter() {
             assert_eq!(primes.factor(n), Some(expected.to_vec()));
+        }
+    }
+
+    #[test]
+    fn factor_compare() {
+        let short = Primes::sieve(30);
+        let long = Primes::sieve(10000);
+
+        let short_lim = short.upper_bound() * short.upper_bound() + 1;
+        // every number less than bound^2 can be factored (since they
+        // always have a factor <= bound).
+        for n in range(0, short_lim) {
+            assert_eq!(short.factor(n), long.factor(n))
+        }
+        // larger numbers can only sometimes be factored
+        'next_n: for n in range(short_lim, 10000) {
+            let possible = short.factor(n);
+            let real = long.factor(n);
+
+            let mut seen_small = false;
+            for &(p,i) in real.as_ref().unwrap().iter() {
+                if p >= short_lim {
+                    // has a factor that's way too large
+                    assert_eq!(possible, None);
+                    continue 'next_n
+                } else if p > short.upper_bound() {
+                    if seen_small || i > 1 {
+                        // has more than one factor that's in the
+                        // intermediate zone so we can't factor it.
+                        assert_eq!(possible, None);
+                        continue 'next_n
+                    } else {
+                        seen_small = true
+                    }
+                }
+            }
+            assert_eq!(possible, real)
         }
     }
 
@@ -368,7 +429,11 @@ mod tests {
         let primes = Primes::sieve(30);
 
         assert_eq!(primes.factor(0), None);
-        assert_eq!(primes.factor(97), None);
+        // can only handle one large factor
+        assert_eq!(primes.factor(31 * 31), None);
+
+        // prime that's too large (bigger than 30*30).
+        assert_eq!(primes.factor(7561), None)
     }
 
     #[test]
