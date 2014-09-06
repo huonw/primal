@@ -19,6 +19,10 @@ pub struct PrimeIterator<'a> {
     iter: iter::Enumerate<bitv::Bits<'a>>,
 }
 
+/// (prime, exponent) pairs storing the prime factorisation of a
+/// number.
+pub type Factors = Vec<(uint, uint)>;
+
 impl Primes {
     /// Construct a `Primes` via a sieve, stopping at `upto`.
     pub fn sieve(upto: uint) -> Primes {
@@ -89,11 +93,13 @@ impl Primes {
 
     /// Factorise `n` into (prime, exponent) pairs.
     ///
-    /// Returns None if `n` cannot be factored, specifically if `n` is
-    /// zero, or if the prime factors of `n` are too large, which is
-    /// either:
+    /// Returns `Err((leftover, partial factorisation))` if `n` cannot
+    /// be fully factored, or if `n` is zero (`leftover == 0`). A
+    /// number can not be completely factored if and only if the prime
+    /// factors of `n` are too large for this sieve, that is, if there
+    /// is
     ///
-    /// - a prime factor larger than `U^2`
+    /// - a prime factor larger than `U^2`, or
     /// - more than one prime factor between `U` and `U^2`
     ///
     /// where `U` is the upper bound of the primes stored in this
@@ -102,8 +108,8 @@ impl Primes {
     /// Notably, any number between `U` and `U^2` can always be fully
     /// factored, since these numbers are guaranteed to only have zero
     /// or one prime factors larger than `U`.
-    pub fn factor(&self, mut n: uint) -> Option<Vec<(uint, u32)>> {
-        if n == 0 { return None }
+    pub fn factor(&self, mut n: uint) -> Result<Factors, (uint, Factors)> {
+        if n == 0 { return Err((0, vec![])) }
 
         let mut ret = Vec::new();
 
@@ -121,6 +127,7 @@ impl Primes {
         }
         if n != 1 {
             let b = self.upper_bound();
+            println!("{} {} {}", b, b*b, n);
             if b * b >= n {
                 // n is not divisible by anything from 1...sqrt(n), so
                 // must be prime itself! (That is, even though we
@@ -129,10 +136,10 @@ impl Primes {
                 ret.push((n, 1));
             } else {
                 // large factors :(
-                return None
+                return Err((n, ret))
             }
         }
-        Some(ret)
+        Ok(ret)
     }
 }
 
@@ -363,9 +370,9 @@ mod tests {
     fn factor() {
         let primes = Primes::sieve(1000);
 
-        let tests: &[(uint, &[(uint, u32)])] = &[
+        let tests: &[(uint, &[(uint, uint)])] = &[
             (1, &[]),
-            (2, &[(2u, 1u32)]),
+            (2, &[(2u, 1)]),
             (3, &[(3, 1)]),
             (4, &[(2, 2)]),
             (5, &[(5, 1)]),
@@ -383,7 +390,7 @@ mod tests {
             (4*5*7561, &[(2, 2), (5,1), (7561, 1)]),
             ];
         for &(n, expected) in tests.iter() {
-            assert_eq!(primes.factor(n), Some(expected.to_vec()));
+            assert_eq!(primes.factor(n), Ok(expected.to_vec()));
         }
     }
 
@@ -393,6 +400,7 @@ mod tests {
         let long = Primes::sieve(10000);
 
         let short_lim = short.upper_bound() * short.upper_bound() + 1;
+        println!("{}", short_lim)
         // every number less than bound^2 can be factored (since they
         // always have a factor <= bound).
         for n in range(0, short_lim) {
@@ -401,26 +409,37 @@ mod tests {
         // larger numbers can only sometimes be factored
         'next_n: for n in range(short_lim, 10000) {
             let possible = short.factor(n);
-            let real = long.factor(n);
+            let real = long.factor(n).unwrap();
 
-            let mut seen_small = false;
-            for &(p,i) in real.as_ref().unwrap().iter() {
-                if p >= short_lim {
-                    // has a factor that's way too large
-                    assert_eq!(possible, None);
-                    continue 'next_n
+            let mut seen_small = None;
+            for (this_idx, &(p,i)) in real.iter().enumerate() {
+                let last_short_prime = if p >= short_lim {
+                    this_idx
                 } else if p > short.upper_bound() {
-                    if seen_small || i > 1 {
-                        // has more than one factor that's in the
-                        // intermediate zone so we can't factor it.
-                        assert_eq!(possible, None);
-                        continue 'next_n
-                    } else {
-                        seen_small = true
+                    match seen_small {
+                        Some(idx) => idx,
+                        None if i > 1 => this_idx,
+                        None => {
+                            // we can cope with one
+                            seen_small = Some(this_idx);
+                            continue
+                        }
                     }
-                }
+                } else {
+                    // small enough
+                    continue
+                };
+
+                // break into the two parts
+                let (low, hi) = real.as_slice().split_at(last_short_prime);
+                let leftover = hi.iter().fold(1, |x, &(p, i)| x * num::pow(p, i));
+
+                assert_eq!(possible, Err((leftover, low.to_vec())));
+                continue 'next_n;
             }
-            assert_eq!(possible, real)
+
+            // if we're here, we know that everything should match
+            assert_eq!(possible, Ok(real))
         }
     }
 
@@ -428,12 +447,19 @@ mod tests {
     fn factor_failures() {
         let primes = Primes::sieve(30);
 
-        assert_eq!(primes.factor(0), None);
+        assert_eq!(primes.factor(0),
+                   Err((0, vec![])));
         // can only handle one large factor
-        assert_eq!(primes.factor(31 * 31), None);
+        assert_eq!(primes.factor(31 * 31),
+                   Err((31 * 31, vec![])));
+        assert_eq!(primes.factor(2 * 3 * 31 * 31),
+                   Err((31 * 31, vec![(2, 1), (3, 1)])));
 
         // prime that's too large (bigger than 30*30).
-        assert_eq!(primes.factor(7561), None)
+        assert_eq!(primes.factor(7561),
+                   Err((7561, vec![])));
+        assert_eq!(primes.factor(2 * 3 * 7561),
+                   Err((7561, vec![(2, 1), (3, 1)])));
     }
 
     #[test]
