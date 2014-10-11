@@ -23,13 +23,13 @@ fn mod_exp(mut x: u64, mut d: u64, n: u64) -> u64 {
 /// upper bound will be faster using the `is_prime` method of a
 /// `Primes` instance.
 pub fn is_prime_miller_rabin(n: u64) -> bool {
-    static HINT: &'static [u64] = &[2];
+    const HINT: &'static [u64] = &[2];
 
     // we have a strict upper bound, so we can just use the witness
     // table of Pomerance, Selfridge & Wagstaff and Jeaschke to be as
     // efficient as possible, without having to fall back to
     // randomness.
-    static WITNESSES: &'static [(u64, &'static [u64])] =
+    const WITNESSES: &'static [(u64, &'static [u64])] =
         [(2_046, HINT),
          (1_373_652, &[2, 3]),
          (9_080_190, &[31, 73]),
@@ -78,7 +78,7 @@ mod tests {
 
     #[test]
     fn miller_rabin() {
-        static LIMIT: uint = 1_000_000;
+        const LIMIT: uint = 1_000_000;
         let sieve = Primes::sieve(LIMIT);
         for x in range(0, LIMIT) {
             let s = sieve.is_prime(x);

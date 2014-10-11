@@ -94,7 +94,7 @@ mod tests {
 
         let sieve = Primes::sieve(200);
         let mut primes = sieve.primes();
-        static MAX: f64 = 0xFFFF_FFFF_FFFF_FFFFu64 as f64;
+        const MAX: f64 = 0xFFFF_FFFF_FFFF_FFFFu64 as f64;
         // test a whole pile of (semi)primes
         loop {
             let p = match primes.next() {

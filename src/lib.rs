@@ -85,8 +85,8 @@ mod tests {
     use self::test::Bencher;
 
 
-    static N: uint = 1_000_000;
-    static STEP: uint = 101;
+    const N: uint = 1_000_000;
+    const STEP: uint = 101;
     #[bench]
     fn bench_miller_rabin_tests(b: &mut Bencher) {
         b.iter(|| {

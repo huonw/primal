@@ -32,7 +32,7 @@ fn main() {
     let stop_at = sieve.primes().nth(LARGEST_PI as uint).unwrap();
 
     println!("// created with small_prime_props.rs");
-    print!("pub static SMALL_PRIME_PI: [{}, .. {}] = [", u_type(LARGEST_PI), stop_at);
+    print!("pub const SMALL_PRIME_PI: [{}, .. {}] = [", u_type(LARGEST_PI), stop_at);
     let mut width = LINE_LIMIT;
 
     macro_rules! check_width {
@@ -77,8 +77,8 @@ fn main() {
     println!("];");
 
     let count = sieve.primes().take_while(|p| *p as u64 <= LARGEST_PRIME).count();
-    println!("pub static SMALL_PRIME_LIMIT: uint = {};", LARGEST_PRIME);
-    print!("pub static SMALL_PRIMES: [{}, .. {}] = [", u_type(LARGEST_PRIME), count);
+    println!("pub const SMALL_PRIME_LIMIT: uint = {};", LARGEST_PRIME);
+    print!("pub const SMALL_PRIMES: [{}, .. {}] = [", u_type(LARGEST_PRIME), count);
     width = LINE_LIMIT;
 
     for p in sieve.primes().take_while(|p| *p as u64 <= LARGEST_PRIME) {
