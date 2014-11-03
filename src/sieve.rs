@@ -384,6 +384,10 @@ mod tests {
     fn sieve_large(b: &mut Bencher) {
         b.iter(|| Primes::sieve(100_000))
     }
+    #[bench]
+    fn sieve_huge(b: &mut Bencher) {
+        b.iter(|| Primes::sieve(10_000_000))
+    }
 
     fn bench_iterate(b: &mut Bencher, upto: uint) {
         let sieve = Primes::sieve(upto);

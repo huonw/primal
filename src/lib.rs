@@ -60,11 +60,13 @@ extern crate "num" as num_;
 #[cfg(test)] extern crate test;
 
 pub use estimate::{estimate_prime_pi, estimate_nth_prime};
+//pub use fast_sieve::Sieve;
 pub use is_prime::{is_prime_miller_rabin};
 pub use perfect_power::{as_perfect_power, as_prime_power};
 pub use sieve::{Primes, PrimeIterator};
 
 mod estimate;
+mod fast_sieve;
 mod is_prime;
 mod perfect_power;
 mod sieve;
