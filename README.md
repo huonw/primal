@@ -19,4 +19,4 @@ the primes, and factorisation via trial division.
 (Despite the name, it can sieve the primes up to 10<sup>9</sup> in
 about 5 seconds.)
 
-[**Documentation**](http://www.rust-ci.org/huonw/slow_primes/doc/slow_primes/)
+[**Documentation**](http://huonw.github.io/slow_primes/slow_primes/)
