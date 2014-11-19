@@ -3,6 +3,7 @@
 
 use std::collections::{Bitv};
 use std::{cmp};
+use std::num::Float;
 
 use Primes;
 

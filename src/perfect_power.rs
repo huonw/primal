@@ -1,5 +1,6 @@
 use std::num;
 use num_::Integer;
+use std::num::{Float, Int};
 
 /// Returns integers `(y, k)` such that `x = y^k` with `k` maximised
 /// (other than for `x = 0, 1`, in which case `y = x`, `k = 1`).
@@ -61,7 +62,7 @@ pub fn as_prime_power(x: u64) -> Option<(u64, u8)> {
 
 #[cfg(test)]
 mod tests {
-    use std::num;
+    use std::num::{mod, Float};
     use Primes;
 
     use super::{as_perfect_power, as_prime_power};

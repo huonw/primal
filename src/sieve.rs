@@ -1,5 +1,6 @@
 use std::collections::{Bitv, bitv};
 use std::{iter, cmp};
+use std::num::Float;
 
 use Factors;
 
