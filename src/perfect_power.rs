@@ -1,4 +1,3 @@
-use std::num;
 use num_::Integer;
 use std::num::{Float, Int};
 
@@ -34,7 +33,7 @@ pub fn as_perfect_power(x: u64) -> (u64, u8) {
     while expn <= floor_log_2 {
         let factor = x_.powf(1.0/expn as f64).round() as u64;
 
-        if num::pow(factor, expn) == x {
+        if factor.pow(expn) == x {
             last = (factor, expn as u8);
             // if x is a 2nd and 5th power, it's going to be a 10th
             // power too, meaning we can search faster.
