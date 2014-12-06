@@ -118,7 +118,7 @@ pub fn estimate_nth_prime(n: u64) -> (u64, u64) {
 
 #[cfg(test)]
 mod tests {
-    use std::num;
+    use std::num::Int;
 
     use Primes;
     use super::{estimate_prime_pi, estimate_nth_prime};
@@ -161,7 +161,7 @@ mod tests {
             (17, 2623557157654233),
             ];
         for &(exponent, real) in sporadic.iter() {
-            let n = num::pow(10, exponent);
+            let n = 10u64.pow(exponent);
             check(n, real);
         }
     }
@@ -201,7 +201,7 @@ mod tests {
             ];
 
         for &(exponent, nth_prime) in sporadic.iter() {
-            let n = num::pow(10, exponent);
+            let n = 10u64.pow(exponent);
             check(n, nth_prime);
         }
     }

@@ -198,7 +198,7 @@ impl<'a> DoubleEndedIterator<uint> for PrimeIterator<'a> {
 mod tests {
     use test::Bencher;
     use super::Primes;
-    use std::num;
+    use std::num::Int;
     use std::iter::range_step;
 
     #[test]
@@ -316,7 +316,7 @@ mod tests {
 
                 // break into the two parts
                 let (low, hi) = real.as_slice().split_at(last_short_prime);
-                let leftover = hi.iter().fold(1, |x, &(p, i)| x * num::pow(p, i));
+                let leftover = hi.iter().fold(1, |x, &(p, i)| x * p.pow(i));
 
                 assert_eq!(possible, Err((leftover, low.to_vec())));
                 continue 'next_n;
@@ -357,7 +357,7 @@ mod tests {
             loop {
                 let (lo, hi) = primes.size_hint();
 
-                let mut copy = primes;
+                let copy = primes;
                 let len = copy.count();
 
                 let next = primes.next();

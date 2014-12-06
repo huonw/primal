@@ -61,7 +61,7 @@ pub fn as_prime_power(x: u64) -> Option<(u64, u8)> {
 
 #[cfg(test)]
 mod tests {
-    use std::num::{mod, Float};
+    use std::num::{Float, Int};
     use Primes;
 
     use super::{as_perfect_power, as_prime_power};
@@ -107,7 +107,7 @@ mod tests {
             for (q, is_prime) in Some((1, true)).into_iter().chain(subprimes) {
                 let pq = p * q as u64;
                 for n in range(1, MAX.log(pq as f64) as uint) {
-                    let x = num::pow(pq, n);
+                    let x = pq.pow(n);
 
                     let expected = (pq, n as u8);
                     assert_eq!(as_perfect_power(x), expected);
