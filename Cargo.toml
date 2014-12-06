@@ -19,4 +19,4 @@ and state-of-the-art estimation of upper and lower bounds for π(n)
 """
 
 [dependencies]
-num = "~0.0.3"
+num = "~0.0.5"
