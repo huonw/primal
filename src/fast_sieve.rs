@@ -1,5 +1,4 @@
 #![allow(dead_code)]
-// inspired by http://primesieve.org/segmented_sieve.html
 
 use std::collections::{Bitv};
 use std::{cmp};
@@ -7,7 +6,12 @@ use std::num::Float;
 
 use Primes;
 
-pub struct Sieve {
+/// A segmented sieve that yields only a small run of primes at a
+/// time.
+///
+/// This is heavily inspired by this [segmented
+/// sieve](http://primesieve.org/segmented_sieve.html) code.
+pub struct StreamingSieve {
     small: Primes,
     sieve: Bitv,
     primes: Vec<uint>,
@@ -22,13 +26,15 @@ const CACHE: uint = 32 << 10;
 // 8 for the bit vector, 2 for storing odd numbers only
 const SEG_SIZE: uint = 16 * CACHE;
 
-impl Sieve {
-    pub fn new(limit: uint) -> Sieve {
+impl StreamingSieve {
+    /// Create a new instance of the streaming sieve that will
+    /// correctly progressively filter primes up to `limit`.
+    pub fn new(limit: uint) -> StreamingSieve {
         let small = Primes::sieve((limit as f64).sqrt() as uint + 1);
         let current = 2;
         let low = 0;
 
-        Sieve {
+        StreamingSieve {
             small: small,
             sieve: Bitv::with_capacity(SEG_SIZE, false),
             primes: vec![],
@@ -40,6 +46,15 @@ impl Sieve {
         }
     }
 
+    /// Extract the next chunk of filtered primes, the return value is
+    /// `Some((low, v))` or `None` if the sieve has reached the limit.
+    ///
+    /// The vector stores bits for each odd number starting at `low`.
+    /// Bit `n` of `v` is set if and only if `low + 2 * n + 1` is
+    /// prime.
+    ///
+    /// NB. the prime 2 is not included in any of these sieves and so
+    /// needs special handling.
     pub fn next(&mut self) -> Option<(uint, &Bitv)> {
         if self.low >= self.limit {
             return None
@@ -80,12 +95,12 @@ impl Sieve {
 #[cfg(test)]
 mod tests {
     use test::Bencher;
-    use super::Sieve;
+    use super::StreamingSieve;
     use std::iter::range_step;
 
     #[test]
     fn test() {
-        let mut sieve = Sieve::new(2000);
+        let mut sieve = StreamingSieve::new(2000);
         let primes = ::Primes::sieve(2000);
 
         loop {
@@ -105,7 +120,7 @@ mod tests {
 
     fn run(b: &mut Bencher, n: uint) {
         b.iter(|| {
-            let mut sieve = Sieve::new(n);
+            let mut sieve = StreamingSieve::new(n);
             while sieve.next().is_some() {}
         })
     }
