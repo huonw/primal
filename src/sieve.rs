@@ -14,9 +14,10 @@ pub struct Primes {
 }
 
 /// Iterator over the primes stored in a sieve.
+#[derive(Clone)]
 pub struct PrimeIterator<'a> {
     two: bool,
-    iter: iter::Enumerate<bitv::Bits<'a>>,
+    iter: iter::Enumerate<bitv::Iter<'a>>,
 }
 
 impl Primes {
@@ -42,7 +43,7 @@ impl Primes {
         // bad stuff happens for very small bounds.
         let limit = cmp::max(10, limit);
 
-        let mut is_prime = Bitv::with_capacity((limit + 1) / 2, true);
+        let mut is_prime = Bitv::from_elem((limit + 1) / 2, true);
         // 1 isn't prime
         is_prime.set(0, false);
 
@@ -160,7 +161,7 @@ impl<'a> Iterator<uint> for PrimeIterator<'a> {
     }
 
     fn size_hint(&self) -> (uint, Option<uint>) {
-        let mut iter = *self;
+        let mut iter = self.clone();
         // TODO: this doesn't run in constant time, is it super-bad?
         match (iter.next(), iter.next_back()) {
             (Some(lo), Some(hi)) => {
@@ -284,7 +285,7 @@ mod tests {
         let long = Primes::sieve(10000);
 
         let short_lim = short.upper_bound() * short.upper_bound() + 1;
-        println!("{}", short_lim)
+
         // every number less than bound^2 can be factored (since they
         // always have a factor <= bound).
         for n in range(0, short_lim) {
@@ -357,7 +358,7 @@ mod tests {
             loop {
                 let (lo, hi) = primes.size_hint();
 
-                let copy = primes;
+                let copy = primes.clone();
                 let len = copy.count();
 
                 let next = primes.next();

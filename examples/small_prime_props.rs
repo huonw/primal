@@ -32,7 +32,7 @@ fn main() {
     let stop_at = sieve.primes().nth(LARGEST_PI as uint).unwrap();
 
     println!("// created with small_prime_props.rs");
-    print!("pub const SMALL_PRIME_PI: [{}, .. {}] = [", u_type(LARGEST_PI), stop_at);
+    print!("pub const SMALL_PRIME_PI: [{}; {}] = [", u_type(LARGEST_PI), stop_at);
     let mut width = LINE_LIMIT;
 
     macro_rules! check_width {

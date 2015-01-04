@@ -102,7 +102,7 @@ mod tests {
                 None => break
             };
 
-            let subprimes = primes.map(|x| (x, false));
+            let subprimes = primes.clone().map(|x| (x, false));
             // include 1 to test p itself.
             for (q, is_prime) in Some((1, true)).into_iter().chain(subprimes) {
                 let pq = p * q as u64;
