@@ -144,7 +144,8 @@ impl Primes {
     }
 }
 
-impl<'a> Iterator<uint> for PrimeIterator<'a> {
+impl<'a> Iterator for PrimeIterator<'a> {
+    type Item = uint;
     #[inline]
     fn next(&mut self) -> Option<uint> {
         if self.two {
@@ -177,7 +178,7 @@ impl<'a> Iterator<uint> for PrimeIterator<'a> {
     }
 }
 
-impl<'a> DoubleEndedIterator<uint> for PrimeIterator<'a> {
+impl<'a> DoubleEndedIterator for PrimeIterator<'a> {
     #[inline]
     fn next_back(&mut self) -> Option<uint> {
         loop {

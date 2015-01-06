@@ -55,6 +55,8 @@
 //! git = "https://github.com/huonw/slow_primes"
 //! ```
 
+#![feature(associated_types)]
+
 extern crate "num" as num_;
 
 #[cfg(test)] extern crate test;
