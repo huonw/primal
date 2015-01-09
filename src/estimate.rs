@@ -19,7 +19,7 @@ use std::num::Float;
 /// [pdf]: http://www.unilim.fr/laco/theses/1998/T1998_01.html
 pub fn estimate_prime_pi(n: u64) -> (u64, u64) {
     if n < tables::SMALL_PRIME_PI.len() as u64 {
-        let x = tables::SMALL_PRIME_PI[n as uint] as u64;
+        let x = tables::SMALL_PRIME_PI[n as usize] as u64;
         (x, x)
     } else {
         let n_ = n as f64;
@@ -81,7 +81,7 @@ pub fn estimate_nth_prime(n: u64) -> (u64, u64) {
         (0, 0)
     } else if n <= tables::SMALL_PRIMES.len() as u64 {
         // table is 0-indexed, n is 1-indexed, need to adjust.
-        let x = tables::SMALL_PRIMES[n as uint - 1] as u64;
+        let x = tables::SMALL_PRIMES[n as usize - 1] as u64;
         (x, x)
     } else {
         let n_ = n as f64;

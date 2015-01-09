@@ -55,7 +55,7 @@
 //! git = "https://github.com/huonw/slow_primes"
 //! ```
 
-#![feature(associated_types)]
+#![allow(unstable)]
 
 extern crate "num" as num_;
 
@@ -78,7 +78,7 @@ mod tables;
 
 /// (prime, exponent) pairs storing the prime factorisation of a
 /// number.
-pub type Factors = Vec<(uint, uint)>;
+pub type Factors = Vec<(usize, usize)>;
 
 #[cfg(test)]
 mod tests {
@@ -89,8 +89,8 @@ mod tests {
     use self::test::Bencher;
 
 
-    const N: uint = 1_000_000;
-    const STEP: uint = 101;
+    const N: usize = 1_000_000;
+    const STEP: usize = 101;
     #[bench]
     fn bench_miller_rabin_tests(b: &mut Bencher) {
         b.iter(|| {

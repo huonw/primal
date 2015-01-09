@@ -27,12 +27,12 @@ impl Primes {
     /// more), allowing for very efficient iteration and primality
     /// testing below this, and guarantees that all numbers up to
     /// `limit^2` can be factorised.
-    pub fn sieve(limit: uint) -> Primes {
+    pub fn sieve(limit: usize) -> Primes {
         // having this out-of-line like this is faster (130 us/iter
         // vs. 111 us/iter on sieve_large), and using a manual while
         // rather than a `range_step` is a similar speedup.
         #[inline(never)]
-        fn filter(is_prime: &mut Bitv, limit: uint, check: uint, p: uint) {
+        fn filter(is_prime: &mut Bitv, limit: usize, check: usize, p: usize) {
             let mut zero = 2 * check * (check + 1);
             while zero < limit / 2 {
                 is_prime.set(zero, false);
@@ -51,7 +51,7 @@ impl Primes {
         // the ticking works properly)
         filter(&mut is_prime, limit, 1, 3);
 
-        let bound = (limit as f64).sqrt() as uint + 1;
+        let bound = (limit as f64).sqrt() as usize + 1;
         // skip 2.
         let mut check = 2;
         let mut tick = if check % 3 == 1 {2} else {1};
@@ -69,13 +69,13 @@ impl Primes {
     }
 
     /// The largest number stored.
-    pub fn upper_bound(&self) -> uint {
+    pub fn upper_bound(&self) -> usize {
         (self.v.len() - 1) * 2 + 1
     }
 
     /// Check if `n` is prime, possibly failing if `n` is larger than
     /// the upper bound of this Primes instance.
-    pub fn is_prime(&self, n: uint) -> bool {
+    pub fn is_prime(&self, n: usize) -> bool {
         if n % 2 == 0 {
             // 2 is the evenest prime.
             n == 2
@@ -110,7 +110,7 @@ impl Primes {
     /// Notably, any number between `U` and `U^2` can always be fully
     /// factored, since these numbers are guaranteed to only have zero
     /// or one prime factors larger than `U`.
-    pub fn factor(&self, mut n: uint) -> Result<Factors, (uint, Factors)> {
+    pub fn factor(&self, mut n: usize) -> Result<Factors, (usize, Factors)> {
         if n == 0 { return Err((0, vec![])) }
 
         let mut ret = Vec::new();
@@ -145,9 +145,9 @@ impl Primes {
 }
 
 impl<'a> Iterator for PrimeIterator<'a> {
-    type Item = uint;
+    type Item = usize;
     #[inline]
-    fn next(&mut self) -> Option<uint> {
+    fn next(&mut self) -> Option<usize> {
         if self.two {
             self.two = false;
             Some(2)
@@ -161,7 +161,7 @@ impl<'a> Iterator for PrimeIterator<'a> {
         }
     }
 
-    fn size_hint(&self) -> (uint, Option<uint>) {
+    fn size_hint(&self) -> (usize, Option<usize>) {
         let mut iter = self.clone();
         // TODO: this doesn't run in constant time, is it super-bad?
         match (iter.next(), iter.next_back()) {
@@ -169,8 +169,8 @@ impl<'a> Iterator for PrimeIterator<'a> {
                 let (below_hi, above_hi) = ::estimate_prime_pi(hi as u64);
                 let (below_lo, above_lo) = ::estimate_prime_pi(lo as u64);
 
-                ((below_hi - cmp::min(above_lo, below_hi)) as uint,
-                 Some((above_hi - below_lo + 1) as uint))
+                ((below_hi - cmp::min(above_lo, below_hi)) as usize,
+                 Some((above_hi - below_lo + 1) as usize))
             }
             (Some(_), None) => (1, Some(1)),
             (None, _) => (0, Some(0))
@@ -180,7 +180,7 @@ impl<'a> Iterator for PrimeIterator<'a> {
 
 impl<'a> DoubleEndedIterator for PrimeIterator<'a> {
     #[inline]
-    fn next_back(&mut self) -> Option<uint> {
+    fn next_back(&mut self) -> Option<usize> {
         loop {
             match self.iter.next_back() {
                 Some((i, true)) => return Some(2 * i + 1),
@@ -244,11 +244,11 @@ mod tests {
         let primes = Primes::sieve(50);
         let mut expected = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
 
-        assert_eq!(primes.primes().collect::<Vec<uint>>().as_slice(),
+        assert_eq!(primes.primes().collect::<Vec<usize>>().as_slice(),
                    expected.as_slice());
 
         expected.reverse();
-        assert_eq!(primes.primes().rev().collect::<Vec<uint>>().as_slice(),
+        assert_eq!(primes.primes().rev().collect::<Vec<usize>>().as_slice(),
                    expected.as_slice());
     }
 
@@ -256,9 +256,9 @@ mod tests {
     fn factor() {
         let primes = Primes::sieve(1000);
 
-        let tests: &[(uint, &[(uint, uint)])] = &[
+        let tests: &[(usize, &[(usize, usize)])] = &[
             (1, &[]),
-            (2, &[(2u, 1)]),
+            (2, &[(2_us, 1)]),
             (3, &[(3, 1)]),
             (4, &[(2, 2)]),
             (5, &[(5, 1)]),
@@ -365,7 +365,7 @@ mod tests {
                 let next = primes.next();
 
                 assert!(lo <= len && len <= hi.unwrap(),
-                        "found failing size_hint for {} to {}, should satisfy: {} <= {} <= {}",
+                        "found failing size_hint for {:?} to {}, should satisfy: {} <= {} <= {:?}",
                         next, i, lo, len, hi);
 
                 if next.is_none() {
@@ -392,7 +392,7 @@ mod tests {
         b.iter(|| Primes::sieve(10_000_000))
     }
 
-    fn bench_iterate(b: &mut Bencher, upto: uint) {
+    fn bench_iterate(b: &mut Bencher, upto: usize) {
         let sieve = Primes::sieve(upto);
 
         b.iter(|| {

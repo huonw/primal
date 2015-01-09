@@ -28,8 +28,8 @@ pub fn as_perfect_power(x: u64) -> (u64, u8) {
     // TODO: we could be smarter about this: we know all the possible
     // primes that can divide the exponent (since we have a list up to
     // 251 >= 64), so we really only need to check them.
-    let mut expn = 2u;
-    let mut step = 1u;
+    let mut expn = 2;
+    let mut step = 1;
     while expn <= floor_log_2 {
         let factor = x_.powf(1.0/expn as f64).round() as u64;
 
@@ -106,7 +106,7 @@ mod tests {
             // include 1 to test p itself.
             for (q, is_prime) in Some((1, true)).into_iter().chain(subprimes) {
                 let pq = p * q as u64;
-                for n in range(1, MAX.log(pq as f64) as uint) {
+                for n in range(1, MAX.log(pq as f64) as usize) {
                     let x = pq.pow(n);
 
                     let expected = (pq, n as u8);

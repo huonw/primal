@@ -14,22 +14,22 @@ use Primes;
 pub struct StreamingSieve {
     small: Primes,
     sieve: Bitv,
-    primes: Vec<(uint, uint)>,
+    primes: Vec<(usize, usize)>,
 
-    low: uint,
-    current: uint,
-    limit: uint,
+    low: usize,
+    current: usize,
+    limit: usize,
 }
 
-const CACHE: uint = 32 << 10;
+const CACHE: usize = 32 << 10;
 // 8 for the bit vector, 2 for storing odd numbers only
-const SEG_SIZE: uint = 16 * CACHE;
+const SEG_SIZE: usize = 16 * CACHE;
 
 impl StreamingSieve {
     /// Create a new instance of the streaming sieve that will
     /// correctly progressively filter primes up to `limit`.
-    pub fn new(limit: uint) -> StreamingSieve {
-        let small = Primes::sieve((limit as f64).sqrt() as uint + 1);
+    pub fn new(limit: usize) -> StreamingSieve {
+        let small = Primes::sieve((limit as f64).sqrt() as usize + 1);
         let current = 2;
         let low = 0;
 
@@ -53,7 +53,7 @@ impl StreamingSieve {
     ///
     /// NB. the prime 2 is not included in any of these sieves and so
     /// needs special handling.
-    pub fn next(&mut self) -> Option<(uint, &Bitv)> {
+    pub fn next(&mut self) -> Option<(usize, &Bitv)> {
         if self.low >= self.limit {
             return None
         }
@@ -69,7 +69,7 @@ impl StreamingSieve {
             }
             self.current += 1
         }
-        for &(k, ref mut next) in self.primes.iter_mut() {
+        for &mut (k, ref mut next) in self.primes.iter_mut() {
             let mut j = *next / 2;
             while j < SEG_SIZE / 2 {
                 self.sieve.set(j, false);
@@ -115,7 +115,7 @@ mod tests {
         }
     }
 
-    fn run(b: &mut Bencher, n: uint) {
+    fn run(b: &mut Bencher, n: usize) {
         b.iter(|| {
             let mut sieve = StreamingSieve::new(n);
             while sieve.next().is_some() {}
