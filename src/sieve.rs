@@ -295,7 +295,7 @@ mod tests {
         // larger numbers can only sometimes be factored
         'next_n: for n in range(short_lim, 10000) {
             let possible = short.factor(n);
-            let real = long.factor(n).unwrap();
+            let real = long.factor(n).ok().unwrap();
 
             let mut seen_small = None;
             for (this_idx, &(p,i)) in real.iter().enumerate() {
