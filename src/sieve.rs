@@ -152,7 +152,7 @@ impl<'a> Iterator for PrimeIterator<'a> {
             self.two = false;
             Some(2)
         } else {
-            for (i, is_prime) in self.iter {
+            for (i, is_prime) in &mut self.iter {
                 if is_prime {
                     return Some(2 * i + 1)
                 }

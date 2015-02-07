@@ -55,7 +55,7 @@
 //! git = "https://github.com/huonw/slow_primes"
 //! ```
 
-#![allow(unstable)]
+#![feature(collections, core)]
 
 extern crate "num" as num_;
 
