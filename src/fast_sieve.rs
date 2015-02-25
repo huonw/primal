@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 
-use std::collections::{Bitv};
+use std::collections::{BitVec};
 use std::{cmp};
 use std::num::Float;
 
@@ -13,7 +13,7 @@ use Primes;
 /// sieve](http://primesieve.org/segmented_sieve.html) code.
 pub struct StreamingSieve {
     small: Primes,
-    sieve: Bitv,
+    sieve: BitVec,
     primes: Vec<(usize, usize)>,
 
     low: usize,
@@ -35,7 +35,7 @@ impl StreamingSieve {
 
         StreamingSieve {
             small: small,
-            sieve: Bitv::from_elem(SEG_SIZE, false),
+            sieve: BitVec::from_elem(SEG_SIZE, false),
             primes: vec![],
 
             low: low,
@@ -53,7 +53,7 @@ impl StreamingSieve {
     ///
     /// NB. the prime 2 is not included in any of these sieves and so
     /// needs special handling.
-    pub fn next(&mut self) -> Option<(usize, &Bitv)> {
+    pub fn next(&mut self) -> Option<(usize, &BitVec)> {
         if self.low >= self.limit {
             return None
         }

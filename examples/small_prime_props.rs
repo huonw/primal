@@ -1,4 +1,3 @@
-#![feature(core)]
 extern crate slow_primes;
 
 use std::cmp;

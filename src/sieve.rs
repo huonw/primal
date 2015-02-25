@@ -1,4 +1,4 @@
-use std::collections::{Bitv, bitv};
+use std::collections::{BitVec, bit_vec};
 use std::{iter, cmp};
 use std::num::Float;
 
@@ -10,14 +10,14 @@ use Factors;
 pub struct Primes {
     // This only stores odd numbers, since even numbers are mostly
     // non-prime.
-    v: Bitv
+    v: BitVec
 }
 
 /// Iterator over the primes stored in a sieve.
 #[derive(Clone)]
 pub struct PrimeIterator<'a> {
     two: bool,
-    iter: iter::Enumerate<bitv::Iter<'a>>,
+    iter: iter::Enumerate<bit_vec::Iter<'a>>,
 }
 
 impl Primes {
@@ -32,7 +32,7 @@ impl Primes {
         // vs. 111 us/iter on sieve_large), and using a manual while
         // rather than a `range_step` is a similar speedup.
         #[inline(never)]
-        fn filter(is_prime: &mut Bitv, limit: usize, check: usize, p: usize) {
+        fn filter(is_prime: &mut BitVec, limit: usize, check: usize, p: usize) {
             let mut zero = 2 * check * (check + 1);
             while zero < limit / 2 {
                 is_prime.set(zero, false);
@@ -43,7 +43,7 @@ impl Primes {
         // bad stuff happens for very small bounds.
         let limit = cmp::max(10, limit);
 
-        let mut is_prime = Bitv::from_elem((limit + 1) / 2, true);
+        let mut is_prime = BitVec::from_elem((limit + 1) / 2, true);
         // 1 isn't prime
         is_prime.set(0, false);
 
@@ -258,7 +258,7 @@ mod tests {
 
         let tests: &[(usize, &[(usize, usize)])] = &[
             (1, &[]),
-            (2, &[(2_us, 1)]),
+            (2, &[(2_usize, 1)]),
             (3, &[(3, 1)]),
             (4, &[(2, 2)]),
             (5, &[(5, 1)]),

@@ -56,6 +56,7 @@
 //! ```
 
 #![feature(collections, core)]
+#![cfg_attr(test, feature(test))]
 
 extern crate "num" as num_;
 
