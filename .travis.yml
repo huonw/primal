@@ -1,9 +1,9 @@
+sudo: false
+language: rust
 env:
   global:
-    - secure: Pxqx8rgBOcxrCbIUbONh9V0kGIYnYS03nUXZsTVuN5EmSEWj/wK0Xj9o0TMn6ICeDc97FJODM4U8E9JK5simysIbVcKb8AOp1E7Tm6vgt4mcmtp/dtjBOiQ0a2Cog6rFeCY0Dvhap3rywXUDqiqNuQ5hXEaezcqVMYhBUjxES0k=
-install:
-  - curl https://static.rust-lang.org/rustup.sh | sudo sh -
+    secure: XoaTEmwZpiVmq3FTpSInp6phrc90PVwcZ79DTmNatYlnwK4cySUQMRD9WCT7uce3g4mm2WlQ+p5pWzn+sW8QqbTCqunObkGacwAmQqj0XvETecj2fVOF5BC7ii6zQRMqYC/XAd3CZWcrMSrQNb6w0rZ8Pt0WqPkuiGeuc3pHASQ=
 script:
-  - cargo build --verbose && cargo test --verbose && cargo doc --verbose && mv target/doc doc
-after_script:
-  - curl http://www.rust-ci.org/artifacts/put?t=$RUSTCI_TOKEN | sh
+- cargo build --verbose && cargo test --verbose && cargo doc --verbose
+after_success:
+- test -z "$FEATURES" && test "$TRAVIS_PULL_REQUEST" == false && test "$TRAVIS_BRANCH" == "master" && bash deploy-docs.sh
