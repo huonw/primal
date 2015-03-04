@@ -318,7 +318,7 @@ mod tests {
 
                 // break into the two parts
                 let (low, hi) = real.as_slice().split_at(last_short_prime);
-                let leftover = hi.iter().fold(1, |x, &(p, i)| x * p.pow(i));
+                let leftover = hi.iter().fold(1, |x, &(p, i)| x * p.pow(i as u32));
 
                 assert_eq!(possible, Err((leftover, low.to_vec())));
                 continue 'next_n;
