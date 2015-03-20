@@ -56,7 +56,7 @@ pub fn is_prime_miller_rabin(n: u64) -> bool {
         let mut power = mod_exp(a, d, n);
         if power == 1 { continue 'next_witness }
 
-        for _r in range(0, s) {
+        for _r in 0..s {
             if power == n - 1 {
                 continue 'next_witness
             }
@@ -80,7 +80,7 @@ mod tests {
     fn miller_rabin() {
         const LIMIT: usize = 1_000_000;
         let sieve = Primes::sieve(LIMIT);
-        for x in range(0, LIMIT) {
+        for x in 0..LIMIT {
             let s = sieve.is_prime(x);
             let mr = is_prime_miller_rabin(x as u64);
 

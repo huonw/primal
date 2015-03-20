@@ -56,7 +56,7 @@
 //! ```
 
 #![feature(collections, core)]
-#![cfg_attr(test, feature(test))]
+#![cfg_attr(test, feature(test, step_by))]
 
 extern crate "num" as num_;
 
@@ -85,7 +85,6 @@ pub type Factors = Vec<(usize, usize)>;
 mod tests {
     extern crate test;
 
-    use std::iter::range_step;
     use super::{Primes, is_prime_miller_rabin};
     use self::test::Bencher;
 
@@ -95,7 +94,7 @@ mod tests {
     #[bench]
     fn bench_miller_rabin_tests(b: &mut Bencher) {
         b.iter(|| {
-            range_step(1, N, STEP)
+            (1..N).step_by(STEP)
                 .filter(|&n| is_prime_miller_rabin(n as u64)).count()
         })
     }
@@ -103,7 +102,7 @@ mod tests {
     fn bench_sieve_tests(b: &mut Bencher) {
         b.iter(|| {
             let sieve = Primes::sieve(1_000_000);
-            range_step(1, N, STEP)
+            (1..N).step_by(STEP)
                 .filter(|&n| sieve.is_prime(n)).count()
         })
     }

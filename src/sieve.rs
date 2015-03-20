@@ -201,7 +201,6 @@ mod tests {
     use test::Bencher;
     use super::Primes;
     use std::num::Int;
-    use std::iter::range_step;
 
     #[test]
     fn is_prime() {
@@ -289,11 +288,11 @@ mod tests {
 
         // every number less than bound^2 can be factored (since they
         // always have a factor <= bound).
-        for n in range(0, short_lim) {
+        for n in 0..short_lim {
             assert_eq!(short.factor(n), long.factor(n))
         }
         // larger numbers can only sometimes be factored
-        'next_n: for n in range(short_lim, 10000) {
+        'next_n: for n in short_lim..10000 {
             let possible = short.factor(n);
             let real = long.factor(n).ok().unwrap();
 
@@ -350,7 +349,7 @@ mod tests {
 
     #[test]
     fn size_hint() {
-        for i in range_step(0, 1000, 100) {
+        for i in (0..1000).step_by(100) {
             let sieve = Primes::sieve(i);
 
             let mut primes = sieve.primes();

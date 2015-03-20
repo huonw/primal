@@ -92,7 +92,6 @@ impl StreamingSieve {
 mod tests {
     use test::Bencher;
     use super::StreamingSieve;
-    use std::iter::range_step;
 
     #[test]
     #[ignore(reason = "5 isn't a prime? should debug it, I guess.")]
@@ -107,7 +106,7 @@ mod tests {
             };
             println!("tick {}", next.len());
 
-            for i in range_step(low + 1, low + next.len(), 2) {
+            for i in (low + 1..low + next.len()).step_by(2) {
                 if i > 2000 { break }
                 assert!(primes.is_prime(i) == next[(i - low) / 2],
                         "failed for {} (is prime = {})", i, primes.is_prime(i));
