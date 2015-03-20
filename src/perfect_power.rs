@@ -1,6 +1,18 @@
 use num_::Integer;
 use std::num::{Float, Int};
 
+fn wrapping_pow(mut base: u64, mut exp: u32) -> u64 {
+    let mut acc = 1;
+    while exp > 0 {
+        if exp % 2 == 1 {
+            acc = acc.wrapping_mul(base)
+        }
+        base = base.wrapping_mul(base);
+        exp /= 2;
+    }
+    acc
+}
+
 /// Returns integers `(y, k)` such that `x = y^k` with `k` maximised
 /// (other than for `x = 0, 1`, in which case `y = x`, `k = 1`).
 ///
@@ -32,8 +44,12 @@ pub fn as_perfect_power(x: u64) -> (u64, u8) {
     let mut step = 1;
     while expn <= floor_log_2 {
         let factor = x_.powf(1.0/expn as f64).round() as u64;
-
-        if factor.pow(expn) == x {
+        // the only case this will wrap is if x is close to 2^64 and
+        // the round() rounds up, pushing this calculation over the
+        // edge, however, the overflow will be well away from x, so we
+        // still correctly don't take this branch. (x can't be a
+        // perfect power if the result rounds away.)
+        if wrapping_pow(factor, expn) == x {
             last = (factor, expn as u8);
             // if x is a 2nd and 5th power, it's going to be a 10th
             // power too, meaning we can search faster.
