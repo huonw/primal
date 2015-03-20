@@ -135,7 +135,7 @@ mod tests {
 
         let mut last = 0;
         for (i, p) in primes.primes().enumerate() {
-            for j in range(last, p) {
+            for j in last..p {
                 check(j as u64, i as u64);
             }
             last = p;
