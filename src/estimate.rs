@@ -1,5 +1,4 @@
 use tables;
-use std::num::Float;
 
 /// Returns estimated bounds for π(*n*), the number of primes less
 /// than or equal to `n`.
@@ -118,8 +117,6 @@ pub fn estimate_nth_prime(n: u64) -> (u64, u64) {
 
 #[cfg(test)]
 mod tests {
-    use std::num::Int;
-
     use Primes;
     use super::{estimate_prime_pi, estimate_nth_prime};
 

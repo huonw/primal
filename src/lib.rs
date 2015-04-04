@@ -55,10 +55,10 @@
 //! git = "https://github.com/huonw/slow_primes"
 //! ```
 
-#![feature(collections, core)]
+#![feature(collections)]
 #![cfg_attr(test, feature(test, step_by))]
 
-extern crate "num" as num_;
+extern crate num as num_;
 
 #[cfg(test)] extern crate test;
 

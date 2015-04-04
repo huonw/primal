@@ -2,7 +2,6 @@
 
 use std::collections::{BitVec};
 use std::{cmp};
-use std::num::Float;
 
 use Primes;
 
