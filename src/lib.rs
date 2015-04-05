@@ -37,7 +37,7 @@
 //! let (_lo, hi) = slow_primes::estimate_nth_prime(10001);
 //!
 //! // find the primes up to this upper bound
-//! let sieve = slow_primes::Primes::sieve(hi as uint);
+//! let sieve = slow_primes::Primes::sieve(hi as usize);
 //!
 //! // (.nth is zero indexed.)
 //! match sieve.primes().nth(10001 - 1) {
@@ -55,10 +55,10 @@
 //! git = "https://github.com/huonw/slow_primes"
 //! ```
 
-#![feature(collections, core)]
+#![feature(collections)]
 #![cfg_attr(test, feature(test, step_by))]
 
-extern crate "num" as num_;
+extern crate num as num_;
 
 #[cfg(test)] extern crate test;
 

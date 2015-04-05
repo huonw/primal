@@ -1,6 +1,5 @@
 use std::collections::{BitVec, bit_vec};
 use std::{iter, cmp};
-use std::num::Float;
 
 use Factors;
 
@@ -200,7 +199,6 @@ impl<'a> DoubleEndedIterator for PrimeIterator<'a> {
 mod tests {
     use test::Bencher;
     use super::Primes;
-    use std::num::Int;
 
     #[test]
     fn is_prime() {
@@ -243,12 +241,10 @@ mod tests {
         let primes = Primes::sieve(50);
         let mut expected = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
 
-        assert_eq!(primes.primes().collect::<Vec<usize>>().as_slice(),
-                   expected.as_slice());
+        assert_eq!(primes.primes().collect::<Vec<usize>>(), expected);
 
         expected.reverse();
-        assert_eq!(primes.primes().rev().collect::<Vec<usize>>().as_slice(),
-                   expected.as_slice());
+        assert_eq!(primes.primes().rev().collect::<Vec<usize>>(), expected);
     }
 
     #[test]
@@ -316,7 +312,7 @@ mod tests {
                 };
 
                 // break into the two parts
-                let (low, hi) = real.as_slice().split_at(last_short_prime);
+                let (low, hi) = real.split_at(last_short_prime);
                 let leftover = hi.iter().fold(1, |x, &(p, i)| x * p.pow(i as u32));
 
                 assert_eq!(possible, Err((leftover, low.to_vec())));

@@ -1,8 +1,7 @@
 use num_::Integer;
-use std::num::{Float, Int};
 
 fn wrapping_pow(mut base: u64, mut exp: u32) -> u64 {
-    let mut acc = 1;
+    let mut acc: u64 = 1;
     while exp > 0 {
         if exp % 2 == 1 {
             acc = acc.wrapping_mul(base)
