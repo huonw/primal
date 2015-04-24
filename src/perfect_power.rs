@@ -76,7 +76,6 @@ pub fn as_prime_power(x: u64) -> Option<(u64, u8)> {
 
 #[cfg(test)]
 mod tests {
-    use std::num::{Float, Int};
     use Primes;
 
     use super::{as_perfect_power, as_prime_power};
