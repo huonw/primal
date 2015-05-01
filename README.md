@@ -1,6 +1,6 @@
 # slow_primes
 
-[![Build Status](https://travis-ci.org/huonw/slow_primes.png)](https://travis-ci.org/huonw/slow_primes)
+[![Build Status](https://travis-ci.org/huonw/slow_primes.png)](https://travis-ci.org/huonw/slow_primes) [![Coverage Status](https://coveralls.io/repos/huonw/slow_primes/badge.svg?branch=update)](https://coveralls.io/r/huonw/slow_primes?branch=update)
 
 Extremely simplistic and relatively unoptimised handling of basic
 tasks around primes:
