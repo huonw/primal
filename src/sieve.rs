@@ -6,6 +6,7 @@ use Factors;
 /// Stores information about primes up to some limit.
 ///
 /// This uses at least `limit / 16 + O(1)` bytes of storage.
+#[derive(Debug)]
 pub struct Primes {
     // This only stores odd numbers, since even numbers are mostly
     // non-prime.

@@ -10,6 +10,7 @@ use Primes;
 ///
 /// This is heavily inspired by this [segmented
 /// sieve](http://primesieve.org/segmented_sieve.html) code.
+#[derive(Debug)]
 pub struct StreamingSieve {
     small: Primes,
     sieve: BitVec,
@@ -62,19 +63,22 @@ impl StreamingSieve {
         let high = cmp::min(low + SEG_SIZE - 1, self.limit);
         self.sieve.set_all();
 
-        while self.current * self.current <= high {
-            if self.small.is_prime(self.current) {
-                self.primes.push((self.current, self.current * self.current - low));
+        let mut s = self.current;
+
+        while s * s <= high {
+            if self.small.is_prime(s) {
+                self.primes.push((s, s * s - low));
             }
-            self.current += 1
+            s += 1
         }
+
+        self.current = s;
         for &mut (k, ref mut next) in self.primes.iter_mut() {
             let mut j = *next / 2;
             while j < SEG_SIZE / 2 {
                 self.sieve.set(j, false);
                 j += k;
             }
-
 
             *next = (2 * j + 1) - SEG_SIZE;
         }
@@ -93,20 +97,13 @@ mod tests {
     use super::StreamingSieve;
 
     #[test]
-    #[ignore(reason = "5 isn't a prime? should debug it, I guess.")]
     fn test() {
-        let mut sieve = StreamingSieve::new(2000);
-        let primes = ::Primes::sieve(2000);
-
-        loop {
-            let (low, next) = match sieve.next() {
-                None => break,
-                Some(x) => x,
-            };
-            println!("tick {}", next.len());
-
+        const LIMIT: usize = 2_000_000;
+        let mut sieve = StreamingSieve::new(LIMIT);
+        let primes = ::Primes::sieve(LIMIT);
+        while let Some((low, next)) = sieve.next() {
             for i in (low + 1..low + next.len()).step_by(2) {
-                if i > 2000 { break }
+                if i > LIMIT { break }
                 assert!(primes.is_prime(i) == next[(i - low) / 2],
                         "failed for {} (is prime = {})", i, primes.is_prime(i));
             }
