@@ -29,7 +29,7 @@ impl StreamingSieve {
     /// correctly progressively filter primes up to `limit`.
     pub fn new(limit: usize) -> StreamingSieve {
         let small = Primes::sieve((limit as f64).sqrt() as usize + 1);
-        let current = 2;
+        let current = 3;
         let low = 0;
 
         StreamingSieve {
