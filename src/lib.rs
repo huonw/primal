@@ -55,12 +55,11 @@
 //! git = "https://github.com/huonw/slow_primes"
 //! ```
 
-#![feature(collections)]
-#![cfg_attr(test, feature(test, step_by))]
+#![cfg_attr(all(test, feature = "unstable"), feature(test, step_by))]
 
 extern crate num as num_;
 
-#[cfg(test)] extern crate test;
+#[cfg(all(test, feature = "unstable"))] extern crate test;
 
 pub use estimate::{estimate_prime_pi, estimate_nth_prime};
 //pub use fast_sieve::Sieve;
@@ -84,8 +83,8 @@ mod tables;
 /// number.
 pub type Factors = Vec<(usize, usize)>;
 
-#[cfg(test)]
-mod tests {
+#[cfg(all(test, feature = "unstable"))]
+mod benches {
     extern crate test;
 
     use super::{Primes, is_prime_miller_rabin};

@@ -93,23 +93,30 @@ impl StreamingSieve {
 
 #[cfg(test)]
 mod tests {
-    use test::Bencher;
     use super::StreamingSieve;
-    use bit::BitVec;
-
     #[test]
     fn test() {
         const LIMIT: usize = 2_000_000;
         let mut sieve = StreamingSieve::new(LIMIT);
         let primes = ::Primes::sieve(LIMIT);
         while let Some((low, next)) = sieve.next() {
-            for i in (low + 1..low + next.len()).step_by(2) {
+            let mut i = low + 1;
+            while i < low + next.len() {
                 if i > LIMIT { break }
                 assert!(primes.is_prime(i) == next[(i - low) / 2],
                         "failed for {} (is prime = {})", i, primes.is_prime(i));
+                i += 2;
             }
         }
     }
+
+}
+
+#[cfg(all(test, feature = "unstable"))]
+mod benches {
+    use test::Bencher;
+    use bit::BitVec;
+    use super::StreamingSieve;
 
     fn run(b: &mut Bencher, n: usize) {
         b.iter(|| {
@@ -129,6 +136,10 @@ mod tests {
     #[bench]
     fn sieve_large(b: &mut Bencher) {
         run(b, 100_000)
+    }
+    #[bench]
+    fn sieve_larger(b: &mut Bencher) {
+        run(b, 1_000_000)
     }
     #[bench]
     fn sieve_huge(b: &mut Bencher) {

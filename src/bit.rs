@@ -8,6 +8,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+#![allow(dead_code)]
 // FIXME(Gankro): BitVec and BitSet are very tightly coupled. Ideally (for
 // maintenance), they should be in separate files/modules, with BitSet only
 // using BitVec's public API. This will be hard for performance though, because
@@ -37,8 +38,7 @@
 //!
 //! [sieve]: http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
 //!
-//! ```
-//! # #![feature(collections, core, step_by)]
+//! ```ignore
 //! use std::collections::{BitSet, BitVec};
 //! use std::iter;
 //!
@@ -126,8 +126,7 @@ static FALSE: bool = false;
 ///
 /// # Examples
 ///
-/// ```
-/// # #![feature(collections)]
+/// ```ignore
 /// use std::collections::BitVec;
 ///
 /// let mut bv = BitVec::from_elem(10, false);
@@ -233,8 +232,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     /// let mut bv = BitVec::new();
     /// ```
@@ -247,8 +245,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let mut bv = BitVec::from_elem(10, false);
@@ -287,8 +284,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let bv = BitVec::from_bytes(&[0b10100000, 0b00010010]);
@@ -330,8 +326,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let bv = BitVec::from_fn(5, |i| { i % 2 == 0 });
@@ -349,8 +344,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let bv = BitVec::from_bytes(&[0b01100000]);
@@ -381,8 +375,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let mut bv = BitVec::from_elem(5, false);
@@ -404,8 +397,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let before = 0b01100000;
@@ -425,8 +417,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let before = 0b01100000;
@@ -454,8 +445,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let a   = 0b01100100;
@@ -485,8 +475,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let a   = 0b01100100;
@@ -516,8 +505,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let a   = 0b01100100;
@@ -546,8 +534,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let mut bv = BitVec::from_elem(5, true);
@@ -571,8 +558,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let bv = BitVec::from_bytes(&[0b01110100, 0b10010010]);
@@ -587,8 +573,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let mut bv = BitVec::from_elem(10, false);
@@ -605,8 +590,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let mut bv = BitVec::from_elem(10, false);
@@ -627,8 +611,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let mut bv = BitVec::from_elem(3, true);
@@ -674,8 +657,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let mut bv = BitVec::from_bytes(&[0b01001011]);
@@ -700,8 +682,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let mut bv = BitVec::from_elem(3, false);
@@ -730,8 +711,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let mut bv = BitVec::from_elem(3, false);
@@ -752,8 +732,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let mut bv = BitVec::new();
@@ -773,8 +752,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let mut bv = BitVec::from_bytes(&[0b01001011]);
@@ -824,8 +802,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let mut bv = BitVec::from_bytes(&[0b01001001]);
@@ -854,8 +831,7 @@ impl BitVec {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitVec;
     ///
     /// let mut bv = BitVec::new();
@@ -1015,8 +991,7 @@ impl<'a> IntoIterator for &'a BitVec {
 ///
 /// # Examples
 ///
-/// ```
-/// # #![feature(collections)]
+/// ```ignore
 /// use std::collections::{BitSet, BitVec};
 ///
 /// // It's a regular set
@@ -1077,8 +1052,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitSet;
     ///
     /// let mut s = BitSet::new();
@@ -1093,8 +1067,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitSet;
     ///
     /// let mut s = BitSet::with_capacity(100);
@@ -1110,8 +1083,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::{BitVec, BitSet};
     ///
     /// let bv = BitVec::from_bytes(&[0b01100000]);
@@ -1132,8 +1104,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitSet;
     ///
     /// let mut s = BitSet::with_capacity(100);
@@ -1153,8 +1124,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitSet;
     ///
     /// let mut s = BitSet::new();
@@ -1179,8 +1149,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitSet;
     ///
     /// let mut s = BitSet::new();
@@ -1199,8 +1168,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitSet;
     ///
     /// let mut s = BitSet::new();
@@ -1220,8 +1188,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitSet;
     ///
     /// let mut s = BitSet::new();
@@ -1267,8 +1234,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::BitSet;
     ///
     /// let mut s = BitSet::new();
@@ -1299,8 +1265,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::{BitVec, BitSet};
     ///
     /// let s = BitSet::from_bit_vec(BitVec::from_bytes(&[0b01001010]));
@@ -1320,8 +1285,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::{BitVec, BitSet};
     ///
     /// let a = BitSet::from_bit_vec(BitVec::from_bytes(&[0b01101000]));
@@ -1350,8 +1314,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::{BitVec, BitSet};
     ///
     /// let a = BitSet::from_bit_vec(BitVec::from_bytes(&[0b01101000]));
@@ -1380,8 +1343,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::{BitSet, BitVec};
     ///
     /// let a = BitSet::from_bit_vec(BitVec::from_bytes(&[0b01101000]));
@@ -1418,8 +1380,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::{BitSet, BitVec};
     ///
     /// let a = BitSet::from_bit_vec(BitVec::from_bytes(&[0b01101000]));
@@ -1447,8 +1408,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::{BitSet, BitVec};
     ///
     /// let a   = 0b01101000;
@@ -1471,8 +1431,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::{BitSet, BitVec};
     ///
     /// let a   = 0b01101000;
@@ -1496,8 +1455,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::{BitSet, BitVec};
     ///
     /// let a   = 0b01101000;
@@ -1529,8 +1487,7 @@ impl BitSet {
     ///
     /// # Examples
     ///
-    /// ```
-    /// # #![feature(collections)]
+    /// ```ignore
     /// use std::collections::{BitSet, BitVec};
     ///
     /// let a   = 0b01101000;

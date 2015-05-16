@@ -198,7 +198,6 @@ impl<'a> DoubleEndedIterator for PrimeIterator<'a> {
 
 #[cfg(test)]
 mod tests {
-    use test::Bencher;
     use super::Primes;
 
     #[test]
@@ -346,7 +345,8 @@ mod tests {
 
     #[test]
     fn size_hint() {
-        for i in (0..1000).step_by(100) {
+        let mut i = 0;
+        while i < 1000 {
             let sieve = Primes::sieve(i);
 
             let mut primes = sieve.primes();
@@ -368,8 +368,16 @@ mod tests {
                     break
                 }
             }
+
+            i += 100;
         }
     }
+}
+
+#[cfg(all(test, feature = "unstable"))]
+mod benches {
+    use super::Primes;
+    use test::Bencher;
 
     #[bench]
     fn sieve_small(b: &mut Bencher) {
