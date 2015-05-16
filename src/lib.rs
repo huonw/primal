@@ -68,6 +68,9 @@ pub use is_prime::{is_prime_miller_rabin};
 pub use perfect_power::{as_perfect_power, as_prime_power};
 pub use sieve::{Primes, PrimeIterator};
 
+pub use fast_sieve::StreamingSieve;
+
+mod bit;
 mod estimate;
 mod fast_sieve;
 mod is_prime;
