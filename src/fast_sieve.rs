@@ -76,8 +76,7 @@ impl StreamingSieve {
         }
 
         self.current = s;
-        let lim = self.limit;
-        let top = cmp::min(SEG_LEN, lim) / 2;
+        let top = cmp::min(SEG_LEN, self.limit) / 2;
         for &mut (k, ref mut next) in self.primes.iter_mut() {
             let mut j = *next / 2;
             while j < top {
@@ -87,7 +86,9 @@ impl StreamingSieve {
                 j += k;
             }
 
-            *next = (2 * j + 1) - SEG_LEN;
+            // if this wraps, we've hit the limit, and so won't be
+            // continuing, so whatever, it can be junk.
+            *next = (2 * j + 1).wrapping_sub(SEG_LEN);
         }
 
         if low == 0 {
