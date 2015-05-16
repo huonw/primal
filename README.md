@@ -1,6 +1,6 @@
 # primal
 
-[![Build Status](https://travis-ci.org/huonw/primal.png)](https://travis-ci.org/huonw/primal) [![Coverage Status](https://coveralls.io/repos/huonw/primal/badge.svg?branch=update)](https://coveralls.io/r/huonw/primal?branch=update) [![Crates.io](https://img.shields.io/crates/v/primal.svg)](https://crates.io/crates/primal)
+[![Build Status](https://travis-ci.org/huonw/primal.png)](https://travis-ci.org/huonw/primal) [![Coverage Status](https://coveralls.io/repos/huonw/primal/badge.svg?branch=update)](https://coveralls.io/r/huonw/primal?branch=update) [![crates.io](https://img.shields.io/crates/v/primal.svg)](https://crates.io/crates/primal)
 
 Simplistic and relatively unoptimised handling of basic tasks around
 primes:
