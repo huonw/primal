@@ -23,7 +23,8 @@ pub struct StreamingSieve {
 
 const CACHE: usize = 32 << 10;
 // 8 for the bit vector, 2 for storing odd numbers only
-const SEG_SIZE: usize = 16 * CACHE;
+const SEG_ELEMS: usize = 8 * CACHE;
+const SEG_LEN: usize = 2 * SEG_ELEMS;
 
 impl StreamingSieve {
     /// Create a new instance of the streaming sieve that will
@@ -33,9 +34,10 @@ impl StreamingSieve {
         let current = 3;
         let low = 0;
 
+        let elems = cmp::min(limit, SEG_ELEMS);
         StreamingSieve {
             small: small,
-            sieve: BitVec::from_elem(SEG_SIZE, false),
+            sieve: BitVec::from_elem(elems, false),
             primes: vec![],
 
             low: low,
@@ -59,8 +61,8 @@ impl StreamingSieve {
         }
 
         let low = self.low;
-        self.low += SEG_SIZE;
-        let high = cmp::min(low + SEG_SIZE - 1, self.limit);
+        self.low += SEG_LEN;
+        let high = cmp::min(low + SEG_LEN - 1, self.limit);
         self.sieve.set_all();
 
         let mut s = self.current;
@@ -73,15 +75,18 @@ impl StreamingSieve {
         }
 
         self.current = s;
+        let lim = self.limit;
+        let top = cmp::min(SEG_LEN, lim) / 2;
         for &mut (k, ref mut next) in self.primes.iter_mut() {
             let mut j = *next / 2;
-            while j < SEG_SIZE / 2 {
+            while j < top {
                 self.sieve.set(j, false);
                 j += k;
             }
 
-            *next = (2 * j + 1) - SEG_SIZE;
+            *next = (2 * j + 1) - SEG_LEN;
         }
+
         if low == 0 {
             // 1 is not prime.
             self.sieve.set(0, false);
