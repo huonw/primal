@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 
-use std::collections::{BitVec};
+use bit::{BitVec};
 use std::{cmp};
 
 use Primes;
@@ -95,6 +95,7 @@ impl StreamingSieve {
 mod tests {
     use test::Bencher;
     use super::StreamingSieve;
+    use bit::BitVec;
 
     #[test]
     fn test() {
