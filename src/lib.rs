@@ -15,7 +15,7 @@
 //! (Despite the name, it can sieve the primes up to 10<sup>9</sup> in
 //! about 5 seconds.)
 //!
-//! [*Source*](http://github.com/huonw/slow_primes)
+//! [*Source*](http://github.com/huonw/primal)
 //!
 //! # Example
 //!
@@ -34,10 +34,10 @@
 //!
 //! ```rust
 //! // find our upper bound
-//! let (_lo, hi) = slow_primes::estimate_nth_prime(10001);
+//! let (_lo, hi) = primal::estimate_nth_prime(10001);
 //!
 //! // find the primes up to this upper bound
-//! let sieve = slow_primes::Primes::sieve(hi as usize);
+//! let sieve = primal::Primes::sieve(hi as usize);
 //!
 //! // (.nth is zero indexed.)
 //! match sieve.primes().nth(10001 - 1) {
@@ -51,8 +51,8 @@
 //! Just add the following to your [`Cargo.toml`](http://crates.io/):
 //!
 //! ```toml
-//! [dependencies.slow_primes]
-//! git = "https://github.com/huonw/slow_primes"
+//! [dependencies.primal]
+//! git = "https://github.com/huonw/primal"
 //! ```
 
 #![cfg_attr(all(test, feature = "unstable"), feature(test, step_by))]

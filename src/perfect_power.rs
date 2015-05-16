@@ -18,14 +18,14 @@ fn wrapping_pow(mut base: u64, mut exp: u32) -> u64 {
 /// # Examples
 ///
 /// ```rust
-/// assert_eq!(slow_primes::as_perfect_power(2), (2, 1));
-/// assert_eq!(slow_primes::as_perfect_power(4), (2, 2));
-/// assert_eq!(slow_primes::as_perfect_power(8), (2, 3));
-/// assert_eq!(slow_primes::as_perfect_power(1024), (2, 10));
+/// assert_eq!(primal::as_perfect_power(2), (2, 1));
+/// assert_eq!(primal::as_perfect_power(4), (2, 2));
+/// assert_eq!(primal::as_perfect_power(8), (2, 3));
+/// assert_eq!(primal::as_perfect_power(1024), (2, 10));
 ///
-/// assert_eq!(slow_primes::as_perfect_power(1000), (10, 3));
+/// assert_eq!(primal::as_perfect_power(1000), (10, 3));
 ///
-/// assert_eq!(slow_primes::as_perfect_power(15), (15, 1));
+/// assert_eq!(primal::as_perfect_power(15), (15, 1));
 /// ```
 pub fn as_perfect_power(x: u64) -> (u64, u8) {
     if x == 0 || x == 1 {
