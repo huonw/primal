@@ -1,12 +1,12 @@
 [package]
 
-name = "slow_primes"
+name = "primal"
 version = "0.1.14"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
-homepage = "https://github.com/huonw/slow_primes"
-repository = "https://github.com/huonw/slow_primes"
-documentation = "http://huonw.github.io/slow_primes/slow_primes/"
+homepage = "https://github.com/huonw/primal"
+repository = "https://github.com/huonw/primal"
+documentation = "http://huonw.github.io/primal/primal/"
 license = "MIT/Apache-2.0"
 keywords = ["math", "mathematics", "primes", "number-theory"]
 readme = "README.md"

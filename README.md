@@ -1,9 +1,9 @@
-# slow_primes
+# primal
 
-[![Build Status](https://travis-ci.org/huonw/slow_primes.png)](https://travis-ci.org/huonw/slow_primes) [![Coverage Status](https://coveralls.io/repos/huonw/slow_primes/badge.svg?branch=update)](https://coveralls.io/r/huonw/slow_primes?branch=update)
+[![Build Status](https://travis-ci.org/huonw/primal.png)](https://travis-ci.org/huonw/primal) [![Coverage Status](https://coveralls.io/repos/huonw/primal/badge.svg?branch=update)](https://coveralls.io/r/huonw/primal?branch=update) [![Crates.io](https://img.shields.io/crates/v/primal.svg)](https://crates.io/crates/primal)
 
-Extremely simplistic and relatively unoptimised handling of basic
-tasks around primes:
+Simplistic and relatively unoptimised handling of basic tasks around
+primes:
 
 - checking for primality
 - enumerating primes
@@ -16,7 +16,6 @@ some fixed bound (in a relatively memory efficient manner), and then
 allows this cached information to be used for things like enumerating
 the primes, and factorisation via trial division.
 
-(Despite the name, it can sieve the primes up to 10<sup>9</sup> in
-about 5 seconds.)
+(It can sieve the primes up to 10<sup>9</sup> in about 5 seconds.)
 
-[**Documentation**](http://huonw.github.io/slow_primes/slow_primes/)
+[**Documentation**](http://huonw.github.io/primal/primal/)
