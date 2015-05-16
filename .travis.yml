@@ -2,6 +2,8 @@ sudo: required
 language: rust
 rust:
   - nightly
+  - beta
+  - 1.0.0
 env:
   global:
     secure: XoaTEmwZpiVmq3FTpSInp6phrc90PVwcZ79DTmNatYlnwK4cySUQMRD9WCT7uce3g4mm2WlQ+p5pWzn+sW8QqbTCqunObkGacwAmQqj0XvETecj2fVOF5BC7ii6zQRMqYC/XAd3CZWcrMSrQNb6w0rZ8Pt0WqPkuiGeuc3pHASQ=
@@ -14,7 +16,7 @@ script:
       travis-cargo bench &&
       travis-cargo doc
 after_success:
-  - travis-cargo doc-upload
+  - travis-cargo --only 1.0.0 doc-upload
   - travis-cargo coveralls
 notifications:
     webhooks: http://huon.me:54856/travis
