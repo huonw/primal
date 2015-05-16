@@ -10,6 +10,8 @@ use Factors;
 pub struct Primes {
     // This only stores odd numbers, since even numbers are mostly
     // non-prime.
+    //
+    // This indicates which numbers are composite.
     v: BitVec
 }
 
@@ -32,10 +34,10 @@ impl Primes {
         // vs. 111 us/iter on sieve_large), and using a manual while
         // rather than a `range_step` is a similar speedup.
         #[inline(never)]
-        fn filter(is_prime: &mut BitVec, limit: usize, check: usize, p: usize) {
-            let mut zero = 2 * check * (check + 1);
+        fn filter(is_prime: &mut BitVec, limit: usize, p: usize) {
+            let mut zero = p * p / 2;
             while zero < limit / 2 {
-                is_prime.set(zero, false);
+                is_prime.set(zero, true);
                 zero += p;
             }
         }
@@ -43,13 +45,13 @@ impl Primes {
         // bad stuff happens for very small bounds.
         let limit = cmp::max(10, limit);
 
-        let mut is_prime = BitVec::from_elem((limit + 1) / 2, true);
+        let mut is_prime = BitVec::from_elem((limit + 1) / 2, false);
         // 1 isn't prime
-        is_prime.set(0, false);
+        is_prime.set(0, true);
 
         // multiples of 3 aren't prime (3 is handled separately, so
         // the ticking works properly)
-        filter(&mut is_prime, limit, 1, 3);
+        filter(&mut is_prime, limit, 3);
 
         let bound = (limit as f64).sqrt() as usize + 1;
         // skip 2.
@@ -57,8 +59,8 @@ impl Primes {
         let mut tick = if check % 3 == 1 {2} else {1};
 
         while check <= bound {
-            if is_prime[check] {
-                filter(&mut is_prime, limit, check, 2 * check + 1)
+            if !is_prime[check] {
+                filter(&mut is_prime, limit, 2 * check + 1)
             }
 
             check += tick;
@@ -81,7 +83,7 @@ impl Primes {
             n == 2
         } else {
             assert!(n <= self.upper_bound());
-            self.v[n / 2]
+            !self.v[n / 2]
         }
     }
 
@@ -152,8 +154,8 @@ impl<'a> Iterator for PrimeIterator<'a> {
             self.two = false;
             Some(2)
         } else {
-            for (i, is_prime) in &mut self.iter {
-                if is_prime {
+            for (i, is_not_prime) in &mut self.iter {
+                if !is_not_prime {
                     return Some(2 * i + 1)
                 }
             }
@@ -183,8 +185,8 @@ impl<'a> DoubleEndedIterator for PrimeIterator<'a> {
     fn next_back(&mut self) -> Option<usize> {
         loop {
             match self.iter.next_back() {
-                Some((i, true)) => return Some(2 * i + 1),
-                Some((_, false)) => {/* continue */}
+                Some((i, false)) => return Some(2 * i + 1),
+                Some((_, true)) => {/* continue */}
                 None if self.two => {
                     self.two = false;
                     return Some(2)
