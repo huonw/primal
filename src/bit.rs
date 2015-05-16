@@ -80,43 +80,43 @@
 //! println!("There are {} primes below {}", num_primes, max_prime);
 //! ```
 
-use std::cmp::Ordering;
 use std::cmp;
 use std::fmt;
 use std::hash;
-use std::iter::RandomAccessIterator;
-use std::iter::{Chain, Enumerate, Repeat, Skip, Take, repeat, Cloned};
+use std::iter::{Take, repeat};
 use std::iter::{self, FromIterator};
 use std::ops::Index;
 use std::slice;
-use std::{u8, u32, usize};
+use std::usize;
 
-type Blocks<'a> = Cloned<slice::Iter<'a, u32>>;
 type MutBlocks<'a> = slice::IterMut<'a, u32>;
-type MatchWords<'a> = Chain<Enumerate<Blocks<'a>>, Skip<Take<Enumerate<Repeat<u32>>>>>;
 
 fn reverse_bits(byte: u8) -> u8 {
     let mut result = 0;
-    for i in 0..u8::BITS {
-        result |= ((byte >> i) & 1) << (u8::BITS - 1 - i);
+    for i in 0..8 {
+        result |= ((byte >> i) & 1) << (8 - 1 - i);
     }
     result
 }
 
 // Take two BitVec's, and return iterators of their words, where the shorter one
 // has been padded with 0's
-fn match_words <'a,'b>(a: &'a BitVec, b: &'b BitVec) -> (MatchWords<'a>, MatchWords<'b>) {
-    let a_len = a.storage.len();
-    let b_len = b.storage.len();
+macro_rules! match_words {
+    ($a: expr, $b: expr) => {{
+        let a = &$a;
+        let b = &$b;
+        let a_len = a.storage.len();
+        let b_len = b.storage.len();
 
-    // have to uselessly pretend to pad the longer one for type matching
-    if a_len < b_len {
-        (a.blocks().enumerate().chain(iter::repeat(0).enumerate().take(b_len).skip(a_len)),
-         b.blocks().enumerate().chain(iter::repeat(0).enumerate().take(0).skip(0)))
-    } else {
-        (a.blocks().enumerate().chain(iter::repeat(0).enumerate().take(0).skip(0)),
-         b.blocks().enumerate().chain(iter::repeat(0).enumerate().take(a_len).skip(b_len)))
-    }
+        // have to uselessly pretend to pad the longer one for type matching
+        if a_len < b_len {
+            (a.storage.iter().cloned().enumerate().chain(iter::repeat(0).enumerate().take(b_len).skip(a_len)),
+             b.storage.iter().cloned().enumerate().chain(iter::repeat(0).enumerate().take(0).skip(0)))
+        } else {
+            (a.storage.iter().cloned().enumerate().chain(iter::repeat(0).enumerate().take(0).skip(0)),
+             b.storage.iter().cloned().enumerate().chain(iter::repeat(0).enumerate().take(a_len).skip(b_len)))
+        }
+    }}
 }
 
 static TRUE: bool = true;
@@ -150,8 +150,6 @@ static FALSE: bool = false;
 /// println!("{:?}", bv);
 /// println!("total bits set to true: {}", bv.iter().filter(|x| *x).count());
 /// ```
-#[unstable(feature = "collections",
-           reason = "RFC 509")]
 pub struct BitVec {
     /// Internal representation of the bit vector
     storage: Vec<u32>,
@@ -183,17 +181,17 @@ fn blocks_for_bits(bits: usize) -> usize {
     //
     // Note that we can technically avoid this branch with the expression
     // `(nbits + u32::BITS - 1) / 32::BITS`, but if nbits is almost usize::MAX this will overflow.
-    if bits % u32::BITS == 0 {
-        bits / u32::BITS
+    if bits % 32 == 0 {
+        bits / 32
     } else {
-        bits / u32::BITS + 1
+        bits / 32 + 1
     }
 }
 
 /// Computes the bitmask for the final word of the vector
 fn mask_for_bits(bits: usize) -> u32 {
     // Note especially that a perfect multiple of u32::BITS should mask all 1s.
-    !0 >> (u32::BITS - bits % u32::BITS) % u32::BITS
+    !0 >> (32 - bits % 32) % 32
 }
 
 impl BitVec {
@@ -206,7 +204,7 @@ impl BitVec {
         // This could theoretically be a `debug_assert!`.
         assert_eq!(self.storage.len(), other.storage.len());
         let mut changed_bits = 0;
-        for (a, b) in self.blocks_mut().zip(other.blocks()) {
+        for (a, b) in self.blocks_mut().zip(other.storage.iter().cloned()) {
             let w = op(*a, b);
             changed_bits |= *a ^ w;
             *a = w;
@@ -220,16 +218,10 @@ impl BitVec {
         self.storage.iter_mut()
     }
 
-    /// Iterator over the underlying blocks of data
-    fn blocks(&self) -> Blocks {
-        // (2)
-        self.storage.iter().cloned()
-    }
-
     /// An operation might screw up the unused bits in the last block of the
     /// `BitVec`. As per (3), it's assumed to be all 0s. This method fixes it up.
     fn fix_last_block(&mut self) {
-        let extra_bits = self.len() % u32::BITS;
+        let extra_bits = self.len() % 32;
         if extra_bits > 0 {
             let mask = (1 << extra_bits) - 1;
             let storage_len = self.storage.len();
@@ -246,7 +238,6 @@ impl BitVec {
     /// use std::collections::BitVec;
     /// let mut bv = BitVec::new();
     /// ```
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn new() -> BitVec {
         BitVec { storage: Vec::new(), nbits: 0 }
     }
@@ -283,7 +274,6 @@ impl BitVec {
     ///
     /// It is important to note that this function does not specify the
     /// *length* of the returned bitvector, but only the *capacity*.
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn with_capacity(nbits: usize) -> BitVec {
         BitVec {
             storage: Vec::with_capacity(blocks_for_bits(nbits)),
@@ -308,7 +298,7 @@ impl BitVec {
     ///                     false, false, true, false]));
     /// ```
     pub fn from_bytes(bytes: &[u8]) -> BitVec {
-        let len = bytes.len().checked_mul(u8::BITS).expect("capacity overflow");
+        let len = bytes.len().checked_mul(8).expect("capacity overflow");
         let mut bit_vec = BitVec::with_capacity(len);
         let complete_words = bytes.len() / 4;
         let extra_bytes = bytes.len() % 4;
@@ -372,13 +362,12 @@ impl BitVec {
     /// assert_eq!(bv[1], true);
     /// ```
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn get(&self, i: usize) -> Option<bool> {
         if i >= self.nbits {
             return None;
         }
-        let w = i / u32::BITS;
-        let b = i % u32::BITS;
+        let w = i / 32;
+        let b = i % 32;
         self.storage.get(w).map(|&block|
             (block & (1 << b)) != 0
         )
@@ -401,12 +390,10 @@ impl BitVec {
     /// assert_eq!(bv[3], true);
     /// ```
     #[inline]
-    #[unstable(feature = "collections",
-               reason = "panic semantics are likely to change in the future")]
     pub fn set(&mut self, i: usize, x: bool) {
         assert!(i < self.nbits);
-        let w = i / u32::BITS;
-        let b = i % u32::BITS;
+        let w = i / 32;
+        let b = i % 32;
         let flag = 1 << b;
         let val = if x { self.storage[w] | flag }
                   else { self.storage[w] & !flag };
@@ -572,7 +559,7 @@ impl BitVec {
     pub fn all(&self) -> bool {
         let mut last_word = !0;
         // Check that every block but the last is all-ones...
-        self.blocks().all(|elem| {
+        self.storage.iter().cloned().all(|elem| {
             let tmp = last_word;
             last_word = elem;
             tmp == !0
@@ -592,7 +579,6 @@ impl BitVec {
     /// assert_eq!(bv.iter().filter(|x| *x).count(), 7);
     /// ```
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn iter(&self) -> Iter {
         Iter { bit_vec: self, next_idx: 0, end_idx: self.nbits }
     }
@@ -612,7 +598,7 @@ impl BitVec {
     /// assert_eq!(bv.none(), false);
     /// ```
     pub fn none(&self) -> bool {
-        self.blocks().all(|w| w == 0)
+        self.storage.iter().cloned().all(|w| w == 0)
     }
 
     /// Returns `true` if any bit is 1.
@@ -680,28 +666,6 @@ impl BitVec {
         ).collect()
     }
 
-    /// Compares a `BitVec` to a slice of `bool`s.
-    /// Both the `BitVec` and slice must have the same length.
-    ///
-    /// # Panics
-    ///
-    /// Panics if the `BitVec` and slice are of different length.
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// # #![feature(collections)]
-    /// use std::collections::BitVec;
-    ///
-    /// let bv = BitVec::from_bytes(&[0b10100000]);
-    ///
-    /// assert!(bv.eq_vec(&[true, false, true, false,
-    ///                     false, false, false, false]));
-    /// ```
-    pub fn eq_vec(&self, v: &[bool]) -> bool {
-        assert_eq!(self.nbits, v.len());
-        iter::order::eq(self.iter(), v.iter().cloned())
-    }
 
     /// Shortens a `BitVec`, dropping excess elements.
     ///
@@ -718,7 +682,6 @@ impl BitVec {
     /// bv.truncate(2);
     /// assert!(bv.eq_vec(&[false, true]));
     /// ```
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn truncate(&mut self, len: usize) {
         if len < self.len() {
             self.nbits = len;
@@ -746,7 +709,6 @@ impl BitVec {
     /// assert_eq!(bv.len(), 3);
     /// assert!(bv.capacity() >= 13);
     /// ```
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn reserve(&mut self, additional: usize) {
         let desired_cap = self.len().checked_add(additional).expect("capacity overflow");
         let storage_len = self.storage.len();
@@ -777,7 +739,6 @@ impl BitVec {
     /// assert_eq!(bv.len(), 3);
     /// assert!(bv.capacity() >= 13);
     /// ```
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn reserve_exact(&mut self, additional: usize) {
         let desired_cap = self.len().checked_add(additional).expect("capacity overflow");
         let storage_len = self.storage.len();
@@ -800,9 +761,8 @@ impl BitVec {
     /// assert!(bv.capacity() >= 10);
     /// ```
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn capacity(&self) -> usize {
-        self.storage.capacity().checked_mul(u32::BITS).unwrap_or(usize::MAX)
+        self.storage.capacity().checked_mul(32).unwrap_or(usize::MAX)
     }
 
     /// Grows the `BitVec` in-place, adding `n` copies of `value` to the `BitVec`.
@@ -833,7 +793,7 @@ impl BitVec {
 
         // Correct the old tail word, setting or clearing formerly unused bits
         let num_cur_blocks = blocks_for_bits(self.nbits);
-        if self.nbits % u32::BITS > 0 {
+        if self.nbits % 32 > 0 {
             let mask = mask_for_bits(self.nbits);
             if value {
                 self.storage[num_cur_blocks - 1] |= !mask;
@@ -873,7 +833,6 @@ impl BitVec {
     /// assert_eq!(bv.pop(), Some(false));
     /// assert_eq!(bv.len(), 6);
     /// ```
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn pop(&mut self) -> Option<bool> {
         if self.is_empty() {
             None
@@ -883,7 +842,7 @@ impl BitVec {
             // (3)
             self.set(i, false);
             self.nbits = i;
-            if self.nbits % u32::BITS == 0 {
+            if self.nbits % 32 == 0 {
                 // (2)
                 self.storage.pop();
             }
@@ -904,9 +863,8 @@ impl BitVec {
     /// bv.push(false);
     /// assert!(bv.eq_vec(&[true, false]));
     /// ```
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn push(&mut self, elem: bool) {
-        if self.nbits % u32::BITS == 0 {
+        if self.nbits % 32 == 0 {
             self.storage.push(0);
         }
         let insert_pos = self.nbits;
@@ -916,29 +874,24 @@ impl BitVec {
 
     /// Returns the total number of bits in this vector
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn len(&self) -> usize { self.nbits }
 
     /// Returns true if there are no bits in this vector
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn is_empty(&self) -> bool { self.len() == 0 }
 
     /// Clears all bits in this vector.
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn clear(&mut self) {
         for w in &mut self.storage { *w = 0; }
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl Default for BitVec {
     #[inline]
     fn default() -> BitVec { BitVec::new() }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl FromIterator<bool> for BitVec {
     fn from_iter<I: IntoIterator<Item=bool>>(iter: I) -> BitVec {
         let mut ret = BitVec::new();
@@ -947,7 +900,6 @@ impl FromIterator<bool> for BitVec {
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl Extend<bool> for BitVec {
     #[inline]
     fn extend<I: IntoIterator<Item=bool>>(&mut self, iterable: I) {
@@ -960,7 +912,6 @@ impl Extend<bool> for BitVec {
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl Clone for BitVec {
     #[inline]
     fn clone(&self) -> BitVec {
@@ -974,23 +925,6 @@ impl Clone for BitVec {
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
-impl PartialOrd for BitVec {
-    #[inline]
-    fn partial_cmp(&self, other: &BitVec) -> Option<Ordering> {
-        iter::order::partial_cmp(self.iter(), other.iter())
-    }
-}
-
-#[stable(feature = "rust1", since = "1.0.0")]
-impl Ord for BitVec {
-    #[inline]
-    fn cmp(&self, other: &BitVec) -> Ordering {
-        iter::order::cmp(self.iter(), other.iter())
-    }
-}
-
-#[stable(feature = "rust1", since = "1.0.0")]
 impl fmt::Debug for BitVec {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         for bit in self {
@@ -1000,32 +934,28 @@ impl fmt::Debug for BitVec {
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl hash::Hash for BitVec {
     fn hash<H: hash::Hasher>(&self, state: &mut H) {
         self.nbits.hash(state);
-        for elem in self.blocks() {
+        for elem in self.storage.iter().cloned() {
             elem.hash(state);
         }
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl cmp::PartialEq for BitVec {
     #[inline]
     fn eq(&self, other: &BitVec) -> bool {
         if self.nbits != other.nbits {
             return false;
         }
-        self.blocks().zip(other.blocks()).all(|(w1, w2)| w1 == w2)
+        self.storage.iter().cloned().zip(other.storage.iter().cloned()).all(|(w1, w2)| w1 == w2)
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl cmp::Eq for BitVec {}
 
 /// An iterator for `BitVec`.
-#[stable(feature = "rust1", since = "1.0.0")]
 #[derive(Clone)]
 pub struct Iter<'a> {
     bit_vec: &'a BitVec,
@@ -1033,7 +963,6 @@ pub struct Iter<'a> {
     end_idx: usize,
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl<'a> Iterator for Iter<'a> {
     type Item = bool;
 
@@ -1054,7 +983,6 @@ impl<'a> Iterator for Iter<'a> {
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl<'a> DoubleEndedIterator for Iter<'a> {
     #[inline]
     fn next_back(&mut self) -> Option<bool> {
@@ -1067,27 +995,8 @@ impl<'a> DoubleEndedIterator for Iter<'a> {
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl<'a> ExactSizeIterator for Iter<'a> {}
 
-#[stable(feature = "rust1", since = "1.0.0")]
-impl<'a> RandomAccessIterator for Iter<'a> {
-    #[inline]
-    fn indexable(&self) -> usize {
-        self.end_idx - self.next_idx
-    }
-
-    #[inline]
-    fn idx(&mut self, index: usize) -> Option<bool> {
-        if index >= self.indexable() {
-            None
-        } else {
-            Some(self.bit_vec[index])
-        }
-    }
-}
-
-#[stable(feature = "rust1", since = "1.0.0")]
 impl<'a> IntoIterator for &'a BitVec {
     type Item = bool;
     type IntoIter = Iter<'a>;
@@ -1137,19 +1046,15 @@ impl<'a> IntoIterator for &'a BitVec {
 /// assert!(bv[3]);
 /// ```
 #[derive(Clone)]
-#[unstable(feature = "collections",
-           reason = "RFC 509")]
 pub struct BitSet {
     bit_vec: BitVec,
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl Default for BitSet {
     #[inline]
     fn default() -> BitSet { BitSet::new() }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl FromIterator<usize> for BitSet {
     fn from_iter<I: IntoIterator<Item=usize>>(iter: I) -> BitSet {
         let mut ret = BitSet::new();
@@ -1158,7 +1063,6 @@ impl FromIterator<usize> for BitSet {
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl Extend<usize> for BitSet {
     #[inline]
     fn extend<I: IntoIterator<Item=usize>>(&mut self, iter: I) {
@@ -1167,36 +1071,6 @@ impl Extend<usize> for BitSet {
         }
     }
 }
-
-#[stable(feature = "rust1", since = "1.0.0")]
-impl PartialOrd for BitSet {
-    #[inline]
-    fn partial_cmp(&self, other: &BitSet) -> Option<Ordering> {
-        let (a_iter, b_iter) = match_words(self.get_ref(), other.get_ref());
-        iter::order::partial_cmp(a_iter, b_iter)
-    }
-}
-
-#[stable(feature = "rust1", since = "1.0.0")]
-impl Ord for BitSet {
-    #[inline]
-    fn cmp(&self, other: &BitSet) -> Ordering {
-        let (a_iter, b_iter) = match_words(self.get_ref(), other.get_ref());
-        iter::order::cmp(a_iter, b_iter)
-    }
-}
-
-#[stable(feature = "rust1", since = "1.0.0")]
-impl cmp::PartialEq for BitSet {
-    #[inline]
-    fn eq(&self, other: &BitSet) -> bool {
-        let (a_iter, b_iter) = match_words(self.get_ref(), other.get_ref());
-        iter::order::eq(a_iter, b_iter)
-    }
-}
-
-#[stable(feature = "rust1", since = "1.0.0")]
-impl cmp::Eq for BitSet {}
 
 impl BitSet {
     /// Creates a new empty `BitSet`.
@@ -1210,7 +1084,6 @@ impl BitSet {
     /// let mut s = BitSet::new();
     /// ```
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn new() -> BitSet {
         BitSet { bit_vec: BitVec::new() }
     }
@@ -1228,7 +1101,6 @@ impl BitSet {
     /// assert!(s.capacity() >= 100);
     /// ```
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn with_capacity(nbits: usize) -> BitSet {
         let bit_vec = BitVec::from_elem(nbits, false);
         BitSet::from_bit_vec(bit_vec)
@@ -1268,7 +1140,6 @@ impl BitSet {
     /// assert!(s.capacity() >= 100);
     /// ```
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn capacity(&self) -> usize {
         self.bit_vec.capacity()
     }
@@ -1290,7 +1161,6 @@ impl BitSet {
     /// s.reserve_len(10);
     /// assert!(s.capacity() >= 10);
     /// ```
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn reserve_len(&mut self, len: usize) {
         let cur_len = self.bit_vec.len();
         if len >= cur_len {
@@ -1317,7 +1187,6 @@ impl BitSet {
     /// s.reserve_len_exact(10);
     /// assert!(s.capacity() >= 10);
     /// ```
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn reserve_len_exact(&mut self, len: usize) {
         let cur_len = self.bit_vec.len();
         if len >= cur_len {
@@ -1382,7 +1251,7 @@ impl BitSet {
 
         // virtually pad other with 0's for equal lengths
         let other_words = {
-            let (_, result) = match_words(self_bit_vec, other_bit_vec);
+            let (_, result) = match_words!(self_bit_vec, other_bit_vec);
             result
         };
 
@@ -1414,7 +1283,6 @@ impl BitSet {
     /// println!("new capacity: {}", s.capacity());
     /// ```
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn shrink_to_fit(&mut self) {
         let bit_vec = &mut self.bit_vec;
         // Obtain original length
@@ -1424,7 +1292,7 @@ impl BitSet {
         // Truncate
         let trunc_len = cmp::max(old_len - n, 1);
         bit_vec.storage.truncate(trunc_len);
-        bit_vec.nbits = trunc_len * u32::BITS;
+        bit_vec.nbits = trunc_len * 32;
     }
 
     /// Iterator over each u32 stored in the `BitSet`.
@@ -1443,7 +1311,6 @@ impl BitSet {
     /// }
     /// ```
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn iter(&self) -> SetIter {
         SetIter {set: self, next_idx: 0}
     }
@@ -1466,7 +1333,6 @@ impl BitSet {
     /// }
     /// ```
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn union<'a>(&'a self, other: &'a BitSet) -> Union<'a> {
         fn or(w1: u32, w2: u32) -> u32 { w1 | w2 }
 
@@ -1497,7 +1363,6 @@ impl BitSet {
     /// }
     /// ```
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn intersection<'a>(&'a self, other: &'a BitSet) -> Intersection<'a> {
         fn bitand(w1: u32, w2: u32) -> u32 { w1 & w2 }
         let min = cmp::min(self.bit_vec.len(), other.bit_vec.len());
@@ -1535,7 +1400,6 @@ impl BitSet {
     /// }
     /// ```
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn difference<'a>(&'a self, other: &'a BitSet) -> Difference<'a> {
         fn diff(w1: u32, w2: u32) -> u32 { w1 & !w2 }
 
@@ -1567,7 +1431,6 @@ impl BitSet {
     /// }
     /// ```
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn symmetric_difference<'a>(&'a self, other: &'a BitSet) -> SymmetricDifference<'a> {
         fn bitxor(w1: u32, w2: u32) -> u32 { w1 ^ w2 }
 
@@ -1688,28 +1551,24 @@ impl BitSet {
 
     /// Returns the number of set bits in this set.
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn len(&self) -> usize  {
-        self.bit_vec.blocks().fold(0, |acc, n| acc + n.count_ones() as usize)
+        self.bit_vec.storage.iter().cloned().fold(0, |acc, n| acc + n.count_ones() as usize)
     }
 
     /// Returns whether there are no bits set in this set
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn is_empty(&self) -> bool {
         self.bit_vec.none()
     }
 
     /// Clears all bits in this set
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn clear(&mut self) {
         self.bit_vec.clear();
     }
 
     /// Returns `true` if this set contains the specified integer.
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn contains(&self, value: &usize) -> bool {
         let bit_vec = &self.bit_vec;
         *value < bit_vec.nbits && bit_vec[*value]
@@ -1718,35 +1577,31 @@ impl BitSet {
     /// Returns `true` if the set has no elements in common with `other`.
     /// This is equivalent to checking for an empty intersection.
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn is_disjoint(&self, other: &BitSet) -> bool {
         self.intersection(other).next().is_none()
     }
 
     /// Returns `true` if the set is a subset of another.
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn is_subset(&self, other: &BitSet) -> bool {
         let self_bit_vec = &self.bit_vec;
         let other_bit_vec = &other.bit_vec;
         let other_blocks = blocks_for_bits(other_bit_vec.len());
 
         // Check that `self` intersect `other` is self
-        self_bit_vec.blocks().zip(other_bit_vec.blocks()).all(|(w1, w2)| w1 & w2 == w1) &&
+        self_bit_vec.storage.iter().cloned().zip(other_bit_vec.storage.iter().cloned()).all(|(w1, w2)| w1 & w2 == w1) &&
         // Make sure if `self` has any more blocks than `other`, they're all 0
-        self_bit_vec.blocks().skip(other_blocks).all(|w| w == 0)
+        self_bit_vec.storage.iter().cloned().skip(other_blocks).all(|w| w == 0)
     }
 
     /// Returns `true` if the set is a superset of another.
     #[inline]
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn is_superset(&self, other: &BitSet) -> bool {
         other.is_subset(self)
     }
 
     /// Adds a value to the set. Returns `true` if the value was not already
     /// present in the set.
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn insert(&mut self, value: usize) -> bool {
         if self.contains(&value) {
             return false;
@@ -1764,7 +1619,6 @@ impl BitSet {
 
     /// Removes a value from the set. Returns `true` if the value was
     /// present in the set.
-    #[stable(feature = "rust1", since = "1.0.0")]
     pub fn remove(&mut self, value: &usize) -> bool {
         if !self.contains(value) {
             return false;
@@ -1776,7 +1630,6 @@ impl BitSet {
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl fmt::Debug for BitSet {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         try!(write!(fmt, "{{"));
@@ -1792,7 +1645,6 @@ impl fmt::Debug for BitSet {
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl hash::Hash for BitSet {
     fn hash<H: hash::Hasher>(&self, state: &mut H) {
         for pos in self {
@@ -1803,7 +1655,6 @@ impl hash::Hash for BitSet {
 
 /// An iterator for `BitSet`.
 #[derive(Clone)]
-#[stable(feature = "rust1", since = "1.0.0")]
 pub struct SetIter<'a> {
     set: &'a BitSet,
     next_idx: usize
@@ -1820,19 +1671,14 @@ struct TwoBitPositions<'a> {
 }
 
 #[derive(Clone)]
-#[stable(feature = "rust1", since = "1.0.0")]
 pub struct Union<'a>(TwoBitPositions<'a>);
 #[derive(Clone)]
-#[stable(feature = "rust1", since = "1.0.0")]
 pub struct Intersection<'a>(Take<TwoBitPositions<'a>>);
 #[derive(Clone)]
-#[stable(feature = "rust1", since = "1.0.0")]
 pub struct Difference<'a>(TwoBitPositions<'a>);
 #[derive(Clone)]
-#[stable(feature = "rust1", since = "1.0.0")]
 pub struct SymmetricDifference<'a>(TwoBitPositions<'a>);
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl<'a> Iterator for SetIter<'a> {
     type Item = usize;
 
@@ -1855,20 +1701,19 @@ impl<'a> Iterator for SetIter<'a> {
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl<'a> Iterator for TwoBitPositions<'a> {
     type Item = usize;
 
     fn next(&mut self) -> Option<usize> {
         while self.next_idx < self.set.bit_vec.len() ||
               self.next_idx < self.other.bit_vec.len() {
-            let bit_idx = self.next_idx % u32::BITS;
+            let bit_idx = self.next_idx % 32;
             if bit_idx == 0 {
                 let s_bit_vec = &self.set.bit_vec;
                 let o_bit_vec = &self.other.bit_vec;
                 // Merging the two words is a bit of an awkward dance since
                 // one BitVec might be longer than the other
-                let word_idx = self.next_idx / u32::BITS;
+                let word_idx = self.next_idx / 32;
                 let w1 = if word_idx < s_bit_vec.storage.len() {
                              s_bit_vec.storage[word_idx]
                          } else { 0 };
@@ -1893,7 +1738,6 @@ impl<'a> Iterator for TwoBitPositions<'a> {
     }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl<'a> Iterator for Union<'a> {
     type Item = usize;
 
@@ -1901,7 +1745,6 @@ impl<'a> Iterator for Union<'a> {
     #[inline] fn size_hint(&self) -> (usize, Option<usize>) { self.0.size_hint() }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl<'a> Iterator for Intersection<'a> {
     type Item = usize;
 
@@ -1909,7 +1752,6 @@ impl<'a> Iterator for Intersection<'a> {
     #[inline] fn size_hint(&self) -> (usize, Option<usize>) { self.0.size_hint() }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl<'a> Iterator for Difference<'a> {
     type Item = usize;
 
@@ -1917,7 +1759,6 @@ impl<'a> Iterator for Difference<'a> {
     #[inline] fn size_hint(&self) -> (usize, Option<usize>) { self.0.size_hint() }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl<'a> Iterator for SymmetricDifference<'a> {
     type Item = usize;
 
@@ -1925,7 +1766,6 @@ impl<'a> Iterator for SymmetricDifference<'a> {
     #[inline] fn size_hint(&self) -> (usize, Option<usize>) { self.0.size_hint() }
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
 impl<'a> IntoIterator for &'a BitSet {
     type Item = usize;
     type IntoIter = SetIter<'a>;
