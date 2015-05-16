@@ -80,7 +80,9 @@ impl StreamingSieve {
         for &mut (k, ref mut next) in self.primes.iter_mut() {
             let mut j = *next / 2;
             while j < top {
-                self.sieve.set(j, false);
+                unsafe {
+                    self.sieve.set_unchecked(j, false);
+                }
                 j += k;
             }
 

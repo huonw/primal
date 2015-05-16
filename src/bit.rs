@@ -385,12 +385,20 @@ impl BitVec {
     #[inline]
     pub fn set(&mut self, i: usize, x: bool) {
         assert!(i < self.nbits);
+        unsafe {
+            self.set_unchecked(i, x)
+        }
+    }
+
+    #[inline]
+    pub unsafe fn set_unchecked(&mut self, i: usize, x: bool) {
+        //
         let w = i / 32;
         let b = i % 32;
         let flag = 1 << b;
-        let val = if x { self.storage[w] | flag }
-                  else { self.storage[w] & !flag };
-        self.storage[w] = val;
+        let ptr = self.storage.get_unchecked_mut(w);
+        let val = if x { *ptr | flag } else { *ptr & !flag };
+        *ptr = val;
     }
 
     /// Sets all bits to 1.
