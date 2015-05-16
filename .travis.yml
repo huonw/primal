@@ -6,7 +6,7 @@ rust:
   - 1.0.0
 env:
   global:
-    secure: XoaTEmwZpiVmq3FTpSInp6phrc90PVwcZ79DTmNatYlnwK4cySUQMRD9WCT7uce3g4mm2WlQ+p5pWzn+sW8QqbTCqunObkGacwAmQqj0XvETecj2fVOF5BC7ii6zQRMqYC/XAd3CZWcrMSrQNb6w0rZ8Pt0WqPkuiGeuc3pHASQ=
+    secure: "XC17VYZReFZgL+s+3g5PNcgflFzGq9/RQVGElwmGVCpwNQtW/fDKPsOn8VZFdjTUR4oXh87IkQSP9uGhGpUUzS6NvmA8hELS0j75CzhcwHerCKOhmwLdgDhjLbybjLRmVTVZ0kauRT0gV1CiDyUjnDTPxL9pznVKvTUrnYvP94wCltMMJ5l3RwWWEI435vmTdZ5up4Mjy6aDRIHytvbuwMxlMsgENmkTZASBRNDxr5cHYyUsDJ2aBZ18xie6BL5+nTem7wDzgaD6m9ETiB3uPdIfM+Jeolqvqhnu0dWzIS9lgWRv5wgyqDpAoDHgUQXZn4nDNNDNQCpjXQzdoUi2+7vW+fW3eZn+TVcSlJ4cPmnTAVG0ItllemwXXWMQ/fimRzRkek1C3rfqk3IHSZX6ZK+lalCd+ceInhbsSWqDDfAh7WbJ5TKGuZjmffT5ej2WzzZ7/fdqQNYOIPakiy115BGrr4WNjjtUbrsjHJa2TzsWKJ/LzrQ+84IB3qJSd557x/4tTmPwratTmHVvlTL3n0JO49q5jAQ7LZDsTS4IUW3I1Fo2M2VSJPqqF/ux64KxoAdJRwYEACE69JojDoyZh0329RVdx605iNjAXdoISGWQPjBHGjWnkUEvMMIBm8lv3agfGMPqL/bcC0sYihjJWUoCi6C5QJVxawdCuPdTHWY="
 before_script:
   - pip install 'travis-cargo<0.2' --user && export PATH=$HOME/.local/bin:$PATH
 script:
