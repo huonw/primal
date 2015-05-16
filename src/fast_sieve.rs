@@ -13,6 +13,7 @@ use Primes;
 #[derive(Debug)]
 pub struct StreamingSieve {
     small: Primes,
+    // stores which numbers *aren't* prime, i.e. true == composite.
     sieve: BitVec,
     primes: Vec<(usize, usize)>,
 
@@ -63,7 +64,7 @@ impl StreamingSieve {
         let low = self.low;
         self.low += SEG_LEN;
         let high = cmp::min(low + SEG_LEN - 1, self.limit);
-        self.sieve.set_all();
+        self.sieve.clear();
 
         let mut s = self.current;
 
@@ -81,7 +82,7 @@ impl StreamingSieve {
             let mut j = *next / 2;
             while j < top {
                 unsafe {
-                    self.sieve.set_unchecked(j, false);
+                    self.sieve.set_unchecked(j, true);
                 }
                 j += k;
             }
@@ -91,7 +92,7 @@ impl StreamingSieve {
 
         if low == 0 {
             // 1 is not prime.
-            self.sieve.set(0, false);
+            self.sieve.set(0, true);
         }
 
         Some((low, &self.sieve))
@@ -110,7 +111,7 @@ mod tests {
             let mut i = low + 1;
             while i < low + next.len() {
                 if i > LIMIT { break }
-                assert!(primes.is_prime(i) == next[(i - low) / 2],
+                assert!(primes.is_prime(i) == !next[(i - low) / 2],
                         "failed for {} (is prime = {})", i, primes.is_prime(i));
                 i += 2;
             }
