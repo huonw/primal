@@ -1,4 +1,10 @@
-use tables;
+//! Estimate upper and lower bounds for the *n*-th prime, and π(*n*),
+//! the number of primes less than or equal to *n*.
+//!
+//! This is designed to be used via the `primal` crate.
+
+#[allow(dead_code)]
+mod tables;
 
 /// Returns estimated bounds for π(*n*), the number of primes less
 /// than or equal to `n`.
@@ -16,7 +22,7 @@ use tables;
 /// 1998.
 ///
 /// [pdf]: http://www.unilim.fr/laco/theses/1998/T1998_01.html
-pub fn estimate_prime_pi(n: u64) -> (u64, u64) {
+pub fn prime_pi(n: u64) -> (u64, u64) {
     if n < tables::SMALL_PRIME_PI.len() as u64 {
         let x = tables::SMALL_PRIME_PI[n as usize] as u64;
         (x, x)
@@ -75,7 +81,7 @@ pub fn estimate_prime_pi(n: u64) -> (u64, u64) {
 /// de nombres premiers."][pdf] PhD diss., Université de Limoges, 1998.
 ///
 /// [pdf]: http://www.unilim.fr/laco/theses/1998/T1998_01.html
-pub fn estimate_nth_prime(n: u64) -> (u64, u64) {
+pub fn nth_prime(n: u64) -> (u64, u64) {
     if n == 0 {
         (0, 0)
     } else if n <= tables::SMALL_PRIMES.len() as u64 {
@@ -117,13 +123,13 @@ pub fn estimate_nth_prime(n: u64) -> (u64, u64) {
 
 #[cfg(test)]
 mod tests {
-    use Primes;
-    use super::{estimate_prime_pi, estimate_nth_prime};
+    extern crate primal;
+    use self::primal::Primes;
 
     #[test]
     fn prime_pi() {
         fn check(n: u64, pi: u64) {
-            let (lo, hi) = estimate_prime_pi(n);
+            let (lo, hi) = super::prime_pi(n);
             assert!(lo <= pi && pi <= hi,
                     "found failing estimate at {}, should satisfy: {} <= {} <= {}",
                     n, lo, pi, hi)
@@ -166,7 +172,7 @@ mod tests {
     #[test]
     fn nth_prime() {
         fn check(n: u64, p: u64) {
-            let (lo, hi) = estimate_nth_prime(n);
+            let (lo, hi) = super::nth_prime(n);
             assert!(lo <= p && p <= hi,
                     "found failing estimate at {}, should satisfy: {} <= {} <= {}",
                     n, lo, p, hi);

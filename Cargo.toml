@@ -21,5 +21,7 @@ and state-of-the-art estimation of upper and lower bounds for π(n)
 [dependencies]
 num = "~0"
 
+primal-estimate = { path = "primal-estimate" }
+
 [features]
 unstable = []
