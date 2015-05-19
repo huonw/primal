@@ -1,4 +1,4 @@
-use bit::{BitVec, self};
+use primal_bit::{BitVec, self};
 use std::{iter, cmp};
 
 use Factors;
@@ -19,7 +19,7 @@ pub struct Primes {
 #[derive(Clone)]
 pub struct PrimeIterator<'a> {
     two: bool,
-    iter: iter::Enumerate<bit::Iter<'a>>,
+    iter: iter::Enumerate<primal_bit::Iter<'a>>,
 }
 
 impl Primes {

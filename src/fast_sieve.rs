@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 
-use bit::{BitVec};
+use primal_bit::{BitVec};
 use std::{cmp};
 
 use Primes;
@@ -124,7 +124,6 @@ mod tests {
 #[cfg(all(test, feature = "unstable"))]
 mod benches {
     use test::Bencher;
-    use bit::BitVec;
     use super::StreamingSieve;
 
     fn run(b: &mut Bencher, n: usize) {

@@ -59,6 +59,7 @@
 
 extern crate num as num_;
 extern crate primal_estimate;
+extern crate primal_bit;
 
 #[cfg(all(test, feature = "unstable"))] extern crate test;
 
@@ -71,7 +72,6 @@ pub use sieve::{Primes, PrimeIterator};
 
 pub use fast_sieve::StreamingSieve;
 
-mod bit;
 mod fast_sieve;
 mod is_prime;
 mod perfect_power;

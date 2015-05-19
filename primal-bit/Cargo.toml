@@ -1,0 +1,15 @@
+[package]
+name = "primal-bit"
+version = "0.1.0"
+authors = ["Huon Wilson <dbau.pp@gmail.com>",
+           "The Rust Project Developers"]
+
+homepage = "https://github.com/huonw/primal"
+repository = "https://github.com/huonw/primal"
+documentation = "http://huonw.github.io/primal/primal_estimate/"
+license = "MIT/Apache-2.0"
+keywords = ["math", "mathematics", "primes", "number-theory"]
+
+description = """
+Bit-vector specialised to the prime-number-related needs of `primal`.
+"""
