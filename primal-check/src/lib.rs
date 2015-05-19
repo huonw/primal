@@ -22,7 +22,7 @@ fn mod_exp(mut x: u64, mut d: u64, n: u64) -> u64 {
 /// Doing a lot of primality tests with numbers strictly below some
 /// upper bound will be faster using the `is_prime` method of a
 /// `Primes` instance.
-pub fn is_prime_miller_rabin(n: u64) -> bool {
+pub fn miller_rabin(n: u64) -> bool {
     const HINT: &'static [u64] = &[2];
 
     // we have a strict upper bound, so we can just use the witness
@@ -73,8 +73,8 @@ pub fn is_prime_miller_rabin(n: u64) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use Primes;
-    use super::is_prime_miller_rabin;
+    extern crate primal;
+    use self::primal::Primes;
 
     #[test]
     fn miller_rabin() {
@@ -82,7 +82,7 @@ mod tests {
         let sieve = Primes::sieve(LIMIT);
         for x in 0..LIMIT {
             let s = sieve.is_prime(x);
-            let mr = is_prime_miller_rabin(x as u64);
+            let mr = super::miller_rabin(x as u64);
 
             assert!(s == mr, "miller_rabin {} mismatches sieve {} for {}",
                     mr, s, x)

@@ -22,6 +22,7 @@ and state-of-the-art estimation of upper and lower bounds for π(n)
 num = "~0"
 
 primal-bit = { path = "primal-bit" }
+primal-check = { path = "primal-check" }
 primal-estimate = { path = "primal-estimate" }
 
 [features]

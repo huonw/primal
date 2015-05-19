@@ -60,20 +60,20 @@
 extern crate num as num_;
 extern crate primal_estimate;
 extern crate primal_bit;
+extern crate primal_check;
 
 #[cfg(all(test, feature = "unstable"))] extern crate test;
 
 pub use primal_estimate::prime_pi as estimate_prime_pi;
 pub use primal_estimate::nth_prime as estimate_nth_prime;
 //pub use fast_sieve::Sieve;
-pub use is_prime::{is_prime_miller_rabin};
+pub use primal_check::miller_rabin as is_prime;
 pub use perfect_power::{as_perfect_power, as_prime_power};
 pub use sieve::{Primes, PrimeIterator};
 
 pub use fast_sieve::StreamingSieve;
 
 mod fast_sieve;
-mod is_prime;
 mod perfect_power;
 mod sieve;
 
@@ -85,7 +85,7 @@ pub type Factors = Vec<(usize, usize)>;
 mod benches {
     extern crate test;
 
-    use super::{Primes, is_prime_miller_rabin};
+    use super::{Primes, is_prime};
     use self::test::Bencher;
 
 
@@ -95,7 +95,7 @@ mod benches {
     fn bench_miller_rabin_tests(b: &mut Bencher) {
         b.iter(|| {
             (1..N).step_by(STEP)
-                .filter(|&n| is_prime_miller_rabin(n as u64)).count()
+                .filter(|&n| is_prime(n as u64)).count()
         })
     }
     #[bench]

@@ -67,7 +67,7 @@ pub fn as_perfect_power(x: u64) -> (u64, u8) {
 /// Returns `None` if `x` not a perfect power.
 pub fn as_prime_power(x: u64) -> Option<(u64, u8)> {
     let (y, k) = as_perfect_power(x);
-    if ::is_prime_miller_rabin(y) {
+    if ::is_prime(y) {
         Some((y, k))
     } else {
         None
