@@ -320,25 +320,6 @@ impl BitVec {
         bit_vec
     }
 
-    /// Creates a `BitVec` of the specified length where the value at each index
-    /// is `f(index)`.
-    ///
-    /// # Examples
-    ///
-    /// ```ignore
-    /// use std::collections::BitVec;
-    ///
-    /// let bv = BitVec::from_fn(5, |i| { i % 2 == 0 });
-    /// assert!(bv.eq_vec(&[true, false, true, false, true]));
-    /// ```
-    pub fn from_fn<F>(len: usize, mut f: F) -> BitVec where F: FnMut(usize) -> bool {
-        let mut bit_vec = BitVec::from_elem(len, false);
-        for i in 0..len {
-            bit_vec.set(i, f(i));
-        }
-        bit_vec
-    }
-
     /// Retrieves the value at index `i`, or `None` if the index is out of bounds.
     ///
     /// # Examples
@@ -610,52 +591,6 @@ impl BitVec {
     pub fn any(&self) -> bool {
         !self.none()
     }
-
-    /// Organises the bits into bytes, such that the first bit in the
-    /// `BitVec` becomes the high-order bit of the first byte. If the
-    /// size of the `BitVec` is not a multiple of eight then trailing bits
-    /// will be filled-in with `false`.
-    ///
-    /// # Examples
-    ///
-    /// ```ignore
-    /// use std::collections::BitVec;
-    ///
-    /// let mut bv = BitVec::from_elem(3, true);
-    /// bv.set(1, false);
-    ///
-    /// assert_eq!(bv.to_bytes(), [0b10100000]);
-    ///
-    /// let mut bv = BitVec::from_elem(9, false);
-    /// bv.set(2, true);
-    /// bv.set(8, true);
-    ///
-    /// assert_eq!(bv.to_bytes(), [0b00100000, 0b10000000]);
-    /// ```
-    pub fn to_bytes(&self) -> Vec<u8> {
-        fn bit(bit_vec: &BitVec, byte: usize, bit: usize) -> u8 {
-            let offset = byte * 8 + bit;
-            if offset >= bit_vec.nbits {
-                0
-            } else {
-                (bit_vec[offset] as u8) << (7 - bit)
-            }
-        }
-
-        let len = self.nbits/8 +
-                  if self.nbits % 8 == 0 { 0 } else { 1 };
-        (0..len).map(|i|
-            bit(self, i, 0) |
-            bit(self, i, 1) |
-            bit(self, i, 2) |
-            bit(self, i, 3) |
-            bit(self, i, 4) |
-            bit(self, i, 5) |
-            bit(self, i, 6) |
-            bit(self, i, 7)
-        ).collect()
-    }
-
 
     /// Shortens a `BitVec`, dropping excess elements.
     ///
