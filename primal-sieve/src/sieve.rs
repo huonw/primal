@@ -23,7 +23,7 @@ impl Sieve {
 
         let mut seen = BitVec::with_capacity(limit / 2);
         while let Some((n, bits)) = stream.next() {
-            seen.push_all(&bits, limit - n);
+            seen.push_all(&bits, (limit - n + 1) / 2);
         }
         Sieve {
             stream: stream,
@@ -116,6 +116,60 @@ mod tests {
         for i in 0..limit {
             assert_eq!(primes.is_prime(i),
                        real.is_prime(i))
+        }
+    }
+
+    #[test]
+    fn upper_bound() {
+        let primes = Sieve::new(30);
+        assert_eq!(primes.upper_bound(), 29);
+        let primes = Sieve::new(31);
+        assert_eq!(primes.upper_bound(), 31);
+
+        let primes = Sieve::new(30000);
+        assert_eq!(primes.upper_bound(), 29999);
+        let primes = Sieve::new(30001);
+        assert_eq!(primes.upper_bound(), 30001);
+    }
+
+    #[test]
+    fn primes_iterator() {
+        let primes = Sieve::new(50);
+        let mut expected = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
+
+        assert_eq!(primes.primes().collect::<Vec<usize>>(), expected);
+
+        expected.reverse();
+        assert_eq!(primes.primes().rev().collect::<Vec<usize>>(), expected);
+    }
+
+    #[test]
+    fn size_hint() {
+        let mut i = 0;
+        while i < 1000 {
+            let sieve = Sieve::new(i);
+
+            let mut primes = sieve.primes();
+
+            // check the size hint at each and every iteration
+            loop {
+                let (lo, hi) = primes.size_hint();
+
+                let copy = primes.clone();
+                let len = copy.count();
+
+                let next = primes.next();
+
+                assert!(lo <= len && len <= hi.unwrap(),
+                        "found failing size_hint for {:?} to {}, should satisfy: {} <= {} <= {:?}",
+                        next, i, lo, len, hi);
+
+                if next.is_none() {
+                    break
+                }
+            }
+
+            i += 100;
         }
     }
 }
