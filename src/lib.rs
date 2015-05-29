@@ -73,7 +73,7 @@ pub use primal_check::miller_rabin as is_prime;
 pub use primal_check::{as_perfect_power, as_prime_power};
 pub use primal_smallsieve::{Primes, PrimeIterator};
 
-pub use primal_sieve::StreamingSieve;
+pub use primal_sieve::{StreamingSieve, Sieve};
 
 /// (prime, exponent) pairs storing the prime factorisation of a
 /// number.
