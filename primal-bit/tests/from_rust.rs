@@ -8,8 +8,20 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::collections::BitVec;
-use std::u32;
+extern crate primal_bit;
+use primal_bit::BitVec;
+
+const BITS: usize = 32;
+
+trait EqVec {
+    fn eq_vec(&self, v: &[bool]) -> bool;
+}
+impl EqVec for BitVec {
+    fn eq_vec(&self, v: &[bool]) -> bool {
+        self.len() == v.len() &&
+            self.iter().zip(v).all(|(a, &b)| a == b)
+    }
+}
 
 #[test]
 fn test_to_str() {
@@ -382,18 +394,6 @@ fn test_from_bytes() {
 }
 
 #[test]
-fn test_to_bytes() {
-    let mut bv = BitVec::from_elem(3, true);
-    bv.set(1, false);
-    assert_eq!(bv.to_bytes(), [0b10100000]);
-
-    let mut bv = BitVec::from_elem(9, false);
-    bv.set(2, true);
-    bv.set(8, true);
-    assert_eq!(bv.to_bytes(), [0b00100000, 0b10000000]);
-}
-
-#[test]
 fn test_from_bools() {
     let bools = vec![true, false, true, true];
     let bit_vec: BitVec = bools.iter().map(|n| *n).collect();
@@ -463,38 +463,6 @@ fn test_big_clear() {
 }
 
 #[test]
-fn test_bit_vec_lt() {
-    let mut a = BitVec::from_elem(5, false);
-    let mut b = BitVec::from_elem(5, false);
-
-    assert!(!(a < b) && !(b < a));
-    b.set(2, true);
-    assert!(a < b);
-    a.set(3, true);
-    assert!(a < b);
-    a.set(2, true);
-    assert!(!(a < b) && b < a);
-    b.set(0, true);
-    assert!(a < b);
-}
-
-#[test]
-fn test_ord() {
-    let mut a = BitVec::from_elem(5, false);
-    let mut b = BitVec::from_elem(5, false);
-
-    assert!(a <= b && a >= b);
-    a.set(1, true);
-    assert!(a > b && a >= b);
-    assert!(b < a && b <= a);
-    b.set(1, true);
-    b.set(2, true);
-    assert!(b > a && b >= a);
-    assert!(a < b && a <= b);
-}
-
-
-#[test]
 fn test_small_bit_vec_tests() {
     let v = BitVec::from_bytes(&[0]);
     assert!(!v.all());
@@ -541,43 +509,43 @@ fn test_big_bit_vec_tests() {
 
 #[test]
 fn test_bit_vec_push_pop() {
-    let mut s = BitVec::from_elem(5 * u32::BITS - 2, false);
-    assert_eq!(s.len(), 5 * u32::BITS - 2);
-    assert_eq!(s[5 * u32::BITS - 3], false);
+    let mut s = BitVec::from_elem(5 * BITS - 2, false);
+    assert_eq!(s.len(), 5 * BITS - 2);
+    assert_eq!(s[5 * BITS - 3], false);
     s.push(true);
     s.push(true);
-    assert_eq!(s[5 * u32::BITS - 2], true);
-    assert_eq!(s[5 * u32::BITS - 1], true);
+    assert_eq!(s[5 * BITS - 2], true);
+    assert_eq!(s[5 * BITS - 1], true);
     // Here the internal vector will need to be extended
     s.push(false);
-    assert_eq!(s[5 * u32::BITS], false);
+    assert_eq!(s[5 * BITS], false);
     s.push(false);
-    assert_eq!(s[5 * u32::BITS + 1], false);
-    assert_eq!(s.len(), 5 * u32::BITS + 2);
+    assert_eq!(s[5 * BITS + 1], false);
+    assert_eq!(s.len(), 5 * BITS + 2);
     // Pop it all off
     assert_eq!(s.pop(), Some(false));
     assert_eq!(s.pop(), Some(false));
     assert_eq!(s.pop(), Some(true));
     assert_eq!(s.pop(), Some(true));
-    assert_eq!(s.len(), 5 * u32::BITS - 2);
+    assert_eq!(s.len(), 5 * BITS - 2);
 }
 
 #[test]
 fn test_bit_vec_truncate() {
-    let mut s = BitVec::from_elem(5 * u32::BITS, true);
+    let mut s = BitVec::from_elem(5 * BITS, true);
 
-    assert_eq!(s, BitVec::from_elem(5 * u32::BITS, true));
-    assert_eq!(s.len(), 5 * u32::BITS);
-    s.truncate(4 * u32::BITS);
-    assert_eq!(s, BitVec::from_elem(4 * u32::BITS, true));
-    assert_eq!(s.len(), 4 * u32::BITS);
+    assert_eq!(s, BitVec::from_elem(5 * BITS, true));
+    assert_eq!(s.len(), 5 * BITS);
+    s.truncate(4 * BITS);
+    assert_eq!(s, BitVec::from_elem(4 * BITS, true));
+    assert_eq!(s.len(), 4 * BITS);
     // Truncating to a size > s.len() should be a noop
-    s.truncate(5 * u32::BITS);
-    assert_eq!(s, BitVec::from_elem(4 * u32::BITS, true));
-    assert_eq!(s.len(), 4 * u32::BITS);
-    s.truncate(3 * u32::BITS - 10);
-    assert_eq!(s, BitVec::from_elem(3 * u32::BITS - 10, true));
-    assert_eq!(s.len(), 3 * u32::BITS - 10);
+    s.truncate(5 * BITS);
+    assert_eq!(s, BitVec::from_elem(4 * BITS, true));
+    assert_eq!(s.len(), 4 * BITS);
+    s.truncate(3 * BITS - 10);
+    assert_eq!(s, BitVec::from_elem(3 * BITS - 10, true));
+    assert_eq!(s.len(), 3 * BITS - 10);
     s.truncate(0);
     assert_eq!(s, BitVec::from_elem(0, true));
     assert_eq!(s.len(), 0);
@@ -585,26 +553,26 @@ fn test_bit_vec_truncate() {
 
 #[test]
 fn test_bit_vec_reserve() {
-    let mut s = BitVec::from_elem(5 * u32::BITS, true);
+    let mut s = BitVec::from_elem(5 * BITS, true);
     // Check capacity
-    assert!(s.capacity() >= 5 * u32::BITS);
-    s.reserve(2 * u32::BITS);
-    assert!(s.capacity() >= 7 * u32::BITS);
-    s.reserve(7 * u32::BITS);
-    assert!(s.capacity() >= 12 * u32::BITS);
-    s.reserve_exact(7 * u32::BITS);
-    assert!(s.capacity() >= 12 * u32::BITS);
-    s.reserve(7 * u32::BITS + 1);
-    assert!(s.capacity() >= 12 * u32::BITS + 1);
+    assert!(s.capacity() >= 5 * BITS);
+    s.reserve(2 * BITS);
+    assert!(s.capacity() >= 7 * BITS);
+    s.reserve(7 * BITS);
+    assert!(s.capacity() >= 12 * BITS);
+    s.reserve_exact(7 * BITS);
+    assert!(s.capacity() >= 12 * BITS);
+    s.reserve(7 * BITS + 1);
+    assert!(s.capacity() >= 12 * BITS + 1);
     // Check that length hasn't changed
-    assert_eq!(s.len(), 5 * u32::BITS);
+    assert_eq!(s.len(), 5 * BITS);
     s.push(true);
     s.push(false);
     s.push(true);
-    assert_eq!(s[5 * u32::BITS - 1], true);
-    assert_eq!(s[5 * u32::BITS - 0], true);
-    assert_eq!(s[5 * u32::BITS + 1], false);
-    assert_eq!(s[5 * u32::BITS + 2], true);
+    assert_eq!(s[5 * BITS - 1], true);
+    assert_eq!(s[5 * BITS - 0], true);
+    assert_eq!(s[5 * BITS + 1], false);
+    assert_eq!(s[5 * BITS + 2], true);
 }
 
 #[test]
@@ -630,12 +598,14 @@ fn test_bit_vec_extend() {
                                  0b01001001, 0b10010010, 0b10111101]));
 }
 
+#[cfg(feature = "unstable")]
 mod bench {
-    use std::collections::BitVec;
+    extern crate test;
+    use primal_bit::BitVec;
     use std::u32;
-    use std::__rand::{Rng, thread_rng, ThreadRng};
+    use rand::{Rng, thread_rng, ThreadRng};
 
-    use test::{Bencher, black_box};
+    use self::test::{Bencher, black_box};
 
     const BENCH_BITS : usize = 1 << 14;
 
@@ -649,7 +619,7 @@ mod bench {
         let mut bit_vec = 0 as usize;
         b.iter(|| {
             for _ in 0..100 {
-                bit_vec |= 1 << ((r.next_u32() as usize) % u32::BITS);
+                bit_vec |= 1 << ((r.next_u32() as usize) % BITS);
             }
             black_box(&bit_vec);
         });
@@ -682,10 +652,10 @@ mod bench {
     #[bench]
     fn bench_bit_set_small(b: &mut Bencher) {
         let mut r = rng();
-        let mut bit_vec = BitVec::from_elem(u32::BITS, false);
+        let mut bit_vec = BitVec::from_elem(BITS, false);
         b.iter(|| {
             for _ in 0..100 {
-                bit_vec.set((r.next_u32() as usize) % u32::BITS, true);
+                bit_vec.set((r.next_u32() as usize) % BITS, true);
             }
             black_box(&bit_vec);
         });
@@ -702,7 +672,7 @@ mod bench {
 
     #[bench]
     fn bench_bit_vec_small_iter(b: &mut Bencher) {
-        let bit_vec = BitVec::from_elem(u32::BITS, false);
+        let bit_vec = BitVec::from_elem(BITS, false);
         b.iter(|| {
             let mut sum = 0;
             for _ in 0..10 {
