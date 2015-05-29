@@ -8,7 +8,7 @@ fi
 shift
 
 if [ "$place" = "all" ]; then
-    place="bit,check,estimate,smallsieve,."
+    place="bit,check,estimate,smallsieve,sieve,."
 fi
 
 echo "${place}," |
