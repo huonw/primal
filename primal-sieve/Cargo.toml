@@ -16,6 +16,7 @@ A high performance prime sieve.
 [dependencies]
 primal-smallsieve = { path = "../primal-smallsieve" }
 primal-bit = { path = "../primal-bit" }
+primal-estimate = { path = "../primal-estimate" }
 
 [features]
 unstable = []

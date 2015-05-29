@@ -752,6 +752,19 @@ impl BitVec {
     pub fn clear(&mut self) {
         for w in &mut self.storage { *w = 0; }
     }
+
+    pub fn push_all(&mut self, bits: &BitVec, nbits: usize) {
+        assert!(self.len() % 32 == 0);
+        let iter = bits.storage.iter().cloned();
+        let count = if nbits >= bits.len() {
+            self.storage.extend(iter);
+            bits.len()
+        } else {
+            self.storage.extend(iter.take(blocks_for_bits(nbits)));
+            nbits
+        };
+        self.nbits = self.nbits.checked_add(count).expect("capacity overflow");
+    }
 }
 
 impl Default for BitVec {
