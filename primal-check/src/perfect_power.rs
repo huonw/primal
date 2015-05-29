@@ -1,4 +1,4 @@
-use num_::Integer;
+use num::Integer;
 
 fn wrapping_pow(mut base: u64, mut exp: u32) -> u64 {
     let mut acc: u64 = 1;
@@ -18,6 +18,7 @@ fn wrapping_pow(mut base: u64, mut exp: u32) -> u64 {
 /// # Examples
 ///
 /// ```rust
+/// # extern crate primal_check as primal;
 /// assert_eq!(primal::as_perfect_power(2), (2, 1));
 /// assert_eq!(primal::as_perfect_power(4), (2, 2));
 /// assert_eq!(primal::as_perfect_power(8), (2, 3));
@@ -67,7 +68,7 @@ pub fn as_perfect_power(x: u64) -> (u64, u8) {
 /// Returns `None` if `x` not a perfect power.
 pub fn as_prime_power(x: u64) -> Option<(u64, u8)> {
     let (y, k) = as_perfect_power(x);
-    if ::is_prime(y) {
+    if ::miller_rabin(y) {
         Some((y, k))
     } else {
         None
@@ -76,7 +77,7 @@ pub fn as_prime_power(x: u64) -> Option<(u64, u8)> {
 
 #[cfg(test)]
 mod tests {
-    use Primes;
+    use primal::Primes;
 
     use super::{as_perfect_power, as_prime_power};
 

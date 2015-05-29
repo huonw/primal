@@ -12,6 +12,10 @@ keywords = ["math", "mathematics", "primes", "number-theory"]
 description = """
 Fast standalone primality testing.
 """
+
+[dependencies]
+num = "0"
+
 [dev-dependencies]
 primal = { path = ".." }
 

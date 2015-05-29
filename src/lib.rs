@@ -68,13 +68,12 @@ pub use primal_estimate::prime_pi as estimate_prime_pi;
 pub use primal_estimate::nth_prime as estimate_nth_prime;
 //pub use fast_sieve::Sieve;
 pub use primal_check::miller_rabin as is_prime;
-pub use perfect_power::{as_perfect_power, as_prime_power};
+pub use primal_check::{as_perfect_power, as_prime_power};
 pub use sieve::{Primes, PrimeIterator};
 
 pub use fast_sieve::StreamingSieve;
 
 mod fast_sieve;
-mod perfect_power;
 mod sieve;
 
 /// (prime, exponent) pairs storing the prime factorisation of a
