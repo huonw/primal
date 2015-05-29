@@ -1,4 +1,5 @@
 extern crate primal;
+extern crate primal_smallsieve;
 
 use std::cmp;
 
@@ -25,7 +26,7 @@ fn main() {
     let (_, hi) = primal::estimate_nth_prime(LARGEST_PI + 1);
     // we know `hi` is definitely above one prime we're interested in,
     // so just make sure we're above the other one.
-    let sieve = primal::Primes::sieve(cmp::max(hi, LARGEST_PRIME) as usize);
+    let sieve = primal_smallsieve::Primes::sieve(cmp::max(hi, LARGEST_PRIME) as usize);
 
     let stop_at = sieve.primes().nth(LARGEST_PI as usize).unwrap();
 

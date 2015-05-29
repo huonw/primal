@@ -1,0 +1,19 @@
+[package]
+name = "primal-smallsieve"
+version = "0.1.0"
+authors = ["Huon Wilson <dbau.pp@gmail.com>"]
+
+homepage = "https://github.com/huonw/primal"
+repository = "https://github.com/huonw/primal"
+documentation = "http://huonw.github.io/primal/primal_smallsieve/"
+license = "MIT/Apache-2.0"
+keywords = ["math", "mathematics", "primes", "number-theory"]
+
+description = """
+A simple sieve of Eratosthenes designed for sieving primes below small
+numbers.
+"""
+
+[dependencies]
+primal-bit = { path = "../primal-bit" }
+primal-estimate = { path = "../primal-estimate" }

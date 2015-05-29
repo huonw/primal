@@ -3,7 +3,7 @@
 use primal_bit::{BitVec};
 use std::{cmp};
 
-use Primes;
+use primal_smallsieve::Primes;
 
 /// A segmented sieve that yields only a small run of primes at a
 /// time.
@@ -107,7 +107,7 @@ mod tests {
     fn test() {
         const LIMIT: usize = 2_000_000;
         let mut sieve = StreamingSieve::new(LIMIT);
-        let primes = ::Primes::sieve(LIMIT);
+        let primes = ::primal_smallsieve::Primes::sieve(LIMIT);
         while let Some((low, next)) = sieve.next() {
             let mut i = low + 1;
             while i < low + next.len() {

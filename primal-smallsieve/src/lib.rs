@@ -1,7 +1,12 @@
-use primal_bit::{BitVec, self};
-use std::{iter, cmp};
+//! Sieve small numbers.
+//!
+//! This is designed to be used via the `primal` crate.
 
-use Factors;
+extern crate primal_bit;
+extern crate primal_estimate;
+
+use primal_bit::BitVec;
+use std::{iter, cmp};
 
 /// Stores information about primes up to some limit.
 ///
@@ -112,7 +117,9 @@ impl Primes {
     /// Notably, any number between `U` and `U^2` can always be fully
     /// factored, since these numbers are guaranteed to only have zero
     /// or one prime factors larger than `U`.
-    pub fn factor(&self, mut n: usize) -> Result<Factors, (usize, Factors)> {
+    pub fn factor(&self, mut n: usize) -> Result<Vec<(usize,usize)>,
+                                                 (usize, Vec<(usize, usize)>)>
+    {
         if n == 0 { return Err((0, vec![])) }
 
         let mut ret = Vec::new();
@@ -168,8 +175,8 @@ impl<'a> Iterator for PrimeIterator<'a> {
         // TODO: this doesn't run in constant time, is it super-bad?
         match (iter.next(), iter.next_back()) {
             (Some(lo), Some(hi)) => {
-                let (below_hi, above_hi) = ::estimate_prime_pi(hi as u64);
-                let (below_lo, above_lo) = ::estimate_prime_pi(lo as u64);
+                let (below_hi, above_hi) = primal_estimate::prime_pi(hi as u64);
+                let (below_lo, above_lo) = primal_estimate::prime_pi(lo as u64);
 
                 ((below_hi - cmp::min(above_lo, below_hi)) as usize,
                  Some((above_hi - below_lo + 1) as usize))
