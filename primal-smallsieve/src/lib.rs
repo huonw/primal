@@ -2,6 +2,8 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
+#![cfg_attr(all(test, feature = "unstable"), feature(test))]
+#[cfg(all(test, feature = "unstable"))] extern crate test;
 extern crate primal_bit;
 extern crate primal_estimate;
 
