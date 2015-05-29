@@ -13,3 +13,6 @@ keywords = ["math", "mathematics", "primes", "number-theory"]
 description = """
 Bit-vector specialised to the prime-number-related needs of `primal`.
 """
+
+[features]
+unstable = []
