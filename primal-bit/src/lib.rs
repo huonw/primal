@@ -90,14 +90,6 @@ use std::usize;
 
 type MutBlocks<'a> = slice::IterMut<'a, u32>;
 
-fn reverse_bits(byte: u8) -> u8 {
-    let mut result = 0;
-    for i in 0..8 {
-        result |= ((byte >> i) & 1) << (8 - 1 - i);
-    }
-    result
-}
-
 // Take two BitVec's, and return iterators of their words, where the shorter one
 // has been padded with 0's
 macro_rules! match_words {
@@ -171,7 +163,7 @@ impl Index<usize> for BitVec {
 
 /// Computes how many blocks are needed to store that many bits
 fn blocks_for_bits(bits: usize) -> usize {
-    // If we want 17 bits, dividing by 32 will produce 0. So we add 1 to make sure we
+    // If we want 17 ints, dividing by 32 will produce 0. So we add 1 to make sure we
     // reserve enough. But if we want exactly a multiple of 32, this will actually allocate
     // one too many. So we need to check if that's the case. We can do that by computing if
     // bitwise AND by `32 - 1` is 0. But LLVM should be able to optimize the semantically
@@ -275,49 +267,6 @@ impl BitVec {
             storage: Vec::with_capacity(blocks_for_bits(nbits)),
             nbits: 0,
         }
-    }
-
-    /// Transforms a byte-vector into a `BitVec`. Each byte becomes eight bits,
-    /// with the most significant bits of each byte coming first. Each
-    /// bit becomes `true` if equal to 1 or `false` if equal to 0.
-    ///
-    /// # Examples
-    ///
-    /// ```ignore
-    /// use std::collections::BitVec;
-    ///
-    /// let bv = BitVec::from_bytes(&[0b10100000, 0b00010010]);
-    /// assert!(bv.eq_vec(&[true, false, true, false,
-    ///                     false, false, false, false,
-    ///                     false, false, false, true,
-    ///                     false, false, true, false]));
-    /// ```
-    pub fn from_bytes(bytes: &[u8]) -> BitVec {
-        let len = bytes.len().checked_mul(8).expect("capacity overflow");
-        let mut bit_vec = BitVec::with_capacity(len);
-        let complete_words = bytes.len() / 4;
-        let extra_bytes = bytes.len() % 4;
-
-        bit_vec.nbits = len;
-
-        for i in 0..complete_words {
-            bit_vec.storage.push(
-                ((reverse_bits(bytes[i * 4 + 0]) as u32) << 0) |
-                ((reverse_bits(bytes[i * 4 + 1]) as u32) << 8) |
-                ((reverse_bits(bytes[i * 4 + 2]) as u32) << 16) |
-                ((reverse_bits(bytes[i * 4 + 3]) as u32) << 24)
-            );
-        }
-
-        if extra_bytes > 0 {
-            let mut last_word = 0;
-            for (i, &byte) in bytes[complete_words*4..].iter().enumerate() {
-                last_word |= (reverse_bits(byte) as u32) << (i * 8);
-            }
-            bit_vec.storage.push(last_word);
-        }
-
-        bit_vec
     }
 
     /// Retrieves the value at index `i`, or `None` if the index is out of bounds.

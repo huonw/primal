@@ -13,13 +13,25 @@ use primal_bit::BitVec;
 
 const BITS: usize = 32;
 
-trait EqVec {
+trait Methods {
     fn eq_vec(&self, v: &[bool]) -> bool;
+    fn from_bytes(x: &[u8]) -> BitVec;
 }
-impl EqVec for BitVec {
+impl Methods for BitVec {
     fn eq_vec(&self, v: &[bool]) -> bool {
         self.len() == v.len() &&
             self.iter().zip(v).all(|(a, &b)| a == b)
+    }
+    fn from_bytes(bytes: &[u8]) -> BitVec {
+        let len = bytes.len().checked_mul(8).expect("capacity overflow");
+        let mut bit_vec = BitVec::with_capacity(len);
+
+        for &byte in bytes {
+            for x in (0..8).rev() {
+                bit_vec.push(byte & (1 << x) != 0)
+            }
+        }
+        bit_vec
     }
 }
 
