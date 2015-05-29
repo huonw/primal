@@ -1,5 +1,8 @@
 #![allow(dead_code)]
 
+extern crate primal_bit;
+extern crate primal_smallsieve;
+
 use primal_bit::{BitVec};
 use std::{cmp};
 

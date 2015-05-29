@@ -1,0 +1,18 @@
+[package]
+name = "primal-sieve"
+version = "0.1.0"
+authors = ["Huon Wilson <dbau.pp@gmail.com>"]
+
+homepage = "https://github.com/huonw/primal"
+repository = "https://github.com/huonw/primal"
+documentation = "http://huonw.github.io/primal/primal_sieve/"
+license = "MIT/Apache-2.0"
+keywords = ["math", "mathematics", "primes", "number-theory"]
+
+description = """
+A high performance prime sieve.
+"""
+
+[dependencies]
+primal-smallsieve = { path = "../primal-smallsieve" }
+primal-bit = { path = "../primal-bit" }

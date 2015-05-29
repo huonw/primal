@@ -62,6 +62,7 @@ extern crate primal_estimate;
 extern crate primal_bit;
 extern crate primal_check;
 extern crate primal_smallsieve;
+extern crate primal_sieve;
 
 #[cfg(all(test, feature = "unstable"))] extern crate test;
 
@@ -72,9 +73,7 @@ pub use primal_check::miller_rabin as is_prime;
 pub use primal_check::{as_perfect_power, as_prime_power};
 pub use primal_smallsieve::{Primes, PrimeIterator};
 
-pub use fast_sieve::StreamingSieve;
-
-mod fast_sieve;
+pub use primal_sieve::StreamingSieve;
 
 /// (prime, exponent) pairs storing the prime factorisation of a
 /// number.

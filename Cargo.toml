@@ -25,6 +25,7 @@ primal-bit = { path = "primal-bit" }
 primal-check = { path = "primal-check" }
 primal-estimate = { path = "primal-estimate" }
 primal-smallsieve = { path = "primal-smallsieve" }
+primal-sieve = { path = "primal-sieve" }
 
 [features]
 unstable = []
