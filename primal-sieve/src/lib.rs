@@ -4,6 +4,7 @@
 extern crate primal_bit;
 extern crate primal_smallsieve;
 extern crate primal_estimate;
+extern crate hamming;
 
 mod streaming;
 pub use streaming::StreamingSieve;

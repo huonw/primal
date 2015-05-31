@@ -1,6 +1,7 @@
 use primal_bit::BitVec;
 use wheel;
 use streaming::StreamingSieve;
+use hamming;
 
 use std::cmp;
 
@@ -46,6 +47,34 @@ impl Sieve {
             (true, base, tweak) => !self.seen[base][tweak],
         }
     }
+
+    pub fn count_upto(&self, n: usize) -> usize {
+        assert!(n <= self.upper_bound());
+        match n {
+            0...1 => 0,
+            2 => 1,
+            3...4 => 2,
+            5...6 => 3,
+            7...10 => 4,
+            _ => {
+                let (includes, base, tweak) = self.index_for(n);
+                let mut count = 4;
+                for v in &self.seen[..base] {
+                    let bytes = v.as_bytes();
+                    count += 8 * bytes.len() - hamming::weight(bytes) as usize;
+                }
+                let (tweak_byte, tweak_bit) = (tweak / 8, tweak % 8);
+
+                let bytes = self.seen[base].as_bytes();
+                count += 8 * tweak_byte - hamming::weight(&bytes[..tweak_byte]) as usize;
+                let byte = bytes[tweak_byte];
+                for i in 0..tweak_bit + includes as usize {
+                    count += (byte & (1 << i) == 0) as usize
+                }
+                count
+            }
+        }
+    }
 }
 
 #[cfg(test)]
@@ -77,6 +106,20 @@ mod tests {
         let primes = Sieve::new(30001);
         assert!(primes.upper_bound() >= 30001);
     }
+
+    #[test]
+    fn count_upto() {
+        let limit = 2_000_000;
+        let primes = Sieve::new(limit);
+        let real = Primes::sieve(limit);
+
+        for i in (0..20).chain((0..100).map(|n| n * 19998 + 1)) {
+            let val = primes.count_upto(i);
+            let true_ = real.primes().take_while(|p| *p <= i).count();
+            assert!(val == true_, "failed for {}, true {}, computed {}",
+                    i, true_, val)
+        }
+    }
 }
 
 #[cfg(all(test, feature = "unstable"))]
@@ -100,4 +143,19 @@ mod benches {
     fn sieve_huge(b: &mut Bencher) {
         b.iter(|| Sieve::new(10_000_000))
     }
+
+    fn count_upto(b: &mut Bencher, n: usize) {
+        let s = Sieve::new(n + 1);
+
+        b.iter(|| s.count_upto(n));
+    }
+
+    #[bench]
+    fn count_upto_small(b: &mut Bencher) { count_upto(b, 100) }
+    #[bench]
+    fn count_upto_medium(b: &mut Bencher) { count_upto(b, 10_000) }
+    #[bench]
+    fn count_upto_large(b: &mut Bencher) { count_upto(b, 100_000) }
+    #[bench]
+    fn count_upto_huge(b: &mut Bencher) { count_upto(b, 10_000_000) }
 }

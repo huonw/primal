@@ -18,5 +18,7 @@ primal-smallsieve = { path = "../primal-smallsieve" }
 primal-bit = { path = "../primal-bit" }
 primal-estimate = { path = "../primal-estimate" }
 
+hamming = "0.1"
+
 [features]
 unstable = []
