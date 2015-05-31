@@ -1,0 +1,7 @@
+[package]
+name = "wheel-generator"
+version = "0.1.0"
+authors = ["Huon Wilson <dbau.pp@gmail.com>"]
+
+[dependencies]
+primal-smallsieve = { path = "../primal-smallsieve" }
