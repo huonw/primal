@@ -1,6 +1,7 @@
 use primal_bit::{BitVec};
 use std::{cmp};
 
+use wheel;
 use primal_smallsieve::Primes;
 
 /// A segmented sieve that yields only a small run of primes at a
@@ -13,27 +14,32 @@ pub struct StreamingSieve {
     small: Primes,
     // stores which numbers *aren't* prime, i.e. true == composite.
     sieve: BitVec,
-    primes: Vec<(usize, usize)>,
+    primes: Vec<wheel::WheelInfo>,
 
     low: usize,
     current: usize,
     limit: usize,
 }
 
-const CACHE: usize = 32 << 10;
+const CACHE: usize = (32 << 10) - 2;
 // 8 for the bit vector, 2 for storing odd numbers only
 const SEG_ELEMS: usize = 8 * CACHE;
-const SEG_LEN: usize = 2 * SEG_ELEMS;
+const SEG_LEN: usize = SEG_ELEMS * wheel::MODULO / wheel::SIZE;
 
 impl StreamingSieve {
     /// Create a new instance of the streaming sieve that will
     /// correctly progressively filter primes up to `limit`.
     pub fn new(limit: usize) -> StreamingSieve {
         let small = Primes::sieve((limit as f64).sqrt() as usize + 1);
-        let current = 3;
+        let current = match wheel::MODULO {
+            6 => 5,
+            30 => 7,
+            210 => 11,
+            _ => unimplemented!(),
+        };
         let low = 0;
 
-        let elems = cmp::min(limit, SEG_ELEMS);
+        let elems = cmp::min((limit * wheel::SIZE + wheel::MODULO - 1) / wheel::MODULO, SEG_ELEMS);
         StreamingSieve {
             small: small,
             sieve: BitVec::from_elem(elems, false),
@@ -68,25 +74,28 @@ impl StreamingSieve {
 
         while s * s <= high {
             if self.small.is_prime(s) {
-                self.primes.push((s, s * s - low));
+                self.primes.push(wheel::compute_wheel_elem(s, low));
             }
             s += 1
         }
 
         self.current = s;
-        let top = cmp::min(SEG_LEN, self.limit) / 2;
-        for &mut (k, ref mut next) in self.primes.iter_mut() {
-            let mut j = *next / 2;
-            while j < top {
-                unsafe {
-                    self.sieve.set_unchecked(j, true);
-                }
-                j += k;
-            }
+        {
+            let bytes = self.sieve.as_bytes_mut();
+            let top = bytes.len();
 
-            // if this wraps, we've hit the limit, and so won't be
-            // continuing, so whatever, it can be junk.
-            *next = (2 * j + 1).wrapping_sub(SEG_LEN);
+            for wi in self.primes.iter_mut() {
+                let mut si = wi.sieve_index;
+                let mut wi_ = wi.wheel_index;
+                let p = wi.prime;
+                while si < top {
+                    wheel::set_bit(bytes, &mut si, &mut wi_, p);
+                }
+                // if this wraps, we've hit the limit, and so won't be
+                // continuing, so whatever, it can be junk.
+                wi.sieve_index = si.wrapping_sub(top);
+                wi.wheel_index = wi_;
+            }
         }
 
         if low == 0 {
@@ -100,23 +109,40 @@ impl StreamingSieve {
 
 #[cfg(test)]
 mod tests {
+    use wheel;
     use super::StreamingSieve;
+    fn gcd(x: usize, y: usize) -> usize {
+        if y == 0 { x }
+        else { gcd(y, x % y) }
+    }
+    fn coprime_to(x: usize) -> Vec<usize> {
+        (1..x).filter(|&n| gcd(n, x) == 1).collect()
+    }
     #[test]
     fn test() {
+        let coprime = coprime_to(wheel::MODULO);
         const LIMIT: usize = 2_000_000;
         let mut sieve = StreamingSieve::new(LIMIT);
         let primes = ::primal_smallsieve::Primes::sieve(LIMIT);
-        while let Some((low, next)) = sieve.next() {
-            let mut i = low + 1;
-            while i < low + next.len() {
-                if i > LIMIT { break }
-                assert!(primes.is_prime(i) == !next[(i - low) / 2],
+
+        let mut base = 0;
+        let mut index = 0;
+
+        while let Some((_low, next)) = sieve.next() {
+            for val in next {
+                let i = wheel::MODULO * base + coprime[index];
+                if i >= LIMIT { break }
+                assert!(primes.is_prime(i) == !val,
                         "failed for {} (is prime = {})", i, primes.is_prime(i));
-                i += 2;
+
+                index += 1;
+                if index == wheel::SIZE {
+                    index = 0;
+                    base += 1
+                }
             }
         }
     }
-
 }
 
 #[cfg(all(test, feature = "unstable"))]

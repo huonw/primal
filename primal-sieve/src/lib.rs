@@ -8,6 +8,12 @@ extern crate primal_estimate;
 mod streaming;
 pub use streaming::StreamingSieve;
 
+// mod wheel6;
+mod wheel30;
+mod wheel210;
+mod wheel {
+    pub use wheel210::*;
+}
 mod sieve;
 
 pub use sieve::Sieve;

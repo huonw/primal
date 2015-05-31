@@ -1,35 +1,45 @@
 use primal_bit::BitVec;
-
+use wheel;
 use streaming::StreamingSieve;
+
+use std::cmp;
 
 pub struct Sieve {
     #[allow(dead_code)]
     stream: StreamingSieve,
-    seen: BitVec,
+    nbits: usize,
+    seen: Vec<BitVec>,
 }
 
 impl Sieve {
     pub fn new(limit: usize) -> Sieve {
         let mut stream = StreamingSieve::new(limit);
 
-        let mut seen = BitVec::with_capacity(limit / 2);
+        let mut seen = Vec::new();
+        let mut nbits = 0;
         while let Some((n, bits)) = stream.next() {
-            seen.push_all(&bits, (limit - n + 1) / 2);
+            seen.push(bits.clone());
+            nbits += cmp::min(bits.len(), wheel::bit_index(limit - n + 1).1);
         }
         Sieve {
             stream: stream,
+            nbits: nbits,
             seen: seen,
         }
     }
     pub fn upper_bound(&self) -> usize {
-        (self.seen.len() - 1) * 2 + 1
+        let last_bit = self.nbits - 1;
+        wheel::from_bit_index(last_bit)
     }
     pub fn is_prime(&self, n: usize) -> bool {
-        if n % 2 == 0 {
-            n == 2
-        } else {
-            assert!(n <= self.upper_bound());
-            !self.seen[n / 2]
+        match wheel::bit_index(n) {
+            (false, _) => n == 2 || n == 3 || n == 5 || n == 7,
+            (true, idx) => {
+                let len = self.seen[0].len();
+                let base = idx / len;
+                let tweak = idx % len;
+                !self.seen[base][tweak]
+            }
         }
     }
 }
@@ -41,27 +51,27 @@ mod tests {
 
     #[test]
     fn is_prime() {
-        let limit = 1_000_000;
+        let limit = 2_000_000;
         let real = Primes::sieve(limit);
         let primes = Sieve::new(limit);
 
         for i in 0..limit {
-            assert_eq!(primes.is_prime(i),
-                       real.is_prime(i))
+            assert!(primes.is_prime(i) == real.is_prime(i),
+                    "failed for {} (real = {})", i, real.is_prime(i));
         }
     }
 
     #[test]
     fn upper_bound() {
         let primes = Sieve::new(30);
-        assert_eq!(primes.upper_bound(), 29);
+        assert!(primes.upper_bound() >= 29);
         let primes = Sieve::new(31);
-        assert_eq!(primes.upper_bound(), 31);
+        assert!(primes.upper_bound() >= 31);
 
         let primes = Sieve::new(30000);
-        assert_eq!(primes.upper_bound(), 29999);
+        assert!(primes.upper_bound() >= 29999);
         let primes = Sieve::new(30001);
-        assert_eq!(primes.upper_bound(), 30001);
+        assert!(primes.upper_bound() >= 30001);
     }
 }
 
