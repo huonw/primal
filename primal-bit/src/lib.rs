@@ -237,6 +237,12 @@ impl BitVec {
                                            (self.nbits + 7) / 8)
         }
     }
+    pub fn as_bytes(&self) -> &[u8] {
+        unsafe {
+            std::slice::from_raw_parts(self.storage.as_ptr() as *const _,
+                                       (self.nbits + 7) / 8)
+        }
+    }
 
     /// Creates a `BitVec` that holds `nbits` elements, setting each element
     /// to `bit`.
