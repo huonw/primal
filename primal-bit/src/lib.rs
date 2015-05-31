@@ -231,6 +231,13 @@ impl BitVec {
         BitVec { storage: Vec::new(), nbits: 0 }
     }
 
+    pub fn as_bytes_mut(&mut self) -> &mut [u8] {
+        unsafe {
+            std::slice::from_raw_parts_mut(self.storage.as_mut_ptr() as *mut _,
+                                           (self.nbits + 7) / 8)
+        }
+    }
+
     /// Creates a `BitVec` that holds `nbits` elements, setting each element
     /// to `bit`.
     ///
