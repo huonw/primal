@@ -51,6 +51,24 @@ impl StreamingSieve {
         }
     }
 
+    fn direct_sieve(&mut self) {
+        let bytes = self.sieve.as_bytes_mut();
+        let top = bytes.len();
+
+        for wi in self.primes.iter_mut() {
+            let mut si = wi.sieve_index;
+            let mut wi_ = wi.wheel_index;
+            let p = wi.prime;
+            while si < top {
+                wheel::set_bit(bytes, &mut si, &mut wi_, p);
+            }
+            // if this wraps, we've hit the limit, and so won't be
+            // continuing, so whatever, it can be junk.
+            wi.sieve_index = si.wrapping_sub(top);
+            wi.wheel_index = wi_;
+        }
+    }
+
     /// Extract the next chunk of filtered primes, the return value is
     /// `Some((low, v))` or `None` if the sieve has reached the limit.
     ///
@@ -80,23 +98,7 @@ impl StreamingSieve {
         }
 
         self.current = s;
-        {
-            let bytes = self.sieve.as_bytes_mut();
-            let top = bytes.len();
-
-            for wi in self.primes.iter_mut() {
-                let mut si = wi.sieve_index;
-                let mut wi_ = wi.wheel_index;
-                let p = wi.prime;
-                while si < top {
-                    wheel::set_bit(bytes, &mut si, &mut wi_, p);
-                }
-                // if this wraps, we've hit the limit, and so won't be
-                // continuing, so whatever, it can be junk.
-                wi.sieve_index = si.wrapping_sub(top);
-                wi.wheel_index = wi_;
-            }
-        }
+        self.direct_sieve();
 
         if low == 0 {
             // 1 is not prime.

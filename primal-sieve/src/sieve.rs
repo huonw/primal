@@ -27,19 +27,23 @@ impl Sieve {
             seen: seen,
         }
     }
+    fn split_index(&self, idx: usize) -> (usize, usize) {
+        let len = self.seen[0].len();
+        (idx / len,idx % len)
+    }
+    fn index_for(&self, n: usize) -> (bool, usize, usize) {
+        let (b, idx) = wheel::bit_index(n);
+        let (base, tweak) = self.split_index(idx);
+        (b, base, tweak)
+    }
     pub fn upper_bound(&self) -> usize {
         let last_bit = self.nbits - 1;
         wheel::from_bit_index(last_bit)
     }
     pub fn is_prime(&self, n: usize) -> bool {
-        match wheel::bit_index(n) {
-            (false, _) => n == 2 || n == 3 || n == 5 || n == 7,
-            (true, idx) => {
-                let len = self.seen[0].len();
-                let base = idx / len;
-                let tweak = idx % len;
-                !self.seen[base][tweak]
-            }
+        match self.index_for(n) {
+            (false, _, _) => n == 2 || n == 3 || n == 5 || n == 7,
+            (true, base, tweak) => !self.seen[base][tweak],
         }
     }
 }
