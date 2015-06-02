@@ -20,8 +20,10 @@ echo "${place}," |
             "$@";
         else
             dir="primal-${name}"
-            if ! ( cd $dir && echo $name && "$@"; ); then
-                break
+            ( cd "$dir" && echo "$name" && "$@"; )
+            res=$?
+            if [ "$res" != "0" ]; then
+                exit $res
             fi
         fi
     done
