@@ -58,7 +58,12 @@ impl Sieve {
             7...10 => 4,
             _ => {
                 let (includes, base, tweak) = self.index_for(n);
-                let mut count = 4;
+                let mut count = match wheel::MODULO {
+                    30 => 3,
+                    210 => 4,
+                    _ => unimplemented!()
+                };
+
                 for v in &self.seen[..base] {
                     let bytes = v.as_bytes();
                     count += 8 * bytes.len() - hamming::weight(bytes) as usize;
