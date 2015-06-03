@@ -15,23 +15,50 @@ pub struct StreamingSieve {
     // stores which numbers *aren't* prime, i.e. true == composite.
     sieve: BitVec,
     primes: Vec<wheel::WheelInfo>,
+    presieve: BitVec,
 
     low: usize,
     current: usize,
     limit: usize,
 }
 
-const CACHE: usize = (32 << 10) - 2;
+const CACHE: usize = (32 << 10) - 2 * (wheel::MODULO == 210) as usize;
 // 8 for the bit vector, 2 for storing odd numbers only
 const SEG_ELEMS: usize = 8 * CACHE;
 const SEG_LEN: usize = SEG_ELEMS * wheel::MODULO / wheel::SIZE;
+
+const PRESIEVE_PROD: usize = 2 * 3 * 5 * 7 * 11;
+const PRESIEVE_PRIMES: &'static [usize] = &[2, 3, 5, 7, 11];
+const PRESIEVE_NEXT: usize = 13;
+const PRESIEVE_ACTIVE: bool = wheel::MODULO == 30;
+
+#[inline(never)]
+fn compute_presieve() -> BitVec {
+    assert!(PRESIEVE_ACTIVE);
+    let len = (PRESIEVE_PROD * wheel::SIZE + wheel::MODULO - 1) / wheel::MODULO;
+    let mut bitv = BitVec::from_elem(len, false);
+
+    // this is silly and should be done with a sieve that only uses
+    // the primes in PRESIEVE_PRIMES.
+    for i in 0..len {
+        let true_ = wheel::from_bit_index(i);
+        fn gcd(x: usize, y: usize) -> usize {
+            if y == 0 { x }
+            else { gcd(y, x % y) }
+        }
+        if gcd(true_, PRESIEVE_PROD) != 1 {
+            bitv.set(i, true)
+        }
+    }
+    bitv
+}
 
 impl StreamingSieve {
     /// Create a new instance of the streaming sieve that will
     /// correctly progressively filter primes up to `limit`.
     pub fn new(limit: usize) -> StreamingSieve {
         let small = Primes::sieve((limit as f64).sqrt() as usize + 1);
-        let current = match wheel::MODULO {
+        let mut current = match wheel::MODULO {
             6 => 5,
             30 => 7,
             210 => 11,
@@ -39,15 +66,55 @@ impl StreamingSieve {
         };
         let low = 0;
 
+        let presieve = if PRESIEVE_ACTIVE && limit > PRESIEVE_PROD * 2 {
+            current = PRESIEVE_NEXT;
+            compute_presieve()
+        } else {
+            BitVec::new()
+        };
+
         let elems = cmp::min((limit * wheel::SIZE + wheel::MODULO - 1) / wheel::MODULO, SEG_ELEMS);
         StreamingSieve {
             small: small,
             sieve: BitVec::from_elem(elems, false),
             primes: vec![],
+            presieve: presieve,
 
             low: low,
             current: current,
             limit: limit
+        }
+    }
+
+    pub fn very_small_sieve(&mut self, low: usize) {
+        let offset = (low % PRESIEVE_PROD) * wheel::SIZE / wheel::MODULO / 8;
+
+        copy_all(self.sieve.as_bytes_mut(),
+                 self.presieve.as_bytes(),
+                 offset);
+        fn copy_all(mut dst: &mut [u8], src: &[u8], init_offset: usize) {
+            let mut pos = 0;
+            // pre-fill data at the start, as a rotation of `src`.
+            pos += memcpy(&mut dst[pos..], &src[init_offset..]);
+            if pos >= dst.len() { return }
+
+            pos += memcpy(&mut dst[pos..], &src[..init_offset]);
+            if pos >= dst.len() { return }
+
+            // progressively copy the prefix to the rest of the
+            // vector, doubling each time.
+            while pos < dst.len() {
+                let (filled, unfilled) = dst.split_at_mut(pos);
+                pos += memcpy(unfilled, filled);
+            }
+        }
+        fn memcpy<'d>(dst: &'d mut [u8], src: &[u8]) -> usize {
+            use std::ptr;
+            let l = cmp::min(dst.len(), src.len());
+            unsafe {
+                ptr::copy(src.as_ptr(), dst.as_mut_ptr(), l);
+            }
+            l
         }
     }
 
@@ -98,11 +165,23 @@ impl StreamingSieve {
         }
 
         self.current = s;
+        if PRESIEVE_ACTIVE && self.presieve.len() > 0 {
+            self.very_small_sieve(low);
+        }
         self.direct_sieve();
 
         if low == 0 {
             // 1 is not prime.
             self.sieve.set(0, true);
+            if PRESIEVE_ACTIVE {
+                // but these are
+                for &x in PRESIEVE_PRIMES {
+                    let (use_, idx) = wheel::bit_index(x);
+                    if use_ {
+                        self.sieve.set(idx, false)
+                    }
+                }
+            }
         }
 
         Some((low, &self.sieve))
