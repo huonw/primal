@@ -1,5 +1,6 @@
 use primal_bit::{BitVec};
 use std::{cmp};
+use hamming;
 
 use wheel;
 use primal_smallsieve::Primes;
@@ -87,6 +88,48 @@ impl StreamingSieve {
             low: low,
             current: current,
             limit: limit
+        }
+    }
+    fn split_index(&self, idx: usize) -> (usize, usize) {
+        let len = SEG_ELEMS;
+        (idx / len,idx % len)
+    }
+    fn index_for(&self, n: usize) -> (bool, usize, usize) {
+        let (b, idx) = wheel::bit_index(n);
+        let (base, tweak) = self.split_index(idx);
+        (b, base, tweak)
+    }
+
+    pub fn count_upto(n: usize) -> usize {
+        match n {
+            0...1 => 0,
+            2 => 1,
+            3...4 => 2,
+            5...6 => 3,
+            7...10 => 4,
+            _ => {
+                let mut sieve = StreamingSieve::new(n);
+                let (includes, base, tweak) = sieve.index_for(n);
+                let mut count = match wheel::BYTE_MODULO {
+                    30 => 3,
+                    _ => unimplemented!()
+                };
+
+                for _ in 0..base {
+                    let (_, bitv) = sieve.next().unwrap();
+                    let bytes = bitv.as_bytes();
+                    count += 8 * bytes.len() - hamming::weight(bytes) as usize;
+                }
+                let (tweak_byte, tweak_bit) = (tweak / 8, tweak % 8);
+                let (_, last) = sieve.next().unwrap();
+                let bytes = last.as_bytes();
+                count += 8 * tweak_byte - hamming::weight(&bytes[..tweak_byte]) as usize;
+                let byte = bytes[tweak_byte];
+                for i in 0..tweak_bit + includes as usize {
+                    count += (byte & (1 << i) == 0) as usize
+                }
+                count
+            }
         }
     }
 
