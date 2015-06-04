@@ -26,9 +26,9 @@ const CACHE: usize = (32 << 10);
 const SEG_ELEMS: usize = 8 * CACHE;
 const SEG_LEN: usize = SEG_ELEMS * wheel::BYTE_MODULO / wheel::BYTE_SIZE;
 
-const PRESIEVE_PROD: usize = 2 * 3 * 5 * 7 * 11;
-const PRESIEVE_PRIMES: &'static [usize] = &[2, 3, 5, 7, 11];
-const PRESIEVE_NEXT: usize = 13;
+const PRESIEVE_PROD: usize = 2 * 3 * 5 * 7 * 11 * 13;
+const PRESIEVE_PRIMES: &'static [usize] = &[2, 3, 5, 7, 11, 13];
+const PRESIEVE_NEXT: usize = 17;
 const PRESIEVE_ACTIVE: bool = true;
 
 fn bits_for(x: usize) -> usize {
