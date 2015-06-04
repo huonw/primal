@@ -18,6 +18,13 @@ fn coprime_to(x: usize, upto: usize) -> Vec<usize> {
     (1..upto).filter(|&n| gcd(n, x) == 1).collect()
 }
 
+fn bit_index(x: usize) -> usize {
+    let wheel = x / WHEEL * COUNT;
+    let rem = x % WHEEL;
+    let bits = (1..rem).filter(|y| gcd(*y, WHEEL) == 1).count();
+    wheel + bits
+}
+
 const LIMIT: usize = 2_000_000;
 
 const WHEEL: usize = 2 * 3 * 5 * 7;
@@ -78,27 +85,27 @@ fn main() {
             }
         }
 
-        for start_bit in 0..8 {
-            let mut bit = start_bit;
-            let twiddles = lines[..COUNT].iter().map(|&(sl, sh)| {
-                assert!(sl % 8 == 0);
-                let sl = sl / 8;
-                let old_bit = bit;
-                let new_bit = bit + sh;
-                let offset = new_bit / 8;
-                bit = new_bit % 8;
-                (sl, offset, old_bit)
-            });
+        let start_bit = bit_index(p1 * p1) % 8;
+        assert_eq!(bit_index(p2 * p2) % 8, start_bit);
+        let mut bit = start_bit;
+        let twiddles = lines[..COUNT].iter().map(|&(sl, sh)| {
+            assert!(sl % 8 == 0);
+            let sl = sl / 8;
+            let old_bit = bit;
+            let new_bit = bit + sh;
+            let offset = new_bit / 8;
+            bit = new_bit % 8;
+            (sl, offset, old_bit)
+        });
 
-            print!("    ");
-            for (i, (sl, offset, bit)) in twiddles.enumerate() {
-                print!("elem!({}u8,{},{},{}),", bit, sl, offset,
-                       if i == COUNT-1 {-(i as isize)}else{1});
-                if i % 4 == 3 {
-                    print!("\n        ")
-                }
+        print!("    ");
+        for (i, (sl, offset, bit)) in twiddles.enumerate() {
+            print!("elem!({}u8,{},{},{}),", bit, sl, offset,
+                   if i == COUNT-1 {-(i as isize)}else{1});
+            if i % 4 == 3 {
+                print!("\n        ")
             }
-            println!("");
         }
+        println!("");
     }
 }
