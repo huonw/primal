@@ -36,9 +36,10 @@ fn bits_for(x: usize) -> usize {
 }
 
 #[inline(never)]
-fn compute_presieve() -> BitVec {
+fn compute_presieve(limit_bits: usize) -> BitVec {
     assert!(PRESIEVE_ACTIVE);
-    let len = bits_for(PRESIEVE_PROD);
+    let len = cmp::min(bits_for(PRESIEVE_PROD),
+                       limit_bits);
     let mut bitv = BitVec::from_elem(len, false);
 
     // this is silly and should be done with a sieve that only uses
@@ -72,7 +73,7 @@ impl StreamingSieve {
         let elems = cmp::min(bits_for(limit), SEG_ELEMS);
         let presieve = if PRESIEVE_ACTIVE {
             current = PRESIEVE_NEXT;
-            compute_presieve()
+            compute_presieve(elems)
         } else {
             BitVec::new()
         };
