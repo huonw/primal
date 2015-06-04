@@ -1,5 +1,6 @@
 #![allow(dead_code)]
 
+use wheel::{WheelInfo, WheelElem, WheelInit};
 ///
 /// @file   WheelFactorization.cpp
 /// @brief  Precomputed arrays for wheel factorization.
@@ -9,25 +10,6 @@
 /// This file is distributed under the BSD License. See the COPYING
 /// file in the top level directory.
 ///
-
-
-#[derive(Debug)]
-pub struct WheelInfo {
-    pub true_prime: usize,
-    pub prime: usize,
-    pub wheel_index: usize,
-    pub sieve_index: usize,
-}
-impl WheelInfo {
-    pub fn bit(&self) -> usize {
-        self.sieve_index * 8 + WHEEL[self.wheel_index].unset_bit.trailing_zeros() as usize
-    }
-    pub fn actual(&self) -> usize {
-        let bit = self.bit();
-
-        from_bit_index(bit)
-    }
-}
 
 pub fn bit_index(n: usize) -> (bool, usize) {
     let init = &INIT[n % MODULO];
@@ -73,31 +55,6 @@ pub fn compute_wheel_elem(p: usize, low: usize) -> WheelInfo {
 }
 
 pub const SIZE: usize = 48;
-#[derive(Debug)]
-pub struct WheelInit {
-    pub next_mult_factor: u8,
-    pub wheel_index: u8,
-}
-macro_rules! init {
-    ($nmf: expr, $wi: expr) => { WheelInit { next_mult_factor: $nmf, wheel_index: $wi }}
-}
-#[derive(Debug)]
-pub struct WheelElem {
-    pub unset_bit: u8,
-    pub next_mult_factor: u8,
-    pub correction: u8,
-    pub next: i8,
-}
-macro_rules! elem {
-    ($bit: expr, $nmf: expr, $c: expr, $n: expr) => {
-        WheelElem {
-            unset_bit: 1u8 << $bit,
-            next_mult_factor: $nmf,
-            correction: $c,
-            next: $n,
-        }
-    }
-}
 
 pub const MODULO: usize = 210;
 
