@@ -30,9 +30,19 @@ const LIMIT: usize = 2_000_000;
 const BYTE_WHEEL: usize = 2 * 3 * 5;
 const BYTE_COUNT: usize = 1 * 2 * 4;
 
+#[cfg(not(feature = "thirty"))]
 const WHEEL: usize = 2 * 3 * 5 * 7;
+#[cfg(not(feature = "thirty"))]
 const COUNT: usize = 1 * 2 * 4 * 6;
+#[cfg(not(feature = "thirty"))]
 const START_AT: usize = 11;
+
+#[cfg(feature = "thirty")]
+const WHEEL: usize = 2 * 3 * 5;
+#[cfg(feature = "thirty")]
+const COUNT: usize = 1 * 2 * 4;
+#[cfg(feature = "thirty")]
+const START_AT: usize = 7;
 
 fn main() {
     errln!("wheel for {} (count {})", WHEEL, COUNT);
@@ -60,8 +70,9 @@ fn main() {
         map.entry(p % BYTE_WHEEL).or_insert(vec![]).push((p, bits, bit_diffs));
     }
 
+    println!("elems!{{");
     for (m, bitss) in &map {
-        println!("    // remainder {}", m);
+        print!("    // remainder {}\n    [", m);
         assert!(bitss.len() >= 2);
         let (p1, _, ref bits1) = bitss[0];
         let (p2, _, ref bits2) = bitss[1];
@@ -101,14 +112,14 @@ fn main() {
             (sl, offset, old_bit)
         });
 
-        print!("    ");
         for (i, (sl, offset, bit)) in twiddles.enumerate() {
-            print!("elem!({}u8,{},{},{}),", bit, sl, offset,
-                   if i == COUNT-1 {-(i as isize)}else{1});
-            if i % 4 == 3 {
+            if i % 4 == 0 {
                 print!("\n        ")
             }
+            print!("{}u8,{},{},{};", bit, sl, offset,
+                   if i == COUNT-1 {-(i as isize)}else{1});
         }
-        println!("");
+        println!("\n    ],");
     }
+    println!("}}")
 }

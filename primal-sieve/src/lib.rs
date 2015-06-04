@@ -38,17 +38,31 @@ mod wheel {
         pub correction: u8,
         pub next: i8,
     }
+
     #[macro_escape]
-    macro_rules! elem {
-        ($bit: expr, $nmf: expr, $c: expr, $n: expr) => {
-            ::wheel::WheelElem {
-                unset_bit: 1u8 << $bit,
-                next_mult_factor: $nmf,
-                correction: $c,
-                next: $n,
-            }
+    macro_rules! count_ints {
+        // count non-recursively, to avoid recursion limits
+        ($($x: expr, )*) => { sum!($(0usize * $x as usize + 1usize,)*) }
+    }
+    #[macro_escape]
+    macro_rules! sum {
+        ($($x: expr, )*) => { 0 $(+ $x)* }
+    }
+
+    #[macro_escape]
+    macro_rules! elems {
+        ($([$($bit: expr, $nmf: expr, $c: expr, $n: expr;)*],)*) => {
+            const WHEEL: &'static [::wheel::WheelElem; sum!($(count_ints!($($bit,)*),)*)] = &[
+                $($(::wheel::WheelElem {
+                    unset_bit: 1u8 << $bit,
+                    next_mult_factor: $nmf,
+                    correction: $c,
+                    next: $n,
+                },)*)*
+                ];
         }
     }
+
     pub use wheel30::{bit_index, from_bit_index};
     pub use wheel210::{set_bit, compute_wheel_elem, MODULO, SIZE};
 }

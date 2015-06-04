@@ -5,3 +5,6 @@ authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 [dependencies]
 primal-smallsieve = { path = "../primal-smallsieve" }
+
+[features]
+thirty = []
