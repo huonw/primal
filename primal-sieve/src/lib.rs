@@ -12,6 +12,9 @@ pub use streaming::StreamingSieve;
 // mod wheel6;
 #[macro_use]
 mod wheel {
+    pub const BYTE_SIZE: usize = 8;
+    pub const BYTE_MODULO: usize = 30;
+
     #[derive(Debug)]
     pub struct WheelInfo {
         pub true_prime: usize,
@@ -46,7 +49,8 @@ mod wheel {
             }
         }
     }
-    pub use wheel210::{bit_index, from_bit_index, set_bit, compute_wheel_elem, MODULO, SIZE};
+    pub use wheel30::{bit_index, from_bit_index};
+    pub use wheel210::{set_bit, compute_wheel_elem, MODULO, SIZE};
 }
 mod wheel30;
 mod wheel210;

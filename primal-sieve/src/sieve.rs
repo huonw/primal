@@ -58,9 +58,8 @@ impl Sieve {
             7...10 => 4,
             _ => {
                 let (includes, base, tweak) = self.index_for(n);
-                let mut count = match wheel::MODULO {
+                let mut count = match wheel::BYTE_MODULO {
                     30 => 3,
-                    210 => 4,
                     _ => unimplemented!()
                 };
 

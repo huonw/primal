@@ -22,20 +22,23 @@ pub struct StreamingSieve {
     limit: usize,
 }
 
-const CACHE: usize = (32 << 10) - 2 * (wheel::MODULO == 210) as usize;
-// 8 for the bit vector, 2 for storing odd numbers only
+const CACHE: usize = (32 << 10);
 const SEG_ELEMS: usize = 8 * CACHE;
-const SEG_LEN: usize = SEG_ELEMS * wheel::MODULO / wheel::SIZE;
+const SEG_LEN: usize = SEG_ELEMS * wheel::BYTE_MODULO / wheel::BYTE_SIZE;
 
 const PRESIEVE_PROD: usize = 2 * 3 * 5 * 7 * 11;
 const PRESIEVE_PRIMES: &'static [usize] = &[2, 3, 5, 7, 11];
 const PRESIEVE_NEXT: usize = 13;
-const PRESIEVE_ACTIVE: bool = wheel::MODULO == 30;
+const PRESIEVE_ACTIVE: bool = true;
+
+fn bits_for(x: usize) -> usize {
+    (x * wheel::BYTE_SIZE + wheel::BYTE_MODULO - 1) / wheel::BYTE_MODULO
+}
 
 #[inline(never)]
 fn compute_presieve() -> BitVec {
     assert!(PRESIEVE_ACTIVE);
-    let len = (PRESIEVE_PROD * wheel::SIZE + wheel::MODULO - 1) / wheel::MODULO;
+    let len = bits_for(PRESIEVE_PROD);
     let mut bitv = BitVec::from_elem(len, false);
 
     // this is silly and should be done with a sieve that only uses
@@ -66,14 +69,14 @@ impl StreamingSieve {
         };
         let low = 0;
 
-        let presieve = if PRESIEVE_ACTIVE && limit > PRESIEVE_PROD * 2 {
+        let elems = cmp::min(bits_for(limit), SEG_ELEMS);
+        let presieve = if PRESIEVE_ACTIVE {
             current = PRESIEVE_NEXT;
             compute_presieve()
         } else {
             BitVec::new()
         };
 
-        let elems = cmp::min((limit * wheel::SIZE + wheel::MODULO - 1) / wheel::MODULO, SEG_ELEMS);
         StreamingSieve {
             small: small,
             sieve: BitVec::from_elem(elems, false),
@@ -87,7 +90,7 @@ impl StreamingSieve {
     }
 
     pub fn very_small_sieve(&mut self, low: usize) {
-        let offset = (low % PRESIEVE_PROD) * wheel::SIZE / wheel::MODULO / 8;
+        let offset = (low % PRESIEVE_PROD) * wheel::BYTE_SIZE / wheel::BYTE_MODULO / 8;
 
         copy_all(self.sieve.as_bytes_mut(),
                  self.presieve.as_bytes(),
@@ -201,7 +204,7 @@ mod tests {
     }
     #[test]
     fn test() {
-        let coprime = coprime_to(wheel::MODULO);
+        let coprime = coprime_to(wheel::BYTE_MODULO);
         const LIMIT: usize = 2_000_000;
         let mut sieve = StreamingSieve::new(LIMIT);
         let primes = ::primal_smallsieve::Primes::sieve(LIMIT);
@@ -211,13 +214,13 @@ mod tests {
 
         while let Some((_low, next)) = sieve.next() {
             for val in next {
-                let i = wheel::MODULO * base + coprime[index];
+                let i = wheel::BYTE_MODULO * base + coprime[index];
                 if i >= LIMIT { break }
                 assert!(primes.is_prime(i) == !val,
                         "failed for {} (is prime = {})", i, primes.is_prime(i));
 
                 index += 1;
-                if index == wheel::SIZE {
+                if index == wheel::BYTE_SIZE {
                     index = 0;
                     base += 1
                 }
