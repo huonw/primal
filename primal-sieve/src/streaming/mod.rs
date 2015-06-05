@@ -104,6 +104,30 @@ impl StreamingSieve {
         }
     }
 
+    fn find_new_sieving_primes(&mut self, low: usize, high: usize) {
+        if let Some(ref small) = self.small {
+            let mut s = self.current;
+            assert!(s % 2 == 1);
+            while s * s <= high {
+                if small.is_prime(s) {
+                    if s <= SEG_LEN / 100 {
+                        self.small_primes.push(wheel::compute_wheel_elem(wheel::Wheel30, s, low));
+                    } else {
+                        let elem = wheel::compute_wheel_elem(wheel::Wheel210, s, low);
+                        if s < SEG_LEN / 2 {
+                            self.primes.push(elem)
+                        } else {
+                            self.large_primes.push(elem)
+                        }
+                    }
+                }
+                s += 2
+            }
+
+            self.current = s;
+        }
+    }
+
     fn small_primes_sieve<W: wheel::Wheel>(sieve: &mut BitVec,
                                            small_primes: &mut [wheel::State<W>]) {
         let bytes = sieve.as_bytes_mut();
@@ -166,28 +190,7 @@ impl StreamingSieve {
         self.low += SEG_LEN;
         let high = cmp::min(low + SEG_LEN - 1, self.limit);
         self.sieve.clear();
-
-        let mut s = self.current;
-
-        if let Some(ref small) = self.small {
-            while s * s <= high {
-                if small.is_prime(s) {
-                    if s <= SEG_LEN / 100 {
-                        self.small_primes.push(wheel::compute_wheel_elem(wheel::Wheel30, s, low));
-                    } else {
-                        let elem = wheel::compute_wheel_elem(wheel::Wheel210, s, low);
-                        if s < SEG_LEN / 2 {
-                            self.primes.push(elem)
-                        } else {
-                            self.large_primes.push(elem)
-                        }
-                    }
-                }
-                s += 1
-            }
-        }
-
-        self.current = s;
+        self.find_new_sieving_primes(low, high);
 
         self.presieve.apply(&mut self.sieve, low);
         StreamingSieve::small_primes_sieve(&mut self.sieve, &mut self.small_primes);
