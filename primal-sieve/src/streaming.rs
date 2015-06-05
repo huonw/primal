@@ -41,21 +41,17 @@ fn compute_presieve(limit_bits: usize) -> BitVec {
     assert!(PRESIEVE_ACTIVE);
     let len = cmp::min(bits_for(PRESIEVE_PROD),
                        limit_bits);
-    let mut bitv = BitVec::from_elem(len, false);
 
-    // this is silly and should be done with a sieve that only uses
-    // the primes in PRESIEVE_PRIMES.
-    for i in 0..len {
-        let true_ = wheel::from_bit_index(i);
-        fn gcd(x: usize, y: usize) -> usize {
-            if y == 0 { x }
-            else { gcd(y, x % y) }
-        }
-        if gcd(true_, PRESIEVE_PROD) != 1 {
-            bitv.set(i, true)
+    let mut sievers = vec![];
+    for &x in PRESIEVE_PRIMES {
+        let (use_, _idx) = wheel::bit_index(x);
+        if use_ {
+            sievers.push(wheel::compute_wheel_elem(wheel::Wheel30, x, PRESIEVE_PROD));
         }
     }
-    bitv
+    let mut sieve =  BitVec::from_elem(len, false);
+    StreamingSieve::small_primes_sieve(&mut sieve, &mut sievers);
+    sieve
 }
 
 impl StreamingSieve {
@@ -160,9 +156,10 @@ impl StreamingSieve {
         }
     }
 
-    fn small_primes_sieve(&mut self) {
-        let bytes = self.sieve.as_bytes_mut();
-        for wi in &mut self.small_primes {
+    fn small_primes_sieve<W: wheel::Wheel>(sieve: &mut BitVec,
+                                           small_primes: &mut [wheel::WheelInfo<W>]) {
+        let bytes = sieve.as_bytes_mut();
+        for wi in small_primes {
             wi.sieve_hardcoded(bytes);
         }
     }
@@ -223,7 +220,7 @@ impl StreamingSieve {
         if PRESIEVE_ACTIVE && self.presieve.len() > 0 {
             self.very_small_sieve(low);
         }
-        self.small_primes_sieve();
+        StreamingSieve::small_primes_sieve(&mut self.sieve, &mut self.small_primes);
         self.direct_sieve();
 
         if low == 0 {
