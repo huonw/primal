@@ -16,6 +16,7 @@ pub struct StreamingSieve {
     // stores which numbers *aren't* prime, i.e. true == composite.
     sieve: BitVec,
     primes: Vec<wheel::WheelInfo<wheel::Wheel210>>,
+    small_primes: Vec<wheel::WheelInfo<wheel::Wheel30>>,
     presieve: BitVec,
 
     low: usize,
@@ -73,6 +74,7 @@ impl StreamingSieve {
             small: small,
             sieve: BitVec::from_elem(elems, false),
             primes: vec![],
+            small_primes: vec![],
             presieve: presieve,
 
             low: low,
@@ -155,6 +157,13 @@ impl StreamingSieve {
         }
     }
 
+    fn small_primes_sieve(&mut self) {
+        let bytes = self.sieve.as_bytes_mut();
+        for wi in &mut self.small_primes {
+            wi.sieve_hardcoded(bytes);
+        }
+    }
+
     fn direct_sieve(&mut self) {
         let bytes = self.sieve.as_bytes_mut();
 
@@ -196,7 +205,11 @@ impl StreamingSieve {
 
         while s * s <= high {
             if self.small.is_prime(s) {
-                self.primes.push(wheel::compute_wheel_elem(wheel::Wheel210, s, low));
+                if s <= SEG_LEN / 100 {
+                    self.small_primes.push(wheel::compute_wheel_elem(wheel::Wheel30, s, low));
+                } else {
+                    self.primes.push(wheel::compute_wheel_elem(wheel::Wheel210, s, low));
+                }
             }
             s += 1
         }
@@ -205,6 +218,7 @@ impl StreamingSieve {
         if PRESIEVE_ACTIVE && self.presieve.len() > 0 {
             self.very_small_sieve(low);
         }
+        self.small_primes_sieve();
         self.direct_sieve();
 
         if low == 0 {
