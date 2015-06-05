@@ -4,6 +4,8 @@ use hamming;
 
 use wheel;
 
+mod presieve;
+
 /// A segmented sieve that yields only a small run of primes at a
 /// time.
 ///
@@ -16,7 +18,7 @@ pub struct StreamingSieve {
     sieve: BitVec,
     primes: Vec<wheel::WheelInfo<wheel::Wheel210>>,
     small_primes: Vec<wheel::WheelInfo<wheel::Wheel30>>,
-    presieve: BitVec,
+    presieve: presieve::Presieve,
 
     low: usize,
     current: usize,
@@ -27,47 +29,24 @@ const CACHE: usize = (32 << 10);
 const SEG_ELEMS: usize = 8 * CACHE;
 const SEG_LEN: usize = SEG_ELEMS * wheel::BYTE_MODULO / wheel::BYTE_SIZE;
 
-const PRESIEVE_PROD: usize = 2 * 3 * 5 * 7 * 11 * 13;
-const PRESIEVE_PRIMES: &'static [usize] = &[2, 3, 5, 7, 11, 13];
-const PRESIEVE_NEXT: usize = 17;
-const PRESIEVE_ACTIVE: bool = true;
-
 fn bits_for(x: usize) -> usize {
     (x * wheel::BYTE_SIZE + wheel::BYTE_MODULO - 1) / wheel::BYTE_MODULO
-}
-
-#[inline(never)]
-fn compute_presieve(limit_bits: usize) -> BitVec {
-    assert!(PRESIEVE_ACTIVE);
-    let len = cmp::min(bits_for(PRESIEVE_PROD),
-                       limit_bits);
-
-    let mut sievers = vec![];
-    for &x in PRESIEVE_PRIMES {
-        let (use_, _idx) = wheel::bit_index(x);
-        if use_ {
-            sievers.push(wheel::compute_wheel_elem(wheel::Wheel30, x, PRESIEVE_PROD));
-        }
-    }
-    let mut sieve =  BitVec::from_elem(len, false);
-    StreamingSieve::small_primes_sieve(&mut sieve, &mut sievers);
-    sieve
 }
 
 impl StreamingSieve {
     /// Create a new instance of the streaming sieve that will
     /// correctly progressively filter primes up to `limit`.
     pub fn new(limit: usize) -> StreamingSieve {
-        let small = if limit < PRESIEVE_NEXT * PRESIEVE_NEXT {
+        let small = if limit < presieve::PRESIEVE_NEXT * presieve::PRESIEVE_NEXT {
             None
         } else {
             Some(::Sieve::new((limit as f64).sqrt() as usize + 1))
         };
-        let current = PRESIEVE_NEXT;
+        let current = presieve::PRESIEVE_NEXT;
         let low = 0;
 
         let elems = cmp::min(bits_for(limit), SEG_ELEMS);
-        let presieve = compute_presieve(elems);
+        let presieve = presieve::Presieve::new(elems);
 
         StreamingSieve {
             small: small,
@@ -121,38 +100,6 @@ impl StreamingSieve {
                 }
                 count
             }
-        }
-    }
-
-    pub fn very_small_sieve(&mut self, low: usize) {
-        let offset = (low % PRESIEVE_PROD) * wheel::BYTE_SIZE / wheel::BYTE_MODULO / 8;
-
-        copy_all(self.sieve.as_bytes_mut(),
-                 self.presieve.as_bytes(),
-                 offset);
-        fn copy_all(mut dst: &mut [u8], src: &[u8], init_offset: usize) {
-            let mut pos = 0;
-            // pre-fill data at the start, as a rotation of `src`.
-            pos += memcpy(&mut dst[pos..], &src[init_offset..]);
-            if pos >= dst.len() { return }
-
-            pos += memcpy(&mut dst[pos..], &src[..init_offset]);
-            if pos >= dst.len() { return }
-
-            // progressively copy the prefix to the rest of the
-            // vector, doubling each time.
-            while pos < dst.len() {
-                let (filled, unfilled) = dst.split_at_mut(pos);
-                pos += memcpy(unfilled, filled);
-            }
-        }
-        fn memcpy<'d>(dst: &'d mut [u8], src: &[u8]) -> usize {
-            use std::ptr;
-            let l = cmp::min(dst.len(), src.len());
-            unsafe {
-                ptr::copy(src.as_ptr(), dst.as_mut_ptr(), l);
-            }
-            l
         }
     }
 
@@ -217,24 +164,15 @@ impl StreamingSieve {
         }
 
         self.current = s;
-        if PRESIEVE_ACTIVE && self.presieve.len() > 0 {
-            self.very_small_sieve(low);
-        }
+
+        self.presieve.apply(&mut self.sieve, low);
         StreamingSieve::small_primes_sieve(&mut self.sieve, &mut self.small_primes);
         self.direct_sieve();
 
         if low == 0 {
             // 1 is not prime.
             self.sieve.set(0, true);
-            if PRESIEVE_ACTIVE {
-                // but these are
-                for &x in PRESIEVE_PRIMES {
-                    let (use_, idx) = wheel::bit_index(x);
-                    if use_ {
-                        self.sieve.set(idx, false)
-                    }
-                }
-            }
+            self.presieve.mark_small_primes(&mut self.sieve);
         }
 
         Some((low, &self.sieve))
@@ -290,9 +228,6 @@ mod benches {
             while sieve.next().is_some() {}
         })
     }
-    fn run_presieve(b: &mut Bencher, n: usize) {
-        b.iter(|| super::compute_presieve(super::bits_for(n)))
-    }
 
     #[bench]
     fn sieve_small(b: &mut Bencher) {
@@ -313,25 +248,5 @@ mod benches {
     #[bench]
     fn sieve_huge(b: &mut Bencher) {
         run(b, 10_000_000)
-    }
-    #[bench]
-    fn presieve_small(b: &mut Bencher) {
-        run_presieve(b, 100)
-    }
-    #[bench]
-    fn presieve_medium(b: &mut Bencher) {
-        run_presieve(b, 10_000)
-    }
-    #[bench]
-    fn presieve_large(b: &mut Bencher) {
-        run_presieve(b, 100_000)
-    }
-    #[bench]
-    fn presieve_larger(b: &mut Bencher) {
-        run_presieve(b, 1_000_000)
-    }
-    #[bench]
-    fn presieve_huge(b: &mut Bencher) {
-        run_presieve(b, 10_000_000)
     }
 }
