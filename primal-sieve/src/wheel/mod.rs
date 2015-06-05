@@ -1,6 +1,29 @@
 pub const BYTE_SIZE: usize = 8;
 pub const BYTE_MODULO: usize = 30;
 
+pub fn bit_index(n: usize) -> (bool, usize) {
+    const POS: &'static [(bool, u8); BYTE_MODULO] = &[
+        // 0
+        (false, 0), (true, 0), (false, 1), (false, 1), (false, 1), (false, 1),
+        // 6
+        (false, 1), (true, 1), (false, 2), (false, 2), (false, 2), (true, 2),
+        // 12
+        (false, 3), (true, 3), (false, 4), (false, 4), (false, 4), (true, 4),
+        // 18
+        (false, 5), (true, 5), (false, 6), (false, 6), (false, 6), (true, 6),
+        // 24
+        (false, 7), (false, 7), (false, 7), (false, 7), (false, 7), (true, 7),
+        ];
+    let init = &POS[n % BYTE_MODULO];
+    (init.0, (n / BYTE_MODULO) * BYTE_SIZE + init.1 as usize)
+}
+pub fn from_bit_index(bit: usize) -> usize {
+    const TRUE_AT_BIT: &'static [usize; 8] = &[
+        1, 7, 11, 13, 17, 19, 23, 29
+            ];
+    (bit / BYTE_SIZE) * BYTE_MODULO + TRUE_AT_BIT[bit % BYTE_SIZE]
+}
+
 pub use self::wheel30::Wheel30;
 pub use self::wheel210::Wheel210;
 
@@ -159,7 +182,6 @@ pub fn compute_wheel_elem<W: Wheel>(w: W, p: usize, low: usize) -> WheelInfo<W> 
 
 }
 
-pub use self::wheel30::{bit_index, from_bit_index};
 pub use self::wheel210::{MODULO};
 
 mod wheel30;

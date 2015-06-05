@@ -18,21 +18,10 @@ impl Wheel for Wheel30 {
     fn init(&self) -> &'static [WheelInit] { INIT }
 }
 
-pub fn bit_index(n: usize) -> (bool, usize) {
-    let init = &INIT[n % MODULO];
-    (init.next_mult_factor == 0, (n / MODULO) * SIZE + init.wheel_index as usize)
-}
-pub fn from_bit_index(bit: usize) -> usize {
-    (bit / SIZE) * MODULO + TRUE_AT_BIT[bit % SIZE]
-}
-
 pub const SIZE: usize = 8;
 
 pub const MODULO: usize = 30;
 
-const TRUE_AT_BIT: &'static [usize; 8] = &[
-    1, 7, 11, 13, 17, 19, 23, 29
-    ];
 const INIT: &'static [WheelInit; 30] = &[
     // 0
     init!{1,  0}, init!{0,  0}, init!{5,  1}, init!{4,  1},
