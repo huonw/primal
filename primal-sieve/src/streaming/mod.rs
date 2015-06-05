@@ -119,10 +119,10 @@ impl StreamingSieve {
 
         let mut iter = self.primes.iter_mut();
 
-        while iter.size_hint().0 >= 2 {
-            match (iter.next(), iter.next()) {
-                (Some(wi1), Some(wi2)) => {
-                    wi1.sieve_pair(wi2, bytes);
+        while iter.size_hint().0 >= 3 {
+            match (iter.next(), iter.next(), iter.next()) {
+                (Some(wi1), Some(wi2), Some(wi3)) => {
+                    wi1.sieve_triple(wi2, wi3, bytes);
                 }
                 _ => unreachable!()
             }

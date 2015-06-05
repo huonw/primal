@@ -95,6 +95,51 @@ impl<W: Wheel> WheelInfo<W> {
         self2.sieve_index = si2.wrapping_sub(top);
         self2.wheel_index = wi2;
     }
+    pub fn sieve_triple(&mut self, self2: &mut WheelInfo<W>, self3: &mut WheelInfo<W>,
+                        bytes: &mut [u8]) {
+        let bytes = bytes;
+        let top = bytes.len();
+        let wheel = self.wheel.wheel();
+
+        let mut si1 = self.sieve_index;
+        let mut wi1 = self.wheel_index;
+        let p1 = self.prime;
+        let mut si2 = self2.sieve_index;
+        let mut wi2 = self2.wheel_index;
+        let p2 = self2.prime;
+        let mut si3 = self3.sieve_index;
+        let mut wi3 = self3.wheel_index;
+        let p3 = self3.prime;
+
+        while si1 < top && si2 < top && si3 < top {
+            raw_set_bit(wheel,
+                        bytes, &mut si1, &mut wi1, p1);
+            raw_set_bit(wheel,
+                        bytes, &mut si2, &mut wi2, p2);
+            raw_set_bit(wheel,
+                        bytes, &mut si3, &mut wi3, p3);
+        }
+        while si1 < top {
+            raw_set_bit(wheel,
+                        bytes, &mut si1, &mut wi1, p1);
+        }
+        while si2 < top {
+            raw_set_bit(wheel,
+                        bytes, &mut si2, &mut wi2, p2);
+        }
+        while si3 < top {
+            raw_set_bit(wheel,
+                        bytes, &mut si3, &mut wi3, p3);
+        }
+        // if this wraps, we've hit the limit, and so won't be
+        // continuing, so whatever, it can be junk.
+        self.sieve_index = si1.wrapping_sub(top);
+        self.wheel_index = wi1;
+        self2.sieve_index = si2.wrapping_sub(top);
+        self2.wheel_index = wi2;
+        self3.sieve_index = si3.wrapping_sub(top);
+        self3.wheel_index = wi3;
+    }
 
     pub fn sieve_hardcoded(&mut self, bytes: &mut [u8]) {
         unsafe {
