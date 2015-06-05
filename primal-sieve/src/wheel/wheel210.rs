@@ -1,6 +1,22 @@
 #![allow(dead_code)]
 
-use wheel::{self, WheelInfo, WheelInit};
+use wheel::{WheelInit, Wheel, WheelElem};
+
+#[derive(Debug)]
+pub struct Wheel210;
+impl Wheel for Wheel210 {
+    #[inline(always)]
+    fn modulo(&self) -> usize { MODULO }
+
+    #[inline(always)]
+    fn size(&self) -> usize { SIZE }
+
+    #[inline(always)]
+    fn wheel(&self) -> &'static [WheelElem] { WHEEL }
+
+    #[inline(always)]
+    fn init(&self) -> &'static [WheelInit] { INIT }
+}
 
 pub fn bit_index(n: usize) -> (bool, usize) {
     let init = &INIT[n % MODULO];
@@ -8,16 +24,6 @@ pub fn bit_index(n: usize) -> (bool, usize) {
 }
 pub fn from_bit_index(bit: usize) -> usize {
     (bit / SIZE) * MODULO + TRUE_AT_BIT[bit % SIZE]
-}
-
-pub fn set_bit(x: &mut [u8], si: &mut usize, wi: &mut usize, prime: usize) {
-    wheel::raw_set_bit(WHEEL,
-                       x, si, wi, prime);
-}
-
-pub fn compute_wheel_elem(p: usize, low: usize) -> WheelInfo {
-    wheel::raw_compute_elem(INIT, MODULO, SIZE,
-                            p, low)
 }
 
 pub const SIZE: usize = 48;

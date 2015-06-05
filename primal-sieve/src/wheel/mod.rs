@@ -1,13 +1,77 @@
 pub const BYTE_SIZE: usize = 8;
 pub const BYTE_MODULO: usize = 30;
 
-#[derive(Debug)]
-pub struct WheelInfo {
-    pub true_prime: usize,
-    pub prime: usize,
-    pub wheel_index: usize,
-    pub sieve_index: usize,
+pub use self::wheel30::Wheel30;
+pub use self::wheel210::Wheel210;
+
+pub trait Wheel {
+    fn modulo(&self) -> usize;
+    fn size(&self) -> usize;
+    fn wheel(&self) -> &'static [WheelElem];
+    fn init(&self) -> &'static [WheelInit];
 }
+
+#[derive(Debug)]
+pub struct WheelInfo<W> {
+    wheel: W,
+    true_prime: usize,
+    prime: usize,
+    wheel_index: usize,
+    sieve_index: usize,
+}
+impl<W: Wheel> WheelInfo<W> {
+    #[inline]
+    pub fn sieve(&mut self, bytes: &mut [u8]) {
+        let bytes = bytes;
+        let top = bytes.len();
+
+        let mut si = self.sieve_index;
+        let mut wi = self.wheel_index;
+        let p = self.prime;
+        while si < top {
+            raw_set_bit(self.wheel.wheel(),
+                        bytes, &mut si, &mut wi, p)
+        }
+        self.sieve_index = si.wrapping_sub(top);
+        self.wheel_index = wi;
+    }
+    #[inline]
+    pub fn sieve_pair(&mut self, self2: &mut WheelInfo<W>, bytes: &mut [u8]) {
+        let bytes = bytes;
+        let top = bytes.len();
+        let wheel = self.wheel.wheel();
+
+        let mut si1 = self.sieve_index;
+        let mut wi1 = self.wheel_index;
+        let p1 = self.prime;
+        let mut si2 = self2.sieve_index;
+        let mut wi2 = self2.wheel_index;
+        let p2 = self2.prime;
+
+        while si1 < top && si2 < top {
+            raw_set_bit(wheel,
+                        bytes, &mut si1, &mut wi1, p1);
+            raw_set_bit(wheel,
+                        bytes, &mut si2, &mut wi2, p2);
+        }
+        while si1 < top {
+            raw_set_bit(wheel,
+                        bytes, &mut si1, &mut wi1, p1);
+        }
+        while si2 < top {
+            raw_set_bit(wheel,
+                        bytes, &mut si2, &mut wi2, p2);
+        }
+
+        // if this wraps, we've hit the limit, and so won't be
+        // continuing, so whatever, it can be junk.
+        self.sieve_index = si1.wrapping_sub(top);
+        self.wheel_index = wi1;
+        self2.sieve_index = si2.wrapping_sub(top);
+        self2.wheel_index = wi2;
+    }
+}
+
 #[derive(Debug)]
 pub struct WheelInit {
     pub next_mult_factor: u8,
@@ -72,21 +136,20 @@ const WHEEL_OFFSETS: &'static [usize; BYTE_MODULO] = &[
     ];
 
 #[inline(always)]
-fn raw_compute_elem(init: &'static [WheelInit],
-                    modulo: usize, size: usize,
-                    p: usize, low: usize) -> WheelInfo {
+pub fn compute_wheel_elem<W: Wheel>(w: W, p: usize, low: usize) -> WheelInfo<W> {
     let mut mult = p * p;
 
-    let init = &init[p % modulo];
+    let init = &w.init()[p % w.modulo()];
     let next_mult_factor = init.next_mult_factor;
     mult += p * next_mult_factor as usize;
 
     let low_offset = mult - low;
 
-    let wheel_index = WHEEL_OFFSETS[p % BYTE_MODULO] * size;
+    let wheel_index = WHEEL_OFFSETS[p % BYTE_MODULO] * w.size();
     let sieve_index = low_offset * BYTE_SIZE / BYTE_MODULO / 8;
 
     let ret = WheelInfo {
+        wheel: w,
         true_prime: p,
         prime: p / BYTE_MODULO,
         sieve_index: sieve_index,
@@ -97,7 +160,7 @@ fn raw_compute_elem(init: &'static [WheelInit],
 }
 
 pub use self::wheel30::{bit_index, from_bit_index};
-pub use self::wheel210::{set_bit, compute_wheel_elem, MODULO, SIZE};
+pub use self::wheel210::{MODULO};
 
 mod wheel30;
 mod wheel210;

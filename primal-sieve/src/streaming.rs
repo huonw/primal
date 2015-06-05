@@ -15,7 +15,7 @@ pub struct StreamingSieve {
     small: Primes,
     // stores which numbers *aren't* prime, i.e. true == composite.
     sieve: BitVec,
-    primes: Vec<wheel::WheelInfo>,
+    primes: Vec<wheel::WheelInfo<wheel::Wheel210>>,
     presieve: BitVec,
 
     low: usize,
@@ -167,52 +167,19 @@ impl StreamingSieve {
 
     fn direct_sieve(&mut self) {
         let bytes = self.sieve.as_bytes_mut();
-        let top = bytes.len();
 
         let mut iter = self.primes.iter_mut();
 
         while iter.size_hint().0 >= 2 {
             match (iter.next(), iter.next()) {
                 (Some(wi1), Some(wi2)) => {
-                    let mut si1 = wi1.sieve_index;
-                    let mut wi_1 = wi1.wheel_index;
-                    let p1 = wi1.prime;
-                    let mut si2 = wi2.sieve_index;
-                    let mut wi_2 = wi2.wheel_index;
-                    let p2 = wi2.prime;
-
-                    while si1 < top && si2 < top {
-                        wheel::set_bit(bytes, &mut si1, &mut wi_1, p1);
-                        wheel::set_bit(bytes, &mut si2, &mut wi_2, p2);
-                    }
-                    while si1 < top {
-                        wheel::set_bit(bytes, &mut si1, &mut wi_1, p1);
-                    }
-                    while si2 < top {
-                        wheel::set_bit(bytes, &mut si2, &mut wi_2, p2);
-                    }
-
-                    // if this wraps, we've hit the limit, and so won't be
-                    // continuing, so whatever, it can be junk.
-                    wi1.sieve_index = si1.wrapping_sub(top);
-                    wi1.wheel_index = wi_1;
-                    wi2.sieve_index = si2.wrapping_sub(top);
-                    wi2.wheel_index = wi_2;
+                    wi1.sieve_pair(wi2, bytes);
                 }
                 _ => unreachable!()
             }
         }
         for wi in iter {
-            let mut si = wi.sieve_index;
-            let mut wi_ = wi.wheel_index;
-            let p = wi.prime;
-            while si < top {
-                wheel::set_bit(bytes, &mut si, &mut wi_, p);
-            }
-            // if this wraps, we've hit the limit, and so won't be
-            // continuing, so whatever, it can be junk.
-            wi.sieve_index = si.wrapping_sub(top);
-            wi.wheel_index = wi_;
+            wi.sieve(bytes)
         }
     }
 
@@ -239,7 +206,7 @@ impl StreamingSieve {
 
         while s * s <= high {
             if self.small.is_prime(s) {
-                self.primes.push(wheel::compute_wheel_elem(s, low));
+                self.primes.push(wheel::compute_wheel_elem(wheel::Wheel210, s, low));
             }
             s += 1
         }
