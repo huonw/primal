@@ -63,21 +63,11 @@ impl StreamingSieve {
     /// correctly progressively filter primes up to `limit`.
     pub fn new(limit: usize) -> StreamingSieve {
         let small = Primes::sieve((limit as f64).sqrt() as usize + 1);
-        let mut current = match wheel::MODULO {
-            6 => 5,
-            30 => 7,
-            210 => 11,
-            _ => unimplemented!(),
-        };
+        let current = PRESIEVE_NEXT;
         let low = 0;
 
         let elems = cmp::min(bits_for(limit), SEG_ELEMS);
-        let presieve = if PRESIEVE_ACTIVE {
-            current = PRESIEVE_NEXT;
-            compute_presieve(elems)
-        } else {
-            BitVec::new()
-        };
+        let presieve = compute_presieve(elems);
 
         StreamingSieve {
             small: small,

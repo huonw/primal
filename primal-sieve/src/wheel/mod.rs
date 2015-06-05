@@ -182,7 +182,5 @@ pub fn compute_wheel_elem<W: Wheel>(w: W, p: usize, low: usize) -> WheelInfo<W> 
 
 }
 
-pub use self::wheel210::{MODULO};
-
 mod wheel30;
 mod wheel210;
