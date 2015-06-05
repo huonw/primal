@@ -189,7 +189,7 @@ impl StreamingSieve {
         let low = self.low;
         self.low += SEG_LEN;
         let high = cmp::min(low + SEG_LEN - 1, self.limit);
-        self.sieve.clear();
+
         self.find_new_sieving_primes(low, high);
 
         self.presieve.apply(&mut self.sieve, low);
