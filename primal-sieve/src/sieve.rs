@@ -5,9 +5,8 @@ use hamming;
 
 use std::cmp;
 
+#[derive(Debug)]
 pub struct Sieve {
-    #[allow(dead_code)]
-    stream: StreamingSieve,
     nbits: usize,
     seen: Vec<BitVec>,
 }
@@ -23,7 +22,6 @@ impl Sieve {
             nbits += cmp::min(bits.len(), wheel::bit_index(limit - n + 1).1);
         }
         Sieve {
-            stream: stream,
             nbits: nbits,
             seen: seen,
         }

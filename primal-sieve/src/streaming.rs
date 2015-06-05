@@ -3,7 +3,6 @@ use std::{cmp};
 use hamming;
 
 use wheel;
-use primal_smallsieve::Primes;
 
 /// A segmented sieve that yields only a small run of primes at a
 /// time.
@@ -12,7 +11,7 @@ use primal_smallsieve::Primes;
 /// sieve](http://primesieve.org/segmented_sieve.html) code.
 #[derive(Debug)]
 pub struct StreamingSieve {
-    small: Primes,
+    small: Option<::Sieve>,
     // stores which numbers *aren't* prime, i.e. true == composite.
     sieve: BitVec,
     primes: Vec<wheel::WheelInfo<wheel::Wheel210>>,
@@ -63,7 +62,11 @@ impl StreamingSieve {
     /// Create a new instance of the streaming sieve that will
     /// correctly progressively filter primes up to `limit`.
     pub fn new(limit: usize) -> StreamingSieve {
-        let small = Primes::sieve((limit as f64).sqrt() as usize + 1);
+        let small = if limit < PRESIEVE_NEXT * PRESIEVE_NEXT {
+            None
+        } else {
+            Some(::Sieve::new((limit as f64).sqrt() as usize + 1))
+        };
         let current = PRESIEVE_NEXT;
         let low = 0;
 
@@ -203,15 +206,17 @@ impl StreamingSieve {
 
         let mut s = self.current;
 
-        while s * s <= high {
-            if self.small.is_prime(s) {
-                if s <= SEG_LEN / 100 {
-                    self.small_primes.push(wheel::compute_wheel_elem(wheel::Wheel30, s, low));
-                } else {
-                    self.primes.push(wheel::compute_wheel_elem(wheel::Wheel210, s, low));
+        if let Some(ref small) = self.small {
+            while s * s <= high {
+                if small.is_prime(s) {
+                    if s <= SEG_LEN / 100 {
+                        self.small_primes.push(wheel::compute_wheel_elem(wheel::Wheel30, s, low));
+                    } else {
+                        self.primes.push(wheel::compute_wheel_elem(wheel::Wheel210, s, low));
+                    }
                 }
+                s += 1
             }
-            s += 1
         }
 
         self.current = s;
