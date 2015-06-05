@@ -37,16 +37,17 @@ impl StreamingSieve {
     /// Create a new instance of the streaming sieve that will
     /// correctly progressively filter primes up to `limit`.
     pub fn new(limit: usize) -> StreamingSieve {
-        let small = if limit < presieve::PRESIEVE_NEXT * presieve::PRESIEVE_NEXT {
-            None
-        } else {
-            Some(::Sieve::new((limit as f64).sqrt() as usize + 1))
-        };
-        let current = presieve::PRESIEVE_NEXT;
         let low = 0;
 
         let elems = cmp::min(bits_for(limit), SEG_ELEMS);
         let presieve = presieve::Presieve::new(elems);
+        let current = presieve.smallest_unincluded_prime();
+
+        let small = if limit < current * current {
+            None
+        } else {
+            Some(::Sieve::new((limit as f64).sqrt() as usize + 1))
+        };
 
         StreamingSieve {
             small: small,
@@ -94,9 +95,11 @@ impl StreamingSieve {
                 let (_, last) = sieve.next().unwrap();
                 let bytes = last.as_bytes();
                 count += 8 * tweak_byte - hamming::weight(&bytes[..tweak_byte]) as usize;
-                let byte = bytes[tweak_byte];
-                for i in 0..tweak_bit + includes as usize {
-                    count += (byte & (1 << i) == 0) as usize
+                if tweak_bit > 0 || includes {
+                    let byte = bytes[tweak_byte];
+                    for i in 0..tweak_bit + includes as usize {
+                        count += (byte & (1 << i) == 0) as usize
+                    }
                 }
                 count
             }

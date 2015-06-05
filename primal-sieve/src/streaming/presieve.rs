@@ -4,34 +4,59 @@ use std::{cmp, ptr};
 use wheel;
 use super::{bits_for, StreamingSieve};
 
-const PRESIEVE_PROD: usize = 2 * 3 * 5 * 7 * 11 * 13;
-const PRESIEVE_PRIMES: &'static [usize] = &[2, 3, 5, 7, 11, 13];
-pub const PRESIEVE_NEXT: usize = 17;
+const MINIMUM_PRESIEVE: usize = 2 * 3 * 5;
+const PRESIEVE_PRIMES: &'static [usize] = &[7, 11, 13, 17, 19, 23, 29];
 
 #[derive(Debug)]
 pub struct Presieve {
     sieve: BitVec,
+    presieve_prod: usize,
+    presieve_idx: usize,
 }
 impl Presieve {
+    #[inline(never)]
     pub fn new(limit_bits: usize) -> Presieve {
-        let len = cmp::min(bits_for(PRESIEVE_PROD),
-                           limit_bits);
+        let mut prod = MINIMUM_PRESIEVE;
+        let mut idx = 0;
+        for (i, &x) in PRESIEVE_PRIMES.iter().enumerate() {
+            let new_prod = prod * x;
+            if bits_for(new_prod) > limit_bits {
+                break
+            }
+            prod = new_prod;
+            idx = i;
+        }
 
-        let mut sievers = vec![];
-        for &x in PRESIEVE_PRIMES {
-            let (use_, _idx) = wheel::bit_index(x);
-            if use_ {
-                sievers.push(wheel::compute_wheel_elem(wheel::Wheel30, x, PRESIEVE_PROD));
+        let len = cmp::min(bits_for(prod), limit_bits);
+
+        if idx == 0 {
+            Presieve {
+                sieve: BitVec::new(),
+                presieve_prod: prod,
+                presieve_idx: idx,
+            }
+        } else {
+            let mut sievers = vec![];
+            for &x in &PRESIEVE_PRIMES[..idx] {
+                let (use_, _idx) = wheel::bit_index(x);
+                if use_ {
+                    sievers.push(wheel::compute_wheel_elem(wheel::Wheel30, x, prod));
+                }
+            }
+            let mut sieve =  BitVec::from_elem(len, false);
+            StreamingSieve::small_primes_sieve(&mut sieve, &mut sievers);
+            Presieve {
+                sieve: sieve,
+                presieve_prod: prod,
+                presieve_idx: idx,
             }
         }
-        let mut sieve =  BitVec::from_elem(len, false);
-        StreamingSieve::small_primes_sieve(&mut sieve, &mut sievers);
-        Presieve {
-            sieve: sieve,
-        }
+    }
+    pub fn smallest_unincluded_prime(&self) -> usize {
+        PRESIEVE_PRIMES[self.presieve_idx]
     }
     pub fn mark_small_primes(&self, sieve: &mut BitVec) {
-        for &x in PRESIEVE_PRIMES {
+        for &x in &PRESIEVE_PRIMES[..self.presieve_idx] {
             let (use_, idx) = wheel::bit_index(x);
             if use_ {
                 sieve.set(idx, false)
@@ -39,7 +64,10 @@ impl Presieve {
         }
     }
     pub fn apply(&self, sieve: &mut BitVec, low: usize) {
-        let offset = (low % PRESIEVE_PROD) * wheel::BYTE_SIZE / wheel::BYTE_MODULO / 8;
+        if self.sieve.len() == 0 {
+            return
+        }
+        let offset = (low % self.presieve_prod) * wheel::BYTE_SIZE / wheel::BYTE_MODULO / 8;
 
         copy_all(sieve.as_bytes_mut(),
                  self.sieve.as_bytes(),
