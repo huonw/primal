@@ -1,17 +1,6 @@
 #![allow(dead_code)]
 
-use wheel::{WheelInfo, WheelElem, WheelInit};
-
-///
-/// @file   WheelFactorization.cpp
-/// @brief  Precomputed arrays for wheel factorization.
-///
-/// Copyright (C) 2013 Kim Walisch, <kim.walisch@gmail.com>
-///
-/// This file is distributed under the BSD License. See the COPYING
-/// file in the top level directory.
-///
-
+use wheel::{self, WheelInfo, WheelInit};
 
 pub fn bit_index(n: usize) -> (bool, usize) {
     let init = &INIT[n % MODULO];
@@ -22,35 +11,12 @@ pub fn from_bit_index(bit: usize) -> usize {
 }
 
 pub fn set_bit(x: &mut [u8], si: &mut usize, wi: &mut usize, prime: usize) {
-    unsafe {
-        let WheelElem { unset_bit, next_mult_factor, correction, next } =
-            *WHEEL.get_unchecked(*wi);
-        *x.get_unchecked_mut(*si) |= unset_bit;
-
-        *si += prime * next_mult_factor as usize;
-        *si += correction as usize;
-        *wi = wi.wrapping_add(next as usize);
-    }
+    wheel::raw_set_bit(WHEEL, x, si, wi, prime);
 }
 
 pub fn compute_wheel_elem(p: usize, low: usize) -> WheelInfo {
-    let mut mult = p * p;
-
-    let init = &INIT[p % MODULO];
-    let next_mult_factor = init.next_mult_factor;
-    mult += p * next_mult_factor as usize;
-    let low_offset = mult - low;
-
-    let wheel_index = init.wheel_index as usize * SIZE;
-    let sieve_index = low_offset / MODULO * SIZE / 8;
-
-    let ret = WheelInfo {
-        true_prime: p,
-        prime: p / MODULO,
-        sieve_index: sieve_index,
-        wheel_index: wheel_index,
-    };
-    ret
+    wheel::raw_compute_elem(INIT, MODULO, SIZE,
+                            p, low)
 }
 
 pub const SIZE: usize = 8;
