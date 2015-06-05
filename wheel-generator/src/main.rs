@@ -187,47 +187,65 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
         println!("        {}...{} => {{ // {} * x + {}",
                  wheel_start, wheel_end - 1,
                  BYTE_WHEEL, m);
-        let indent: String = "            ".into();
-            println!("\
+        let mut indent: String = "            ".into();
+        println!("\
 {indent}loop {{",
                      indent = indent);
-        for (j, &(sl, offset, bit)) in twiddles.iter().enumerate() {
-            println!("\
-{indent}    if wi <= {val} {{
-{indent}        if si >= len {{ wi = {val}; break 'outer; }}
-{indent}        *start.offset(si) |= {}; si += prime_ * {} + {};
-{indent}    }}",
-                     1 << bit,
-                     sl, offset,
-                     val = wheel_start + j,
-                     indent = indent);
+        for j in (0..COUNT).rev() {
+            indent.push_str(" ");
+            println!("{}'label{}: loop {{", indent, wheel_start + j);
         }
+
         println!("\
-{indent}    while si < loop_len {{",
+{indent} match wi {{", indent = indent);
+        for j in 0..COUNT - 1 {
+            println!("{}  {1} => break 'label{1},", indent, wheel_start + j);
+        }
+        println!("{}  _ => break 'label{},", indent, wheel_start + COUNT - 1);
+        println!("{} }}", indent);
+        println!("{}}}", indent);
+        println!("\
+{indent}while si < loop_len {{",
                  indent = indent);
 
         let mut sl_so_far = 0;
         let mut offset_so_far = 0;
         for &(sl, offset, bit) in twiddles {
             println!("\
-{indent}        *start.offset(si + prime_ * {} + {}) |= {};",
+{indent}    *start.offset(si + prime_ * {} + {}) |= {};",
                      sl_so_far, offset_so_far, 1 << bit, indent = indent);
             sl_so_far += sl;
             offset_so_far += offset;
         }
         println!("
-{indent}        si += prime_ * {} + {}
-{indent}    }}
-{indent}    wi = {wheel_start}
+{indent}    si += prime_ * {} + {}
 {indent}}}",
                  sl_so_far, offset_so_far,
-                 wheel_start = wheel_start,
                  indent = indent);
+
+        for (j, &(sl, offset, bit)) in twiddles.iter().enumerate() {
+            indent.pop();
+            let end = if j + 1 == COUNT {
+                format!("wi = {}", wheel_start)
+            } else {
+                format!("break 'label{}", wheel_start + j + 1)
+            };
+            println!("\
+{indent} if si >= len {{ wi = {val}; break 'outer; }}
+{indent} *start.offset(si) |= {}; si += prime_ * {} + {};
+{indent} {}
+{indent}}}",
+
+                     1 << bit,
+                     sl, offset,
+                     end,
+                     val = wheel_start + j,
+                     indent = indent);
+        }
         println!("        }}");
     }
     println!("        _ => unreachable!(\"{{}}\", wi),
     }}
-    break 'outer;
     }}
     *si_ = (si as usize).wrapping_sub(bytes.len());
     *wi_ = wi;
