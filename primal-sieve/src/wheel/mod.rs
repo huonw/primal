@@ -32,6 +32,8 @@ pub trait Wheel {
     fn size(&self) -> usize;
     fn wheel(&self) -> &'static [WheelElem];
     fn init(&self) -> &'static [WheelInit];
+    unsafe fn hardcoded_sieve(&self,
+                              bytes: &mut [u8], si_: &mut usize, wi_: &mut usize, prime: usize);
 }
 
 #[derive(Debug)]
@@ -92,6 +94,13 @@ impl<W: Wheel> WheelInfo<W> {
         self.wheel_index = wi1;
         self2.sieve_index = si2.wrapping_sub(top);
         self2.wheel_index = wi2;
+    }
+
+    pub fn sieve_hardcoded(&mut self, bytes: &mut [u8]) {
+        unsafe {
+            self.wheel.hardcoded_sieve(bytes,
+                                       &mut self.sieve_index, &mut self.wheel_index, self.prime)
+        }
     }
 }
 

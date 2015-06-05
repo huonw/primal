@@ -87,6 +87,12 @@ impl Wheel for Wheel{modulo} {{
 
     #[inline(always)]
     fn init(&self) -> &'static [WheelInit] {{ INIT }}
+
+    #[inline(always)]
+    unsafe fn hardcoded_sieve(&self,
+                              bytes: &mut [u8], si_: &mut usize, wi_: &mut usize, prime: usize) {{
+        hardcoded_sieve(bytes, si_, wi_, prime)
+    }}
 }}
 
 pub const SIZE: usize = {size};
@@ -107,6 +113,7 @@ pub const MODULO: usize = {modulo};
     }
     println!("];");
 
+    let mut all_twiddles = vec![];
     println!("const WHEEL: &'static [WheelElem; {}] = &[", BYTE_COUNT * COUNT);
     for (m, bitss) in &map {
         println!("    // remainder {}", m);
@@ -139,7 +146,7 @@ pub const MODULO: usize = {modulo};
         let start_bit = bit_index(p1 * p1) % 8;
         assert_eq!(bit_index(p2 * p2) % 8, start_bit);
         let mut bit = start_bit;
-        let twiddles = lines[..COUNT].iter().map(|&(sl, sh)| {
+        let twiddles: Vec<_> = lines[..COUNT].iter().map(|&(sl, sh)| {
             assert_eq!(sl % 8, 0);
             let sl = sl / 8;
             let old_bit = bit;
@@ -147,12 +154,91 @@ pub const MODULO: usize = {modulo};
             let offset = new_bit / 8;
             bit = new_bit % 8;
             (sl, offset, old_bit)
-        });
+        }).collect();
 
-        for (i, (sl, offset, bit)) in twiddles.enumerate() {
+        for (i, &(sl, offset, bit)) in twiddles.iter().enumerate() {
             println!("    WheelElem {{ unset_bit: 1u8 << {}u8, next_mult_factor: {}, correction: {}, next: {} }},", bit, sl, offset,
                    if i == COUNT-1 {-(i as isize)}else{1});
         }
+        all_twiddles.push((m, twiddles));
     }
-    println!("];")
+    println!("];");
+
+    let big_slope = all_twiddles[0].1.iter().fold(0, |a, &(sl, _offset, _)| a + sl);
+    let big_step = all_twiddles[0].1.iter().fold(0, |a, &(_sl, offset, _)| a + offset);
+    println!("\
+pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize, prime: usize) {{
+    let bytes = bytes;
+    let start = bytes.as_mut_ptr();
+    let end = start.offset(bytes.len() as isize);
+    let loop_end = end.offset(-(({big_slope} * prime + {big_step}) as isize));
+    let mut wi = *wi_;
+    let mut p = start.offset(*si_ as isize);
+    let prime_ = prime as isize;
+
+    'outer: loop {{
+    match wi {{",
+             big_slope = big_slope,
+             big_step = big_step);
+    for (i, &(m, ref twiddles)) in all_twiddles.iter().enumerate() {
+        let wheel_start = i * COUNT;
+        let wheel_end = (i + 1) * COUNT;
+        println!("        {}...{} => {{ // {} * x + {}",
+                 wheel_start, wheel_end - 1,
+                 BYTE_WHEEL, m);
+        let indent: String = "            ".into();
+        println!("{}if wi != {} {{", indent, wheel_start);
+
+        for (j, &(sl, offset, bit)) in twiddles.iter().enumerate().skip(1) {
+            println!("\
+{indent}    if wi <= {val} {{
+{indent}        if p >= end {{ wi = {val}; break 'outer; }}
+{indent}        *p |= {}; p = p.offset(prime_ * {} + {})
+{indent}    }}",
+                     1 << bit,
+                     sl, offset,
+                     val = wheel_start + j,
+                     indent = indent);
+        }
+        println!("\
+{indent}}}\n
+{indent}while p < loop_end {{",
+                 indent = indent);
+
+        let mut sl_so_far = 0;
+        let mut offset_so_far = 0;
+        for &(sl, offset, bit) in twiddles {
+            println!("{}    *p.offset(prime_ * {} + {}) |= {};",
+                     indent, sl_so_far, offset_so_far, 1 << bit);
+            sl_so_far += sl;
+            offset_so_far += offset;
+        }
+        println!("
+{indent}    p = p.offset(prime_ * {} + {})
+{indent}}}",
+                 sl_so_far, offset_so_far,
+                 indent = indent);
+
+        for (j, &(sl, offset, bit)) in twiddles.iter().enumerate() {
+            println!("\
+{indent}if wi <= {val} {{
+{indent}    if p >= end {{ wi = {val}; break 'outer; }}
+{indent}    *p |= {}; p = p.offset(prime_ * {} + {})
+{indent}}}",
+                     1 << bit,
+                     sl, offset,
+                     val = wheel_start + j,
+                     indent = indent);
+        }
+
+        println!("        }}");
+    }
+    println!("        _ => unreachable!(),
+    }}
+    break 'outer;
+    }}
+    let si = p as usize - start as usize;
+    *si_ = si.wrapping_sub(bytes.len());
+    *wi_ = wi;
+}}");
 }
