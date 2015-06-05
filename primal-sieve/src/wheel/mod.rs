@@ -167,7 +167,7 @@ const WHEEL_OFFSETS: &'static [usize; BYTE_MODULO] = &[
     0, 0, 0, 0, 0, 7,
     ];
 
-#[inline(always)]
+#[inline(never)]
 pub fn compute_wheel_elem<W: Wheel>(w: W, p: usize, low: usize) -> WheelInfo<W> {
     let mut mult = p * p;
 
@@ -175,18 +175,25 @@ pub fn compute_wheel_elem<W: Wheel>(w: W, p: usize, low: usize) -> WheelInfo<W> 
     let next_mult_factor = init.next_mult_factor;
     mult += p * next_mult_factor as usize;
 
-    let low_offset = mult - low;
-
     let wheel_index = WHEEL_OFFSETS[p % BYTE_MODULO] * w.size();
-    let sieve_index = low_offset * BYTE_SIZE / BYTE_MODULO / 8;
+    let sieve_index = mult * BYTE_SIZE / BYTE_MODULO / 8;
 
-    let ret = WheelInfo {
+    let mut ret = WheelInfo {
         wheel: w,
         true_prime: p,
         prime: p / BYTE_MODULO,
         sieve_index: sieve_index,
         wheel_index: wheel_index,
     };
+    // run the wheel until its above `low`... this is ugly and should be done analytically.
+    let wheel = ret.wheel.wheel();
+    while ret.sieve_index * BYTE_MODULO < low {
+        let WheelElem { next_mult_factor, correction, next, .. } = wheel[ret.wheel_index];
+        ret.sieve_index += ret.prime * next_mult_factor as usize;
+        ret.sieve_index += correction as usize;
+        ret.wheel_index = ret.wheel_index.wrapping_add(next as usize);
+    }
+    ret.sieve_index -= low / BYTE_MODULO;
     ret
 
 }
