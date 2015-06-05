@@ -170,10 +170,11 @@ pub const MODULO: usize = {modulo};
 pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize, prime: usize) {{
     let bytes = bytes;
     let start = bytes.as_mut_ptr();
-    let end = start.offset(bytes.len() as isize);
-    let loop_end = end.offset(-(({big_slope} * prime + {big_step}) as isize));
+    let len = bytes.len() as isize;
+    let largest_step = ({big_slope} * prime + {big_step}) as isize;
+    let loop_len = len - largest_step;
+    let mut si = *si_ as isize;
     let mut wi = *wi_;
-    let mut p = start.offset(*si_ as isize);
     let prime_ = prime as isize;
 
     'outer: loop {{
@@ -193,8 +194,8 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
         for (j, &(sl, offset, bit)) in twiddles.iter().enumerate() {
             println!("\
 {indent}    if wi <= {val} {{
-{indent}        if p >= end {{ wi = {val}; break 'outer; }}
-{indent}        *p |= {}; p = p.offset(prime_ * {} + {})
+{indent}        if si >= len {{ wi = {val}; break 'outer; }}
+{indent}        *start.offset(si) |= {}; si += prime_ * {} + {};
 {indent}    }}",
                      1 << bit,
                      sl, offset,
@@ -202,34 +203,33 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                      indent = indent);
         }
         println!("\
-{indent}    while p < loop_end {{",
+{indent}    while si < loop_len {{",
                  indent = indent);
 
         let mut sl_so_far = 0;
         let mut offset_so_far = 0;
         for &(sl, offset, bit) in twiddles {
             println!("\
-{indent}        *p.offset(prime_ * {} + {}) |= {};",
+{indent}        *start.offset(si + prime_ * {} + {}) |= {};",
                      sl_so_far, offset_so_far, 1 << bit, indent = indent);
             sl_so_far += sl;
             offset_so_far += offset;
         }
         println!("
-{indent}        p = p.offset(prime_ * {} + {})
+{indent}        si += prime_ * {} + {}
 {indent}    }}
-{indent}    wi = {}
+{indent}    wi = {wheel_start}
 {indent}}}",
                  sl_so_far, offset_so_far,
-                 wheel_start,
+                 wheel_start = wheel_start,
                  indent = indent);
         println!("        }}");
     }
-    println!("        _ => unreachable!(),
+    println!("        _ => unreachable!(\"{{}}\", wi),
     }}
     break 'outer;
     }}
-    let si = p as usize - start as usize;
-    *si_ = si.wrapping_sub(bytes.len());
+    *si_ = (si as usize).wrapping_sub(bytes.len());
     *wi_ = wi;
 }}");
 }
