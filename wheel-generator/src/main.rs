@@ -164,8 +164,8 @@ pub const MODULO: usize = {modulo};
     }
     println!("];");
 
-    let big_slope = all_twiddles[0].1.iter().fold(0, |a, &(sl, _offset, _)| a + sl);
-    let big_step = all_twiddles[0].1.iter().fold(0, |a, &(_sl, offset, _)| a + offset);
+    let big_slope = all_twiddles[0].1[..COUNT-1].iter().fold(0, |a, &(sl, _offset, _)| a + sl);
+    let big_step = all_twiddles[BYTE_COUNT - 1].1[..COUNT-1].iter().fold(0, |a, &(_sl, offset, _)| a + offset);
     println!("\
 pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize, prime: usize) {{
     let bytes = bytes;
@@ -187,9 +187,10 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                  wheel_start, wheel_end - 1,
                  BYTE_WHEEL, m);
         let indent: String = "            ".into();
-        println!("{}if wi != {} {{", indent, wheel_start);
-
-        for (j, &(sl, offset, bit)) in twiddles.iter().enumerate().skip(1) {
+            println!("\
+{indent}loop {{",
+                     indent = indent);
+        for (j, &(sl, offset, bit)) in twiddles.iter().enumerate() {
             println!("\
 {indent}    if wi <= {val} {{
 {indent}        if p >= end {{ wi = {val}; break 'outer; }}
@@ -201,36 +202,26 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                      indent = indent);
         }
         println!("\
-{indent}}}\n
-{indent}while p < loop_end {{",
+{indent}    while p < loop_end {{",
                  indent = indent);
 
         let mut sl_so_far = 0;
         let mut offset_so_far = 0;
         for &(sl, offset, bit) in twiddles {
-            println!("{}    *p.offset(prime_ * {} + {}) |= {};",
-                     indent, sl_so_far, offset_so_far, 1 << bit);
+            println!("\
+{indent}        *p.offset(prime_ * {} + {}) |= {};",
+                     sl_so_far, offset_so_far, 1 << bit, indent = indent);
             sl_so_far += sl;
             offset_so_far += offset;
         }
         println!("
-{indent}    p = p.offset(prime_ * {} + {})
+{indent}        p = p.offset(prime_ * {} + {})
+{indent}    }}
+{indent}    wi = {}
 {indent}}}",
                  sl_so_far, offset_so_far,
+                 wheel_start,
                  indent = indent);
-
-        for (j, &(sl, offset, bit)) in twiddles.iter().enumerate() {
-            println!("\
-{indent}if wi <= {val} {{
-{indent}    if p >= end {{ wi = {val}; break 'outer; }}
-{indent}    *p |= {}; p = p.offset(prime_ * {} + {})
-{indent}}}",
-                     1 << bit,
-                     sl, offset,
-                     val = wheel_start + j,
-                     indent = indent);
-        }
-
         println!("        }}");
     }
     println!("        _ => unreachable!(),
