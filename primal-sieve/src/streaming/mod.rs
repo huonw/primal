@@ -16,9 +16,9 @@ pub struct StreamingSieve {
     small: Option<::Sieve>,
     // stores which numbers *aren't* prime, i.e. true == composite.
     sieve: BitVec,
-    primes: Vec<wheel::WheelInfo<wheel::Wheel210>>,
-    small_primes: Vec<wheel::WheelInfo<wheel::Wheel30>>,
-    large_primes: Vec<wheel::WheelInfo<wheel::Wheel210>>,
+    primes: Vec<wheel::State<wheel::Wheel210>>,
+    small_primes: Vec<wheel::State<wheel::Wheel30>>,
+    large_primes: Vec<wheel::State<wheel::Wheel210>>,
     presieve: presieve::Presieve,
 
     low: usize,
@@ -26,13 +26,9 @@ pub struct StreamingSieve {
     limit: usize,
 }
 
-const CACHE: usize = (32 << 10);
+const CACHE: usize = 32 << 10;
 const SEG_ELEMS: usize = 8 * CACHE;
 const SEG_LEN: usize = SEG_ELEMS * wheel::BYTE_MODULO / wheel::BYTE_SIZE;
-
-fn bits_for(x: usize) -> usize {
-    (x * wheel::BYTE_SIZE + wheel::BYTE_MODULO - 1) / wheel::BYTE_MODULO
-}
 
 impl StreamingSieve {
     /// Create a new instance of the streaming sieve that will
@@ -40,7 +36,7 @@ impl StreamingSieve {
     pub fn new(limit: usize) -> StreamingSieve {
         let low = 0;
 
-        let elems = cmp::min(bits_for(limit), SEG_ELEMS);
+        let elems = cmp::min(wheel::bits_for(limit), SEG_ELEMS);
         let presieve = presieve::Presieve::new(elems);
         let current = presieve.smallest_unincluded_prime();
 
@@ -109,7 +105,7 @@ impl StreamingSieve {
     }
 
     fn small_primes_sieve<W: wheel::Wheel>(sieve: &mut BitVec,
-                                           small_primes: &mut [wheel::WheelInfo<W>]) {
+                                           small_primes: &mut [wheel::State<W>]) {
         let bytes = sieve.as_bytes_mut();
         for wi in small_primes {
             wi.sieve_hardcoded(bytes);

@@ -2,7 +2,7 @@ use primal_bit::BitVec;
 use std::{cmp, ptr};
 
 use wheel;
-use super::{bits_for, StreamingSieve};
+use super::{StreamingSieve};
 
 const MINIMUM_PRESIEVE: usize = 2 * 3 * 5;
 const PRESIEVE_PRIMES: &'static [usize] = &[7, 11, 13, 17, 19, 23, 29];
@@ -20,14 +20,14 @@ impl Presieve {
         let mut idx = 0;
         for (i, &x) in PRESIEVE_PRIMES.iter().enumerate() {
             let new_prod = prod * x;
-            if bits_for(new_prod) > limit_bits {
+            if wheel::bits_for(new_prod) > limit_bits {
                 break
             }
             prod = new_prod;
             idx = i;
         }
 
-        let len = cmp::min(bits_for(prod), limit_bits);
+        let len = cmp::min(wheel::bits_for(prod), limit_bits);
 
         if idx == 0 {
             Presieve {
@@ -103,7 +103,7 @@ mod benches {
     use test::Bencher;
     use super::Presieve;
     fn run_presieve(b: &mut Bencher, n: usize) {
-        b.iter(|| super::Presieve::new(super::super::bits_for(n)))
+        b.iter(|| super::Presieve::new(::wheel::bits_for(n)))
     }
     #[bench]
     fn presieve_small(b: &mut Bencher) {

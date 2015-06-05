@@ -1,6 +1,10 @@
 pub const BYTE_SIZE: usize = 8;
 pub const BYTE_MODULO: usize = 30;
 
+pub fn bits_for(x: usize) -> usize {
+    (x * BYTE_SIZE + BYTE_MODULO - 1) / BYTE_MODULO
+}
+
 pub fn bit_index(n: usize) -> (bool, usize) {
     const POS: &'static [(bool, u8); BYTE_MODULO] = &[
         // 0
@@ -37,13 +41,13 @@ pub trait Wheel {
 }
 
 #[derive(Debug)]
-pub struct WheelInfo<W> {
+pub struct State<W> {
     wheel: W,
     prime: u32,
     wheel_index: u16,
     sieve_index: u16,
 }
-impl<W: Wheel> WheelInfo<W> {
+impl<W: Wheel> State<W> {
     #[inline]
     pub fn sieve(&mut self, bytes: &mut [u8]) {
         let bytes = bytes;
@@ -60,7 +64,7 @@ impl<W: Wheel> WheelInfo<W> {
         self.wheel_index = wi as u16;
     }
     #[inline]
-    pub fn sieve_pair(&mut self, self2: &mut WheelInfo<W>, bytes: &mut [u8]) {
+    pub fn sieve_pair(&mut self, self2: &mut State<W>, bytes: &mut [u8]) {
         let bytes = bytes;
         let top = bytes.len();
         let wheel = self.wheel.wheel();
@@ -94,7 +98,7 @@ impl<W: Wheel> WheelInfo<W> {
         self2.sieve_index = si2.wrapping_sub(top) as u16;
         self2.wheel_index = wi2 as u16;
     }
-    pub fn sieve_triple(&mut self, self2: &mut WheelInfo<W>, self3: &mut WheelInfo<W>,
+    pub fn sieve_triple(&mut self, self2: &mut State<W>, self3: &mut State<W>,
                         bytes: &mut [u8]) {
         let bytes = bytes;
         let top = bytes.len();
@@ -154,43 +158,15 @@ impl<W: Wheel> WheelInfo<W> {
 
 #[derive(Debug)]
 pub struct WheelInit {
-    pub next_mult_factor: u8,
-    pub wheel_index: u8,
-}
-#[macro_escape]
-macro_rules! init {
-    ($nmf: expr, $wi: expr) => { ::wheel::WheelInit { next_mult_factor: $nmf, wheel_index: $wi }}
+    next_mult_factor: u8,
+    wheel_index: u8,
 }
 #[derive(Debug)]
 pub struct WheelElem {
-    pub unset_bit: u8,
-    pub next_mult_factor: u8,
-    pub correction: u8,
-    pub next: i8,
-}
-
-#[macro_escape]
-macro_rules! count_ints {
-    // count non-recursively, to avoid recursion limits
-    ($($x: expr, )*) => { sum!($(0usize * $x as usize + 1usize,)*) }
-}
-#[macro_escape]
-macro_rules! sum {
-    ($($x: expr, )*) => { 0 $(+ $x)* }
-}
-
-#[macro_escape]
-macro_rules! elems {
-    ($([$($bit: expr, $nmf: expr, $c: expr, $n: expr;)*],)*) => {
-        const WHEEL: &'static [::wheel::WheelElem; sum!($(count_ints!($($bit,)*),)*)] = &[
-            $($(::wheel::WheelElem {
-                unset_bit: 1u8 << $bit,
-                next_mult_factor: $nmf,
-                correction: $c,
-                next: $n,
-            },)*)*
-                ];
-    }
+    unset_bit: u8,
+    next_mult_factor: u8,
+    correction: u8,
+    next: i8,
 }
 
 #[inline(always)]
@@ -216,7 +192,7 @@ const WHEEL_OFFSETS: &'static [usize; BYTE_MODULO] = &[
     ];
 
 #[inline(never)]
-pub fn compute_wheel_elem<W: Wheel>(w: W, p: usize, low: usize) -> WheelInfo<W> {
+pub fn compute_wheel_elem<W: Wheel>(w: W, p: usize, low: usize) -> State<W> {
     let mut mult = p * p;
 
     let init = &w.init()[p % w.modulo()];
@@ -236,7 +212,7 @@ pub fn compute_wheel_elem<W: Wheel>(w: W, p: usize, low: usize) -> WheelInfo<W> 
     }
 
     sieve_index -= low / BYTE_MODULO;
-    let ret = WheelInfo {
+    let ret = State {
         wheel: w,
         prime: prime as u32,
         sieve_index: sieve_index as u16,
