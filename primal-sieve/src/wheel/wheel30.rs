@@ -1,3 +1,4 @@
+// automatically generated
 use wheel::{WheelInit, Wheel, WheelElem};
 
 #[derive(Debug)]
@@ -21,63 +22,108 @@ pub const SIZE: usize = 8;
 pub const MODULO: usize = 30;
 
 const INIT: &'static [WheelInit; 30] = &[
-    // 0
-    init!{1,  0}, init!{0,  0}, init!{5,  1}, init!{4,  1},
-    // 4
-    init!{3,  1}, init!{2,  1}, init!{1,  1}, init!{0,  1},
-    // 8
-    init!{3,  2}, init!{2,  2}, init!{1,  2}, init!{0,  2},
-    // 12
-    init!{1,  3}, init!{0,  3}, init!{3,  4}, init!{2,  4},
-    // 16
-    init!{1,  4}, init!{0,  4}, init!{1,  5}, init!{0,  5},
-    // 20
-    init!{3,  6}, init!{2,  6}, init!{1,  6}, init!{0,  6},
-    // 24
-    init!{5,  7}, init!{4,  7}, init!{3,  7}, init!{2,  7},
-    // 28
-    init!{1,  7}, init!{0,  7},
+    WheelInit { next_mult_factor: 1, wheel_index: 0 }, // 0
+    WheelInit { next_mult_factor: 0, wheel_index: 0 }, // 1
+    WheelInit { next_mult_factor: 5, wheel_index: 1 }, // 2
+    WheelInit { next_mult_factor: 4, wheel_index: 1 }, // 3
+    WheelInit { next_mult_factor: 3, wheel_index: 1 }, // 4
+    WheelInit { next_mult_factor: 2, wheel_index: 1 }, // 5
+    WheelInit { next_mult_factor: 1, wheel_index: 1 }, // 6
+    WheelInit { next_mult_factor: 0, wheel_index: 1 }, // 7
+    WheelInit { next_mult_factor: 3, wheel_index: 2 }, // 8
+    WheelInit { next_mult_factor: 2, wheel_index: 2 }, // 9
+    WheelInit { next_mult_factor: 1, wheel_index: 2 }, // 10
+    WheelInit { next_mult_factor: 0, wheel_index: 2 }, // 11
+    WheelInit { next_mult_factor: 1, wheel_index: 3 }, // 12
+    WheelInit { next_mult_factor: 0, wheel_index: 3 }, // 13
+    WheelInit { next_mult_factor: 3, wheel_index: 4 }, // 14
+    WheelInit { next_mult_factor: 2, wheel_index: 4 }, // 15
+    WheelInit { next_mult_factor: 1, wheel_index: 4 }, // 16
+    WheelInit { next_mult_factor: 0, wheel_index: 4 }, // 17
+    WheelInit { next_mult_factor: 1, wheel_index: 5 }, // 18
+    WheelInit { next_mult_factor: 0, wheel_index: 5 }, // 19
+    WheelInit { next_mult_factor: 3, wheel_index: 6 }, // 20
+    WheelInit { next_mult_factor: 2, wheel_index: 6 }, // 21
+    WheelInit { next_mult_factor: 1, wheel_index: 6 }, // 22
+    WheelInit { next_mult_factor: 0, wheel_index: 6 }, // 23
+    WheelInit { next_mult_factor: 5, wheel_index: 7 }, // 24
+    WheelInit { next_mult_factor: 4, wheel_index: 7 }, // 25
+    WheelInit { next_mult_factor: 3, wheel_index: 7 }, // 26
+    WheelInit { next_mult_factor: 2, wheel_index: 7 }, // 27
+    WheelInit { next_mult_factor: 1, wheel_index: 7 }, // 28
+    WheelInit { next_mult_factor: 0, wheel_index: 7 }, // 29
 ];
-
-elems!{
+const WHEEL: &'static [WheelElem; 64] = &[
     // remainder 1
-    [
-        0u8,6,0,1;1u8,4,0,1;2u8,2,0,1;3u8,4,0,1;
-        4u8,2,0,1;5u8,4,0,1;6u8,6,0,1;7u8,2,1,-7;
-    ],
+    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: -7 },
     // remainder 7
-    [
-        5u8,4,1,1;4u8,2,1,1;0u8,4,0,1;7u8,2,1,1;
-        3u8,4,1,1;2u8,6,1,1;6u8,2,1,1;1u8,6,1,-7;
-    ],
+    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 1, next: -7 },
     // remainder 11
-    [
-        0u8,2,0,1;6u8,4,2,1;1u8,2,0,1;7u8,4,2,1;
-        3u8,6,2,1;5u8,2,1,1;2u8,6,2,1;4u8,4,2,-7;
-    ],
+    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 2, next: -7 },
     // remainder 13
-    [
-        5u8,4,2,1;2u8,2,1,1;1u8,4,1,1;7u8,6,3,1;
-        4u8,2,1,1;3u8,6,3,1;0u8,4,1,1;6u8,2,1,-7;
-    ],
+    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: -7 },
     // remainder 17
-    [
-        5u8,2,1,1;6u8,4,3,1;0u8,6,3,1;3u8,2,1,1;
-        4u8,6,3,1;7u8,4,3,1;1u8,2,1,1;2u8,4,2,-7;
-    ],
+    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 2, next: -7 },
     // remainder 19
-    [
-        0u8,4,2,1;4u8,6,4,1;2u8,2,1,1;5u8,6,4,1;
-        3u8,4,2,1;7u8,2,2,1;1u8,4,2,1;6u8,2,2,-7;
-    ],
+    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 2, next: -7 },
     // remainder 23
-    [
-        5u8,6,5,1;1u8,2,1,1;6u8,6,5,1;2u8,4,3,1;
-        3u8,2,1,1;7u8,4,4,1;0u8,2,1,1;4u8,4,3,-7;
-    ],
+    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 3, next: -7 },
     // remainder 29
-    [
-        0u8,2,1,1;7u8,6,6,1;6u8,4,4,1;5u8,2,2,1;
-        4u8,4,4,1;3u8,2,2,1;2u8,4,4,1;1u8,6,6,-7;
-    ],
-}
+    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 6, next: -7 },
+];

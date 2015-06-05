@@ -70,9 +70,46 @@ fn main() {
         map.entry(p % BYTE_WHEEL).or_insert(vec![]).push((p, bits, bit_diffs));
     }
 
-    println!("elems!{{");
+    println!("// automatically generated
+use wheel::{{WheelInit, Wheel, WheelElem}};
+
+#[derive(Debug)]
+pub struct Wheel{modulo};
+impl Wheel for Wheel{modulo} {{
+    #[inline(always)]
+    fn modulo(&self) -> usize {{ MODULO }}
+
+    #[inline(always)]
+    fn size(&self) -> usize {{ SIZE }}
+
+    #[inline(always)]
+    fn wheel(&self) -> &'static [WheelElem] {{ WHEEL }}
+
+    #[inline(always)]
+    fn init(&self) -> &'static [WheelInit] {{ INIT }}
+}}
+
+pub const SIZE: usize = {size};
+
+pub const MODULO: usize = {modulo};
+",
+             size = COUNT,
+             modulo = WHEEL);
+
+    println!("const INIT: &'static [WheelInit; {}] = &[", WHEEL);
+    let mut next = 0;
+    for (i, &y) in coprime_to(WHEEL, WHEEL).iter().enumerate() {
+        for x in next..y + 1 {
+            println!("    WheelInit {{ next_mult_factor: {}, wheel_index: {} }}, // {}",
+                     y - x, i, x)
+        }
+        next = y + 1;
+    }
+    println!("];");
+
+    println!("const WHEEL: &'static [WheelElem; {}] = &[", BYTE_COUNT * COUNT);
     for (m, bitss) in &map {
-        print!("    // remainder {}\n    [", m);
+        println!("    // remainder {}", m);
         assert!(bitss.len() >= 2);
         let (p1, _, ref bits1) = bitss[0];
         let (p2, _, ref bits2) = bitss[1];
@@ -113,13 +150,9 @@ fn main() {
         });
 
         for (i, (sl, offset, bit)) in twiddles.enumerate() {
-            if i % 4 == 0 {
-                print!("\n        ")
-            }
-            print!("{}u8,{},{},{};", bit, sl, offset,
+            println!("    WheelElem {{ unset_bit: 1u8 << {}u8, next_mult_factor: {}, correction: {}, next: {} }},", bit, sl, offset,
                    if i == COUNT-1 {-(i as isize)}else{1});
         }
-        println!("\n    ],");
     }
-    println!("}}")
+    println!("];")
 }
