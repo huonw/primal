@@ -39,10 +39,9 @@ pub trait Wheel {
 #[derive(Debug)]
 pub struct WheelInfo<W> {
     wheel: W,
-    true_prime: usize,
-    prime: usize,
-    wheel_index: usize,
-    sieve_index: usize,
+    prime: u32,
+    wheel_index: u16,
+    sieve_index: u16,
 }
 impl<W: Wheel> WheelInfo<W> {
     #[inline]
@@ -50,15 +49,15 @@ impl<W: Wheel> WheelInfo<W> {
         let bytes = bytes;
         let top = bytes.len();
 
-        let mut si = self.sieve_index;
-        let mut wi = self.wheel_index;
-        let p = self.prime;
+        let mut si = self.sieve_index as usize;
+        let mut wi = self.wheel_index as usize;
+        let p = self.prime as usize;
         while si < top {
             raw_set_bit(self.wheel.wheel(),
                         bytes, &mut si, &mut wi, p)
         }
-        self.sieve_index = si.wrapping_sub(top);
-        self.wheel_index = wi;
+        self.sieve_index = si.wrapping_sub(top) as u16;
+        self.wheel_index = wi as u16;
     }
     #[inline]
     pub fn sieve_pair(&mut self, self2: &mut WheelInfo<W>, bytes: &mut [u8]) {
@@ -66,12 +65,12 @@ impl<W: Wheel> WheelInfo<W> {
         let top = bytes.len();
         let wheel = self.wheel.wheel();
 
-        let mut si1 = self.sieve_index;
-        let mut wi1 = self.wheel_index;
-        let p1 = self.prime;
-        let mut si2 = self2.sieve_index;
-        let mut wi2 = self2.wheel_index;
-        let p2 = self2.prime;
+        let mut si1 = self.sieve_index as usize;
+        let mut wi1 = self.wheel_index as usize;
+        let p1 = self.prime as usize;
+        let mut si2 = self2.sieve_index as usize;
+        let mut wi2 = self2.wheel_index as usize;
+        let p2 = self2.prime as usize;
 
         while si1 < top && si2 < top {
             raw_set_bit(wheel,
@@ -90,10 +89,10 @@ impl<W: Wheel> WheelInfo<W> {
 
         // if this wraps, we've hit the limit, and so won't be
         // continuing, so whatever, it can be junk.
-        self.sieve_index = si1.wrapping_sub(top);
-        self.wheel_index = wi1;
-        self2.sieve_index = si2.wrapping_sub(top);
-        self2.wheel_index = wi2;
+        self.sieve_index = si1.wrapping_sub(top) as u16;
+        self.wheel_index = wi1 as u16;
+        self2.sieve_index = si2.wrapping_sub(top) as u16;
+        self2.wheel_index = wi2 as u16;
     }
     pub fn sieve_triple(&mut self, self2: &mut WheelInfo<W>, self3: &mut WheelInfo<W>,
                         bytes: &mut [u8]) {
@@ -101,15 +100,15 @@ impl<W: Wheel> WheelInfo<W> {
         let top = bytes.len();
         let wheel = self.wheel.wheel();
 
-        let mut si1 = self.sieve_index;
-        let mut wi1 = self.wheel_index;
-        let p1 = self.prime;
-        let mut si2 = self2.sieve_index;
-        let mut wi2 = self2.wheel_index;
-        let p2 = self2.prime;
-        let mut si3 = self3.sieve_index;
-        let mut wi3 = self3.wheel_index;
-        let p3 = self3.prime;
+        let mut si1 = self.sieve_index as usize;
+        let mut wi1 = self.wheel_index as usize;
+        let p1 = self.prime as usize;
+        let mut si2 = self2.sieve_index as usize;
+        let mut wi2 = self2.wheel_index as usize;
+        let p2 = self2.prime as usize;
+        let mut si3 = self3.sieve_index as usize;
+        let mut wi3 = self3.wheel_index as usize;
+        let p3 = self3.prime as usize;
 
         while si1 < top && si2 < top && si3 < top {
             raw_set_bit(wheel,
@@ -133,19 +132,23 @@ impl<W: Wheel> WheelInfo<W> {
         }
         // if this wraps, we've hit the limit, and so won't be
         // continuing, so whatever, it can be junk.
-        self.sieve_index = si1.wrapping_sub(top);
-        self.wheel_index = wi1;
-        self2.sieve_index = si2.wrapping_sub(top);
-        self2.wheel_index = wi2;
-        self3.sieve_index = si3.wrapping_sub(top);
-        self3.wheel_index = wi3;
+        self.sieve_index = si1.wrapping_sub(top) as u16;
+        self.wheel_index = wi1 as u16;
+        self2.sieve_index = si2.wrapping_sub(top) as u16;
+        self2.wheel_index = wi2 as u16;
+        self3.sieve_index = si3.wrapping_sub(top) as u16;
+        self3.wheel_index = wi3 as u16;
     }
 
     pub fn sieve_hardcoded(&mut self, bytes: &mut [u8]) {
+        let mut si = self.sieve_index as usize;
+        let mut wi = self.wheel_index as usize;
         unsafe {
             self.wheel.hardcoded_sieve(bytes,
-                                       &mut self.sieve_index, &mut self.wheel_index, self.prime)
+                                       &mut si, &mut wi, self.prime as usize)
         }
+        self.sieve_index = si as u16;
+        self.wheel_index = wi as u16;
     }
 }
 
@@ -220,25 +223,25 @@ pub fn compute_wheel_elem<W: Wheel>(w: W, p: usize, low: usize) -> WheelInfo<W> 
     let next_mult_factor = init.next_mult_factor;
     mult += p * next_mult_factor as usize;
 
-    let wheel_index = WHEEL_OFFSETS[p % BYTE_MODULO] * w.size();
-    let sieve_index = mult * BYTE_SIZE / BYTE_MODULO / 8;
+    let mut wheel_index = WHEEL_OFFSETS[p % BYTE_MODULO] * w.size();
+    let mut sieve_index = mult * BYTE_SIZE / BYTE_MODULO / 8;
 
-    let mut ret = WheelInfo {
-        wheel: w,
-        true_prime: p,
-        prime: p / BYTE_MODULO,
-        sieve_index: sieve_index,
-        wheel_index: wheel_index,
-    };
+    let prime = p / BYTE_MODULO;
     // run the wheel until its above `low`... this is ugly and should be done analytically.
-    let wheel = ret.wheel.wheel();
-    while ret.sieve_index * BYTE_MODULO < low {
-        let WheelElem { next_mult_factor, correction, next, .. } = wheel[ret.wheel_index];
-        ret.sieve_index += ret.prime * next_mult_factor as usize;
-        ret.sieve_index += correction as usize;
-        ret.wheel_index = ret.wheel_index.wrapping_add(next as usize);
+    while sieve_index * BYTE_MODULO < low {
+        let WheelElem { next_mult_factor, correction, next, .. } = w.wheel()[wheel_index];
+        sieve_index += prime * next_mult_factor as usize;
+        sieve_index += correction as usize;
+        wheel_index = wheel_index.wrapping_add(next as usize);
     }
-    ret.sieve_index -= low / BYTE_MODULO;
+
+    sieve_index -= low / BYTE_MODULO;
+    let ret = WheelInfo {
+        wheel: w,
+        prime: prime as u32,
+        sieve_index: sieve_index as u16,
+        wheel_index: wheel_index as u16,
+    };
     ret
 
 }
