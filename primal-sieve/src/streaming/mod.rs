@@ -18,6 +18,7 @@ pub struct StreamingSieve {
     sieve: BitVec,
     primes: Vec<wheel::WheelInfo<wheel::Wheel210>>,
     small_primes: Vec<wheel::WheelInfo<wheel::Wheel30>>,
+    large_primes: Vec<wheel::WheelInfo<wheel::Wheel210>>,
     presieve: presieve::Presieve,
 
     low: usize,
@@ -54,6 +55,7 @@ impl StreamingSieve {
             sieve: BitVec::from_elem(elems, false),
             primes: vec![],
             small_primes: vec![],
+            large_primes: vec![],
             presieve: presieve,
 
             low: low,
@@ -132,6 +134,24 @@ impl StreamingSieve {
         }
     }
 
+    fn large_primes_sieve(&mut self) {
+        let bytes = self.sieve.as_bytes_mut();
+
+        let mut iter = self.large_primes.iter_mut();
+
+        while iter.size_hint().0 >= 2 {
+            match (iter.next(), iter.next()) {
+                (Some(wi1), Some(wi2)) => {
+                    wi1.sieve_pair(wi2, bytes);
+                }
+                _ => unreachable!()
+            }
+        }
+        for wi in iter {
+            wi.sieve(bytes)
+        }
+    }
+
     /// Extract the next chunk of filtered primes, the return value is
     /// `Some((low, v))` or `None` if the sieve has reached the limit.
     ///
@@ -159,7 +179,12 @@ impl StreamingSieve {
                     if s <= SEG_LEN / 100 {
                         self.small_primes.push(wheel::compute_wheel_elem(wheel::Wheel30, s, low));
                     } else {
-                        self.primes.push(wheel::compute_wheel_elem(wheel::Wheel210, s, low));
+                        let elem = wheel::compute_wheel_elem(wheel::Wheel210, s, low);
+                        if s < SEG_LEN / 2 {
+                            self.primes.push(elem)
+                        } else {
+                            self.large_primes.push(elem)
+                        }
                     }
                 }
                 s += 1
@@ -171,6 +196,7 @@ impl StreamingSieve {
         self.presieve.apply(&mut self.sieve, low);
         StreamingSieve::small_primes_sieve(&mut self.sieve, &mut self.small_primes);
         self.direct_sieve();
+        self.large_primes_sieve();
 
         if low == 0 {
             // 1 is not prime.
