@@ -66,9 +66,7 @@
 
 #![cfg_attr(all(test, feature = "unstable"), feature(test, step_by))]
 
-extern crate num as num_;
 extern crate primal_estimate;
-extern crate primal_bit;
 extern crate primal_check;
 extern crate primal_sieve;
 
