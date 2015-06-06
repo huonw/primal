@@ -40,23 +40,6 @@ impl Index<usize> for BitVec {
     }
 }
 
-/// Computes how many blocks are needed to store that many bits
-fn blocks_for_bits(bits: usize) -> usize {
-    // If we want 17 ints, dividing by 32 will produce 0. So we add 1 to make sure we
-    // reserve enough. But if we want exactly a multiple of 32, this will actually allocate
-    // one too many. So we need to check if that's the case. We can do that by computing if
-    // bitwise AND by `32 - 1` is 0. But LLVM should be able to optimize the semantically
-    // superior modulo operator on a power of two to this.
-    //
-    // Note that we can technically avoid this branch with the expression
-    // `(nbits + u32::BITS - 1) / 32::BITS`, but if nbits is almost usize::MAX this will overflow.
-    if bits % 32 == 0 {
-        bits / 32
-    } else {
-        bits / 32 + 1
-    }
-}
-
 impl BitVec {
     /// An operation might screw up the unused bits in the last block of the
     /// `BitVec`. As per (3), it's assumed to be all 0s. This method fixes it up.
@@ -111,7 +94,7 @@ impl BitVec {
     /// }
     /// ```
     pub fn from_elem(nbits: usize, bit: bool) -> BitVec {
-        let nblocks = blocks_for_bits(nbits);
+        let nblocks = nbits.checked_add(32 - 1).expect("capacity overflow") / 32;
         let mut bit_vec = BitVec {
             storage: repeat(if bit { !0 } else { 0 }).take(nblocks).collect(),
             nbits: nbits
