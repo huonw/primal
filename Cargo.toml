@@ -28,4 +28,4 @@ primal-smallsieve = { path = "primal-smallsieve" }
 primal-sieve = { path = "primal-sieve" }
 
 [features]
-unstable = []
+unstable = ["primal-sieve/unstable"]
