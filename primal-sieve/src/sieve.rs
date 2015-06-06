@@ -1,6 +1,6 @@
 use primal_bit::BitVec;
 use wheel;
-use streaming::StreamingSieve;
+use streaming;
 use hamming;
 
 use std::cmp;
@@ -36,11 +36,11 @@ impl Sieve {
     /// Create a new instance, sieving out all the primes up to
     /// `limit`.
     pub fn new(limit: usize) -> Sieve {
-        let mut stream = StreamingSieve::new(limit);
+        let mut stream = streaming::new(limit);
 
         let mut seen = Vec::new();
         let mut nbits = 0;
-        while let Some((n, bits)) = stream.next() {
+        while let Some((n, bits)) = streaming::next(&mut stream) {
             seen.push(bits.clone());
             nbits += cmp::min(bits.len(), wheel::bit_index(limit - n + 1).1);
         }

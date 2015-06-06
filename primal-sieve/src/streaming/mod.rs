@@ -50,7 +50,7 @@ const SEG_LEN: usize = SEG_ELEMS * wheel::BYTE_MODULO / wheel::BYTE_SIZE;
 impl StreamingSieve {
     /// Create a new instance of the streaming sieve that will
     /// correctly progressively filter primes up to `limit`.
-    pub fn new(limit: usize) -> StreamingSieve {
+    fn new(limit: usize) -> StreamingSieve {
         let low = 0;
 
         let elems = cmp::min(wheel::bits_for(limit), SEG_ELEMS);
@@ -201,7 +201,7 @@ impl StreamingSieve {
     ///
     /// NB. the prime 2 is not included in any of these sieves and so
     /// needs special handling.
-    pub fn next(&mut self) -> Option<(usize, &BitVec)> {
+    fn next(&mut self) -> Option<(usize, &BitVec)> {
         if self.low >= self.limit {
             return None
         }
@@ -225,6 +225,14 @@ impl StreamingSieve {
 
         Some((low, &self.sieve))
     }
+}
+
+// module-public but crate-private wrappers, to allow `Sieve` to call these functions.
+pub fn new(limit: usize) -> StreamingSieve {
+    StreamingSieve::new(limit)
+}
+pub fn next(sieve: &mut StreamingSieve) -> Option<(usize, &BitVec)> {
+    sieve.next()
 }
 
 #[cfg(test)]
