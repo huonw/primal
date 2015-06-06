@@ -1,7 +1,7 @@
 [package]
 
 name = "primal"
-version = "0.1.14"
+version = "0.2.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 homepage = "https://github.com/huonw/primal"
@@ -19,9 +19,9 @@ and state-of-the-art estimation of upper and lower bounds for π(n)
 """
 
 [dependencies]
-primal-check = { path = "primal-check" }
-primal-estimate = { path = "primal-estimate" }
-primal-sieve = { path = "primal-sieve" }
+primal-check = { path = "primal-check", version = "0.2" }
+primal-estimate = { path = "primal-estimate", version = "0.2" }
+primal-sieve = { path = "primal-sieve", version = "0.2" }
 
 [features]
 unstable = ["primal-sieve/unstable"]

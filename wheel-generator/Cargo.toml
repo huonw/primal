@@ -1,10 +1,10 @@
 [package]
 name = "wheel-generator"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 [dependencies]
-primal-slowsieve = { path = "../primal-slowsieve" }
+primal-slowsieve = { path = "../primal-slowsieve", version = "0.2" }
 
 [features]
 thirty = []
