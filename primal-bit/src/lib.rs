@@ -231,12 +231,14 @@ impl BitVec {
         BitVec { storage: Vec::new(), nbits: 0 }
     }
 
+    #[inline]
     pub fn as_bytes_mut(&mut self) -> &mut [u8] {
         unsafe {
             std::slice::from_raw_parts_mut(self.storage.as_mut_ptr() as *mut _,
                                            (self.nbits + 7) / 8)
         }
     }
+    #[inline]
     pub fn as_bytes(&self) -> &[u8] {
         unsafe {
             std::slice::from_raw_parts(self.storage.as_ptr() as *const _,
