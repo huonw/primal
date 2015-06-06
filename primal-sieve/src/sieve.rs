@@ -285,7 +285,7 @@ impl<'a> Iterator for PrimesFrom<'a> {
 
 #[cfg(test)]
 mod tests {
-    use primal_smallsieve::Primes;
+    use primal_slowsieve::Primes;
     use super::Sieve;
 
     #[test]

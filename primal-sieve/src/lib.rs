@@ -6,7 +6,7 @@
 #![cfg_attr(all(test, feature = "unstable"), feature(test))]
 
 #[cfg(all(test, feature = "unstable"))] extern crate test;
-#[cfg(test)] extern crate primal_smallsieve;
+#[cfg(test)] extern crate primal_slowsieve;
 extern crate primal_bit;
 extern crate primal_estimate;
 extern crate hamming;

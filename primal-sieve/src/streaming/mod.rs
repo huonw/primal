@@ -243,7 +243,7 @@ pub fn next(sieve: &mut StreamingSieve) -> Option<(usize, &BitVec)> {
 
 #[cfg(test)]
 mod tests {
-    use primal_smallsieve::Primes;
+    use primal_slowsieve::Primes;
     use wheel;
     use super::StreamingSieve;
     fn gcd(x: usize, y: usize) -> usize {
@@ -258,7 +258,7 @@ mod tests {
         let coprime = coprime_to(wheel::BYTE_MODULO);
         const LIMIT: usize = 2_000_000;
         let mut sieve = StreamingSieve::new(LIMIT);
-        let primes = ::primal_smallsieve::Primes::sieve(LIMIT);
+        let primes = ::primal_slowsieve::Primes::sieve(LIMIT);
 
         let mut base = 0;
         let mut index = 0;

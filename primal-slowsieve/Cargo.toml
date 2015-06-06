@@ -1,17 +1,17 @@
 [package]
-name = "primal-smallsieve"
+name = "primal-slowsieve"
 version = "0.1.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 homepage = "https://github.com/huonw/primal"
 repository = "https://github.com/huonw/primal"
-documentation = "http://huonw.github.io/primal/primal_smallsieve/"
+documentation = "http://huonw.github.io/primal/primal_slowsieve/"
 license = "MIT/Apache-2.0"
 keywords = ["math", "mathematics", "primes", "number-theory"]
 
 description = """
-A simple sieve of Eratosthenes designed for sieving primes below small
-numbers.
+A simple sieve of Eratosthenes designed for testing faster sieves. You
+probably want `primal-sieve`, or even just `primal` itself.
 """
 
 [dependencies]

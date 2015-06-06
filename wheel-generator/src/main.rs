@@ -1,4 +1,4 @@
-extern crate primal_smallsieve;
+extern crate primal_slowsieve;
 
 use std::io::prelude::*;
 use std::io;
@@ -46,7 +46,7 @@ const START_AT: usize = 7;
 
 fn main() {
     errln!("wheel for {} (count {})", WHEEL, COUNT);
-    let sieve = primal_smallsieve::Primes::sieve(LIMIT);
+    let sieve = primal_slowsieve::Primes::sieve(LIMIT);
 
     let coprime = coprime_to(BYTE_WHEEL, LIMIT).into_iter().enumerate().collect::<Vec<_>>();
 

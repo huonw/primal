@@ -20,7 +20,7 @@ primal-estimate = { path = "../primal-estimate" }
 hamming = "0.1"
 
 [dev-dependencies]
-primal-smallsieve = { path = "../primal-smallsieve" }
+primal-slowsieve = { path = "../primal-slowsieve" }
 primal = { path = ".." }
 
 [features]

@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 [dependencies]
-primal-smallsieve = { path = "../primal-smallsieve" }
+primal-slowsieve = { path = "../primal-slowsieve" }
 
 [features]
 thirty = []
