@@ -173,7 +173,10 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
     let len = bytes.len() as isize;
     let largest_step = ({big_slope} * prime + {big_step}) as isize;
     let loop_len = len - largest_step;
-    let mut si = *si_ as isize;
+    let loop_end = start.offset(loop_len);
+    let end = start.offset(len);
+    let si = *si_ as isize;
+    let mut p = start.offset(si);
     let mut wi = *wi_;
     let prime_ = prime as isize;
 
@@ -205,20 +208,21 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
         println!("{} }}", indent);
         println!("{}}}", indent);
         println!("\
-{indent}while si < loop_len {{",
+{indent}while p < loop_end {{
+{indent}    p = ::b(p);",
                  indent = indent);
 
         let mut sl_so_far = 0;
         let mut offset_so_far = 0;
         for &(sl, offset, bit) in twiddles {
             println!("\
-{indent}    *start.offset(si + prime_ * {} + {}) |= {};",
+{indent}    *p.offset(prime_ * {} + {}) |= {};",
                      sl_so_far, offset_so_far, 1 << bit, indent = indent);
             sl_so_far += sl;
             offset_so_far += offset;
         }
         println!("
-{indent}    si += prime_ * {} + {}
+{indent}    p = p.offset(prime_ * {} + {})
 {indent}}}",
                  sl_so_far, offset_so_far,
                  indent = indent);
@@ -231,8 +235,8 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                 format!("break 'label{}", wheel_start + j + 1)
             };
             println!("\
-{indent} if si >= len {{ wi = {val}; break 'outer; }}
-{indent} *start.offset(si) |= {}; si += prime_ * {} + {};
+{indent} if p >= end {{ wi = {val}; break 'outer; }}
+{indent} *p |= {}; p = p.offset(prime_ * {} + {});
 {indent} {}
 {indent}}}",
 
@@ -247,7 +251,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
     println!("        _ => unreachable!(\"{{}}\", wi),
     }}
     }}
-    *si_ = (si as usize).wrapping_sub(bytes.len());
+    *si_ = (p as usize).wrapping_sub(end as usize);
     *wi_ = wi;
 }}");
 }
