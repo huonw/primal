@@ -16,7 +16,7 @@ use std::hash;
 use std::iter::repeat;
 use std::ops::Index;
 
-const BITS: usize = 32;
+const BITS: usize = 64;
 
 static TRUE: bool = true;
 static FALSE: bool = false;
@@ -24,7 +24,7 @@ static FALSE: bool = false;
 /// The bitvector type.
 pub struct BitVec {
     /// Internal representation of the bit vector
-    storage: Vec<u32>,
+    storage: Vec<u64>,
     /// The number of valid bits in the internal representation
     nbits: usize
 }
