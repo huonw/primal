@@ -157,6 +157,7 @@ impl Sieve {
             base: base_u64_count * ITER_BASE_STEP,
             current: current,
             elems: elems,
+            limit: self.upper_bound(),
             bits: self.seen[base + 1..].iter(),
         }
     }
@@ -165,6 +166,7 @@ impl Sieve {
 use std::slice;
 const ITER_BASE_STEP: usize = 8 * wheel::BYTE_MODULO;
 
+#[derive(Clone)]
 enum Early {
     Two,
     Three,
@@ -172,10 +174,12 @@ enum Early {
     Done,
 }
 
+#[derive(Clone)]
 pub struct PrimesFrom<'a> {
     early: Early,
     base: usize,
     current: u64,
+    limit: usize,
     elems: slice::Iter<'a, u64>,
     bits: slice::Iter<'a, BitVec>,
 }
@@ -217,7 +221,13 @@ impl<'a> Iterator for PrimesFrom<'a> {
 
         let lsb = c.trailing_zeros();
         self.current = c & (c - 1);
-        Some(self.base + wheel::TRUE_AT_BIT_64[lsb as usize])
+        let p = self.base + wheel::TRUE_AT_BIT_64[lsb as usize];
+        if p <= self.limit {
+            Some(p)
+        } else {
+            self.current = 0;
+            None
+        }
     }
 }
 
@@ -276,6 +286,19 @@ mod tests {
             i += 1;
         }
         assert_eq!(i, primes.count_upto(limit));
+    }
+    #[test]
+    fn primes_from_no_overrun() {
+        let real = Sieve::new(1000);
+
+        for i in 0..100 {
+            let i = i * 38 / 39 + 1;
+            let sieve = Sieve::new(i);
+
+            for p in sieve.primes_from(0) {
+                assert!(real.is_prime(p));
+            }
+        }
     }
     #[test]
     fn upper_bound() {
