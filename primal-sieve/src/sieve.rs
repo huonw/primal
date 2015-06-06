@@ -114,6 +114,58 @@ impl Sieve {
         }
     }
 
+    /// Factorise `n` into (prime, exponent) pairs.
+    ///
+    /// Returns `Err((leftover, partial factorisation))` if `n` cannot
+    /// be fully factored, or if `n` is zero (`leftover == 0`). A
+    /// number can not be completely factored if and only if the prime
+    /// factors of `n` are too large for this sieve, that is, if there
+    /// is
+    ///
+    /// - a prime factor larger than `U^2`, or
+    /// - more than one prime factor between `U` and `U^2`
+    ///
+    /// where `U` is the upper bound of the primes stored in this
+    /// sieve.
+    ///
+    /// Notably, any number between `U` and `U^2` can always be fully
+    /// factored, since these numbers are guaranteed to only have zero
+    /// or one prime factors larger than `U`.
+    pub fn factor(&self, mut n: usize) -> Result<Vec<(usize,usize)>,
+                                                 (usize, Vec<(usize, usize)>)>
+    {
+        if n == 0 { return Err((0, vec![])) }
+
+        let mut ret = Vec::new();
+
+        for p in self.primes_from(0) {
+            if n == 1 { break }
+
+            let mut count = 0;
+            while n % p == 0 {
+                n /= p;
+                count += 1;
+            }
+            if count > 0 {
+                ret.push((p,count));
+            }
+        }
+        if n != 1 {
+            let b = self.upper_bound();
+            if b * b >= n {
+                // n is not divisible by anything from 1...sqrt(n), so
+                // must be prime itself! (That is, even though we
+                // don't know this prime specifically, we can infer
+                // that it must be prime.)
+                ret.push((n, 1));
+            } else {
+                // large factors :(
+                return Err((n, ret))
+            }
+        }
+        Ok(ret)
+    }
+
     /// Return an iterator over the primes from `n` (inclusive) to the
     /// end of this sieve.
     ///
@@ -326,6 +378,102 @@ mod tests {
             assert!(val == true_, "failed for {}, true {}, computed {}",
                     i, true_, val)
         }
+    }
+
+    #[test]
+    fn factor() {
+        let primes = Sieve::new(1000);
+
+        let tests: &[(usize, &[(usize, usize)])] = &[
+            (1, &[]),
+            (2, &[(2_usize, 1)]),
+            (3, &[(3, 1)]),
+            (4, &[(2, 2)]),
+            (5, &[(5, 1)]),
+            (6, &[(2, 1), (3, 1)]),
+            (7, &[(7, 1)]),
+            (8, &[(2, 3)]),
+            (9, &[(3, 2)]),
+            (10, &[(2, 1), (5, 1)]),
+
+            (2*2*2*2*2 * 3*3*3*3*3, &[(2, 5), (3,5)]),
+            (2*3*5*7*11*13*17*19, &[(2,1), (3,1), (5,1), (7,1), (11,1), (13,1), (17,1), (19,1)]),
+            // a factor larger than that stored in the map
+            (7561, &[(7561, 1)]),
+            (2*7561, &[(2, 1), (7561, 1)]),
+            (4*5*7561, &[(2, 2), (5,1), (7561, 1)]),
+            ];
+        for &(n, expected) in tests.iter() {
+            assert_eq!(primes.factor(n), Ok(expected.to_vec()));
+        }
+    }
+
+    #[test]
+    fn factor_compare() {
+        let short = Sieve::new(30);
+        let long = Sieve::new(10000);
+
+        let short_lim = short.upper_bound() * short.upper_bound() + 1;
+
+        // every number less than bound^2 can be factored (since they
+        // always have a factor <= bound).
+        for n in 0..short_lim {
+            assert_eq!(short.factor(n), long.factor(n))
+        }
+        // larger numbers can only sometimes be factored
+        'next_n: for n in short_lim..10000 {
+            let possible = short.factor(n);
+            let real = long.factor(n).ok().unwrap();
+
+            let mut seen_small = None;
+            for (this_idx, &(p,i)) in real.iter().enumerate() {
+                let last_short_prime = if p >= short_lim {
+                    this_idx
+                } else if p > short.upper_bound() {
+                    match seen_small {
+                        Some(idx) => idx,
+                        None if i > 1 => this_idx,
+                        None => {
+                            // we can cope with one
+                            seen_small = Some(this_idx);
+                            continue
+                        }
+                    }
+                } else {
+                    // small enough
+                    continue
+                };
+
+                // break into the two parts
+                let (low, hi) = real.split_at(last_short_prime);
+                let leftover = hi.iter().fold(1, |x, &(p, i)| x * p.pow(i as u32));
+
+                assert_eq!(possible, Err((leftover, low.to_vec())));
+                continue 'next_n;
+            }
+
+            // if we're here, we know that everything should match
+            assert_eq!(possible, Ok(real))
+        }
+    }
+
+    #[test]
+    fn factor_failures() {
+        let primes = Sieve::new(30);
+
+        assert_eq!(primes.factor(0),
+                   Err((0, vec![])));
+        // can only handle one large factor
+        assert_eq!(primes.factor(31 * 31),
+                   Err((31 * 31, vec![])));
+        assert_eq!(primes.factor(2 * 3 * 31 * 31),
+                   Err((31 * 31, vec![(2, 1), (3, 1)])));
+
+        // prime that's too large (bigger than 30*30).
+        assert_eq!(primes.factor(7561),
+                   Err((7561, vec![])));
+        assert_eq!(primes.factor(2 * 3 * 7561),
+                   Err((7561, vec![(2, 1), (3, 1)])));
     }
 }
 
