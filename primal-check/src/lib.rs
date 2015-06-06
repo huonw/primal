@@ -1,3 +1,6 @@
+//! Check some primality-related properties of numbers.
+//!
+//! This crate is designed to be used via `primal`.
 extern crate num;
 #[cfg(test)]
 extern crate primal;

@@ -1,3 +1,7 @@
+//! Highly optimised prime sieves.
+//!
+//! This is designed to be used via the `primal` crate.
+
 #![cfg_attr(feature = "unstable", feature(asm))]
 #![cfg_attr(all(test, feature = "unstable"), feature(test))]
 

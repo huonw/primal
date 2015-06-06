@@ -1,21 +1,33 @@
-//! Simplistic and relatively unoptimised handling of basic
-//! tasks around primes:
+//! `primal` puts raw power into prime numbers.
 //!
+//! This crates includes
+//!
+//! - optimised prime sieves
 //! - checking for primality
 //! - enumerating primes
 //! - factorising numbers
 //! - estimating upper and lower bounds for π(*n*) (the number of primes
 //!   below *n*) and *p<sub>k</sub>* (the <i>k</i>th prime)
 //!
-//! This uses a basic Sieve of Eratosthenes to enumerate the primes up to
-//! some fixed bound (in a relatively memory efficient manner), and then
-//! allows this cached information to be used for things like enumerating
-//! the primes, and factorisation via trial division.
+//! This uses a state-of-the-art cache-friendly Sieve of Eratosthenes
+//! to enumerate the primes up to some fixed bound (in a memory
+//! efficient manner), and then allows this cached information to be
+//! used for things like enumerating and counting primes.
 //!
-//! (Despite the name, it can sieve the primes up to 10<sup>9</sup> in
-//! about 5 seconds.)
+//! `primal` takes around 2.8 seconds and less than 3MB of RAM to
+//! count the exact number of primes below 10<sup>10</sup> (455052511)
+//! on the author's laptop (i7-3517U).
 //!
 //! [*Source*](http://github.com/huonw/primal)
+//!
+//! # Using this library
+//!
+//! Just add the following to your [`Cargo.toml`](http://crates.io/):
+//!
+//! ```toml
+//! [dependencies]
+//! primal = "0.2"
+//! ```
 //!
 //! # Example
 //!
@@ -51,14 +63,6 @@
 //! println!("The 10001st prime is {}", p); // 104743
 //! ```
 //!
-//! # Using this library
-//!
-//! Just add the following to your [`Cargo.toml`](http://crates.io/):
-//!
-//! ```toml
-//! [dependencies.primal]
-//! git = "https://github.com/huonw/primal"
-//! ```
 
 #![cfg_attr(all(test, feature = "unstable"), feature(test, step_by))]
 
