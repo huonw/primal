@@ -16,6 +16,8 @@ use std::hash;
 use std::iter::repeat;
 use std::ops::Index;
 
+const BITS: usize = 32;
+
 static TRUE: bool = true;
 static FALSE: bool = false;
 
@@ -44,7 +46,7 @@ impl BitVec {
     /// An operation might screw up the unused bits in the last block of the
     /// `BitVec`. As per (3), it's assumed to be all 0s. This method fixes it up.
     fn fix_last_block(&mut self) {
-        let extra_bits = self.len() % 32;
+        let extra_bits = self.len() % BITS;
         if extra_bits > 0 {
             let mask = (1 << extra_bits) - 1;
             let storage_len = self.storage.len();
@@ -94,7 +96,7 @@ impl BitVec {
     /// }
     /// ```
     pub fn from_elem(nbits: usize, bit: bool) -> BitVec {
-        let nblocks = nbits.checked_add(32 - 1).expect("capacity overflow") / 32;
+        let nblocks = nbits.checked_add(BITS - 1).expect("capacity overflow") / BITS;
         let mut bit_vec = BitVec {
             storage: repeat(if bit { !0 } else { 0 }).take(nblocks).collect(),
             nbits: nbits
@@ -123,8 +125,8 @@ impl BitVec {
         if i >= self.nbits {
             return None;
         }
-        let w = i / 32;
-        let b = i % 32;
+        let w = i / BITS;
+        let b = i % BITS;
         self.storage.get(w).map(|&block|
             (block & (1 << b)) != 0
         )
@@ -156,8 +158,8 @@ impl BitVec {
     #[inline]
     pub unsafe fn set_unchecked(&mut self, i: usize, x: bool) {
         //
-        let w = i / 32;
-        let b = i % 32;
+        let w = i / BITS;
+        let b = i % BITS;
         let flag = 1 << b;
         let ptr = self.storage.get_unchecked_mut(w);
         let val = if x { *ptr | flag } else { *ptr & !flag };
