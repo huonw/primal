@@ -81,6 +81,11 @@ impl BitVec {
         }
     }
 
+    #[inline]
+    pub fn as_u64s(&self) -> &[u64] {
+        &self.storage
+    }
+
     /// Creates a `BitVec` that holds `nbits` elements, setting each element
     /// to `bit`.
     ///
