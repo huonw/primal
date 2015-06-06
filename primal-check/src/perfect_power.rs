@@ -77,7 +77,7 @@ pub fn as_prime_power(x: u64) -> Option<(u64, u8)> {
 
 #[cfg(test)]
 mod tests {
-    use primal::Primes;
+    use primal::Sieve;
 
     use super::{as_perfect_power, as_prime_power};
 
@@ -107,8 +107,8 @@ mod tests {
                        if is_prime { Some((expected))} else { None })
         }
 
-        let sieve = Primes::sieve(200);
-        let mut primes = sieve.primes();
+        let sieve = Sieve::new(200);
+        let mut primes = sieve.primes_from(0);
         const MAX: f64 = 0xFFFF_FFFF_FFFF_FFFFu64 as f64;
         // test a whole pile of (semi)primes
         loop {

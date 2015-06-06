@@ -124,7 +124,7 @@ pub fn nth_prime(n: u64) -> (u64, u64) {
 #[cfg(test)]
 mod tests {
     extern crate primal;
-    use self::primal::Primes;
+    use self::primal::Sieve;
 
     #[test]
     fn prime_pi() {
@@ -134,10 +134,10 @@ mod tests {
                     "found failing estimate at {}, should satisfy: {} <= {} <= {}",
                     n, lo, pi, hi)
         }
-        let primes = Primes::sieve(1_000_000);
+        let primes = Sieve::new(1_000_000);
 
         let mut last = 0;
-        for (i, p) in primes.primes().enumerate() {
+        for (i, p) in primes.primes_from(0).enumerate() {
             for j in last..p {
                 check(j as u64, i as u64);
             }
@@ -177,9 +177,9 @@ mod tests {
                     "found failing estimate at {}, should satisfy: {} <= {} <= {}",
                     n, lo, p, hi);
         }
-        let sieve = Primes::sieve(1_000_000);
+        let sieve = Sieve::new(1_000_000);
 
-        for (i, p) in sieve.primes().enumerate() {
+        for (i, p) in sieve.primes_from(0).enumerate() {
             let n = i as u64 + 1;
             check(n, p as u64);
         }

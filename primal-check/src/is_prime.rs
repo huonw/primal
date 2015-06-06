@@ -73,12 +73,12 @@ pub fn miller_rabin(n: u64) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use primal::Primes;
+    use primal::Sieve;
 
     #[test]
     fn miller_rabin() {
         const LIMIT: usize = 1_000_000;
-        let sieve = Primes::sieve(LIMIT);
+        let sieve = Sieve::new(LIMIT);
         for x in 0..LIMIT {
             let s = sieve.is_prime(x);
             let mr = super::miller_rabin(x as u64);
