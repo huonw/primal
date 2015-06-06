@@ -11,11 +11,19 @@
 extern crate primal_bit;
 use primal_bit::BitVec;
 
-const BITS: usize = 32;
-
+fn from_bools(bools: &[bool]) -> BitVec {
+    let mut bit_vec = BitVec::from_elem(bools.len(), false);
+    for (i, b) in bools.iter().enumerate() {
+        bit_vec.set(i, *b)
+    }
+    bit_vec
+}
 trait Methods {
     fn eq_vec(&self, v: &[bool]) -> bool;
     fn from_bytes(x: &[u8]) -> BitVec;
+    fn all(&self) -> bool;
+    fn none(&self) -> bool;
+    fn any(&self) -> bool;
 }
 impl Methods for BitVec {
     fn eq_vec(&self, v: &[bool]) -> bool {
@@ -24,15 +32,27 @@ impl Methods for BitVec {
     }
     fn from_bytes(bytes: &[u8]) -> BitVec {
         let len = bytes.len().checked_mul(8).expect("capacity overflow");
-        let mut bit_vec = BitVec::with_capacity(len);
+        let mut bit_vec = BitVec::from_elem(len, false);
 
+        let mut i = 0;
         for &byte in bytes {
             for x in (0..8).rev() {
-                bit_vec.push(byte & (1 << x) != 0)
+                bit_vec.set(i, byte & (1 << x) != 0);
+                i += 1
             }
         }
         bit_vec
     }
+    fn all(&self) -> bool {
+        self.iter().all(|b| b)
+    }
+    fn none(&self) -> bool {
+        self.iter().all(|b| !b)
+    }
+    fn any(&self) -> bool {
+        !self.none()
+    }
+
 }
 
 #[test]
@@ -406,13 +426,6 @@ fn test_from_bytes() {
 }
 
 #[test]
-fn test_from_bools() {
-    let bools = vec![true, false, true, true];
-    let bit_vec: BitVec = bools.iter().map(|n| *n).collect();
-    assert_eq!(format!("{:?}", bit_vec), "1011");
-}
-
-#[test]
 fn test_to_bools() {
     let bools = vec![false, false, true, false, false, true, true, false];
     assert_eq!(BitVec::from_bytes(&[0b00100110]).iter().collect::<Vec<bool>>(), bools);
@@ -421,41 +434,13 @@ fn test_to_bools() {
 #[test]
 fn test_bit_vec_iterator() {
     let bools = vec![true, false, true, true];
-    let bit_vec: BitVec = bools.iter().map(|n| *n).collect();
+    let bit_vec: BitVec = from_bools(&bools);
 
     assert_eq!(bit_vec.iter().collect::<Vec<bool>>(), bools);
 
     let long: Vec<_> = (0..10000).map(|i| i % 2 == 0).collect();
-    let bit_vec: BitVec = long.iter().map(|n| *n).collect();
+    let bit_vec: BitVec = from_bools(&long);
     assert_eq!(bit_vec.iter().collect::<Vec<bool>>(), long)
-}
-
-#[test]
-fn test_small_difference() {
-    let mut b1 = BitVec::from_elem(3, false);
-    let mut b2 = BitVec::from_elem(3, false);
-    b1.set(0, true);
-    b1.set(1, true);
-    b2.set(1, true);
-    b2.set(2, true);
-    assert!(b1.difference(&b2));
-    assert!(b1[0]);
-    assert!(!b1[1]);
-    assert!(!b1[2]);
-}
-
-#[test]
-fn test_big_difference() {
-    let mut b1 = BitVec::from_elem(100, false);
-    let mut b2 = BitVec::from_elem(100, false);
-    b1.set(0, true);
-    b1.set(40, true);
-    b2.set(40, true);
-    b2.set(80, true);
-    assert!(b1.difference(&b2));
-    assert!(b1[0]);
-    assert!(!b1[40]);
-    assert!(!b1[80]);
 }
 
 #[test]
@@ -517,97 +502,6 @@ fn test_big_bit_vec_tests() {
     assert!(v.all());
     assert!(v.any());
     assert!(!v.none());
-}
-
-#[test]
-fn test_bit_vec_push_pop() {
-    let mut s = BitVec::from_elem(5 * BITS - 2, false);
-    assert_eq!(s.len(), 5 * BITS - 2);
-    assert_eq!(s[5 * BITS - 3], false);
-    s.push(true);
-    s.push(true);
-    assert_eq!(s[5 * BITS - 2], true);
-    assert_eq!(s[5 * BITS - 1], true);
-    // Here the internal vector will need to be extended
-    s.push(false);
-    assert_eq!(s[5 * BITS], false);
-    s.push(false);
-    assert_eq!(s[5 * BITS + 1], false);
-    assert_eq!(s.len(), 5 * BITS + 2);
-    // Pop it all off
-    assert_eq!(s.pop(), Some(false));
-    assert_eq!(s.pop(), Some(false));
-    assert_eq!(s.pop(), Some(true));
-    assert_eq!(s.pop(), Some(true));
-    assert_eq!(s.len(), 5 * BITS - 2);
-}
-
-#[test]
-fn test_bit_vec_truncate() {
-    let mut s = BitVec::from_elem(5 * BITS, true);
-
-    assert_eq!(s, BitVec::from_elem(5 * BITS, true));
-    assert_eq!(s.len(), 5 * BITS);
-    s.truncate(4 * BITS);
-    assert_eq!(s, BitVec::from_elem(4 * BITS, true));
-    assert_eq!(s.len(), 4 * BITS);
-    // Truncating to a size > s.len() should be a noop
-    s.truncate(5 * BITS);
-    assert_eq!(s, BitVec::from_elem(4 * BITS, true));
-    assert_eq!(s.len(), 4 * BITS);
-    s.truncate(3 * BITS - 10);
-    assert_eq!(s, BitVec::from_elem(3 * BITS - 10, true));
-    assert_eq!(s.len(), 3 * BITS - 10);
-    s.truncate(0);
-    assert_eq!(s, BitVec::from_elem(0, true));
-    assert_eq!(s.len(), 0);
-}
-
-#[test]
-fn test_bit_vec_reserve() {
-    let mut s = BitVec::from_elem(5 * BITS, true);
-    // Check capacity
-    assert!(s.capacity() >= 5 * BITS);
-    s.reserve(2 * BITS);
-    assert!(s.capacity() >= 7 * BITS);
-    s.reserve(7 * BITS);
-    assert!(s.capacity() >= 12 * BITS);
-    s.reserve_exact(7 * BITS);
-    assert!(s.capacity() >= 12 * BITS);
-    s.reserve(7 * BITS + 1);
-    assert!(s.capacity() >= 12 * BITS + 1);
-    // Check that length hasn't changed
-    assert_eq!(s.len(), 5 * BITS);
-    s.push(true);
-    s.push(false);
-    s.push(true);
-    assert_eq!(s[5 * BITS - 1], true);
-    assert_eq!(s[5 * BITS - 0], true);
-    assert_eq!(s[5 * BITS + 1], false);
-    assert_eq!(s[5 * BITS + 2], true);
-}
-
-#[test]
-fn test_bit_vec_grow() {
-    let mut bit_vec = BitVec::from_bytes(&[0b10110110, 0b00000000, 0b10101010]);
-    bit_vec.grow(32, true);
-    assert_eq!(bit_vec, BitVec::from_bytes(&[0b10110110, 0b00000000, 0b10101010,
-                                 0xFF, 0xFF, 0xFF, 0xFF]));
-    bit_vec.grow(64, false);
-    assert_eq!(bit_vec, BitVec::from_bytes(&[0b10110110, 0b00000000, 0b10101010,
-                                 0xFF, 0xFF, 0xFF, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0]));
-    bit_vec.grow(16, true);
-    assert_eq!(bit_vec, BitVec::from_bytes(&[0b10110110, 0b00000000, 0b10101010,
-                                 0xFF, 0xFF, 0xFF, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0xFF, 0xFF]));
-}
-
-#[test]
-fn test_bit_vec_extend() {
-    let mut bit_vec = BitVec::from_bytes(&[0b10110110, 0b00000000, 0b11111111]);
-    let ext = BitVec::from_bytes(&[0b01001001, 0b10010010, 0b10111101]);
-    bit_vec.extend(ext.iter());
-    assert_eq!(bit_vec, BitVec::from_bytes(&[0b10110110, 0b00000000, 0b11111111,
-                                 0b01001001, 0b10010010, 0b10111101]));
 }
 
 #[cfg(feature = "unstable")]
