@@ -237,6 +237,7 @@ pub fn next(sieve: &mut StreamingSieve) -> Option<(usize, &BitVec)> {
 
 #[cfg(test)]
 mod tests {
+    use primal_smallsieve::Primes;
     use wheel;
     use super::StreamingSieve;
     fn gcd(x: usize, y: usize) -> usize {
@@ -269,6 +270,18 @@ mod tests {
                     base += 1
                 }
             }
+        }
+    }
+    #[test]
+    fn count_upto() {
+        let limit = 2_000_000;
+        let real = Primes::sieve(limit);
+
+        for i in (0..20).chain((0..100).map(|n| n * 19998 + 1)) {
+            let val = StreamingSieve::count_upto(i);
+            let true_ = real.primes().take_while(|p| *p <= i).count();
+            assert!(val == true_, "failed for {}, true {}, computed {}",
+                    i, true_, val)
         }
     }
 }
