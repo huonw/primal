@@ -4,3 +4,4 @@ perf.data*
 /papers
 *.prof
 *.callgrind
+examples_
