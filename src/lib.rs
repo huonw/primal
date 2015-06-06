@@ -19,17 +19,25 @@
 //!
 //! # Example
 //!
-//! Let's find the 10001st prime. The basic idea is to enumerate the
-//! primes and then take the 10001st in that list.
+//! Let's find the 10001st prime. The easiest way is to enumerate the
+//! primes, and find the 10001st:
 //!
-//! Unfortunately, `Primes::sieve` takes an upper bound, and it gives
-//! us no information beyond this; so we really need some way to find
-//! an upper bound to be guaranteed to include the 10001st prime. If
-//! we had an a priori number we could just use that, but we don't
-//! (for the purposes of this example, anyway). Hence, we can either
-//! try filtering with exponentially larger upper bounds until we find
-//! one that works (e.g. doubling each time), or just take a shortcut
-//! and use deeper mathematics via
+//! ```rust
+//! // (.nth is zero indexed.)
+//! let p = primal::Primes::all().nth(10001 - 1).unwrap();
+//! println!("The 10001st prime is {}", p); // 104743
+//! ```
+//!
+//! `Primes` is flexible at the cost of performance, so if we wish to
+//! optimise we could instead explicitly sieve and then find the
+//! appropriate prime.  Unfortunately, `Sieve` requires a limit to
+//! know how far to sieve: we need some way to find an upper bound to
+//! be guaranteed to be at least as large the 10001st prime. We could
+//! guess that, say, 10<sup>8</sup> will be large enough and use that,
+//! but that's probably a huge overestimate. We could also try
+//! filtering with exponentially larger upper bounds until we find one
+//! that works (e.g. doubling each time), or... we could just take a
+//! shortcut and use deeper mathematics via
 //! [`estimate_nth_prime`](fn.estimate_nth_prime.html).
 //!
 //! ```rust
@@ -37,13 +45,10 @@
 //! let (_lo, hi) = primal::estimate_nth_prime(10001);
 //!
 //! // find the primes up to this upper bound
-//! let sieve = primal::Primes::sieve(hi as usize);
+//! let sieve = primal::Sieve::new(hi as usize);
 //!
-//! // (.nth is zero indexed.)
-//! match sieve.primes().nth(10001 - 1) {
-//!     Some(p) => println!("The 10001st prime is {}", p), // 104743
-//!     None => unreachable!(),
-//! }
+//! let p = sieve.primes_from(0).nth(10001 - 1).unwrap();
+//! println!("The 10001st prime is {}", p); // 104743
 //! ```
 //!
 //! # Using this library
