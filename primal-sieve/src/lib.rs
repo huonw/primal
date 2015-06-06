@@ -26,6 +26,7 @@ fn b_imm<T>(p: *const T) -> *const T { p }
 
 mod streaming;
 pub use streaming::StreamingSieve;
+pub use streaming::primes::Primes;
 
 // mod wheel6;
 mod wheel;

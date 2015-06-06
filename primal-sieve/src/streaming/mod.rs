@@ -4,6 +4,7 @@ use hamming;
 
 use wheel;
 
+pub mod primes;
 mod presieve;
 
 /// A heavily optimised prime sieve.
@@ -124,27 +125,32 @@ impl StreamingSieve {
         }
     }
 
+    fn add_sieving_prime(&mut self, p: usize, low: usize) {
+        if p <= SEG_LEN / 100 {
+            self.small_primes.push(wheel::compute_wheel_elem(wheel::Wheel30, p, low));
+        } else {
+            let elem = wheel::compute_wheel_elem(wheel::Wheel210, p, low);
+            if p < SEG_LEN / 2 {
+                self.primes.push(elem)
+            } else {
+                self.large_primes.push(elem)
+            }
+        }
+    }
+
     fn find_new_sieving_primes(&mut self, low: usize, high: usize) {
-        if let Some(ref small) = self.small {
+        if let Some(small) = self.small.take() {
             let mut s = self.current;
             assert!(s % 2 == 1);
             while s * s <= high {
                 if small.is_prime(s) {
-                    if s <= SEG_LEN / 100 {
-                        self.small_primes.push(wheel::compute_wheel_elem(wheel::Wheel30, s, low));
-                    } else {
-                        let elem = wheel::compute_wheel_elem(wheel::Wheel210, s, low);
-                        if s < SEG_LEN / 2 {
-                            self.primes.push(elem)
-                        } else {
-                            self.large_primes.push(elem)
-                        }
-                    }
+                    self.add_sieving_prime(s, low)
                 }
                 s += 2
             }
 
             self.current = s;
+            self.small = Some(small);
         }
     }
 
