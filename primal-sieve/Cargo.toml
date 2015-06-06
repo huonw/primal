@@ -21,6 +21,7 @@ hamming = "0.1"
 
 [dev-dependencies]
 primal-smallsieve = { path = "../primal-smallsieve" }
+primal = { path = ".." }
 
 [features]
 unstable = []

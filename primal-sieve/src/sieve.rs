@@ -5,6 +5,27 @@ use hamming;
 
 use std::cmp;
 
+/// A heavily optimised prime sieve.
+///
+/// This stores information about primes up to some specified limit,
+/// allowing efficient queries of information about them. This caches
+/// the successive outputs of `StreamingSieve` and has very similar
+/// performance, modulo the differences in memory use: to cache the
+/// information `Sieve` uses approximately `limit / 30 +
+/// O(sqrt(limit))` bytes of memory. Consider directly using
+/// `StreamingSieve` if repeated queries are unnecessary, since that
+/// uses only `O(sqrt(limit))` bytes.
+///
+/// # Examples
+///
+/// ```rust
+/// # extern crate primal;
+/// let sieve = primal::Sieve::new(10_000_000);
+/// assert_eq!(sieve.count_upto(123456), 11601);
+///
+/// assert!(sieve.is_prime(6395047));
+/// assert!(!sieve.is_prime(6395048));
+/// ```
 #[derive(Debug)]
 pub struct Sieve {
     nbits: usize,
@@ -12,6 +33,8 @@ pub struct Sieve {
 }
 
 impl Sieve {
+    /// Create a new instance, sieving out all the primes up to
+    /// `limit`.
     pub fn new(limit: usize) -> Sieve {
         let mut stream = StreamingSieve::new(limit);
 
@@ -35,10 +58,17 @@ impl Sieve {
         let (base, tweak) = self.split_index(idx);
         (b, base, tweak)
     }
+    /// Return the largest number that this sieve knows about.
     pub fn upper_bound(&self) -> usize {
         let last_bit = self.nbits - 1;
         wheel::from_bit_index(last_bit)
     }
+    /// Determine if `n` is a prime number.
+    ///
+    /// # Panics
+    ///
+    /// If `n` is out of range (greater than `self.upper_bound()`),
+    /// `count_upto` will panic.
     pub fn is_prime(&self, n: usize) -> bool {
         match self.index_for(n) {
             (false, _, _) => n == 2 || n == 3 || n == 5 || n == 7,
@@ -46,6 +76,12 @@ impl Sieve {
         }
     }
 
+    /// Count the number of primes upto and including `n`.
+    ///
+    /// # Panics
+    ///
+    /// If `n` is out of range (greater than `self.upper_bound()`),
+    /// `count_upto` will panic.
     pub fn count_upto(&self, n: usize) -> usize {
         assert!(n <= self.upper_bound());
         match n {

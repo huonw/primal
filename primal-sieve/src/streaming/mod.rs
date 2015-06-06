@@ -6,11 +6,28 @@ use wheel;
 
 mod presieve;
 
-/// A segmented sieve that yields only a small run of primes at a
-/// time.
+/// A heavily optimised prime sieve.
 ///
-/// This is heavily inspired by this [segmented
-/// sieve](http://primesieve.org/segmented_sieve.html) code.
+/// This is a streaming segmented sieve, meaning it sieves numbers in
+/// intervals, extracting whatever it needs and discarding it. See
+/// `Sieve` for a wrapper that caches the information to allow for
+/// repeated queries, at the cost of *O(limit)* memory use.
+///
+/// This uses *O(sqrt(limit))* memory, and is designed to be as
+/// cache-friendly as possible. `StreamingSieve` should be used for
+/// one-off calls, or simple linear iteration.
+///
+/// The design is *heavily* inspired/adopted from Kim Walisch's
+/// [primesieve](http://primesieve.org/), and has similar speed
+/// (around 5-20% slower).
+///
+/// # Examples
+///
+/// ```rust
+/// # extern crate primal;
+/// let count = primal::StreamingSieve::count_upto(123456);
+/// println!("𝜋(123456) = {}", count);
+/// ```
 #[derive(Debug)]
 pub struct StreamingSieve {
     small: Option<::Sieve>,
@@ -69,6 +86,9 @@ impl StreamingSieve {
         (b, base, tweak)
     }
 
+    /// Count the number of primes upto and including `n`, that is, 𝜋,
+    /// the [prime counting
+    /// function](https://en.wikipedia.org/wiki/Prime-counting_function).
     pub fn count_upto(n: usize) -> usize {
         match n {
             0...1 => 0,
