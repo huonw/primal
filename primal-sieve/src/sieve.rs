@@ -60,8 +60,8 @@ impl Sieve {
     }
     /// Return the largest number that this sieve knows about.
     pub fn upper_bound(&self) -> usize {
-        let last_bit = self.nbits - 1;
-        wheel::from_bit_index(last_bit)
+        let last_bit = self.nbits;
+        wheel::from_bit_index(last_bit) - 1
     }
     /// Determine if `n` is a prime number.
     ///
@@ -134,15 +134,16 @@ mod tests {
 
     #[test]
     fn upper_bound() {
-        let primes = Sieve::new(30);
-        assert!(primes.upper_bound() >= 29);
-        let primes = Sieve::new(31);
-        assert!(primes.upper_bound() >= 31);
+        for i in 1..1000 {
+            let primes = Sieve::new(i);
+            assert!(primes.upper_bound() >= i);
+        }
 
-        let primes = Sieve::new(30000);
-        assert!(primes.upper_bound() >= 29999);
-        let primes = Sieve::new(30001);
-        assert!(primes.upper_bound() >= 30001);
+        for i in 1..200 {
+            let i = i * 10000;
+            let primes = Sieve::new(i);
+            assert!(primes.upper_bound() >= i);
+        }
     }
 
     #[test]
