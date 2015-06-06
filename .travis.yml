@@ -1,4 +1,4 @@
-sudo: required
+sudo: false
 language: rust
 rust:
   - nightly
@@ -11,12 +11,11 @@ before_script:
   - pip install 'travis-cargo<0.2' --user && export PATH=$HOME/.local/bin:$PATH
 script:
   - |
-      travis-cargo build &&
-      travis-cargo test &&
-      travis-cargo bench &&
-      travis-cargo doc
+      ./run-in all travis-cargo build &&
+      ./run-in all travis-cargo test &&
+      ./run-in all travis-cargo bench &&
+      ./run-in all travis-cargo doc
 after_success:
   - travis-cargo --only 1.0.0 doc-upload
-  - travis-cargo coveralls
 notifications:
     webhooks: http://huon.me:54856/travis
