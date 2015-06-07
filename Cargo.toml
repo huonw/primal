@@ -23,5 +23,9 @@ primal-check = { path = "primal-check", version = "0.2" }
 primal-estimate = { path = "primal-estimate", version = "0.2" }
 primal-sieve = { path = "primal-sieve", version = "0.2" }
 
+[dev-dependencies]
+primal-slowsieve = { path = "primal-slowsieve", version = "0.2" }
+time = "0.1"
+
 [features]
 unstable = ["primal-sieve/unstable"]
