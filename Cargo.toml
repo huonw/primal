@@ -1,7 +1,7 @@
 [package]
 
 name = "primal"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 homepage = "https://github.com/huonw/primal"
@@ -11,11 +11,11 @@ license = "MIT/Apache-2.0"
 keywords = ["math", "mathematics", "primes", "number-theory"]
 readme = "README.md"
 description = """
-A library to generate, identify and handle prime numbers and related
-properties.  This library includes slow enumeration of primes up to a
-bound, slow factorisation of arbitrary numbers, fast primality tests
-and state-of-the-art estimation of upper and lower bounds for π(n)
-(the number of primes below n) and p_k (the k-th prime).
+`primal` puts raw power into prime numbers. This crates includes:
+optimised prime sieves, checking for primality, enumerating primes,
+factorising numbers, and state-of-the-art estimation of upper and
+lower bounds for π(n) (the number of primes below n) and p_k (the k-th
+prime).
 """
 
 [dependencies]
