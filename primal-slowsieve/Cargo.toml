@@ -17,6 +17,7 @@ probably want `primal-sieve`, or even just `primal` itself.
 [dependencies]
 primal-bit = { path = "../primal-bit", version = "0.2" }
 primal-estimate = { path = "../primal-estimate", version = "0.2" }
+hamming = "0.1"
 
 [features]
 unstable = []

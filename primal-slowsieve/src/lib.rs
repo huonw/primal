@@ -6,6 +6,7 @@
 #[cfg(all(test, feature = "unstable"))] extern crate test;
 extern crate primal_bit;
 extern crate primal_estimate;
+extern crate hamming;
 
 use primal_bit::BitVec;
 use std::{iter, cmp};
@@ -79,7 +80,7 @@ impl Primes {
 
     /// The largest number stored.
     pub fn upper_bound(&self) -> usize {
-        (self.v.len() - 1) * 2 + 1
+        self.v.len() * 2
     }
 
     /// Check if `n` is prime, possibly failing if `n` is larger than
@@ -152,6 +153,28 @@ impl Primes {
             }
         }
         Ok(ret)
+    }
+
+    /// Count the primes upto and including `n`.
+    ///
+    /// # Panics
+    ///
+    /// `count_upto` panics if `n > self.upper_bound()`.
+    pub fn count_upto(&self, n: usize) -> usize {
+        if n < 2 { return 0 }
+
+        assert!(n <= self.upper_bound());
+        let bit_index = n / 2;
+        let byte = bit_index / 8;
+        let bit = bit_index % 8;
+        let mut mask = (1 << bit) - 1;
+        if n % 2 == 1 {
+            mask = (mask << 1) | 1;
+        }
+        let bytes = self.v.as_bytes();
+        let primes = 8 * byte - hamming::weight(&bytes[..byte]) as usize;
+        let tweak = bytes.get(byte).map_or(0, |b| (!b & mask).count_ones()) as usize;
+        1 + primes + tweak
     }
 }
 
@@ -236,15 +259,16 @@ mod tests {
 
     #[test]
     fn upper_bound() {
-        let primes = Primes::sieve(30);
-        assert_eq!(primes.upper_bound(), 29);
-        let primes = Primes::sieve(31);
-        assert_eq!(primes.upper_bound(), 31);
+        for i in 1..1000 {
+            let primes = Primes::sieve(i);
+            assert!(primes.upper_bound() >= i);
+        }
 
-        let primes = Primes::sieve(30000);
-        assert_eq!(primes.upper_bound(), 29999);
-        let primes = Primes::sieve(30001);
-        assert_eq!(primes.upper_bound(), 30001);
+        for i in 1..200 {
+            let i = i * 10000;
+            let primes = Primes::sieve(i);
+            assert!(primes.upper_bound() >= i);
+        }
     }
 
     #[test]
@@ -381,6 +405,19 @@ mod tests {
             }
 
             i += 100;
+        }
+    }
+
+    #[test]
+    fn count_upto() {
+        let limit = 2_000_000;
+        let sieve = Primes::sieve(limit);
+
+        for i in (0..20).chain((0..100).map(|n| n * 19998 + 1)) {
+            let val = sieve.count_upto(i);
+            let true_ = sieve.primes().take_while(|p| *p <= i).count();
+            assert!(val == true_, "failed for {}, true {}, computed {}",
+                    i, true_, val)
         }
     }
 }
