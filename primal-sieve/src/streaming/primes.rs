@@ -28,7 +28,7 @@ enum Early {
 /// `Sieve` and using its `primes_from` method may be more efficient,
 /// especially if the bound is small.
 ///
-/// This requires *O(max(p, sqrt(X))* memory to yield prime `p`, where
+/// This requires *O(min(p, sqrt(X))* memory to yield prime `p`, where
 /// `X` is the maximum value of `usize`.
 ///
 /// # Examples
