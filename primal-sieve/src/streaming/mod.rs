@@ -1,3 +1,4 @@
+use primal_estimate;
 use primal_bit::{BitVec};
 use std::{cmp};
 use hamming;
@@ -113,6 +114,45 @@ impl StreamingSieve {
                 let (_, last) = sieve.next().unwrap();
                 count += last.count_ones_before(tweak + includes as usize);
                 count
+            }
+        }
+    }
+
+    /// Compute *p<sub>n</sub>*, the `n` prime number, 1-indexed
+    /// (i.e. *p<sub>1</sub>* = 2, *p<sub>2</sub>* = 3).
+    ///
+    /// # Panics
+    ///
+    /// `n` must be larger than 0 and less than the total number of
+    /// primes in this sieve (that is,
+    /// `self.count_upto(self.upper_bound())`).
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// assert_eq!(primal::StreamingSieve::nth_prime(1_000), 7919);
+    /// ```
+    pub fn nth_prime(n: usize) -> usize {
+        assert!(n > 0);
+        match n {
+            1 => 2,
+            2 => 3,
+            3 => 5,
+            _ => {
+                let mut bit_n = n - 3;
+                let (_, hi) = primal_estimate::nth_prime(n as u64);
+                let mut sieve = StreamingSieve::new(hi as usize);
+                while let Some((low, bits)) = sieve.next() {
+                    let count = hamming::weight(bits.as_bytes()) as usize;
+                    if count >= bit_n {
+                        let bit_idx = bits.find_nth_bit(bit_n - 1).unwrap();
+                        return low + wheel::from_bit_index(bit_idx)
+                    }
+
+                    bit_n -= count
+                }
+                unreachable!()
             }
         }
     }
@@ -235,6 +275,7 @@ pub fn next(sieve: &mut StreamingSieve) -> Option<(usize, &BitVec)> {
 
 #[cfg(test)]
 mod tests {
+    use Sieve;
     use primal_slowsieve::Primes;
     use wheel;
     use super::StreamingSieve;
@@ -280,6 +321,18 @@ mod tests {
             let true_ = real.primes().take_while(|p| *p <= i).count();
             assert!(val == true_, "failed for {}, true {}, computed {}",
                     i, true_, val)
+        }
+    }
+
+    #[test]
+    fn nth_prime() {
+        let primes = Sieve::new(2_000_000);
+
+        for (i, p) in primes.primes_from(0).enumerate() {
+            let n = i + 1;
+            if n < 2000 || n % 1000 == 0 {
+                assert_eq!(StreamingSieve::nth_prime(n), p);
+            }
         }
     }
 }
