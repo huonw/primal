@@ -59,7 +59,7 @@
 //! // find the primes up to this upper bound
 //! let sieve = primal::Sieve::new(hi as usize);
 //!
-//! let p = sieve.primes_from(0).nth(10001 - 1).unwrap();
+//! let p = sieve.nth_prime(10001);
 //! println!("The 10001st prime is {}", p); // 104743
 //! ```
 //!
