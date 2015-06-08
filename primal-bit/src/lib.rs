@@ -10,7 +10,9 @@
 
 //! A very simple bit-vector that serves the needs of `primal`.
 
-use std::cmp;
+extern crate hamming;
+
+use std::cmp::{self, Ordering};
 use std::fmt;
 use std::hash;
 use std::iter::repeat;
@@ -84,6 +86,68 @@ impl BitVec {
     #[inline]
     pub fn as_u64s(&self) -> &[u64] {
         &self.storage
+    }
+
+    /// Count the number of ones for the bits up to but not including
+    /// the `bit`th bit.
+    pub fn count_ones_before(&self, bit: usize) -> usize {
+        assert!(bit <= self.nbits);
+        let (byte, bit) = (bit / 8, bit % 8);
+        let mask = (1 << bit) - 1;
+
+        let bytes = self.as_bytes();
+
+        hamming::weight(&bytes[..byte]) as usize
+            + bytes.get(byte).map_or(0, |b| (b & mask).count_ones() as usize)
+    }
+
+    /// Find the index of the `n`th (0-indexed) set bit.
+    pub fn find_nth_bit(&self, mut n: usize) -> Option<usize> {
+        n += 1;
+        let all_bytes = self.as_bytes();
+        let mut bytes = all_bytes;
+
+        while bytes.len() > 240 {
+            let ix = bytes.len() / 2;
+            let (first, second) = bytes.split_at(ix);
+
+            let count = hamming::weight(first) as usize;
+            match count.cmp(&n) {
+                Ordering::Equal | Ordering::Greater => {
+                    bytes = first;
+                }
+                Ordering::Less => {
+                    n -= count;
+                    bytes = second;
+                }
+            }
+        }
+
+        let mut byte_idx = bytes.as_ptr() as usize - all_bytes.as_ptr() as usize;
+
+        let mut b = 0;
+        for &b_ in bytes {
+            let count = b_.count_ones() as usize;
+            if count >= n {
+                b = b_;
+                break
+            }
+
+            byte_idx += 1;
+            n -= count
+        }
+        if b == 0 {
+            None
+        } else {
+            // clear the bottom n-1 set bits, so that the lowest one
+            // is the one we care about
+            for _ in 1..n {
+                b = b & (b - 1);
+            }
+            assert!(b != 0);
+
+            Some(byte_idx * 8 + b.trailing_zeros() as usize)
+        }
     }
 
     /// Creates a `BitVec` that holds `nbits` elements, setting each element
@@ -316,5 +380,47 @@ impl<'a> IntoIterator for &'a BitVec {
 
     fn into_iter(self) -> Iter<'a> {
         self.iter()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::BitVec;
+
+    #[test]
+    fn count_ones_before() {
+        let len = 10000;
+
+        let ones = BitVec::from_elem(len, true);
+        let zeros = BitVec::from_elem(len, false);
+        let mut halves = zeros.clone();
+        for i in 0..len / 2 {
+            halves.set(i * 2, true);
+        }
+        for i in 0..len + 1 {
+            assert_eq!(ones.count_ones_before(i), i);
+            assert_eq!(zeros.count_ones_before(i), 0);
+            assert_eq!(halves.count_ones_before(i), (i + 1) / 2);
+        }
+    }
+
+    #[test]
+    fn find_nth_bit() {
+        let len = 5000;
+
+        let ones = BitVec::from_elem(len, true);
+        let mut halves = BitVec::from_elem(len * 2, false);
+        for i in 0..len {
+            halves.set(i * 2, true);
+        }
+        for i in 0..len {
+            assert_eq!(ones.find_nth_bit(i), Some(i));
+            assert_eq!(halves.find_nth_bit(i), Some(i * 2));
+        }
+        assert_eq!(ones.find_nth_bit(len + 1), None);
+        assert_eq!(halves.find_nth_bit(len + 1), None);
+
+        assert_eq!(BitVec::new().find_nth_bit(0), None);
+        assert_eq!(BitVec::from_elem(len, false).find_nth_bit(0), None);
     }
 }

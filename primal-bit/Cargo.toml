@@ -14,5 +14,8 @@ description = """
 Bit-vector specialised to the prime-number-related needs of `primal`.
 """
 
+[dependencies]
+hamming = "0.1"
+
 [features]
 unstable = []
