@@ -29,7 +29,22 @@ use std::cmp;
 #[derive(Debug)]
 pub struct Sieve {
     nbits: usize,
-    seen: Vec<BitVec>,
+    seen: Vec<Item>,
+}
+
+#[derive(Debug)]
+struct Item {
+    count: usize,
+    bits: BitVec,
+}
+impl Item {
+    fn new(x: &BitVec, so_far: &mut usize) -> Item {
+        *so_far += hamming::weight(x.as_bytes()) as usize;
+        Item {
+            count: *so_far,
+            bits: x.clone()
+        }
+    }
 }
 
 impl Sieve {
@@ -40,8 +55,9 @@ impl Sieve {
 
         let mut seen = Vec::new();
         let mut nbits = 0;
+        let mut so_far = 0;
         while let Some((n, bits)) = streaming::next(&mut stream) {
-            seen.push(bits.clone());
+            seen.push(Item::new(bits, &mut so_far));
             nbits += cmp::min(bits.len(), wheel::bit_index(limit - n + 1).1);
         }
         Sieve {
@@ -50,7 +66,7 @@ impl Sieve {
         }
     }
     fn split_index(&self, idx: usize) -> (usize, usize) {
-        let len = self.seen[0].len();
+        let len = self.seen[0].bits.len();
         (idx / len,idx % len)
     }
     fn index_for(&self, n: usize) -> (bool, usize, usize) {
@@ -72,7 +88,7 @@ impl Sieve {
     pub fn is_prime(&self, n: usize) -> bool {
         match self.index_for(n) {
             (false, _, _) => n == 2 || n == 3 || n == 5 || n == 7,
-            (true, base, tweak) => self.seen[base][tweak],
+            (true, base, tweak) => self.seen[base].bits[tweak],
         }
     }
 
@@ -97,13 +113,12 @@ impl Sieve {
                     _ => unimplemented!()
                 };
 
-                for v in &self.seen[..base] {
-                    let bytes = v.as_bytes();
-                    count += hamming::weight(bytes) as usize;
+                if base > 0 {
+                    count += self.seen[base - 1].count;
                 }
                 let (tweak_byte, tweak_bit) = (tweak / 8, tweak % 8);
 
-                let bytes = self.seen[base].as_bytes();
+                let bytes = self.seen[base].bits.as_bytes();
                 count += hamming::weight(&bytes[..tweak_byte]) as usize;
                 let byte = bytes[tweak_byte];
                 for i in 0..tweak_bit + includes as usize {
@@ -198,10 +213,10 @@ impl Sieve {
         let (_, base, tweak) = self.index_for(n);
         let (tweak_u64, tweak_bit) = (tweak / 64, tweak % 64);
         let tweak_mask = (!0) << tweak_bit;
-        assert!(self.seen.len() == 1 || self.seen[0].len() % 64 == 0);
-        let base_u64_count = base * self.seen[0].len() / 64 + tweak_u64;
+        assert!(self.seen.len() == 1 || self.seen[0].bits.len() % 64 == 0);
+        let base_u64_count = base * self.seen[0].bits.len() / 64 + tweak_u64;
 
-        let mut elems = self.seen[base].as_u64s()[tweak_u64..].iter();
+        let mut elems = self.seen[base].bits.as_u64s()[tweak_u64..].iter();
         let current = elems.next().unwrap() & tweak_mask;
 
         PrimesFrom {
@@ -233,7 +248,7 @@ pub struct PrimesFrom<'a> {
     current: u64,
     limit: usize,
     elems: slice::Iter<'a, u64>,
-    bits: slice::Iter<'a, BitVec>,
+    bits: slice::Iter<'a, Item>,
 }
 
 impl<'a> Iterator for PrimesFrom<'a> {
@@ -265,7 +280,7 @@ impl<'a> Iterator for PrimesFrom<'a> {
                 }
             }
             match self.bits.next() {
-                Some(bits) => self.elems = bits.as_u64s().iter(),
+                Some(bits) => self.elems = bits.bits.as_u64s().iter(),
                 None => return None,
             }
         }

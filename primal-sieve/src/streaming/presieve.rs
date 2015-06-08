@@ -45,7 +45,7 @@ impl Presieve {
             }
             let mut sieve =  BitVec::from_elem(len, true);
             StreamingSieve::small_primes_sieve(&mut sieve, &mut sievers);
-            println!("{} {:?}", idx, &sieve.as_bytes()[0..2]);
+
             Presieve {
                 sieve: sieve,
                 presieve_prod: prod,
