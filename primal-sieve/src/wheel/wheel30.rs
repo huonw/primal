@@ -61,77 +61,77 @@ const INIT: &'static [WheelInit; 30] = &[
 ];
 const WHEEL: &'static [WheelElem; 64] = &[
     // remainder 1
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: -7 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: -7 },
     // remainder 7
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 1, next: -7 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 1, next: -7 },
     // remainder 11
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 2, next: -7 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: -7 },
     // remainder 13
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: -7 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: -7 },
     // remainder 17
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 2, next: -7 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: -7 },
     // remainder 19
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 2, next: -7 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: -7 },
     // remainder 23
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 3, next: -7 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: -7 },
     // remainder 29
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 6, next: -7 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 6, next: -7 },
 ];
 pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize, prime: usize) {
     let bytes = bytes;
@@ -171,47 +171,47 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                     }
                     while p < loop_end {
                         p = ::b(p);
-                        *p.offset(prime_ * 0 + 0) |= 1;
-                        *p.offset(prime_ * 6 + 0) |= 2;
-                        *p.offset(prime_ * 10 + 0) |= 4;
-                        *p.offset(prime_ * 12 + 0) |= 8;
-                        *p.offset(prime_ * 16 + 0) |= 16;
-                        *p.offset(prime_ * 18 + 0) |= 32;
-                        *p.offset(prime_ * 22 + 0) |= 64;
-                        *p.offset(prime_ * 28 + 0) |= 128;
+                        *p.offset(prime_ * 0 + 0) &= 254;
+                        *p.offset(prime_ * 6 + 0) &= 253;
+                        *p.offset(prime_ * 10 + 0) &= 251;
+                        *p.offset(prime_ * 12 + 0) &= 247;
+                        *p.offset(prime_ * 16 + 0) &= 239;
+                        *p.offset(prime_ * 18 + 0) &= 223;
+                        *p.offset(prime_ * 22 + 0) &= 191;
+                        *p.offset(prime_ * 28 + 0) &= 127;
 
                         p = p.offset(prime_ * 30 + 1)
                     }
                     if p >= end { wi = 0; break 'outer; }
-                    *p |= 1; p = p.offset(prime_ * 6 + 0);
+                    *p &= 254; p = p.offset(prime_ * 6 + 0);
                     break 'label1
                    }
                    if p >= end { wi = 1; break 'outer; }
-                   *p |= 2; p = p.offset(prime_ * 4 + 0);
+                   *p &= 253; p = p.offset(prime_ * 4 + 0);
                    break 'label2
                   }
                   if p >= end { wi = 2; break 'outer; }
-                  *p |= 4; p = p.offset(prime_ * 2 + 0);
+                  *p &= 251; p = p.offset(prime_ * 2 + 0);
                   break 'label3
                  }
                  if p >= end { wi = 3; break 'outer; }
-                 *p |= 8; p = p.offset(prime_ * 4 + 0);
+                 *p &= 247; p = p.offset(prime_ * 4 + 0);
                  break 'label4
                 }
                 if p >= end { wi = 4; break 'outer; }
-                *p |= 16; p = p.offset(prime_ * 2 + 0);
+                *p &= 239; p = p.offset(prime_ * 2 + 0);
                 break 'label5
                }
                if p >= end { wi = 5; break 'outer; }
-               *p |= 32; p = p.offset(prime_ * 4 + 0);
+               *p &= 223; p = p.offset(prime_ * 4 + 0);
                break 'label6
               }
               if p >= end { wi = 6; break 'outer; }
-              *p |= 64; p = p.offset(prime_ * 6 + 0);
+              *p &= 191; p = p.offset(prime_ * 6 + 0);
               break 'label7
              }
              if p >= end { wi = 7; break 'outer; }
-             *p |= 128; p = p.offset(prime_ * 2 + 1);
+             *p &= 127; p = p.offset(prime_ * 2 + 1);
              wi = 0
             }
         }
@@ -238,47 +238,47 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                     }
                     while p < loop_end {
                         p = ::b(p);
-                        *p.offset(prime_ * 0 + 0) |= 32;
-                        *p.offset(prime_ * 4 + 1) |= 16;
-                        *p.offset(prime_ * 6 + 2) |= 1;
-                        *p.offset(prime_ * 10 + 2) |= 128;
-                        *p.offset(prime_ * 12 + 3) |= 8;
-                        *p.offset(prime_ * 16 + 4) |= 4;
-                        *p.offset(prime_ * 22 + 5) |= 64;
-                        *p.offset(prime_ * 24 + 6) |= 2;
+                        *p.offset(prime_ * 0 + 0) &= 223;
+                        *p.offset(prime_ * 4 + 1) &= 239;
+                        *p.offset(prime_ * 6 + 2) &= 254;
+                        *p.offset(prime_ * 10 + 2) &= 127;
+                        *p.offset(prime_ * 12 + 3) &= 247;
+                        *p.offset(prime_ * 16 + 4) &= 251;
+                        *p.offset(prime_ * 22 + 5) &= 191;
+                        *p.offset(prime_ * 24 + 6) &= 253;
 
                         p = p.offset(prime_ * 30 + 7)
                     }
                     if p >= end { wi = 8; break 'outer; }
-                    *p |= 32; p = p.offset(prime_ * 4 + 1);
+                    *p &= 223; p = p.offset(prime_ * 4 + 1);
                     break 'label9
                    }
                    if p >= end { wi = 9; break 'outer; }
-                   *p |= 16; p = p.offset(prime_ * 2 + 1);
+                   *p &= 239; p = p.offset(prime_ * 2 + 1);
                    break 'label10
                   }
                   if p >= end { wi = 10; break 'outer; }
-                  *p |= 1; p = p.offset(prime_ * 4 + 0);
+                  *p &= 254; p = p.offset(prime_ * 4 + 0);
                   break 'label11
                  }
                  if p >= end { wi = 11; break 'outer; }
-                 *p |= 128; p = p.offset(prime_ * 2 + 1);
+                 *p &= 127; p = p.offset(prime_ * 2 + 1);
                  break 'label12
                 }
                 if p >= end { wi = 12; break 'outer; }
-                *p |= 8; p = p.offset(prime_ * 4 + 1);
+                *p &= 247; p = p.offset(prime_ * 4 + 1);
                 break 'label13
                }
                if p >= end { wi = 13; break 'outer; }
-               *p |= 4; p = p.offset(prime_ * 6 + 1);
+               *p &= 251; p = p.offset(prime_ * 6 + 1);
                break 'label14
               }
               if p >= end { wi = 14; break 'outer; }
-              *p |= 64; p = p.offset(prime_ * 2 + 1);
+              *p &= 191; p = p.offset(prime_ * 2 + 1);
               break 'label15
              }
              if p >= end { wi = 15; break 'outer; }
-             *p |= 2; p = p.offset(prime_ * 6 + 1);
+             *p &= 253; p = p.offset(prime_ * 6 + 1);
              wi = 8
             }
         }
@@ -305,47 +305,47 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                     }
                     while p < loop_end {
                         p = ::b(p);
-                        *p.offset(prime_ * 0 + 0) |= 1;
-                        *p.offset(prime_ * 2 + 0) |= 64;
-                        *p.offset(prime_ * 6 + 2) |= 2;
-                        *p.offset(prime_ * 8 + 2) |= 128;
-                        *p.offset(prime_ * 12 + 4) |= 8;
-                        *p.offset(prime_ * 18 + 6) |= 32;
-                        *p.offset(prime_ * 20 + 7) |= 4;
-                        *p.offset(prime_ * 26 + 9) |= 16;
+                        *p.offset(prime_ * 0 + 0) &= 254;
+                        *p.offset(prime_ * 2 + 0) &= 191;
+                        *p.offset(prime_ * 6 + 2) &= 253;
+                        *p.offset(prime_ * 8 + 2) &= 127;
+                        *p.offset(prime_ * 12 + 4) &= 247;
+                        *p.offset(prime_ * 18 + 6) &= 223;
+                        *p.offset(prime_ * 20 + 7) &= 251;
+                        *p.offset(prime_ * 26 + 9) &= 239;
 
                         p = p.offset(prime_ * 30 + 11)
                     }
                     if p >= end { wi = 16; break 'outer; }
-                    *p |= 1; p = p.offset(prime_ * 2 + 0);
+                    *p &= 254; p = p.offset(prime_ * 2 + 0);
                     break 'label17
                    }
                    if p >= end { wi = 17; break 'outer; }
-                   *p |= 64; p = p.offset(prime_ * 4 + 2);
+                   *p &= 191; p = p.offset(prime_ * 4 + 2);
                    break 'label18
                   }
                   if p >= end { wi = 18; break 'outer; }
-                  *p |= 2; p = p.offset(prime_ * 2 + 0);
+                  *p &= 253; p = p.offset(prime_ * 2 + 0);
                   break 'label19
                  }
                  if p >= end { wi = 19; break 'outer; }
-                 *p |= 128; p = p.offset(prime_ * 4 + 2);
+                 *p &= 127; p = p.offset(prime_ * 4 + 2);
                  break 'label20
                 }
                 if p >= end { wi = 20; break 'outer; }
-                *p |= 8; p = p.offset(prime_ * 6 + 2);
+                *p &= 247; p = p.offset(prime_ * 6 + 2);
                 break 'label21
                }
                if p >= end { wi = 21; break 'outer; }
-               *p |= 32; p = p.offset(prime_ * 2 + 1);
+               *p &= 223; p = p.offset(prime_ * 2 + 1);
                break 'label22
               }
               if p >= end { wi = 22; break 'outer; }
-              *p |= 4; p = p.offset(prime_ * 6 + 2);
+              *p &= 251; p = p.offset(prime_ * 6 + 2);
               break 'label23
              }
              if p >= end { wi = 23; break 'outer; }
-             *p |= 16; p = p.offset(prime_ * 4 + 2);
+             *p &= 239; p = p.offset(prime_ * 4 + 2);
              wi = 16
             }
         }
@@ -372,47 +372,47 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                     }
                     while p < loop_end {
                         p = ::b(p);
-                        *p.offset(prime_ * 0 + 0) |= 32;
-                        *p.offset(prime_ * 4 + 2) |= 4;
-                        *p.offset(prime_ * 6 + 3) |= 2;
-                        *p.offset(prime_ * 10 + 4) |= 128;
-                        *p.offset(prime_ * 16 + 7) |= 16;
-                        *p.offset(prime_ * 18 + 8) |= 8;
-                        *p.offset(prime_ * 24 + 11) |= 1;
-                        *p.offset(prime_ * 28 + 12) |= 64;
+                        *p.offset(prime_ * 0 + 0) &= 223;
+                        *p.offset(prime_ * 4 + 2) &= 251;
+                        *p.offset(prime_ * 6 + 3) &= 253;
+                        *p.offset(prime_ * 10 + 4) &= 127;
+                        *p.offset(prime_ * 16 + 7) &= 239;
+                        *p.offset(prime_ * 18 + 8) &= 247;
+                        *p.offset(prime_ * 24 + 11) &= 254;
+                        *p.offset(prime_ * 28 + 12) &= 191;
 
                         p = p.offset(prime_ * 30 + 13)
                     }
                     if p >= end { wi = 24; break 'outer; }
-                    *p |= 32; p = p.offset(prime_ * 4 + 2);
+                    *p &= 223; p = p.offset(prime_ * 4 + 2);
                     break 'label25
                    }
                    if p >= end { wi = 25; break 'outer; }
-                   *p |= 4; p = p.offset(prime_ * 2 + 1);
+                   *p &= 251; p = p.offset(prime_ * 2 + 1);
                    break 'label26
                   }
                   if p >= end { wi = 26; break 'outer; }
-                  *p |= 2; p = p.offset(prime_ * 4 + 1);
+                  *p &= 253; p = p.offset(prime_ * 4 + 1);
                   break 'label27
                  }
                  if p >= end { wi = 27; break 'outer; }
-                 *p |= 128; p = p.offset(prime_ * 6 + 3);
+                 *p &= 127; p = p.offset(prime_ * 6 + 3);
                  break 'label28
                 }
                 if p >= end { wi = 28; break 'outer; }
-                *p |= 16; p = p.offset(prime_ * 2 + 1);
+                *p &= 239; p = p.offset(prime_ * 2 + 1);
                 break 'label29
                }
                if p >= end { wi = 29; break 'outer; }
-               *p |= 8; p = p.offset(prime_ * 6 + 3);
+               *p &= 247; p = p.offset(prime_ * 6 + 3);
                break 'label30
               }
               if p >= end { wi = 30; break 'outer; }
-              *p |= 1; p = p.offset(prime_ * 4 + 1);
+              *p &= 254; p = p.offset(prime_ * 4 + 1);
               break 'label31
              }
              if p >= end { wi = 31; break 'outer; }
-             *p |= 64; p = p.offset(prime_ * 2 + 1);
+             *p &= 191; p = p.offset(prime_ * 2 + 1);
              wi = 24
             }
         }
@@ -439,47 +439,47 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                     }
                     while p < loop_end {
                         p = ::b(p);
-                        *p.offset(prime_ * 0 + 0) |= 32;
-                        *p.offset(prime_ * 2 + 1) |= 64;
-                        *p.offset(prime_ * 6 + 4) |= 1;
-                        *p.offset(prime_ * 12 + 7) |= 8;
-                        *p.offset(prime_ * 14 + 8) |= 16;
-                        *p.offset(prime_ * 20 + 11) |= 128;
-                        *p.offset(prime_ * 24 + 14) |= 2;
-                        *p.offset(prime_ * 26 + 15) |= 4;
+                        *p.offset(prime_ * 0 + 0) &= 223;
+                        *p.offset(prime_ * 2 + 1) &= 191;
+                        *p.offset(prime_ * 6 + 4) &= 254;
+                        *p.offset(prime_ * 12 + 7) &= 247;
+                        *p.offset(prime_ * 14 + 8) &= 239;
+                        *p.offset(prime_ * 20 + 11) &= 127;
+                        *p.offset(prime_ * 24 + 14) &= 253;
+                        *p.offset(prime_ * 26 + 15) &= 251;
 
                         p = p.offset(prime_ * 30 + 17)
                     }
                     if p >= end { wi = 32; break 'outer; }
-                    *p |= 32; p = p.offset(prime_ * 2 + 1);
+                    *p &= 223; p = p.offset(prime_ * 2 + 1);
                     break 'label33
                    }
                    if p >= end { wi = 33; break 'outer; }
-                   *p |= 64; p = p.offset(prime_ * 4 + 3);
+                   *p &= 191; p = p.offset(prime_ * 4 + 3);
                    break 'label34
                   }
                   if p >= end { wi = 34; break 'outer; }
-                  *p |= 1; p = p.offset(prime_ * 6 + 3);
+                  *p &= 254; p = p.offset(prime_ * 6 + 3);
                   break 'label35
                  }
                  if p >= end { wi = 35; break 'outer; }
-                 *p |= 8; p = p.offset(prime_ * 2 + 1);
+                 *p &= 247; p = p.offset(prime_ * 2 + 1);
                  break 'label36
                 }
                 if p >= end { wi = 36; break 'outer; }
-                *p |= 16; p = p.offset(prime_ * 6 + 3);
+                *p &= 239; p = p.offset(prime_ * 6 + 3);
                 break 'label37
                }
                if p >= end { wi = 37; break 'outer; }
-               *p |= 128; p = p.offset(prime_ * 4 + 3);
+               *p &= 127; p = p.offset(prime_ * 4 + 3);
                break 'label38
               }
               if p >= end { wi = 38; break 'outer; }
-              *p |= 2; p = p.offset(prime_ * 2 + 1);
+              *p &= 253; p = p.offset(prime_ * 2 + 1);
               break 'label39
              }
              if p >= end { wi = 39; break 'outer; }
-             *p |= 4; p = p.offset(prime_ * 4 + 2);
+             *p &= 251; p = p.offset(prime_ * 4 + 2);
              wi = 32
             }
         }
@@ -506,47 +506,47 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                     }
                     while p < loop_end {
                         p = ::b(p);
-                        *p.offset(prime_ * 0 + 0) |= 1;
-                        *p.offset(prime_ * 4 + 2) |= 16;
-                        *p.offset(prime_ * 10 + 6) |= 4;
-                        *p.offset(prime_ * 12 + 7) |= 32;
-                        *p.offset(prime_ * 18 + 11) |= 8;
-                        *p.offset(prime_ * 22 + 13) |= 128;
-                        *p.offset(prime_ * 24 + 15) |= 2;
-                        *p.offset(prime_ * 28 + 17) |= 64;
+                        *p.offset(prime_ * 0 + 0) &= 254;
+                        *p.offset(prime_ * 4 + 2) &= 239;
+                        *p.offset(prime_ * 10 + 6) &= 251;
+                        *p.offset(prime_ * 12 + 7) &= 223;
+                        *p.offset(prime_ * 18 + 11) &= 247;
+                        *p.offset(prime_ * 22 + 13) &= 127;
+                        *p.offset(prime_ * 24 + 15) &= 253;
+                        *p.offset(prime_ * 28 + 17) &= 191;
 
                         p = p.offset(prime_ * 30 + 19)
                     }
                     if p >= end { wi = 40; break 'outer; }
-                    *p |= 1; p = p.offset(prime_ * 4 + 2);
+                    *p &= 254; p = p.offset(prime_ * 4 + 2);
                     break 'label41
                    }
                    if p >= end { wi = 41; break 'outer; }
-                   *p |= 16; p = p.offset(prime_ * 6 + 4);
+                   *p &= 239; p = p.offset(prime_ * 6 + 4);
                    break 'label42
                   }
                   if p >= end { wi = 42; break 'outer; }
-                  *p |= 4; p = p.offset(prime_ * 2 + 1);
+                  *p &= 251; p = p.offset(prime_ * 2 + 1);
                   break 'label43
                  }
                  if p >= end { wi = 43; break 'outer; }
-                 *p |= 32; p = p.offset(prime_ * 6 + 4);
+                 *p &= 223; p = p.offset(prime_ * 6 + 4);
                  break 'label44
                 }
                 if p >= end { wi = 44; break 'outer; }
-                *p |= 8; p = p.offset(prime_ * 4 + 2);
+                *p &= 247; p = p.offset(prime_ * 4 + 2);
                 break 'label45
                }
                if p >= end { wi = 45; break 'outer; }
-               *p |= 128; p = p.offset(prime_ * 2 + 2);
+               *p &= 127; p = p.offset(prime_ * 2 + 2);
                break 'label46
               }
               if p >= end { wi = 46; break 'outer; }
-              *p |= 2; p = p.offset(prime_ * 4 + 2);
+              *p &= 253; p = p.offset(prime_ * 4 + 2);
               break 'label47
              }
              if p >= end { wi = 47; break 'outer; }
-             *p |= 64; p = p.offset(prime_ * 2 + 2);
+             *p &= 191; p = p.offset(prime_ * 2 + 2);
              wi = 40
             }
         }
@@ -573,47 +573,47 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                     }
                     while p < loop_end {
                         p = ::b(p);
-                        *p.offset(prime_ * 0 + 0) |= 32;
-                        *p.offset(prime_ * 6 + 5) |= 2;
-                        *p.offset(prime_ * 8 + 6) |= 64;
-                        *p.offset(prime_ * 14 + 11) |= 4;
-                        *p.offset(prime_ * 18 + 14) |= 8;
-                        *p.offset(prime_ * 20 + 15) |= 128;
-                        *p.offset(prime_ * 24 + 19) |= 1;
-                        *p.offset(prime_ * 26 + 20) |= 16;
+                        *p.offset(prime_ * 0 + 0) &= 223;
+                        *p.offset(prime_ * 6 + 5) &= 253;
+                        *p.offset(prime_ * 8 + 6) &= 191;
+                        *p.offset(prime_ * 14 + 11) &= 251;
+                        *p.offset(prime_ * 18 + 14) &= 247;
+                        *p.offset(prime_ * 20 + 15) &= 127;
+                        *p.offset(prime_ * 24 + 19) &= 254;
+                        *p.offset(prime_ * 26 + 20) &= 239;
 
                         p = p.offset(prime_ * 30 + 23)
                     }
                     if p >= end { wi = 48; break 'outer; }
-                    *p |= 32; p = p.offset(prime_ * 6 + 5);
+                    *p &= 223; p = p.offset(prime_ * 6 + 5);
                     break 'label49
                    }
                    if p >= end { wi = 49; break 'outer; }
-                   *p |= 2; p = p.offset(prime_ * 2 + 1);
+                   *p &= 253; p = p.offset(prime_ * 2 + 1);
                    break 'label50
                   }
                   if p >= end { wi = 50; break 'outer; }
-                  *p |= 64; p = p.offset(prime_ * 6 + 5);
+                  *p &= 191; p = p.offset(prime_ * 6 + 5);
                   break 'label51
                  }
                  if p >= end { wi = 51; break 'outer; }
-                 *p |= 4; p = p.offset(prime_ * 4 + 3);
+                 *p &= 251; p = p.offset(prime_ * 4 + 3);
                  break 'label52
                 }
                 if p >= end { wi = 52; break 'outer; }
-                *p |= 8; p = p.offset(prime_ * 2 + 1);
+                *p &= 247; p = p.offset(prime_ * 2 + 1);
                 break 'label53
                }
                if p >= end { wi = 53; break 'outer; }
-               *p |= 128; p = p.offset(prime_ * 4 + 4);
+               *p &= 127; p = p.offset(prime_ * 4 + 4);
                break 'label54
               }
               if p >= end { wi = 54; break 'outer; }
-              *p |= 1; p = p.offset(prime_ * 2 + 1);
+              *p &= 254; p = p.offset(prime_ * 2 + 1);
               break 'label55
              }
              if p >= end { wi = 55; break 'outer; }
-             *p |= 16; p = p.offset(prime_ * 4 + 3);
+             *p &= 239; p = p.offset(prime_ * 4 + 3);
              wi = 48
             }
         }
@@ -640,47 +640,47 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                     }
                     while p < loop_end {
                         p = ::b(p);
-                        *p.offset(prime_ * 0 + 0) |= 1;
-                        *p.offset(prime_ * 2 + 1) |= 128;
-                        *p.offset(prime_ * 8 + 7) |= 64;
-                        *p.offset(prime_ * 12 + 11) |= 32;
-                        *p.offset(prime_ * 14 + 13) |= 16;
-                        *p.offset(prime_ * 18 + 17) |= 8;
-                        *p.offset(prime_ * 20 + 19) |= 4;
-                        *p.offset(prime_ * 24 + 23) |= 2;
+                        *p.offset(prime_ * 0 + 0) &= 254;
+                        *p.offset(prime_ * 2 + 1) &= 127;
+                        *p.offset(prime_ * 8 + 7) &= 191;
+                        *p.offset(prime_ * 12 + 11) &= 223;
+                        *p.offset(prime_ * 14 + 13) &= 239;
+                        *p.offset(prime_ * 18 + 17) &= 247;
+                        *p.offset(prime_ * 20 + 19) &= 251;
+                        *p.offset(prime_ * 24 + 23) &= 253;
 
                         p = p.offset(prime_ * 30 + 29)
                     }
                     if p >= end { wi = 56; break 'outer; }
-                    *p |= 1; p = p.offset(prime_ * 2 + 1);
+                    *p &= 254; p = p.offset(prime_ * 2 + 1);
                     break 'label57
                    }
                    if p >= end { wi = 57; break 'outer; }
-                   *p |= 128; p = p.offset(prime_ * 6 + 6);
+                   *p &= 127; p = p.offset(prime_ * 6 + 6);
                    break 'label58
                   }
                   if p >= end { wi = 58; break 'outer; }
-                  *p |= 64; p = p.offset(prime_ * 4 + 4);
+                  *p &= 191; p = p.offset(prime_ * 4 + 4);
                   break 'label59
                  }
                  if p >= end { wi = 59; break 'outer; }
-                 *p |= 32; p = p.offset(prime_ * 2 + 2);
+                 *p &= 223; p = p.offset(prime_ * 2 + 2);
                  break 'label60
                 }
                 if p >= end { wi = 60; break 'outer; }
-                *p |= 16; p = p.offset(prime_ * 4 + 4);
+                *p &= 239; p = p.offset(prime_ * 4 + 4);
                 break 'label61
                }
                if p >= end { wi = 61; break 'outer; }
-               *p |= 8; p = p.offset(prime_ * 2 + 2);
+               *p &= 247; p = p.offset(prime_ * 2 + 2);
                break 'label62
               }
               if p >= end { wi = 62; break 'outer; }
-              *p |= 4; p = p.offset(prime_ * 4 + 4);
+              *p &= 251; p = p.offset(prime_ * 4 + 4);
               break 'label63
              }
              if p >= end { wi = 63; break 'outer; }
-             *p |= 2; p = p.offset(prime_ * 6 + 6);
+             *p &= 253; p = p.offset(prime_ * 6 + 6);
              wi = 56
             }
         }

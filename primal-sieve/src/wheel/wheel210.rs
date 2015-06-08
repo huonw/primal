@@ -241,397 +241,397 @@ const INIT: &'static [WheelInit; 210] = &[
 ];
 const WHEEL: &'static [WheelElem; 384] = &[
     // remainder 1
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: -47 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: -47 },
     // remainder 7
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 1, next: -47 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 1, next: -47 },
     // remainder 11
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 2, next: -47 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: -47 },
     // remainder 13
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 1, next: -47 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: -47 },
     // remainder 17
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 2, next: -47 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: -47 },
     // remainder 19
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 2, correction: 2, next: -47 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: -47 },
     // remainder 23
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 3, next: -47 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: -47 },
     // remainder 29
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 1u8 << 0u8, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 1u8 << 7u8, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 1u8 << 6u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 5u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 4u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 3u8, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 1u8 << 2u8, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 1u8 << 1u8, next_mult_factor: 6, correction: 6, next: -47 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 6, next: -47 },
 ];
 pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize, prime: usize) {
     let bytes = bytes;
@@ -751,247 +751,247 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                             }
                                                             while p < loop_end {
                                                                 p = ::b(p);
-                                                                *p.offset(prime_ * 0 + 0) |= 1;
-                                                                *p.offset(prime_ * 6 + 0) |= 2;
-                                                                *p.offset(prime_ * 10 + 0) |= 4;
-                                                                *p.offset(prime_ * 12 + 0) |= 8;
-                                                                *p.offset(prime_ * 16 + 0) |= 16;
-                                                                *p.offset(prime_ * 18 + 0) |= 32;
-                                                                *p.offset(prime_ * 22 + 0) |= 64;
-                                                                *p.offset(prime_ * 28 + 0) |= 128;
-                                                                *p.offset(prime_ * 30 + 1) |= 1;
-                                                                *p.offset(prime_ * 36 + 1) |= 2;
-                                                                *p.offset(prime_ * 40 + 1) |= 4;
-                                                                *p.offset(prime_ * 42 + 1) |= 8;
-                                                                *p.offset(prime_ * 46 + 1) |= 16;
-                                                                *p.offset(prime_ * 48 + 1) |= 32;
-                                                                *p.offset(prime_ * 52 + 1) |= 64;
-                                                                *p.offset(prime_ * 58 + 1) |= 128;
-                                                                *p.offset(prime_ * 60 + 2) |= 1;
-                                                                *p.offset(prime_ * 66 + 2) |= 2;
-                                                                *p.offset(prime_ * 70 + 2) |= 4;
-                                                                *p.offset(prime_ * 72 + 2) |= 8;
-                                                                *p.offset(prime_ * 76 + 2) |= 16;
-                                                                *p.offset(prime_ * 78 + 2) |= 32;
-                                                                *p.offset(prime_ * 82 + 2) |= 64;
-                                                                *p.offset(prime_ * 88 + 2) |= 128;
-                                                                *p.offset(prime_ * 90 + 3) |= 1;
-                                                                *p.offset(prime_ * 96 + 3) |= 2;
-                                                                *p.offset(prime_ * 100 + 3) |= 4;
-                                                                *p.offset(prime_ * 102 + 3) |= 8;
-                                                                *p.offset(prime_ * 106 + 3) |= 16;
-                                                                *p.offset(prime_ * 108 + 3) |= 32;
-                                                                *p.offset(prime_ * 112 + 3) |= 64;
-                                                                *p.offset(prime_ * 118 + 3) |= 128;
-                                                                *p.offset(prime_ * 120 + 4) |= 1;
-                                                                *p.offset(prime_ * 126 + 4) |= 2;
-                                                                *p.offset(prime_ * 130 + 4) |= 4;
-                                                                *p.offset(prime_ * 132 + 4) |= 8;
-                                                                *p.offset(prime_ * 136 + 4) |= 16;
-                                                                *p.offset(prime_ * 138 + 4) |= 32;
-                                                                *p.offset(prime_ * 142 + 4) |= 64;
-                                                                *p.offset(prime_ * 148 + 4) |= 128;
-                                                                *p.offset(prime_ * 150 + 5) |= 1;
-                                                                *p.offset(prime_ * 156 + 5) |= 2;
-                                                                *p.offset(prime_ * 160 + 5) |= 4;
-                                                                *p.offset(prime_ * 162 + 5) |= 8;
-                                                                *p.offset(prime_ * 166 + 5) |= 16;
-                                                                *p.offset(prime_ * 168 + 5) |= 32;
-                                                                *p.offset(prime_ * 172 + 5) |= 64;
-                                                                *p.offset(prime_ * 178 + 5) |= 128;
+                                                                *p.offset(prime_ * 0 + 0) &= 254;
+                                                                *p.offset(prime_ * 6 + 0) &= 253;
+                                                                *p.offset(prime_ * 10 + 0) &= 251;
+                                                                *p.offset(prime_ * 12 + 0) &= 247;
+                                                                *p.offset(prime_ * 16 + 0) &= 239;
+                                                                *p.offset(prime_ * 18 + 0) &= 223;
+                                                                *p.offset(prime_ * 22 + 0) &= 191;
+                                                                *p.offset(prime_ * 28 + 0) &= 127;
+                                                                *p.offset(prime_ * 30 + 1) &= 254;
+                                                                *p.offset(prime_ * 36 + 1) &= 253;
+                                                                *p.offset(prime_ * 40 + 1) &= 251;
+                                                                *p.offset(prime_ * 42 + 1) &= 247;
+                                                                *p.offset(prime_ * 46 + 1) &= 239;
+                                                                *p.offset(prime_ * 48 + 1) &= 223;
+                                                                *p.offset(prime_ * 52 + 1) &= 191;
+                                                                *p.offset(prime_ * 58 + 1) &= 127;
+                                                                *p.offset(prime_ * 60 + 2) &= 254;
+                                                                *p.offset(prime_ * 66 + 2) &= 253;
+                                                                *p.offset(prime_ * 70 + 2) &= 251;
+                                                                *p.offset(prime_ * 72 + 2) &= 247;
+                                                                *p.offset(prime_ * 76 + 2) &= 239;
+                                                                *p.offset(prime_ * 78 + 2) &= 223;
+                                                                *p.offset(prime_ * 82 + 2) &= 191;
+                                                                *p.offset(prime_ * 88 + 2) &= 127;
+                                                                *p.offset(prime_ * 90 + 3) &= 254;
+                                                                *p.offset(prime_ * 96 + 3) &= 253;
+                                                                *p.offset(prime_ * 100 + 3) &= 251;
+                                                                *p.offset(prime_ * 102 + 3) &= 247;
+                                                                *p.offset(prime_ * 106 + 3) &= 239;
+                                                                *p.offset(prime_ * 108 + 3) &= 223;
+                                                                *p.offset(prime_ * 112 + 3) &= 191;
+                                                                *p.offset(prime_ * 118 + 3) &= 127;
+                                                                *p.offset(prime_ * 120 + 4) &= 254;
+                                                                *p.offset(prime_ * 126 + 4) &= 253;
+                                                                *p.offset(prime_ * 130 + 4) &= 251;
+                                                                *p.offset(prime_ * 132 + 4) &= 247;
+                                                                *p.offset(prime_ * 136 + 4) &= 239;
+                                                                *p.offset(prime_ * 138 + 4) &= 223;
+                                                                *p.offset(prime_ * 142 + 4) &= 191;
+                                                                *p.offset(prime_ * 148 + 4) &= 127;
+                                                                *p.offset(prime_ * 150 + 5) &= 254;
+                                                                *p.offset(prime_ * 156 + 5) &= 253;
+                                                                *p.offset(prime_ * 160 + 5) &= 251;
+                                                                *p.offset(prime_ * 162 + 5) &= 247;
+                                                                *p.offset(prime_ * 166 + 5) &= 239;
+                                                                *p.offset(prime_ * 168 + 5) &= 223;
+                                                                *p.offset(prime_ * 172 + 5) &= 191;
+                                                                *p.offset(prime_ * 178 + 5) &= 127;
 
                                                                 p = p.offset(prime_ * 180 + 6)
                                                             }
                                                             if p >= end { wi = 0; break 'outer; }
-                                                            *p |= 1; p = p.offset(prime_ * 6 + 0);
+                                                            *p &= 254; p = p.offset(prime_ * 6 + 0);
                                                             break 'label1
                                                            }
                                                            if p >= end { wi = 1; break 'outer; }
-                                                           *p |= 2; p = p.offset(prime_ * 4 + 0);
+                                                           *p &= 253; p = p.offset(prime_ * 4 + 0);
                                                            break 'label2
                                                           }
                                                           if p >= end { wi = 2; break 'outer; }
-                                                          *p |= 4; p = p.offset(prime_ * 2 + 0);
+                                                          *p &= 251; p = p.offset(prime_ * 2 + 0);
                                                           break 'label3
                                                          }
                                                          if p >= end { wi = 3; break 'outer; }
-                                                         *p |= 8; p = p.offset(prime_ * 4 + 0);
+                                                         *p &= 247; p = p.offset(prime_ * 4 + 0);
                                                          break 'label4
                                                         }
                                                         if p >= end { wi = 4; break 'outer; }
-                                                        *p |= 16; p = p.offset(prime_ * 2 + 0);
+                                                        *p &= 239; p = p.offset(prime_ * 2 + 0);
                                                         break 'label5
                                                        }
                                                        if p >= end { wi = 5; break 'outer; }
-                                                       *p |= 32; p = p.offset(prime_ * 4 + 0);
+                                                       *p &= 223; p = p.offset(prime_ * 4 + 0);
                                                        break 'label6
                                                       }
                                                       if p >= end { wi = 6; break 'outer; }
-                                                      *p |= 64; p = p.offset(prime_ * 6 + 0);
+                                                      *p &= 191; p = p.offset(prime_ * 6 + 0);
                                                       break 'label7
                                                      }
                                                      if p >= end { wi = 7; break 'outer; }
-                                                     *p |= 128; p = p.offset(prime_ * 2 + 1);
+                                                     *p &= 127; p = p.offset(prime_ * 2 + 1);
                                                      break 'label8
                                                     }
                                                     if p >= end { wi = 8; break 'outer; }
-                                                    *p |= 1; p = p.offset(prime_ * 6 + 0);
+                                                    *p &= 254; p = p.offset(prime_ * 6 + 0);
                                                     break 'label9
                                                    }
                                                    if p >= end { wi = 9; break 'outer; }
-                                                   *p |= 2; p = p.offset(prime_ * 4 + 0);
+                                                   *p &= 253; p = p.offset(prime_ * 4 + 0);
                                                    break 'label10
                                                   }
                                                   if p >= end { wi = 10; break 'outer; }
-                                                  *p |= 4; p = p.offset(prime_ * 2 + 0);
+                                                  *p &= 251; p = p.offset(prime_ * 2 + 0);
                                                   break 'label11
                                                  }
                                                  if p >= end { wi = 11; break 'outer; }
-                                                 *p |= 8; p = p.offset(prime_ * 4 + 0);
+                                                 *p &= 247; p = p.offset(prime_ * 4 + 0);
                                                  break 'label12
                                                 }
                                                 if p >= end { wi = 12; break 'outer; }
-                                                *p |= 16; p = p.offset(prime_ * 2 + 0);
+                                                *p &= 239; p = p.offset(prime_ * 2 + 0);
                                                 break 'label13
                                                }
                                                if p >= end { wi = 13; break 'outer; }
-                                               *p |= 32; p = p.offset(prime_ * 4 + 0);
+                                               *p &= 223; p = p.offset(prime_ * 4 + 0);
                                                break 'label14
                                               }
                                               if p >= end { wi = 14; break 'outer; }
-                                              *p |= 64; p = p.offset(prime_ * 6 + 0);
+                                              *p &= 191; p = p.offset(prime_ * 6 + 0);
                                               break 'label15
                                              }
                                              if p >= end { wi = 15; break 'outer; }
-                                             *p |= 128; p = p.offset(prime_ * 2 + 1);
+                                             *p &= 127; p = p.offset(prime_ * 2 + 1);
                                              break 'label16
                                             }
                                             if p >= end { wi = 16; break 'outer; }
-                                            *p |= 1; p = p.offset(prime_ * 6 + 0);
+                                            *p &= 254; p = p.offset(prime_ * 6 + 0);
                                             break 'label17
                                            }
                                            if p >= end { wi = 17; break 'outer; }
-                                           *p |= 2; p = p.offset(prime_ * 4 + 0);
+                                           *p &= 253; p = p.offset(prime_ * 4 + 0);
                                            break 'label18
                                           }
                                           if p >= end { wi = 18; break 'outer; }
-                                          *p |= 4; p = p.offset(prime_ * 2 + 0);
+                                          *p &= 251; p = p.offset(prime_ * 2 + 0);
                                           break 'label19
                                          }
                                          if p >= end { wi = 19; break 'outer; }
-                                         *p |= 8; p = p.offset(prime_ * 4 + 0);
+                                         *p &= 247; p = p.offset(prime_ * 4 + 0);
                                          break 'label20
                                         }
                                         if p >= end { wi = 20; break 'outer; }
-                                        *p |= 16; p = p.offset(prime_ * 2 + 0);
+                                        *p &= 239; p = p.offset(prime_ * 2 + 0);
                                         break 'label21
                                        }
                                        if p >= end { wi = 21; break 'outer; }
-                                       *p |= 32; p = p.offset(prime_ * 4 + 0);
+                                       *p &= 223; p = p.offset(prime_ * 4 + 0);
                                        break 'label22
                                       }
                                       if p >= end { wi = 22; break 'outer; }
-                                      *p |= 64; p = p.offset(prime_ * 6 + 0);
+                                      *p &= 191; p = p.offset(prime_ * 6 + 0);
                                       break 'label23
                                      }
                                      if p >= end { wi = 23; break 'outer; }
-                                     *p |= 128; p = p.offset(prime_ * 2 + 1);
+                                     *p &= 127; p = p.offset(prime_ * 2 + 1);
                                      break 'label24
                                     }
                                     if p >= end { wi = 24; break 'outer; }
-                                    *p |= 1; p = p.offset(prime_ * 6 + 0);
+                                    *p &= 254; p = p.offset(prime_ * 6 + 0);
                                     break 'label25
                                    }
                                    if p >= end { wi = 25; break 'outer; }
-                                   *p |= 2; p = p.offset(prime_ * 4 + 0);
+                                   *p &= 253; p = p.offset(prime_ * 4 + 0);
                                    break 'label26
                                   }
                                   if p >= end { wi = 26; break 'outer; }
-                                  *p |= 4; p = p.offset(prime_ * 2 + 0);
+                                  *p &= 251; p = p.offset(prime_ * 2 + 0);
                                   break 'label27
                                  }
                                  if p >= end { wi = 27; break 'outer; }
-                                 *p |= 8; p = p.offset(prime_ * 4 + 0);
+                                 *p &= 247; p = p.offset(prime_ * 4 + 0);
                                  break 'label28
                                 }
                                 if p >= end { wi = 28; break 'outer; }
-                                *p |= 16; p = p.offset(prime_ * 2 + 0);
+                                *p &= 239; p = p.offset(prime_ * 2 + 0);
                                 break 'label29
                                }
                                if p >= end { wi = 29; break 'outer; }
-                               *p |= 32; p = p.offset(prime_ * 4 + 0);
+                               *p &= 223; p = p.offset(prime_ * 4 + 0);
                                break 'label30
                               }
                               if p >= end { wi = 30; break 'outer; }
-                              *p |= 64; p = p.offset(prime_ * 6 + 0);
+                              *p &= 191; p = p.offset(prime_ * 6 + 0);
                               break 'label31
                              }
                              if p >= end { wi = 31; break 'outer; }
-                             *p |= 128; p = p.offset(prime_ * 2 + 1);
+                             *p &= 127; p = p.offset(prime_ * 2 + 1);
                              break 'label32
                             }
                             if p >= end { wi = 32; break 'outer; }
-                            *p |= 1; p = p.offset(prime_ * 6 + 0);
+                            *p &= 254; p = p.offset(prime_ * 6 + 0);
                             break 'label33
                            }
                            if p >= end { wi = 33; break 'outer; }
-                           *p |= 2; p = p.offset(prime_ * 4 + 0);
+                           *p &= 253; p = p.offset(prime_ * 4 + 0);
                            break 'label34
                           }
                           if p >= end { wi = 34; break 'outer; }
-                          *p |= 4; p = p.offset(prime_ * 2 + 0);
+                          *p &= 251; p = p.offset(prime_ * 2 + 0);
                           break 'label35
                          }
                          if p >= end { wi = 35; break 'outer; }
-                         *p |= 8; p = p.offset(prime_ * 4 + 0);
+                         *p &= 247; p = p.offset(prime_ * 4 + 0);
                          break 'label36
                         }
                         if p >= end { wi = 36; break 'outer; }
-                        *p |= 16; p = p.offset(prime_ * 2 + 0);
+                        *p &= 239; p = p.offset(prime_ * 2 + 0);
                         break 'label37
                        }
                        if p >= end { wi = 37; break 'outer; }
-                       *p |= 32; p = p.offset(prime_ * 4 + 0);
+                       *p &= 223; p = p.offset(prime_ * 4 + 0);
                        break 'label38
                       }
                       if p >= end { wi = 38; break 'outer; }
-                      *p |= 64; p = p.offset(prime_ * 6 + 0);
+                      *p &= 191; p = p.offset(prime_ * 6 + 0);
                       break 'label39
                      }
                      if p >= end { wi = 39; break 'outer; }
-                     *p |= 128; p = p.offset(prime_ * 2 + 1);
+                     *p &= 127; p = p.offset(prime_ * 2 + 1);
                      break 'label40
                     }
                     if p >= end { wi = 40; break 'outer; }
-                    *p |= 1; p = p.offset(prime_ * 6 + 0);
+                    *p &= 254; p = p.offset(prime_ * 6 + 0);
                     break 'label41
                    }
                    if p >= end { wi = 41; break 'outer; }
-                   *p |= 2; p = p.offset(prime_ * 4 + 0);
+                   *p &= 253; p = p.offset(prime_ * 4 + 0);
                    break 'label42
                   }
                   if p >= end { wi = 42; break 'outer; }
-                  *p |= 4; p = p.offset(prime_ * 2 + 0);
+                  *p &= 251; p = p.offset(prime_ * 2 + 0);
                   break 'label43
                  }
                  if p >= end { wi = 43; break 'outer; }
-                 *p |= 8; p = p.offset(prime_ * 4 + 0);
+                 *p &= 247; p = p.offset(prime_ * 4 + 0);
                  break 'label44
                 }
                 if p >= end { wi = 44; break 'outer; }
-                *p |= 16; p = p.offset(prime_ * 2 + 0);
+                *p &= 239; p = p.offset(prime_ * 2 + 0);
                 break 'label45
                }
                if p >= end { wi = 45; break 'outer; }
-               *p |= 32; p = p.offset(prime_ * 4 + 0);
+               *p &= 223; p = p.offset(prime_ * 4 + 0);
                break 'label46
               }
               if p >= end { wi = 46; break 'outer; }
-              *p |= 64; p = p.offset(prime_ * 6 + 0);
+              *p &= 191; p = p.offset(prime_ * 6 + 0);
               break 'label47
              }
              if p >= end { wi = 47; break 'outer; }
-             *p |= 128; p = p.offset(prime_ * 2 + 1);
+             *p &= 127; p = p.offset(prime_ * 2 + 1);
              wi = 0
             }
         }
@@ -1098,247 +1098,247 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                             }
                                                             while p < loop_end {
                                                                 p = ::b(p);
-                                                                *p.offset(prime_ * 0 + 0) |= 32;
-                                                                *p.offset(prime_ * 4 + 1) |= 16;
-                                                                *p.offset(prime_ * 6 + 2) |= 1;
-                                                                *p.offset(prime_ * 10 + 2) |= 128;
-                                                                *p.offset(prime_ * 12 + 3) |= 8;
-                                                                *p.offset(prime_ * 16 + 4) |= 4;
-                                                                *p.offset(prime_ * 22 + 5) |= 64;
-                                                                *p.offset(prime_ * 24 + 6) |= 2;
-                                                                *p.offset(prime_ * 30 + 7) |= 32;
-                                                                *p.offset(prime_ * 34 + 8) |= 16;
-                                                                *p.offset(prime_ * 36 + 9) |= 1;
-                                                                *p.offset(prime_ * 40 + 9) |= 128;
-                                                                *p.offset(prime_ * 42 + 10) |= 8;
-                                                                *p.offset(prime_ * 46 + 11) |= 4;
-                                                                *p.offset(prime_ * 52 + 12) |= 64;
-                                                                *p.offset(prime_ * 54 + 13) |= 2;
-                                                                *p.offset(prime_ * 60 + 14) |= 32;
-                                                                *p.offset(prime_ * 64 + 15) |= 16;
-                                                                *p.offset(prime_ * 66 + 16) |= 1;
-                                                                *p.offset(prime_ * 70 + 16) |= 128;
-                                                                *p.offset(prime_ * 72 + 17) |= 8;
-                                                                *p.offset(prime_ * 76 + 18) |= 4;
-                                                                *p.offset(prime_ * 82 + 19) |= 64;
-                                                                *p.offset(prime_ * 84 + 20) |= 2;
-                                                                *p.offset(prime_ * 90 + 21) |= 32;
-                                                                *p.offset(prime_ * 94 + 22) |= 16;
-                                                                *p.offset(prime_ * 96 + 23) |= 1;
-                                                                *p.offset(prime_ * 100 + 23) |= 128;
-                                                                *p.offset(prime_ * 102 + 24) |= 8;
-                                                                *p.offset(prime_ * 106 + 25) |= 4;
-                                                                *p.offset(prime_ * 112 + 26) |= 64;
-                                                                *p.offset(prime_ * 114 + 27) |= 2;
-                                                                *p.offset(prime_ * 120 + 28) |= 32;
-                                                                *p.offset(prime_ * 124 + 29) |= 16;
-                                                                *p.offset(prime_ * 126 + 30) |= 1;
-                                                                *p.offset(prime_ * 130 + 30) |= 128;
-                                                                *p.offset(prime_ * 132 + 31) |= 8;
-                                                                *p.offset(prime_ * 136 + 32) |= 4;
-                                                                *p.offset(prime_ * 142 + 33) |= 64;
-                                                                *p.offset(prime_ * 144 + 34) |= 2;
-                                                                *p.offset(prime_ * 150 + 35) |= 32;
-                                                                *p.offset(prime_ * 154 + 36) |= 16;
-                                                                *p.offset(prime_ * 156 + 37) |= 1;
-                                                                *p.offset(prime_ * 160 + 37) |= 128;
-                                                                *p.offset(prime_ * 162 + 38) |= 8;
-                                                                *p.offset(prime_ * 166 + 39) |= 4;
-                                                                *p.offset(prime_ * 172 + 40) |= 64;
-                                                                *p.offset(prime_ * 174 + 41) |= 2;
+                                                                *p.offset(prime_ * 0 + 0) &= 223;
+                                                                *p.offset(prime_ * 4 + 1) &= 239;
+                                                                *p.offset(prime_ * 6 + 2) &= 254;
+                                                                *p.offset(prime_ * 10 + 2) &= 127;
+                                                                *p.offset(prime_ * 12 + 3) &= 247;
+                                                                *p.offset(prime_ * 16 + 4) &= 251;
+                                                                *p.offset(prime_ * 22 + 5) &= 191;
+                                                                *p.offset(prime_ * 24 + 6) &= 253;
+                                                                *p.offset(prime_ * 30 + 7) &= 223;
+                                                                *p.offset(prime_ * 34 + 8) &= 239;
+                                                                *p.offset(prime_ * 36 + 9) &= 254;
+                                                                *p.offset(prime_ * 40 + 9) &= 127;
+                                                                *p.offset(prime_ * 42 + 10) &= 247;
+                                                                *p.offset(prime_ * 46 + 11) &= 251;
+                                                                *p.offset(prime_ * 52 + 12) &= 191;
+                                                                *p.offset(prime_ * 54 + 13) &= 253;
+                                                                *p.offset(prime_ * 60 + 14) &= 223;
+                                                                *p.offset(prime_ * 64 + 15) &= 239;
+                                                                *p.offset(prime_ * 66 + 16) &= 254;
+                                                                *p.offset(prime_ * 70 + 16) &= 127;
+                                                                *p.offset(prime_ * 72 + 17) &= 247;
+                                                                *p.offset(prime_ * 76 + 18) &= 251;
+                                                                *p.offset(prime_ * 82 + 19) &= 191;
+                                                                *p.offset(prime_ * 84 + 20) &= 253;
+                                                                *p.offset(prime_ * 90 + 21) &= 223;
+                                                                *p.offset(prime_ * 94 + 22) &= 239;
+                                                                *p.offset(prime_ * 96 + 23) &= 254;
+                                                                *p.offset(prime_ * 100 + 23) &= 127;
+                                                                *p.offset(prime_ * 102 + 24) &= 247;
+                                                                *p.offset(prime_ * 106 + 25) &= 251;
+                                                                *p.offset(prime_ * 112 + 26) &= 191;
+                                                                *p.offset(prime_ * 114 + 27) &= 253;
+                                                                *p.offset(prime_ * 120 + 28) &= 223;
+                                                                *p.offset(prime_ * 124 + 29) &= 239;
+                                                                *p.offset(prime_ * 126 + 30) &= 254;
+                                                                *p.offset(prime_ * 130 + 30) &= 127;
+                                                                *p.offset(prime_ * 132 + 31) &= 247;
+                                                                *p.offset(prime_ * 136 + 32) &= 251;
+                                                                *p.offset(prime_ * 142 + 33) &= 191;
+                                                                *p.offset(prime_ * 144 + 34) &= 253;
+                                                                *p.offset(prime_ * 150 + 35) &= 223;
+                                                                *p.offset(prime_ * 154 + 36) &= 239;
+                                                                *p.offset(prime_ * 156 + 37) &= 254;
+                                                                *p.offset(prime_ * 160 + 37) &= 127;
+                                                                *p.offset(prime_ * 162 + 38) &= 247;
+                                                                *p.offset(prime_ * 166 + 39) &= 251;
+                                                                *p.offset(prime_ * 172 + 40) &= 191;
+                                                                *p.offset(prime_ * 174 + 41) &= 253;
 
                                                                 p = p.offset(prime_ * 180 + 42)
                                                             }
                                                             if p >= end { wi = 48; break 'outer; }
-                                                            *p |= 32; p = p.offset(prime_ * 4 + 1);
+                                                            *p &= 223; p = p.offset(prime_ * 4 + 1);
                                                             break 'label49
                                                            }
                                                            if p >= end { wi = 49; break 'outer; }
-                                                           *p |= 16; p = p.offset(prime_ * 2 + 1);
+                                                           *p &= 239; p = p.offset(prime_ * 2 + 1);
                                                            break 'label50
                                                           }
                                                           if p >= end { wi = 50; break 'outer; }
-                                                          *p |= 1; p = p.offset(prime_ * 4 + 0);
+                                                          *p &= 254; p = p.offset(prime_ * 4 + 0);
                                                           break 'label51
                                                          }
                                                          if p >= end { wi = 51; break 'outer; }
-                                                         *p |= 128; p = p.offset(prime_ * 2 + 1);
+                                                         *p &= 127; p = p.offset(prime_ * 2 + 1);
                                                          break 'label52
                                                         }
                                                         if p >= end { wi = 52; break 'outer; }
-                                                        *p |= 8; p = p.offset(prime_ * 4 + 1);
+                                                        *p &= 247; p = p.offset(prime_ * 4 + 1);
                                                         break 'label53
                                                        }
                                                        if p >= end { wi = 53; break 'outer; }
-                                                       *p |= 4; p = p.offset(prime_ * 6 + 1);
+                                                       *p &= 251; p = p.offset(prime_ * 6 + 1);
                                                        break 'label54
                                                       }
                                                       if p >= end { wi = 54; break 'outer; }
-                                                      *p |= 64; p = p.offset(prime_ * 2 + 1);
+                                                      *p &= 191; p = p.offset(prime_ * 2 + 1);
                                                       break 'label55
                                                      }
                                                      if p >= end { wi = 55; break 'outer; }
-                                                     *p |= 2; p = p.offset(prime_ * 6 + 1);
+                                                     *p &= 253; p = p.offset(prime_ * 6 + 1);
                                                      break 'label56
                                                     }
                                                     if p >= end { wi = 56; break 'outer; }
-                                                    *p |= 32; p = p.offset(prime_ * 4 + 1);
+                                                    *p &= 223; p = p.offset(prime_ * 4 + 1);
                                                     break 'label57
                                                    }
                                                    if p >= end { wi = 57; break 'outer; }
-                                                   *p |= 16; p = p.offset(prime_ * 2 + 1);
+                                                   *p &= 239; p = p.offset(prime_ * 2 + 1);
                                                    break 'label58
                                                   }
                                                   if p >= end { wi = 58; break 'outer; }
-                                                  *p |= 1; p = p.offset(prime_ * 4 + 0);
+                                                  *p &= 254; p = p.offset(prime_ * 4 + 0);
                                                   break 'label59
                                                  }
                                                  if p >= end { wi = 59; break 'outer; }
-                                                 *p |= 128; p = p.offset(prime_ * 2 + 1);
+                                                 *p &= 127; p = p.offset(prime_ * 2 + 1);
                                                  break 'label60
                                                 }
                                                 if p >= end { wi = 60; break 'outer; }
-                                                *p |= 8; p = p.offset(prime_ * 4 + 1);
+                                                *p &= 247; p = p.offset(prime_ * 4 + 1);
                                                 break 'label61
                                                }
                                                if p >= end { wi = 61; break 'outer; }
-                                               *p |= 4; p = p.offset(prime_ * 6 + 1);
+                                               *p &= 251; p = p.offset(prime_ * 6 + 1);
                                                break 'label62
                                               }
                                               if p >= end { wi = 62; break 'outer; }
-                                              *p |= 64; p = p.offset(prime_ * 2 + 1);
+                                              *p &= 191; p = p.offset(prime_ * 2 + 1);
                                               break 'label63
                                              }
                                              if p >= end { wi = 63; break 'outer; }
-                                             *p |= 2; p = p.offset(prime_ * 6 + 1);
+                                             *p &= 253; p = p.offset(prime_ * 6 + 1);
                                              break 'label64
                                             }
                                             if p >= end { wi = 64; break 'outer; }
-                                            *p |= 32; p = p.offset(prime_ * 4 + 1);
+                                            *p &= 223; p = p.offset(prime_ * 4 + 1);
                                             break 'label65
                                            }
                                            if p >= end { wi = 65; break 'outer; }
-                                           *p |= 16; p = p.offset(prime_ * 2 + 1);
+                                           *p &= 239; p = p.offset(prime_ * 2 + 1);
                                            break 'label66
                                           }
                                           if p >= end { wi = 66; break 'outer; }
-                                          *p |= 1; p = p.offset(prime_ * 4 + 0);
+                                          *p &= 254; p = p.offset(prime_ * 4 + 0);
                                           break 'label67
                                          }
                                          if p >= end { wi = 67; break 'outer; }
-                                         *p |= 128; p = p.offset(prime_ * 2 + 1);
+                                         *p &= 127; p = p.offset(prime_ * 2 + 1);
                                          break 'label68
                                         }
                                         if p >= end { wi = 68; break 'outer; }
-                                        *p |= 8; p = p.offset(prime_ * 4 + 1);
+                                        *p &= 247; p = p.offset(prime_ * 4 + 1);
                                         break 'label69
                                        }
                                        if p >= end { wi = 69; break 'outer; }
-                                       *p |= 4; p = p.offset(prime_ * 6 + 1);
+                                       *p &= 251; p = p.offset(prime_ * 6 + 1);
                                        break 'label70
                                       }
                                       if p >= end { wi = 70; break 'outer; }
-                                      *p |= 64; p = p.offset(prime_ * 2 + 1);
+                                      *p &= 191; p = p.offset(prime_ * 2 + 1);
                                       break 'label71
                                      }
                                      if p >= end { wi = 71; break 'outer; }
-                                     *p |= 2; p = p.offset(prime_ * 6 + 1);
+                                     *p &= 253; p = p.offset(prime_ * 6 + 1);
                                      break 'label72
                                     }
                                     if p >= end { wi = 72; break 'outer; }
-                                    *p |= 32; p = p.offset(prime_ * 4 + 1);
+                                    *p &= 223; p = p.offset(prime_ * 4 + 1);
                                     break 'label73
                                    }
                                    if p >= end { wi = 73; break 'outer; }
-                                   *p |= 16; p = p.offset(prime_ * 2 + 1);
+                                   *p &= 239; p = p.offset(prime_ * 2 + 1);
                                    break 'label74
                                   }
                                   if p >= end { wi = 74; break 'outer; }
-                                  *p |= 1; p = p.offset(prime_ * 4 + 0);
+                                  *p &= 254; p = p.offset(prime_ * 4 + 0);
                                   break 'label75
                                  }
                                  if p >= end { wi = 75; break 'outer; }
-                                 *p |= 128; p = p.offset(prime_ * 2 + 1);
+                                 *p &= 127; p = p.offset(prime_ * 2 + 1);
                                  break 'label76
                                 }
                                 if p >= end { wi = 76; break 'outer; }
-                                *p |= 8; p = p.offset(prime_ * 4 + 1);
+                                *p &= 247; p = p.offset(prime_ * 4 + 1);
                                 break 'label77
                                }
                                if p >= end { wi = 77; break 'outer; }
-                               *p |= 4; p = p.offset(prime_ * 6 + 1);
+                               *p &= 251; p = p.offset(prime_ * 6 + 1);
                                break 'label78
                               }
                               if p >= end { wi = 78; break 'outer; }
-                              *p |= 64; p = p.offset(prime_ * 2 + 1);
+                              *p &= 191; p = p.offset(prime_ * 2 + 1);
                               break 'label79
                              }
                              if p >= end { wi = 79; break 'outer; }
-                             *p |= 2; p = p.offset(prime_ * 6 + 1);
+                             *p &= 253; p = p.offset(prime_ * 6 + 1);
                              break 'label80
                             }
                             if p >= end { wi = 80; break 'outer; }
-                            *p |= 32; p = p.offset(prime_ * 4 + 1);
+                            *p &= 223; p = p.offset(prime_ * 4 + 1);
                             break 'label81
                            }
                            if p >= end { wi = 81; break 'outer; }
-                           *p |= 16; p = p.offset(prime_ * 2 + 1);
+                           *p &= 239; p = p.offset(prime_ * 2 + 1);
                            break 'label82
                           }
                           if p >= end { wi = 82; break 'outer; }
-                          *p |= 1; p = p.offset(prime_ * 4 + 0);
+                          *p &= 254; p = p.offset(prime_ * 4 + 0);
                           break 'label83
                          }
                          if p >= end { wi = 83; break 'outer; }
-                         *p |= 128; p = p.offset(prime_ * 2 + 1);
+                         *p &= 127; p = p.offset(prime_ * 2 + 1);
                          break 'label84
                         }
                         if p >= end { wi = 84; break 'outer; }
-                        *p |= 8; p = p.offset(prime_ * 4 + 1);
+                        *p &= 247; p = p.offset(prime_ * 4 + 1);
                         break 'label85
                        }
                        if p >= end { wi = 85; break 'outer; }
-                       *p |= 4; p = p.offset(prime_ * 6 + 1);
+                       *p &= 251; p = p.offset(prime_ * 6 + 1);
                        break 'label86
                       }
                       if p >= end { wi = 86; break 'outer; }
-                      *p |= 64; p = p.offset(prime_ * 2 + 1);
+                      *p &= 191; p = p.offset(prime_ * 2 + 1);
                       break 'label87
                      }
                      if p >= end { wi = 87; break 'outer; }
-                     *p |= 2; p = p.offset(prime_ * 6 + 1);
+                     *p &= 253; p = p.offset(prime_ * 6 + 1);
                      break 'label88
                     }
                     if p >= end { wi = 88; break 'outer; }
-                    *p |= 32; p = p.offset(prime_ * 4 + 1);
+                    *p &= 223; p = p.offset(prime_ * 4 + 1);
                     break 'label89
                    }
                    if p >= end { wi = 89; break 'outer; }
-                   *p |= 16; p = p.offset(prime_ * 2 + 1);
+                   *p &= 239; p = p.offset(prime_ * 2 + 1);
                    break 'label90
                   }
                   if p >= end { wi = 90; break 'outer; }
-                  *p |= 1; p = p.offset(prime_ * 4 + 0);
+                  *p &= 254; p = p.offset(prime_ * 4 + 0);
                   break 'label91
                  }
                  if p >= end { wi = 91; break 'outer; }
-                 *p |= 128; p = p.offset(prime_ * 2 + 1);
+                 *p &= 127; p = p.offset(prime_ * 2 + 1);
                  break 'label92
                 }
                 if p >= end { wi = 92; break 'outer; }
-                *p |= 8; p = p.offset(prime_ * 4 + 1);
+                *p &= 247; p = p.offset(prime_ * 4 + 1);
                 break 'label93
                }
                if p >= end { wi = 93; break 'outer; }
-               *p |= 4; p = p.offset(prime_ * 6 + 1);
+               *p &= 251; p = p.offset(prime_ * 6 + 1);
                break 'label94
               }
               if p >= end { wi = 94; break 'outer; }
-              *p |= 64; p = p.offset(prime_ * 2 + 1);
+              *p &= 191; p = p.offset(prime_ * 2 + 1);
               break 'label95
              }
              if p >= end { wi = 95; break 'outer; }
-             *p |= 2; p = p.offset(prime_ * 6 + 1);
+             *p &= 253; p = p.offset(prime_ * 6 + 1);
              wi = 48
             }
         }
@@ -1445,247 +1445,247 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                             }
                                                             while p < loop_end {
                                                                 p = ::b(p);
-                                                                *p.offset(prime_ * 0 + 0) |= 1;
-                                                                *p.offset(prime_ * 2 + 0) |= 64;
-                                                                *p.offset(prime_ * 6 + 2) |= 2;
-                                                                *p.offset(prime_ * 8 + 2) |= 128;
-                                                                *p.offset(prime_ * 12 + 4) |= 8;
-                                                                *p.offset(prime_ * 18 + 6) |= 32;
-                                                                *p.offset(prime_ * 20 + 7) |= 4;
-                                                                *p.offset(prime_ * 26 + 9) |= 16;
-                                                                *p.offset(prime_ * 30 + 11) |= 1;
-                                                                *p.offset(prime_ * 32 + 11) |= 64;
-                                                                *p.offset(prime_ * 36 + 13) |= 2;
-                                                                *p.offset(prime_ * 38 + 13) |= 128;
-                                                                *p.offset(prime_ * 42 + 15) |= 8;
-                                                                *p.offset(prime_ * 48 + 17) |= 32;
-                                                                *p.offset(prime_ * 50 + 18) |= 4;
-                                                                *p.offset(prime_ * 56 + 20) |= 16;
-                                                                *p.offset(prime_ * 60 + 22) |= 1;
-                                                                *p.offset(prime_ * 62 + 22) |= 64;
-                                                                *p.offset(prime_ * 66 + 24) |= 2;
-                                                                *p.offset(prime_ * 68 + 24) |= 128;
-                                                                *p.offset(prime_ * 72 + 26) |= 8;
-                                                                *p.offset(prime_ * 78 + 28) |= 32;
-                                                                *p.offset(prime_ * 80 + 29) |= 4;
-                                                                *p.offset(prime_ * 86 + 31) |= 16;
-                                                                *p.offset(prime_ * 90 + 33) |= 1;
-                                                                *p.offset(prime_ * 92 + 33) |= 64;
-                                                                *p.offset(prime_ * 96 + 35) |= 2;
-                                                                *p.offset(prime_ * 98 + 35) |= 128;
-                                                                *p.offset(prime_ * 102 + 37) |= 8;
-                                                                *p.offset(prime_ * 108 + 39) |= 32;
-                                                                *p.offset(prime_ * 110 + 40) |= 4;
-                                                                *p.offset(prime_ * 116 + 42) |= 16;
-                                                                *p.offset(prime_ * 120 + 44) |= 1;
-                                                                *p.offset(prime_ * 122 + 44) |= 64;
-                                                                *p.offset(prime_ * 126 + 46) |= 2;
-                                                                *p.offset(prime_ * 128 + 46) |= 128;
-                                                                *p.offset(prime_ * 132 + 48) |= 8;
-                                                                *p.offset(prime_ * 138 + 50) |= 32;
-                                                                *p.offset(prime_ * 140 + 51) |= 4;
-                                                                *p.offset(prime_ * 146 + 53) |= 16;
-                                                                *p.offset(prime_ * 150 + 55) |= 1;
-                                                                *p.offset(prime_ * 152 + 55) |= 64;
-                                                                *p.offset(prime_ * 156 + 57) |= 2;
-                                                                *p.offset(prime_ * 158 + 57) |= 128;
-                                                                *p.offset(prime_ * 162 + 59) |= 8;
-                                                                *p.offset(prime_ * 168 + 61) |= 32;
-                                                                *p.offset(prime_ * 170 + 62) |= 4;
-                                                                *p.offset(prime_ * 176 + 64) |= 16;
+                                                                *p.offset(prime_ * 0 + 0) &= 254;
+                                                                *p.offset(prime_ * 2 + 0) &= 191;
+                                                                *p.offset(prime_ * 6 + 2) &= 253;
+                                                                *p.offset(prime_ * 8 + 2) &= 127;
+                                                                *p.offset(prime_ * 12 + 4) &= 247;
+                                                                *p.offset(prime_ * 18 + 6) &= 223;
+                                                                *p.offset(prime_ * 20 + 7) &= 251;
+                                                                *p.offset(prime_ * 26 + 9) &= 239;
+                                                                *p.offset(prime_ * 30 + 11) &= 254;
+                                                                *p.offset(prime_ * 32 + 11) &= 191;
+                                                                *p.offset(prime_ * 36 + 13) &= 253;
+                                                                *p.offset(prime_ * 38 + 13) &= 127;
+                                                                *p.offset(prime_ * 42 + 15) &= 247;
+                                                                *p.offset(prime_ * 48 + 17) &= 223;
+                                                                *p.offset(prime_ * 50 + 18) &= 251;
+                                                                *p.offset(prime_ * 56 + 20) &= 239;
+                                                                *p.offset(prime_ * 60 + 22) &= 254;
+                                                                *p.offset(prime_ * 62 + 22) &= 191;
+                                                                *p.offset(prime_ * 66 + 24) &= 253;
+                                                                *p.offset(prime_ * 68 + 24) &= 127;
+                                                                *p.offset(prime_ * 72 + 26) &= 247;
+                                                                *p.offset(prime_ * 78 + 28) &= 223;
+                                                                *p.offset(prime_ * 80 + 29) &= 251;
+                                                                *p.offset(prime_ * 86 + 31) &= 239;
+                                                                *p.offset(prime_ * 90 + 33) &= 254;
+                                                                *p.offset(prime_ * 92 + 33) &= 191;
+                                                                *p.offset(prime_ * 96 + 35) &= 253;
+                                                                *p.offset(prime_ * 98 + 35) &= 127;
+                                                                *p.offset(prime_ * 102 + 37) &= 247;
+                                                                *p.offset(prime_ * 108 + 39) &= 223;
+                                                                *p.offset(prime_ * 110 + 40) &= 251;
+                                                                *p.offset(prime_ * 116 + 42) &= 239;
+                                                                *p.offset(prime_ * 120 + 44) &= 254;
+                                                                *p.offset(prime_ * 122 + 44) &= 191;
+                                                                *p.offset(prime_ * 126 + 46) &= 253;
+                                                                *p.offset(prime_ * 128 + 46) &= 127;
+                                                                *p.offset(prime_ * 132 + 48) &= 247;
+                                                                *p.offset(prime_ * 138 + 50) &= 223;
+                                                                *p.offset(prime_ * 140 + 51) &= 251;
+                                                                *p.offset(prime_ * 146 + 53) &= 239;
+                                                                *p.offset(prime_ * 150 + 55) &= 254;
+                                                                *p.offset(prime_ * 152 + 55) &= 191;
+                                                                *p.offset(prime_ * 156 + 57) &= 253;
+                                                                *p.offset(prime_ * 158 + 57) &= 127;
+                                                                *p.offset(prime_ * 162 + 59) &= 247;
+                                                                *p.offset(prime_ * 168 + 61) &= 223;
+                                                                *p.offset(prime_ * 170 + 62) &= 251;
+                                                                *p.offset(prime_ * 176 + 64) &= 239;
 
                                                                 p = p.offset(prime_ * 180 + 66)
                                                             }
                                                             if p >= end { wi = 96; break 'outer; }
-                                                            *p |= 1; p = p.offset(prime_ * 2 + 0);
+                                                            *p &= 254; p = p.offset(prime_ * 2 + 0);
                                                             break 'label97
                                                            }
                                                            if p >= end { wi = 97; break 'outer; }
-                                                           *p |= 64; p = p.offset(prime_ * 4 + 2);
+                                                           *p &= 191; p = p.offset(prime_ * 4 + 2);
                                                            break 'label98
                                                           }
                                                           if p >= end { wi = 98; break 'outer; }
-                                                          *p |= 2; p = p.offset(prime_ * 2 + 0);
+                                                          *p &= 253; p = p.offset(prime_ * 2 + 0);
                                                           break 'label99
                                                          }
                                                          if p >= end { wi = 99; break 'outer; }
-                                                         *p |= 128; p = p.offset(prime_ * 4 + 2);
+                                                         *p &= 127; p = p.offset(prime_ * 4 + 2);
                                                          break 'label100
                                                         }
                                                         if p >= end { wi = 100; break 'outer; }
-                                                        *p |= 8; p = p.offset(prime_ * 6 + 2);
+                                                        *p &= 247; p = p.offset(prime_ * 6 + 2);
                                                         break 'label101
                                                        }
                                                        if p >= end { wi = 101; break 'outer; }
-                                                       *p |= 32; p = p.offset(prime_ * 2 + 1);
+                                                       *p &= 223; p = p.offset(prime_ * 2 + 1);
                                                        break 'label102
                                                       }
                                                       if p >= end { wi = 102; break 'outer; }
-                                                      *p |= 4; p = p.offset(prime_ * 6 + 2);
+                                                      *p &= 251; p = p.offset(prime_ * 6 + 2);
                                                       break 'label103
                                                      }
                                                      if p >= end { wi = 103; break 'outer; }
-                                                     *p |= 16; p = p.offset(prime_ * 4 + 2);
+                                                     *p &= 239; p = p.offset(prime_ * 4 + 2);
                                                      break 'label104
                                                     }
                                                     if p >= end { wi = 104; break 'outer; }
-                                                    *p |= 1; p = p.offset(prime_ * 2 + 0);
+                                                    *p &= 254; p = p.offset(prime_ * 2 + 0);
                                                     break 'label105
                                                    }
                                                    if p >= end { wi = 105; break 'outer; }
-                                                   *p |= 64; p = p.offset(prime_ * 4 + 2);
+                                                   *p &= 191; p = p.offset(prime_ * 4 + 2);
                                                    break 'label106
                                                   }
                                                   if p >= end { wi = 106; break 'outer; }
-                                                  *p |= 2; p = p.offset(prime_ * 2 + 0);
+                                                  *p &= 253; p = p.offset(prime_ * 2 + 0);
                                                   break 'label107
                                                  }
                                                  if p >= end { wi = 107; break 'outer; }
-                                                 *p |= 128; p = p.offset(prime_ * 4 + 2);
+                                                 *p &= 127; p = p.offset(prime_ * 4 + 2);
                                                  break 'label108
                                                 }
                                                 if p >= end { wi = 108; break 'outer; }
-                                                *p |= 8; p = p.offset(prime_ * 6 + 2);
+                                                *p &= 247; p = p.offset(prime_ * 6 + 2);
                                                 break 'label109
                                                }
                                                if p >= end { wi = 109; break 'outer; }
-                                               *p |= 32; p = p.offset(prime_ * 2 + 1);
+                                               *p &= 223; p = p.offset(prime_ * 2 + 1);
                                                break 'label110
                                               }
                                               if p >= end { wi = 110; break 'outer; }
-                                              *p |= 4; p = p.offset(prime_ * 6 + 2);
+                                              *p &= 251; p = p.offset(prime_ * 6 + 2);
                                               break 'label111
                                              }
                                              if p >= end { wi = 111; break 'outer; }
-                                             *p |= 16; p = p.offset(prime_ * 4 + 2);
+                                             *p &= 239; p = p.offset(prime_ * 4 + 2);
                                              break 'label112
                                             }
                                             if p >= end { wi = 112; break 'outer; }
-                                            *p |= 1; p = p.offset(prime_ * 2 + 0);
+                                            *p &= 254; p = p.offset(prime_ * 2 + 0);
                                             break 'label113
                                            }
                                            if p >= end { wi = 113; break 'outer; }
-                                           *p |= 64; p = p.offset(prime_ * 4 + 2);
+                                           *p &= 191; p = p.offset(prime_ * 4 + 2);
                                            break 'label114
                                           }
                                           if p >= end { wi = 114; break 'outer; }
-                                          *p |= 2; p = p.offset(prime_ * 2 + 0);
+                                          *p &= 253; p = p.offset(prime_ * 2 + 0);
                                           break 'label115
                                          }
                                          if p >= end { wi = 115; break 'outer; }
-                                         *p |= 128; p = p.offset(prime_ * 4 + 2);
+                                         *p &= 127; p = p.offset(prime_ * 4 + 2);
                                          break 'label116
                                         }
                                         if p >= end { wi = 116; break 'outer; }
-                                        *p |= 8; p = p.offset(prime_ * 6 + 2);
+                                        *p &= 247; p = p.offset(prime_ * 6 + 2);
                                         break 'label117
                                        }
                                        if p >= end { wi = 117; break 'outer; }
-                                       *p |= 32; p = p.offset(prime_ * 2 + 1);
+                                       *p &= 223; p = p.offset(prime_ * 2 + 1);
                                        break 'label118
                                       }
                                       if p >= end { wi = 118; break 'outer; }
-                                      *p |= 4; p = p.offset(prime_ * 6 + 2);
+                                      *p &= 251; p = p.offset(prime_ * 6 + 2);
                                       break 'label119
                                      }
                                      if p >= end { wi = 119; break 'outer; }
-                                     *p |= 16; p = p.offset(prime_ * 4 + 2);
+                                     *p &= 239; p = p.offset(prime_ * 4 + 2);
                                      break 'label120
                                     }
                                     if p >= end { wi = 120; break 'outer; }
-                                    *p |= 1; p = p.offset(prime_ * 2 + 0);
+                                    *p &= 254; p = p.offset(prime_ * 2 + 0);
                                     break 'label121
                                    }
                                    if p >= end { wi = 121; break 'outer; }
-                                   *p |= 64; p = p.offset(prime_ * 4 + 2);
+                                   *p &= 191; p = p.offset(prime_ * 4 + 2);
                                    break 'label122
                                   }
                                   if p >= end { wi = 122; break 'outer; }
-                                  *p |= 2; p = p.offset(prime_ * 2 + 0);
+                                  *p &= 253; p = p.offset(prime_ * 2 + 0);
                                   break 'label123
                                  }
                                  if p >= end { wi = 123; break 'outer; }
-                                 *p |= 128; p = p.offset(prime_ * 4 + 2);
+                                 *p &= 127; p = p.offset(prime_ * 4 + 2);
                                  break 'label124
                                 }
                                 if p >= end { wi = 124; break 'outer; }
-                                *p |= 8; p = p.offset(prime_ * 6 + 2);
+                                *p &= 247; p = p.offset(prime_ * 6 + 2);
                                 break 'label125
                                }
                                if p >= end { wi = 125; break 'outer; }
-                               *p |= 32; p = p.offset(prime_ * 2 + 1);
+                               *p &= 223; p = p.offset(prime_ * 2 + 1);
                                break 'label126
                               }
                               if p >= end { wi = 126; break 'outer; }
-                              *p |= 4; p = p.offset(prime_ * 6 + 2);
+                              *p &= 251; p = p.offset(prime_ * 6 + 2);
                               break 'label127
                              }
                              if p >= end { wi = 127; break 'outer; }
-                             *p |= 16; p = p.offset(prime_ * 4 + 2);
+                             *p &= 239; p = p.offset(prime_ * 4 + 2);
                              break 'label128
                             }
                             if p >= end { wi = 128; break 'outer; }
-                            *p |= 1; p = p.offset(prime_ * 2 + 0);
+                            *p &= 254; p = p.offset(prime_ * 2 + 0);
                             break 'label129
                            }
                            if p >= end { wi = 129; break 'outer; }
-                           *p |= 64; p = p.offset(prime_ * 4 + 2);
+                           *p &= 191; p = p.offset(prime_ * 4 + 2);
                            break 'label130
                           }
                           if p >= end { wi = 130; break 'outer; }
-                          *p |= 2; p = p.offset(prime_ * 2 + 0);
+                          *p &= 253; p = p.offset(prime_ * 2 + 0);
                           break 'label131
                          }
                          if p >= end { wi = 131; break 'outer; }
-                         *p |= 128; p = p.offset(prime_ * 4 + 2);
+                         *p &= 127; p = p.offset(prime_ * 4 + 2);
                          break 'label132
                         }
                         if p >= end { wi = 132; break 'outer; }
-                        *p |= 8; p = p.offset(prime_ * 6 + 2);
+                        *p &= 247; p = p.offset(prime_ * 6 + 2);
                         break 'label133
                        }
                        if p >= end { wi = 133; break 'outer; }
-                       *p |= 32; p = p.offset(prime_ * 2 + 1);
+                       *p &= 223; p = p.offset(prime_ * 2 + 1);
                        break 'label134
                       }
                       if p >= end { wi = 134; break 'outer; }
-                      *p |= 4; p = p.offset(prime_ * 6 + 2);
+                      *p &= 251; p = p.offset(prime_ * 6 + 2);
                       break 'label135
                      }
                      if p >= end { wi = 135; break 'outer; }
-                     *p |= 16; p = p.offset(prime_ * 4 + 2);
+                     *p &= 239; p = p.offset(prime_ * 4 + 2);
                      break 'label136
                     }
                     if p >= end { wi = 136; break 'outer; }
-                    *p |= 1; p = p.offset(prime_ * 2 + 0);
+                    *p &= 254; p = p.offset(prime_ * 2 + 0);
                     break 'label137
                    }
                    if p >= end { wi = 137; break 'outer; }
-                   *p |= 64; p = p.offset(prime_ * 4 + 2);
+                   *p &= 191; p = p.offset(prime_ * 4 + 2);
                    break 'label138
                   }
                   if p >= end { wi = 138; break 'outer; }
-                  *p |= 2; p = p.offset(prime_ * 2 + 0);
+                  *p &= 253; p = p.offset(prime_ * 2 + 0);
                   break 'label139
                  }
                  if p >= end { wi = 139; break 'outer; }
-                 *p |= 128; p = p.offset(prime_ * 4 + 2);
+                 *p &= 127; p = p.offset(prime_ * 4 + 2);
                  break 'label140
                 }
                 if p >= end { wi = 140; break 'outer; }
-                *p |= 8; p = p.offset(prime_ * 6 + 2);
+                *p &= 247; p = p.offset(prime_ * 6 + 2);
                 break 'label141
                }
                if p >= end { wi = 141; break 'outer; }
-               *p |= 32; p = p.offset(prime_ * 2 + 1);
+               *p &= 223; p = p.offset(prime_ * 2 + 1);
                break 'label142
               }
               if p >= end { wi = 142; break 'outer; }
-              *p |= 4; p = p.offset(prime_ * 6 + 2);
+              *p &= 251; p = p.offset(prime_ * 6 + 2);
               break 'label143
              }
              if p >= end { wi = 143; break 'outer; }
-             *p |= 16; p = p.offset(prime_ * 4 + 2);
+             *p &= 239; p = p.offset(prime_ * 4 + 2);
              wi = 96
             }
         }
@@ -1792,247 +1792,247 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                             }
                                                             while p < loop_end {
                                                                 p = ::b(p);
-                                                                *p.offset(prime_ * 0 + 0) |= 32;
-                                                                *p.offset(prime_ * 4 + 2) |= 4;
-                                                                *p.offset(prime_ * 6 + 3) |= 2;
-                                                                *p.offset(prime_ * 10 + 4) |= 128;
-                                                                *p.offset(prime_ * 16 + 7) |= 16;
-                                                                *p.offset(prime_ * 18 + 8) |= 8;
-                                                                *p.offset(prime_ * 24 + 11) |= 1;
-                                                                *p.offset(prime_ * 28 + 12) |= 64;
-                                                                *p.offset(prime_ * 30 + 13) |= 32;
-                                                                *p.offset(prime_ * 34 + 15) |= 4;
-                                                                *p.offset(prime_ * 36 + 16) |= 2;
-                                                                *p.offset(prime_ * 40 + 17) |= 128;
-                                                                *p.offset(prime_ * 46 + 20) |= 16;
-                                                                *p.offset(prime_ * 48 + 21) |= 8;
-                                                                *p.offset(prime_ * 54 + 24) |= 1;
-                                                                *p.offset(prime_ * 58 + 25) |= 64;
-                                                                *p.offset(prime_ * 60 + 26) |= 32;
-                                                                *p.offset(prime_ * 64 + 28) |= 4;
-                                                                *p.offset(prime_ * 66 + 29) |= 2;
-                                                                *p.offset(prime_ * 70 + 30) |= 128;
-                                                                *p.offset(prime_ * 76 + 33) |= 16;
-                                                                *p.offset(prime_ * 78 + 34) |= 8;
-                                                                *p.offset(prime_ * 84 + 37) |= 1;
-                                                                *p.offset(prime_ * 88 + 38) |= 64;
-                                                                *p.offset(prime_ * 90 + 39) |= 32;
-                                                                *p.offset(prime_ * 94 + 41) |= 4;
-                                                                *p.offset(prime_ * 96 + 42) |= 2;
-                                                                *p.offset(prime_ * 100 + 43) |= 128;
-                                                                *p.offset(prime_ * 106 + 46) |= 16;
-                                                                *p.offset(prime_ * 108 + 47) |= 8;
-                                                                *p.offset(prime_ * 114 + 50) |= 1;
-                                                                *p.offset(prime_ * 118 + 51) |= 64;
-                                                                *p.offset(prime_ * 120 + 52) |= 32;
-                                                                *p.offset(prime_ * 124 + 54) |= 4;
-                                                                *p.offset(prime_ * 126 + 55) |= 2;
-                                                                *p.offset(prime_ * 130 + 56) |= 128;
-                                                                *p.offset(prime_ * 136 + 59) |= 16;
-                                                                *p.offset(prime_ * 138 + 60) |= 8;
-                                                                *p.offset(prime_ * 144 + 63) |= 1;
-                                                                *p.offset(prime_ * 148 + 64) |= 64;
-                                                                *p.offset(prime_ * 150 + 65) |= 32;
-                                                                *p.offset(prime_ * 154 + 67) |= 4;
-                                                                *p.offset(prime_ * 156 + 68) |= 2;
-                                                                *p.offset(prime_ * 160 + 69) |= 128;
-                                                                *p.offset(prime_ * 166 + 72) |= 16;
-                                                                *p.offset(prime_ * 168 + 73) |= 8;
-                                                                *p.offset(prime_ * 174 + 76) |= 1;
-                                                                *p.offset(prime_ * 178 + 77) |= 64;
+                                                                *p.offset(prime_ * 0 + 0) &= 223;
+                                                                *p.offset(prime_ * 4 + 2) &= 251;
+                                                                *p.offset(prime_ * 6 + 3) &= 253;
+                                                                *p.offset(prime_ * 10 + 4) &= 127;
+                                                                *p.offset(prime_ * 16 + 7) &= 239;
+                                                                *p.offset(prime_ * 18 + 8) &= 247;
+                                                                *p.offset(prime_ * 24 + 11) &= 254;
+                                                                *p.offset(prime_ * 28 + 12) &= 191;
+                                                                *p.offset(prime_ * 30 + 13) &= 223;
+                                                                *p.offset(prime_ * 34 + 15) &= 251;
+                                                                *p.offset(prime_ * 36 + 16) &= 253;
+                                                                *p.offset(prime_ * 40 + 17) &= 127;
+                                                                *p.offset(prime_ * 46 + 20) &= 239;
+                                                                *p.offset(prime_ * 48 + 21) &= 247;
+                                                                *p.offset(prime_ * 54 + 24) &= 254;
+                                                                *p.offset(prime_ * 58 + 25) &= 191;
+                                                                *p.offset(prime_ * 60 + 26) &= 223;
+                                                                *p.offset(prime_ * 64 + 28) &= 251;
+                                                                *p.offset(prime_ * 66 + 29) &= 253;
+                                                                *p.offset(prime_ * 70 + 30) &= 127;
+                                                                *p.offset(prime_ * 76 + 33) &= 239;
+                                                                *p.offset(prime_ * 78 + 34) &= 247;
+                                                                *p.offset(prime_ * 84 + 37) &= 254;
+                                                                *p.offset(prime_ * 88 + 38) &= 191;
+                                                                *p.offset(prime_ * 90 + 39) &= 223;
+                                                                *p.offset(prime_ * 94 + 41) &= 251;
+                                                                *p.offset(prime_ * 96 + 42) &= 253;
+                                                                *p.offset(prime_ * 100 + 43) &= 127;
+                                                                *p.offset(prime_ * 106 + 46) &= 239;
+                                                                *p.offset(prime_ * 108 + 47) &= 247;
+                                                                *p.offset(prime_ * 114 + 50) &= 254;
+                                                                *p.offset(prime_ * 118 + 51) &= 191;
+                                                                *p.offset(prime_ * 120 + 52) &= 223;
+                                                                *p.offset(prime_ * 124 + 54) &= 251;
+                                                                *p.offset(prime_ * 126 + 55) &= 253;
+                                                                *p.offset(prime_ * 130 + 56) &= 127;
+                                                                *p.offset(prime_ * 136 + 59) &= 239;
+                                                                *p.offset(prime_ * 138 + 60) &= 247;
+                                                                *p.offset(prime_ * 144 + 63) &= 254;
+                                                                *p.offset(prime_ * 148 + 64) &= 191;
+                                                                *p.offset(prime_ * 150 + 65) &= 223;
+                                                                *p.offset(prime_ * 154 + 67) &= 251;
+                                                                *p.offset(prime_ * 156 + 68) &= 253;
+                                                                *p.offset(prime_ * 160 + 69) &= 127;
+                                                                *p.offset(prime_ * 166 + 72) &= 239;
+                                                                *p.offset(prime_ * 168 + 73) &= 247;
+                                                                *p.offset(prime_ * 174 + 76) &= 254;
+                                                                *p.offset(prime_ * 178 + 77) &= 191;
 
                                                                 p = p.offset(prime_ * 180 + 78)
                                                             }
                                                             if p >= end { wi = 144; break 'outer; }
-                                                            *p |= 32; p = p.offset(prime_ * 4 + 2);
+                                                            *p &= 223; p = p.offset(prime_ * 4 + 2);
                                                             break 'label145
                                                            }
                                                            if p >= end { wi = 145; break 'outer; }
-                                                           *p |= 4; p = p.offset(prime_ * 2 + 1);
+                                                           *p &= 251; p = p.offset(prime_ * 2 + 1);
                                                            break 'label146
                                                           }
                                                           if p >= end { wi = 146; break 'outer; }
-                                                          *p |= 2; p = p.offset(prime_ * 4 + 1);
+                                                          *p &= 253; p = p.offset(prime_ * 4 + 1);
                                                           break 'label147
                                                          }
                                                          if p >= end { wi = 147; break 'outer; }
-                                                         *p |= 128; p = p.offset(prime_ * 6 + 3);
+                                                         *p &= 127; p = p.offset(prime_ * 6 + 3);
                                                          break 'label148
                                                         }
                                                         if p >= end { wi = 148; break 'outer; }
-                                                        *p |= 16; p = p.offset(prime_ * 2 + 1);
+                                                        *p &= 239; p = p.offset(prime_ * 2 + 1);
                                                         break 'label149
                                                        }
                                                        if p >= end { wi = 149; break 'outer; }
-                                                       *p |= 8; p = p.offset(prime_ * 6 + 3);
+                                                       *p &= 247; p = p.offset(prime_ * 6 + 3);
                                                        break 'label150
                                                       }
                                                       if p >= end { wi = 150; break 'outer; }
-                                                      *p |= 1; p = p.offset(prime_ * 4 + 1);
+                                                      *p &= 254; p = p.offset(prime_ * 4 + 1);
                                                       break 'label151
                                                      }
                                                      if p >= end { wi = 151; break 'outer; }
-                                                     *p |= 64; p = p.offset(prime_ * 2 + 1);
+                                                     *p &= 191; p = p.offset(prime_ * 2 + 1);
                                                      break 'label152
                                                     }
                                                     if p >= end { wi = 152; break 'outer; }
-                                                    *p |= 32; p = p.offset(prime_ * 4 + 2);
+                                                    *p &= 223; p = p.offset(prime_ * 4 + 2);
                                                     break 'label153
                                                    }
                                                    if p >= end { wi = 153; break 'outer; }
-                                                   *p |= 4; p = p.offset(prime_ * 2 + 1);
+                                                   *p &= 251; p = p.offset(prime_ * 2 + 1);
                                                    break 'label154
                                                   }
                                                   if p >= end { wi = 154; break 'outer; }
-                                                  *p |= 2; p = p.offset(prime_ * 4 + 1);
+                                                  *p &= 253; p = p.offset(prime_ * 4 + 1);
                                                   break 'label155
                                                  }
                                                  if p >= end { wi = 155; break 'outer; }
-                                                 *p |= 128; p = p.offset(prime_ * 6 + 3);
+                                                 *p &= 127; p = p.offset(prime_ * 6 + 3);
                                                  break 'label156
                                                 }
                                                 if p >= end { wi = 156; break 'outer; }
-                                                *p |= 16; p = p.offset(prime_ * 2 + 1);
+                                                *p &= 239; p = p.offset(prime_ * 2 + 1);
                                                 break 'label157
                                                }
                                                if p >= end { wi = 157; break 'outer; }
-                                               *p |= 8; p = p.offset(prime_ * 6 + 3);
+                                               *p &= 247; p = p.offset(prime_ * 6 + 3);
                                                break 'label158
                                               }
                                               if p >= end { wi = 158; break 'outer; }
-                                              *p |= 1; p = p.offset(prime_ * 4 + 1);
+                                              *p &= 254; p = p.offset(prime_ * 4 + 1);
                                               break 'label159
                                              }
                                              if p >= end { wi = 159; break 'outer; }
-                                             *p |= 64; p = p.offset(prime_ * 2 + 1);
+                                             *p &= 191; p = p.offset(prime_ * 2 + 1);
                                              break 'label160
                                             }
                                             if p >= end { wi = 160; break 'outer; }
-                                            *p |= 32; p = p.offset(prime_ * 4 + 2);
+                                            *p &= 223; p = p.offset(prime_ * 4 + 2);
                                             break 'label161
                                            }
                                            if p >= end { wi = 161; break 'outer; }
-                                           *p |= 4; p = p.offset(prime_ * 2 + 1);
+                                           *p &= 251; p = p.offset(prime_ * 2 + 1);
                                            break 'label162
                                           }
                                           if p >= end { wi = 162; break 'outer; }
-                                          *p |= 2; p = p.offset(prime_ * 4 + 1);
+                                          *p &= 253; p = p.offset(prime_ * 4 + 1);
                                           break 'label163
                                          }
                                          if p >= end { wi = 163; break 'outer; }
-                                         *p |= 128; p = p.offset(prime_ * 6 + 3);
+                                         *p &= 127; p = p.offset(prime_ * 6 + 3);
                                          break 'label164
                                         }
                                         if p >= end { wi = 164; break 'outer; }
-                                        *p |= 16; p = p.offset(prime_ * 2 + 1);
+                                        *p &= 239; p = p.offset(prime_ * 2 + 1);
                                         break 'label165
                                        }
                                        if p >= end { wi = 165; break 'outer; }
-                                       *p |= 8; p = p.offset(prime_ * 6 + 3);
+                                       *p &= 247; p = p.offset(prime_ * 6 + 3);
                                        break 'label166
                                       }
                                       if p >= end { wi = 166; break 'outer; }
-                                      *p |= 1; p = p.offset(prime_ * 4 + 1);
+                                      *p &= 254; p = p.offset(prime_ * 4 + 1);
                                       break 'label167
                                      }
                                      if p >= end { wi = 167; break 'outer; }
-                                     *p |= 64; p = p.offset(prime_ * 2 + 1);
+                                     *p &= 191; p = p.offset(prime_ * 2 + 1);
                                      break 'label168
                                     }
                                     if p >= end { wi = 168; break 'outer; }
-                                    *p |= 32; p = p.offset(prime_ * 4 + 2);
+                                    *p &= 223; p = p.offset(prime_ * 4 + 2);
                                     break 'label169
                                    }
                                    if p >= end { wi = 169; break 'outer; }
-                                   *p |= 4; p = p.offset(prime_ * 2 + 1);
+                                   *p &= 251; p = p.offset(prime_ * 2 + 1);
                                    break 'label170
                                   }
                                   if p >= end { wi = 170; break 'outer; }
-                                  *p |= 2; p = p.offset(prime_ * 4 + 1);
+                                  *p &= 253; p = p.offset(prime_ * 4 + 1);
                                   break 'label171
                                  }
                                  if p >= end { wi = 171; break 'outer; }
-                                 *p |= 128; p = p.offset(prime_ * 6 + 3);
+                                 *p &= 127; p = p.offset(prime_ * 6 + 3);
                                  break 'label172
                                 }
                                 if p >= end { wi = 172; break 'outer; }
-                                *p |= 16; p = p.offset(prime_ * 2 + 1);
+                                *p &= 239; p = p.offset(prime_ * 2 + 1);
                                 break 'label173
                                }
                                if p >= end { wi = 173; break 'outer; }
-                               *p |= 8; p = p.offset(prime_ * 6 + 3);
+                               *p &= 247; p = p.offset(prime_ * 6 + 3);
                                break 'label174
                               }
                               if p >= end { wi = 174; break 'outer; }
-                              *p |= 1; p = p.offset(prime_ * 4 + 1);
+                              *p &= 254; p = p.offset(prime_ * 4 + 1);
                               break 'label175
                              }
                              if p >= end { wi = 175; break 'outer; }
-                             *p |= 64; p = p.offset(prime_ * 2 + 1);
+                             *p &= 191; p = p.offset(prime_ * 2 + 1);
                              break 'label176
                             }
                             if p >= end { wi = 176; break 'outer; }
-                            *p |= 32; p = p.offset(prime_ * 4 + 2);
+                            *p &= 223; p = p.offset(prime_ * 4 + 2);
                             break 'label177
                            }
                            if p >= end { wi = 177; break 'outer; }
-                           *p |= 4; p = p.offset(prime_ * 2 + 1);
+                           *p &= 251; p = p.offset(prime_ * 2 + 1);
                            break 'label178
                           }
                           if p >= end { wi = 178; break 'outer; }
-                          *p |= 2; p = p.offset(prime_ * 4 + 1);
+                          *p &= 253; p = p.offset(prime_ * 4 + 1);
                           break 'label179
                          }
                          if p >= end { wi = 179; break 'outer; }
-                         *p |= 128; p = p.offset(prime_ * 6 + 3);
+                         *p &= 127; p = p.offset(prime_ * 6 + 3);
                          break 'label180
                         }
                         if p >= end { wi = 180; break 'outer; }
-                        *p |= 16; p = p.offset(prime_ * 2 + 1);
+                        *p &= 239; p = p.offset(prime_ * 2 + 1);
                         break 'label181
                        }
                        if p >= end { wi = 181; break 'outer; }
-                       *p |= 8; p = p.offset(prime_ * 6 + 3);
+                       *p &= 247; p = p.offset(prime_ * 6 + 3);
                        break 'label182
                       }
                       if p >= end { wi = 182; break 'outer; }
-                      *p |= 1; p = p.offset(prime_ * 4 + 1);
+                      *p &= 254; p = p.offset(prime_ * 4 + 1);
                       break 'label183
                      }
                      if p >= end { wi = 183; break 'outer; }
-                     *p |= 64; p = p.offset(prime_ * 2 + 1);
+                     *p &= 191; p = p.offset(prime_ * 2 + 1);
                      break 'label184
                     }
                     if p >= end { wi = 184; break 'outer; }
-                    *p |= 32; p = p.offset(prime_ * 4 + 2);
+                    *p &= 223; p = p.offset(prime_ * 4 + 2);
                     break 'label185
                    }
                    if p >= end { wi = 185; break 'outer; }
-                   *p |= 4; p = p.offset(prime_ * 2 + 1);
+                   *p &= 251; p = p.offset(prime_ * 2 + 1);
                    break 'label186
                   }
                   if p >= end { wi = 186; break 'outer; }
-                  *p |= 2; p = p.offset(prime_ * 4 + 1);
+                  *p &= 253; p = p.offset(prime_ * 4 + 1);
                   break 'label187
                  }
                  if p >= end { wi = 187; break 'outer; }
-                 *p |= 128; p = p.offset(prime_ * 6 + 3);
+                 *p &= 127; p = p.offset(prime_ * 6 + 3);
                  break 'label188
                 }
                 if p >= end { wi = 188; break 'outer; }
-                *p |= 16; p = p.offset(prime_ * 2 + 1);
+                *p &= 239; p = p.offset(prime_ * 2 + 1);
                 break 'label189
                }
                if p >= end { wi = 189; break 'outer; }
-               *p |= 8; p = p.offset(prime_ * 6 + 3);
+               *p &= 247; p = p.offset(prime_ * 6 + 3);
                break 'label190
               }
               if p >= end { wi = 190; break 'outer; }
-              *p |= 1; p = p.offset(prime_ * 4 + 1);
+              *p &= 254; p = p.offset(prime_ * 4 + 1);
               break 'label191
              }
              if p >= end { wi = 191; break 'outer; }
-             *p |= 64; p = p.offset(prime_ * 2 + 1);
+             *p &= 191; p = p.offset(prime_ * 2 + 1);
              wi = 144
             }
         }
@@ -2139,247 +2139,247 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                             }
                                                             while p < loop_end {
                                                                 p = ::b(p);
-                                                                *p.offset(prime_ * 0 + 0) |= 32;
-                                                                *p.offset(prime_ * 2 + 1) |= 64;
-                                                                *p.offset(prime_ * 6 + 4) |= 1;
-                                                                *p.offset(prime_ * 12 + 7) |= 8;
-                                                                *p.offset(prime_ * 14 + 8) |= 16;
-                                                                *p.offset(prime_ * 20 + 11) |= 128;
-                                                                *p.offset(prime_ * 24 + 14) |= 2;
-                                                                *p.offset(prime_ * 26 + 15) |= 4;
-                                                                *p.offset(prime_ * 30 + 17) |= 32;
-                                                                *p.offset(prime_ * 32 + 18) |= 64;
-                                                                *p.offset(prime_ * 36 + 21) |= 1;
-                                                                *p.offset(prime_ * 42 + 24) |= 8;
-                                                                *p.offset(prime_ * 44 + 25) |= 16;
-                                                                *p.offset(prime_ * 50 + 28) |= 128;
-                                                                *p.offset(prime_ * 54 + 31) |= 2;
-                                                                *p.offset(prime_ * 56 + 32) |= 4;
-                                                                *p.offset(prime_ * 60 + 34) |= 32;
-                                                                *p.offset(prime_ * 62 + 35) |= 64;
-                                                                *p.offset(prime_ * 66 + 38) |= 1;
-                                                                *p.offset(prime_ * 72 + 41) |= 8;
-                                                                *p.offset(prime_ * 74 + 42) |= 16;
-                                                                *p.offset(prime_ * 80 + 45) |= 128;
-                                                                *p.offset(prime_ * 84 + 48) |= 2;
-                                                                *p.offset(prime_ * 86 + 49) |= 4;
-                                                                *p.offset(prime_ * 90 + 51) |= 32;
-                                                                *p.offset(prime_ * 92 + 52) |= 64;
-                                                                *p.offset(prime_ * 96 + 55) |= 1;
-                                                                *p.offset(prime_ * 102 + 58) |= 8;
-                                                                *p.offset(prime_ * 104 + 59) |= 16;
-                                                                *p.offset(prime_ * 110 + 62) |= 128;
-                                                                *p.offset(prime_ * 114 + 65) |= 2;
-                                                                *p.offset(prime_ * 116 + 66) |= 4;
-                                                                *p.offset(prime_ * 120 + 68) |= 32;
-                                                                *p.offset(prime_ * 122 + 69) |= 64;
-                                                                *p.offset(prime_ * 126 + 72) |= 1;
-                                                                *p.offset(prime_ * 132 + 75) |= 8;
-                                                                *p.offset(prime_ * 134 + 76) |= 16;
-                                                                *p.offset(prime_ * 140 + 79) |= 128;
-                                                                *p.offset(prime_ * 144 + 82) |= 2;
-                                                                *p.offset(prime_ * 146 + 83) |= 4;
-                                                                *p.offset(prime_ * 150 + 85) |= 32;
-                                                                *p.offset(prime_ * 152 + 86) |= 64;
-                                                                *p.offset(prime_ * 156 + 89) |= 1;
-                                                                *p.offset(prime_ * 162 + 92) |= 8;
-                                                                *p.offset(prime_ * 164 + 93) |= 16;
-                                                                *p.offset(prime_ * 170 + 96) |= 128;
-                                                                *p.offset(prime_ * 174 + 99) |= 2;
-                                                                *p.offset(prime_ * 176 + 100) |= 4;
+                                                                *p.offset(prime_ * 0 + 0) &= 223;
+                                                                *p.offset(prime_ * 2 + 1) &= 191;
+                                                                *p.offset(prime_ * 6 + 4) &= 254;
+                                                                *p.offset(prime_ * 12 + 7) &= 247;
+                                                                *p.offset(prime_ * 14 + 8) &= 239;
+                                                                *p.offset(prime_ * 20 + 11) &= 127;
+                                                                *p.offset(prime_ * 24 + 14) &= 253;
+                                                                *p.offset(prime_ * 26 + 15) &= 251;
+                                                                *p.offset(prime_ * 30 + 17) &= 223;
+                                                                *p.offset(prime_ * 32 + 18) &= 191;
+                                                                *p.offset(prime_ * 36 + 21) &= 254;
+                                                                *p.offset(prime_ * 42 + 24) &= 247;
+                                                                *p.offset(prime_ * 44 + 25) &= 239;
+                                                                *p.offset(prime_ * 50 + 28) &= 127;
+                                                                *p.offset(prime_ * 54 + 31) &= 253;
+                                                                *p.offset(prime_ * 56 + 32) &= 251;
+                                                                *p.offset(prime_ * 60 + 34) &= 223;
+                                                                *p.offset(prime_ * 62 + 35) &= 191;
+                                                                *p.offset(prime_ * 66 + 38) &= 254;
+                                                                *p.offset(prime_ * 72 + 41) &= 247;
+                                                                *p.offset(prime_ * 74 + 42) &= 239;
+                                                                *p.offset(prime_ * 80 + 45) &= 127;
+                                                                *p.offset(prime_ * 84 + 48) &= 253;
+                                                                *p.offset(prime_ * 86 + 49) &= 251;
+                                                                *p.offset(prime_ * 90 + 51) &= 223;
+                                                                *p.offset(prime_ * 92 + 52) &= 191;
+                                                                *p.offset(prime_ * 96 + 55) &= 254;
+                                                                *p.offset(prime_ * 102 + 58) &= 247;
+                                                                *p.offset(prime_ * 104 + 59) &= 239;
+                                                                *p.offset(prime_ * 110 + 62) &= 127;
+                                                                *p.offset(prime_ * 114 + 65) &= 253;
+                                                                *p.offset(prime_ * 116 + 66) &= 251;
+                                                                *p.offset(prime_ * 120 + 68) &= 223;
+                                                                *p.offset(prime_ * 122 + 69) &= 191;
+                                                                *p.offset(prime_ * 126 + 72) &= 254;
+                                                                *p.offset(prime_ * 132 + 75) &= 247;
+                                                                *p.offset(prime_ * 134 + 76) &= 239;
+                                                                *p.offset(prime_ * 140 + 79) &= 127;
+                                                                *p.offset(prime_ * 144 + 82) &= 253;
+                                                                *p.offset(prime_ * 146 + 83) &= 251;
+                                                                *p.offset(prime_ * 150 + 85) &= 223;
+                                                                *p.offset(prime_ * 152 + 86) &= 191;
+                                                                *p.offset(prime_ * 156 + 89) &= 254;
+                                                                *p.offset(prime_ * 162 + 92) &= 247;
+                                                                *p.offset(prime_ * 164 + 93) &= 239;
+                                                                *p.offset(prime_ * 170 + 96) &= 127;
+                                                                *p.offset(prime_ * 174 + 99) &= 253;
+                                                                *p.offset(prime_ * 176 + 100) &= 251;
 
                                                                 p = p.offset(prime_ * 180 + 102)
                                                             }
                                                             if p >= end { wi = 192; break 'outer; }
-                                                            *p |= 32; p = p.offset(prime_ * 2 + 1);
+                                                            *p &= 223; p = p.offset(prime_ * 2 + 1);
                                                             break 'label193
                                                            }
                                                            if p >= end { wi = 193; break 'outer; }
-                                                           *p |= 64; p = p.offset(prime_ * 4 + 3);
+                                                           *p &= 191; p = p.offset(prime_ * 4 + 3);
                                                            break 'label194
                                                           }
                                                           if p >= end { wi = 194; break 'outer; }
-                                                          *p |= 1; p = p.offset(prime_ * 6 + 3);
+                                                          *p &= 254; p = p.offset(prime_ * 6 + 3);
                                                           break 'label195
                                                          }
                                                          if p >= end { wi = 195; break 'outer; }
-                                                         *p |= 8; p = p.offset(prime_ * 2 + 1);
+                                                         *p &= 247; p = p.offset(prime_ * 2 + 1);
                                                          break 'label196
                                                         }
                                                         if p >= end { wi = 196; break 'outer; }
-                                                        *p |= 16; p = p.offset(prime_ * 6 + 3);
+                                                        *p &= 239; p = p.offset(prime_ * 6 + 3);
                                                         break 'label197
                                                        }
                                                        if p >= end { wi = 197; break 'outer; }
-                                                       *p |= 128; p = p.offset(prime_ * 4 + 3);
+                                                       *p &= 127; p = p.offset(prime_ * 4 + 3);
                                                        break 'label198
                                                       }
                                                       if p >= end { wi = 198; break 'outer; }
-                                                      *p |= 2; p = p.offset(prime_ * 2 + 1);
+                                                      *p &= 253; p = p.offset(prime_ * 2 + 1);
                                                       break 'label199
                                                      }
                                                      if p >= end { wi = 199; break 'outer; }
-                                                     *p |= 4; p = p.offset(prime_ * 4 + 2);
+                                                     *p &= 251; p = p.offset(prime_ * 4 + 2);
                                                      break 'label200
                                                     }
                                                     if p >= end { wi = 200; break 'outer; }
-                                                    *p |= 32; p = p.offset(prime_ * 2 + 1);
+                                                    *p &= 223; p = p.offset(prime_ * 2 + 1);
                                                     break 'label201
                                                    }
                                                    if p >= end { wi = 201; break 'outer; }
-                                                   *p |= 64; p = p.offset(prime_ * 4 + 3);
+                                                   *p &= 191; p = p.offset(prime_ * 4 + 3);
                                                    break 'label202
                                                   }
                                                   if p >= end { wi = 202; break 'outer; }
-                                                  *p |= 1; p = p.offset(prime_ * 6 + 3);
+                                                  *p &= 254; p = p.offset(prime_ * 6 + 3);
                                                   break 'label203
                                                  }
                                                  if p >= end { wi = 203; break 'outer; }
-                                                 *p |= 8; p = p.offset(prime_ * 2 + 1);
+                                                 *p &= 247; p = p.offset(prime_ * 2 + 1);
                                                  break 'label204
                                                 }
                                                 if p >= end { wi = 204; break 'outer; }
-                                                *p |= 16; p = p.offset(prime_ * 6 + 3);
+                                                *p &= 239; p = p.offset(prime_ * 6 + 3);
                                                 break 'label205
                                                }
                                                if p >= end { wi = 205; break 'outer; }
-                                               *p |= 128; p = p.offset(prime_ * 4 + 3);
+                                               *p &= 127; p = p.offset(prime_ * 4 + 3);
                                                break 'label206
                                               }
                                               if p >= end { wi = 206; break 'outer; }
-                                              *p |= 2; p = p.offset(prime_ * 2 + 1);
+                                              *p &= 253; p = p.offset(prime_ * 2 + 1);
                                               break 'label207
                                              }
                                              if p >= end { wi = 207; break 'outer; }
-                                             *p |= 4; p = p.offset(prime_ * 4 + 2);
+                                             *p &= 251; p = p.offset(prime_ * 4 + 2);
                                              break 'label208
                                             }
                                             if p >= end { wi = 208; break 'outer; }
-                                            *p |= 32; p = p.offset(prime_ * 2 + 1);
+                                            *p &= 223; p = p.offset(prime_ * 2 + 1);
                                             break 'label209
                                            }
                                            if p >= end { wi = 209; break 'outer; }
-                                           *p |= 64; p = p.offset(prime_ * 4 + 3);
+                                           *p &= 191; p = p.offset(prime_ * 4 + 3);
                                            break 'label210
                                           }
                                           if p >= end { wi = 210; break 'outer; }
-                                          *p |= 1; p = p.offset(prime_ * 6 + 3);
+                                          *p &= 254; p = p.offset(prime_ * 6 + 3);
                                           break 'label211
                                          }
                                          if p >= end { wi = 211; break 'outer; }
-                                         *p |= 8; p = p.offset(prime_ * 2 + 1);
+                                         *p &= 247; p = p.offset(prime_ * 2 + 1);
                                          break 'label212
                                         }
                                         if p >= end { wi = 212; break 'outer; }
-                                        *p |= 16; p = p.offset(prime_ * 6 + 3);
+                                        *p &= 239; p = p.offset(prime_ * 6 + 3);
                                         break 'label213
                                        }
                                        if p >= end { wi = 213; break 'outer; }
-                                       *p |= 128; p = p.offset(prime_ * 4 + 3);
+                                       *p &= 127; p = p.offset(prime_ * 4 + 3);
                                        break 'label214
                                       }
                                       if p >= end { wi = 214; break 'outer; }
-                                      *p |= 2; p = p.offset(prime_ * 2 + 1);
+                                      *p &= 253; p = p.offset(prime_ * 2 + 1);
                                       break 'label215
                                      }
                                      if p >= end { wi = 215; break 'outer; }
-                                     *p |= 4; p = p.offset(prime_ * 4 + 2);
+                                     *p &= 251; p = p.offset(prime_ * 4 + 2);
                                      break 'label216
                                     }
                                     if p >= end { wi = 216; break 'outer; }
-                                    *p |= 32; p = p.offset(prime_ * 2 + 1);
+                                    *p &= 223; p = p.offset(prime_ * 2 + 1);
                                     break 'label217
                                    }
                                    if p >= end { wi = 217; break 'outer; }
-                                   *p |= 64; p = p.offset(prime_ * 4 + 3);
+                                   *p &= 191; p = p.offset(prime_ * 4 + 3);
                                    break 'label218
                                   }
                                   if p >= end { wi = 218; break 'outer; }
-                                  *p |= 1; p = p.offset(prime_ * 6 + 3);
+                                  *p &= 254; p = p.offset(prime_ * 6 + 3);
                                   break 'label219
                                  }
                                  if p >= end { wi = 219; break 'outer; }
-                                 *p |= 8; p = p.offset(prime_ * 2 + 1);
+                                 *p &= 247; p = p.offset(prime_ * 2 + 1);
                                  break 'label220
                                 }
                                 if p >= end { wi = 220; break 'outer; }
-                                *p |= 16; p = p.offset(prime_ * 6 + 3);
+                                *p &= 239; p = p.offset(prime_ * 6 + 3);
                                 break 'label221
                                }
                                if p >= end { wi = 221; break 'outer; }
-                               *p |= 128; p = p.offset(prime_ * 4 + 3);
+                               *p &= 127; p = p.offset(prime_ * 4 + 3);
                                break 'label222
                               }
                               if p >= end { wi = 222; break 'outer; }
-                              *p |= 2; p = p.offset(prime_ * 2 + 1);
+                              *p &= 253; p = p.offset(prime_ * 2 + 1);
                               break 'label223
                              }
                              if p >= end { wi = 223; break 'outer; }
-                             *p |= 4; p = p.offset(prime_ * 4 + 2);
+                             *p &= 251; p = p.offset(prime_ * 4 + 2);
                              break 'label224
                             }
                             if p >= end { wi = 224; break 'outer; }
-                            *p |= 32; p = p.offset(prime_ * 2 + 1);
+                            *p &= 223; p = p.offset(prime_ * 2 + 1);
                             break 'label225
                            }
                            if p >= end { wi = 225; break 'outer; }
-                           *p |= 64; p = p.offset(prime_ * 4 + 3);
+                           *p &= 191; p = p.offset(prime_ * 4 + 3);
                            break 'label226
                           }
                           if p >= end { wi = 226; break 'outer; }
-                          *p |= 1; p = p.offset(prime_ * 6 + 3);
+                          *p &= 254; p = p.offset(prime_ * 6 + 3);
                           break 'label227
                          }
                          if p >= end { wi = 227; break 'outer; }
-                         *p |= 8; p = p.offset(prime_ * 2 + 1);
+                         *p &= 247; p = p.offset(prime_ * 2 + 1);
                          break 'label228
                         }
                         if p >= end { wi = 228; break 'outer; }
-                        *p |= 16; p = p.offset(prime_ * 6 + 3);
+                        *p &= 239; p = p.offset(prime_ * 6 + 3);
                         break 'label229
                        }
                        if p >= end { wi = 229; break 'outer; }
-                       *p |= 128; p = p.offset(prime_ * 4 + 3);
+                       *p &= 127; p = p.offset(prime_ * 4 + 3);
                        break 'label230
                       }
                       if p >= end { wi = 230; break 'outer; }
-                      *p |= 2; p = p.offset(prime_ * 2 + 1);
+                      *p &= 253; p = p.offset(prime_ * 2 + 1);
                       break 'label231
                      }
                      if p >= end { wi = 231; break 'outer; }
-                     *p |= 4; p = p.offset(prime_ * 4 + 2);
+                     *p &= 251; p = p.offset(prime_ * 4 + 2);
                      break 'label232
                     }
                     if p >= end { wi = 232; break 'outer; }
-                    *p |= 32; p = p.offset(prime_ * 2 + 1);
+                    *p &= 223; p = p.offset(prime_ * 2 + 1);
                     break 'label233
                    }
                    if p >= end { wi = 233; break 'outer; }
-                   *p |= 64; p = p.offset(prime_ * 4 + 3);
+                   *p &= 191; p = p.offset(prime_ * 4 + 3);
                    break 'label234
                   }
                   if p >= end { wi = 234; break 'outer; }
-                  *p |= 1; p = p.offset(prime_ * 6 + 3);
+                  *p &= 254; p = p.offset(prime_ * 6 + 3);
                   break 'label235
                  }
                  if p >= end { wi = 235; break 'outer; }
-                 *p |= 8; p = p.offset(prime_ * 2 + 1);
+                 *p &= 247; p = p.offset(prime_ * 2 + 1);
                  break 'label236
                 }
                 if p >= end { wi = 236; break 'outer; }
-                *p |= 16; p = p.offset(prime_ * 6 + 3);
+                *p &= 239; p = p.offset(prime_ * 6 + 3);
                 break 'label237
                }
                if p >= end { wi = 237; break 'outer; }
-               *p |= 128; p = p.offset(prime_ * 4 + 3);
+               *p &= 127; p = p.offset(prime_ * 4 + 3);
                break 'label238
               }
               if p >= end { wi = 238; break 'outer; }
-              *p |= 2; p = p.offset(prime_ * 2 + 1);
+              *p &= 253; p = p.offset(prime_ * 2 + 1);
               break 'label239
              }
              if p >= end { wi = 239; break 'outer; }
-             *p |= 4; p = p.offset(prime_ * 4 + 2);
+             *p &= 251; p = p.offset(prime_ * 4 + 2);
              wi = 192
             }
         }
@@ -2486,247 +2486,247 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                             }
                                                             while p < loop_end {
                                                                 p = ::b(p);
-                                                                *p.offset(prime_ * 0 + 0) |= 1;
-                                                                *p.offset(prime_ * 4 + 2) |= 16;
-                                                                *p.offset(prime_ * 10 + 6) |= 4;
-                                                                *p.offset(prime_ * 12 + 7) |= 32;
-                                                                *p.offset(prime_ * 18 + 11) |= 8;
-                                                                *p.offset(prime_ * 22 + 13) |= 128;
-                                                                *p.offset(prime_ * 24 + 15) |= 2;
-                                                                *p.offset(prime_ * 28 + 17) |= 64;
-                                                                *p.offset(prime_ * 30 + 19) |= 1;
-                                                                *p.offset(prime_ * 34 + 21) |= 16;
-                                                                *p.offset(prime_ * 40 + 25) |= 4;
-                                                                *p.offset(prime_ * 42 + 26) |= 32;
-                                                                *p.offset(prime_ * 48 + 30) |= 8;
-                                                                *p.offset(prime_ * 52 + 32) |= 128;
-                                                                *p.offset(prime_ * 54 + 34) |= 2;
-                                                                *p.offset(prime_ * 58 + 36) |= 64;
-                                                                *p.offset(prime_ * 60 + 38) |= 1;
-                                                                *p.offset(prime_ * 64 + 40) |= 16;
-                                                                *p.offset(prime_ * 70 + 44) |= 4;
-                                                                *p.offset(prime_ * 72 + 45) |= 32;
-                                                                *p.offset(prime_ * 78 + 49) |= 8;
-                                                                *p.offset(prime_ * 82 + 51) |= 128;
-                                                                *p.offset(prime_ * 84 + 53) |= 2;
-                                                                *p.offset(prime_ * 88 + 55) |= 64;
-                                                                *p.offset(prime_ * 90 + 57) |= 1;
-                                                                *p.offset(prime_ * 94 + 59) |= 16;
-                                                                *p.offset(prime_ * 100 + 63) |= 4;
-                                                                *p.offset(prime_ * 102 + 64) |= 32;
-                                                                *p.offset(prime_ * 108 + 68) |= 8;
-                                                                *p.offset(prime_ * 112 + 70) |= 128;
-                                                                *p.offset(prime_ * 114 + 72) |= 2;
-                                                                *p.offset(prime_ * 118 + 74) |= 64;
-                                                                *p.offset(prime_ * 120 + 76) |= 1;
-                                                                *p.offset(prime_ * 124 + 78) |= 16;
-                                                                *p.offset(prime_ * 130 + 82) |= 4;
-                                                                *p.offset(prime_ * 132 + 83) |= 32;
-                                                                *p.offset(prime_ * 138 + 87) |= 8;
-                                                                *p.offset(prime_ * 142 + 89) |= 128;
-                                                                *p.offset(prime_ * 144 + 91) |= 2;
-                                                                *p.offset(prime_ * 148 + 93) |= 64;
-                                                                *p.offset(prime_ * 150 + 95) |= 1;
-                                                                *p.offset(prime_ * 154 + 97) |= 16;
-                                                                *p.offset(prime_ * 160 + 101) |= 4;
-                                                                *p.offset(prime_ * 162 + 102) |= 32;
-                                                                *p.offset(prime_ * 168 + 106) |= 8;
-                                                                *p.offset(prime_ * 172 + 108) |= 128;
-                                                                *p.offset(prime_ * 174 + 110) |= 2;
-                                                                *p.offset(prime_ * 178 + 112) |= 64;
+                                                                *p.offset(prime_ * 0 + 0) &= 254;
+                                                                *p.offset(prime_ * 4 + 2) &= 239;
+                                                                *p.offset(prime_ * 10 + 6) &= 251;
+                                                                *p.offset(prime_ * 12 + 7) &= 223;
+                                                                *p.offset(prime_ * 18 + 11) &= 247;
+                                                                *p.offset(prime_ * 22 + 13) &= 127;
+                                                                *p.offset(prime_ * 24 + 15) &= 253;
+                                                                *p.offset(prime_ * 28 + 17) &= 191;
+                                                                *p.offset(prime_ * 30 + 19) &= 254;
+                                                                *p.offset(prime_ * 34 + 21) &= 239;
+                                                                *p.offset(prime_ * 40 + 25) &= 251;
+                                                                *p.offset(prime_ * 42 + 26) &= 223;
+                                                                *p.offset(prime_ * 48 + 30) &= 247;
+                                                                *p.offset(prime_ * 52 + 32) &= 127;
+                                                                *p.offset(prime_ * 54 + 34) &= 253;
+                                                                *p.offset(prime_ * 58 + 36) &= 191;
+                                                                *p.offset(prime_ * 60 + 38) &= 254;
+                                                                *p.offset(prime_ * 64 + 40) &= 239;
+                                                                *p.offset(prime_ * 70 + 44) &= 251;
+                                                                *p.offset(prime_ * 72 + 45) &= 223;
+                                                                *p.offset(prime_ * 78 + 49) &= 247;
+                                                                *p.offset(prime_ * 82 + 51) &= 127;
+                                                                *p.offset(prime_ * 84 + 53) &= 253;
+                                                                *p.offset(prime_ * 88 + 55) &= 191;
+                                                                *p.offset(prime_ * 90 + 57) &= 254;
+                                                                *p.offset(prime_ * 94 + 59) &= 239;
+                                                                *p.offset(prime_ * 100 + 63) &= 251;
+                                                                *p.offset(prime_ * 102 + 64) &= 223;
+                                                                *p.offset(prime_ * 108 + 68) &= 247;
+                                                                *p.offset(prime_ * 112 + 70) &= 127;
+                                                                *p.offset(prime_ * 114 + 72) &= 253;
+                                                                *p.offset(prime_ * 118 + 74) &= 191;
+                                                                *p.offset(prime_ * 120 + 76) &= 254;
+                                                                *p.offset(prime_ * 124 + 78) &= 239;
+                                                                *p.offset(prime_ * 130 + 82) &= 251;
+                                                                *p.offset(prime_ * 132 + 83) &= 223;
+                                                                *p.offset(prime_ * 138 + 87) &= 247;
+                                                                *p.offset(prime_ * 142 + 89) &= 127;
+                                                                *p.offset(prime_ * 144 + 91) &= 253;
+                                                                *p.offset(prime_ * 148 + 93) &= 191;
+                                                                *p.offset(prime_ * 150 + 95) &= 254;
+                                                                *p.offset(prime_ * 154 + 97) &= 239;
+                                                                *p.offset(prime_ * 160 + 101) &= 251;
+                                                                *p.offset(prime_ * 162 + 102) &= 223;
+                                                                *p.offset(prime_ * 168 + 106) &= 247;
+                                                                *p.offset(prime_ * 172 + 108) &= 127;
+                                                                *p.offset(prime_ * 174 + 110) &= 253;
+                                                                *p.offset(prime_ * 178 + 112) &= 191;
 
                                                                 p = p.offset(prime_ * 180 + 114)
                                                             }
                                                             if p >= end { wi = 240; break 'outer; }
-                                                            *p |= 1; p = p.offset(prime_ * 4 + 2);
+                                                            *p &= 254; p = p.offset(prime_ * 4 + 2);
                                                             break 'label241
                                                            }
                                                            if p >= end { wi = 241; break 'outer; }
-                                                           *p |= 16; p = p.offset(prime_ * 6 + 4);
+                                                           *p &= 239; p = p.offset(prime_ * 6 + 4);
                                                            break 'label242
                                                           }
                                                           if p >= end { wi = 242; break 'outer; }
-                                                          *p |= 4; p = p.offset(prime_ * 2 + 1);
+                                                          *p &= 251; p = p.offset(prime_ * 2 + 1);
                                                           break 'label243
                                                          }
                                                          if p >= end { wi = 243; break 'outer; }
-                                                         *p |= 32; p = p.offset(prime_ * 6 + 4);
+                                                         *p &= 223; p = p.offset(prime_ * 6 + 4);
                                                          break 'label244
                                                         }
                                                         if p >= end { wi = 244; break 'outer; }
-                                                        *p |= 8; p = p.offset(prime_ * 4 + 2);
+                                                        *p &= 247; p = p.offset(prime_ * 4 + 2);
                                                         break 'label245
                                                        }
                                                        if p >= end { wi = 245; break 'outer; }
-                                                       *p |= 128; p = p.offset(prime_ * 2 + 2);
+                                                       *p &= 127; p = p.offset(prime_ * 2 + 2);
                                                        break 'label246
                                                       }
                                                       if p >= end { wi = 246; break 'outer; }
-                                                      *p |= 2; p = p.offset(prime_ * 4 + 2);
+                                                      *p &= 253; p = p.offset(prime_ * 4 + 2);
                                                       break 'label247
                                                      }
                                                      if p >= end { wi = 247; break 'outer; }
-                                                     *p |= 64; p = p.offset(prime_ * 2 + 2);
+                                                     *p &= 191; p = p.offset(prime_ * 2 + 2);
                                                      break 'label248
                                                     }
                                                     if p >= end { wi = 248; break 'outer; }
-                                                    *p |= 1; p = p.offset(prime_ * 4 + 2);
+                                                    *p &= 254; p = p.offset(prime_ * 4 + 2);
                                                     break 'label249
                                                    }
                                                    if p >= end { wi = 249; break 'outer; }
-                                                   *p |= 16; p = p.offset(prime_ * 6 + 4);
+                                                   *p &= 239; p = p.offset(prime_ * 6 + 4);
                                                    break 'label250
                                                   }
                                                   if p >= end { wi = 250; break 'outer; }
-                                                  *p |= 4; p = p.offset(prime_ * 2 + 1);
+                                                  *p &= 251; p = p.offset(prime_ * 2 + 1);
                                                   break 'label251
                                                  }
                                                  if p >= end { wi = 251; break 'outer; }
-                                                 *p |= 32; p = p.offset(prime_ * 6 + 4);
+                                                 *p &= 223; p = p.offset(prime_ * 6 + 4);
                                                  break 'label252
                                                 }
                                                 if p >= end { wi = 252; break 'outer; }
-                                                *p |= 8; p = p.offset(prime_ * 4 + 2);
+                                                *p &= 247; p = p.offset(prime_ * 4 + 2);
                                                 break 'label253
                                                }
                                                if p >= end { wi = 253; break 'outer; }
-                                               *p |= 128; p = p.offset(prime_ * 2 + 2);
+                                               *p &= 127; p = p.offset(prime_ * 2 + 2);
                                                break 'label254
                                               }
                                               if p >= end { wi = 254; break 'outer; }
-                                              *p |= 2; p = p.offset(prime_ * 4 + 2);
+                                              *p &= 253; p = p.offset(prime_ * 4 + 2);
                                               break 'label255
                                              }
                                              if p >= end { wi = 255; break 'outer; }
-                                             *p |= 64; p = p.offset(prime_ * 2 + 2);
+                                             *p &= 191; p = p.offset(prime_ * 2 + 2);
                                              break 'label256
                                             }
                                             if p >= end { wi = 256; break 'outer; }
-                                            *p |= 1; p = p.offset(prime_ * 4 + 2);
+                                            *p &= 254; p = p.offset(prime_ * 4 + 2);
                                             break 'label257
                                            }
                                            if p >= end { wi = 257; break 'outer; }
-                                           *p |= 16; p = p.offset(prime_ * 6 + 4);
+                                           *p &= 239; p = p.offset(prime_ * 6 + 4);
                                            break 'label258
                                           }
                                           if p >= end { wi = 258; break 'outer; }
-                                          *p |= 4; p = p.offset(prime_ * 2 + 1);
+                                          *p &= 251; p = p.offset(prime_ * 2 + 1);
                                           break 'label259
                                          }
                                          if p >= end { wi = 259; break 'outer; }
-                                         *p |= 32; p = p.offset(prime_ * 6 + 4);
+                                         *p &= 223; p = p.offset(prime_ * 6 + 4);
                                          break 'label260
                                         }
                                         if p >= end { wi = 260; break 'outer; }
-                                        *p |= 8; p = p.offset(prime_ * 4 + 2);
+                                        *p &= 247; p = p.offset(prime_ * 4 + 2);
                                         break 'label261
                                        }
                                        if p >= end { wi = 261; break 'outer; }
-                                       *p |= 128; p = p.offset(prime_ * 2 + 2);
+                                       *p &= 127; p = p.offset(prime_ * 2 + 2);
                                        break 'label262
                                       }
                                       if p >= end { wi = 262; break 'outer; }
-                                      *p |= 2; p = p.offset(prime_ * 4 + 2);
+                                      *p &= 253; p = p.offset(prime_ * 4 + 2);
                                       break 'label263
                                      }
                                      if p >= end { wi = 263; break 'outer; }
-                                     *p |= 64; p = p.offset(prime_ * 2 + 2);
+                                     *p &= 191; p = p.offset(prime_ * 2 + 2);
                                      break 'label264
                                     }
                                     if p >= end { wi = 264; break 'outer; }
-                                    *p |= 1; p = p.offset(prime_ * 4 + 2);
+                                    *p &= 254; p = p.offset(prime_ * 4 + 2);
                                     break 'label265
                                    }
                                    if p >= end { wi = 265; break 'outer; }
-                                   *p |= 16; p = p.offset(prime_ * 6 + 4);
+                                   *p &= 239; p = p.offset(prime_ * 6 + 4);
                                    break 'label266
                                   }
                                   if p >= end { wi = 266; break 'outer; }
-                                  *p |= 4; p = p.offset(prime_ * 2 + 1);
+                                  *p &= 251; p = p.offset(prime_ * 2 + 1);
                                   break 'label267
                                  }
                                  if p >= end { wi = 267; break 'outer; }
-                                 *p |= 32; p = p.offset(prime_ * 6 + 4);
+                                 *p &= 223; p = p.offset(prime_ * 6 + 4);
                                  break 'label268
                                 }
                                 if p >= end { wi = 268; break 'outer; }
-                                *p |= 8; p = p.offset(prime_ * 4 + 2);
+                                *p &= 247; p = p.offset(prime_ * 4 + 2);
                                 break 'label269
                                }
                                if p >= end { wi = 269; break 'outer; }
-                               *p |= 128; p = p.offset(prime_ * 2 + 2);
+                               *p &= 127; p = p.offset(prime_ * 2 + 2);
                                break 'label270
                               }
                               if p >= end { wi = 270; break 'outer; }
-                              *p |= 2; p = p.offset(prime_ * 4 + 2);
+                              *p &= 253; p = p.offset(prime_ * 4 + 2);
                               break 'label271
                              }
                              if p >= end { wi = 271; break 'outer; }
-                             *p |= 64; p = p.offset(prime_ * 2 + 2);
+                             *p &= 191; p = p.offset(prime_ * 2 + 2);
                              break 'label272
                             }
                             if p >= end { wi = 272; break 'outer; }
-                            *p |= 1; p = p.offset(prime_ * 4 + 2);
+                            *p &= 254; p = p.offset(prime_ * 4 + 2);
                             break 'label273
                            }
                            if p >= end { wi = 273; break 'outer; }
-                           *p |= 16; p = p.offset(prime_ * 6 + 4);
+                           *p &= 239; p = p.offset(prime_ * 6 + 4);
                            break 'label274
                           }
                           if p >= end { wi = 274; break 'outer; }
-                          *p |= 4; p = p.offset(prime_ * 2 + 1);
+                          *p &= 251; p = p.offset(prime_ * 2 + 1);
                           break 'label275
                          }
                          if p >= end { wi = 275; break 'outer; }
-                         *p |= 32; p = p.offset(prime_ * 6 + 4);
+                         *p &= 223; p = p.offset(prime_ * 6 + 4);
                          break 'label276
                         }
                         if p >= end { wi = 276; break 'outer; }
-                        *p |= 8; p = p.offset(prime_ * 4 + 2);
+                        *p &= 247; p = p.offset(prime_ * 4 + 2);
                         break 'label277
                        }
                        if p >= end { wi = 277; break 'outer; }
-                       *p |= 128; p = p.offset(prime_ * 2 + 2);
+                       *p &= 127; p = p.offset(prime_ * 2 + 2);
                        break 'label278
                       }
                       if p >= end { wi = 278; break 'outer; }
-                      *p |= 2; p = p.offset(prime_ * 4 + 2);
+                      *p &= 253; p = p.offset(prime_ * 4 + 2);
                       break 'label279
                      }
                      if p >= end { wi = 279; break 'outer; }
-                     *p |= 64; p = p.offset(prime_ * 2 + 2);
+                     *p &= 191; p = p.offset(prime_ * 2 + 2);
                      break 'label280
                     }
                     if p >= end { wi = 280; break 'outer; }
-                    *p |= 1; p = p.offset(prime_ * 4 + 2);
+                    *p &= 254; p = p.offset(prime_ * 4 + 2);
                     break 'label281
                    }
                    if p >= end { wi = 281; break 'outer; }
-                   *p |= 16; p = p.offset(prime_ * 6 + 4);
+                   *p &= 239; p = p.offset(prime_ * 6 + 4);
                    break 'label282
                   }
                   if p >= end { wi = 282; break 'outer; }
-                  *p |= 4; p = p.offset(prime_ * 2 + 1);
+                  *p &= 251; p = p.offset(prime_ * 2 + 1);
                   break 'label283
                  }
                  if p >= end { wi = 283; break 'outer; }
-                 *p |= 32; p = p.offset(prime_ * 6 + 4);
+                 *p &= 223; p = p.offset(prime_ * 6 + 4);
                  break 'label284
                 }
                 if p >= end { wi = 284; break 'outer; }
-                *p |= 8; p = p.offset(prime_ * 4 + 2);
+                *p &= 247; p = p.offset(prime_ * 4 + 2);
                 break 'label285
                }
                if p >= end { wi = 285; break 'outer; }
-               *p |= 128; p = p.offset(prime_ * 2 + 2);
+               *p &= 127; p = p.offset(prime_ * 2 + 2);
                break 'label286
               }
               if p >= end { wi = 286; break 'outer; }
-              *p |= 2; p = p.offset(prime_ * 4 + 2);
+              *p &= 253; p = p.offset(prime_ * 4 + 2);
               break 'label287
              }
              if p >= end { wi = 287; break 'outer; }
-             *p |= 64; p = p.offset(prime_ * 2 + 2);
+             *p &= 191; p = p.offset(prime_ * 2 + 2);
              wi = 240
             }
         }
@@ -2833,247 +2833,247 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                             }
                                                             while p < loop_end {
                                                                 p = ::b(p);
-                                                                *p.offset(prime_ * 0 + 0) |= 32;
-                                                                *p.offset(prime_ * 6 + 5) |= 2;
-                                                                *p.offset(prime_ * 8 + 6) |= 64;
-                                                                *p.offset(prime_ * 14 + 11) |= 4;
-                                                                *p.offset(prime_ * 18 + 14) |= 8;
-                                                                *p.offset(prime_ * 20 + 15) |= 128;
-                                                                *p.offset(prime_ * 24 + 19) |= 1;
-                                                                *p.offset(prime_ * 26 + 20) |= 16;
-                                                                *p.offset(prime_ * 30 + 23) |= 32;
-                                                                *p.offset(prime_ * 36 + 28) |= 2;
-                                                                *p.offset(prime_ * 38 + 29) |= 64;
-                                                                *p.offset(prime_ * 44 + 34) |= 4;
-                                                                *p.offset(prime_ * 48 + 37) |= 8;
-                                                                *p.offset(prime_ * 50 + 38) |= 128;
-                                                                *p.offset(prime_ * 54 + 42) |= 1;
-                                                                *p.offset(prime_ * 56 + 43) |= 16;
-                                                                *p.offset(prime_ * 60 + 46) |= 32;
-                                                                *p.offset(prime_ * 66 + 51) |= 2;
-                                                                *p.offset(prime_ * 68 + 52) |= 64;
-                                                                *p.offset(prime_ * 74 + 57) |= 4;
-                                                                *p.offset(prime_ * 78 + 60) |= 8;
-                                                                *p.offset(prime_ * 80 + 61) |= 128;
-                                                                *p.offset(prime_ * 84 + 65) |= 1;
-                                                                *p.offset(prime_ * 86 + 66) |= 16;
-                                                                *p.offset(prime_ * 90 + 69) |= 32;
-                                                                *p.offset(prime_ * 96 + 74) |= 2;
-                                                                *p.offset(prime_ * 98 + 75) |= 64;
-                                                                *p.offset(prime_ * 104 + 80) |= 4;
-                                                                *p.offset(prime_ * 108 + 83) |= 8;
-                                                                *p.offset(prime_ * 110 + 84) |= 128;
-                                                                *p.offset(prime_ * 114 + 88) |= 1;
-                                                                *p.offset(prime_ * 116 + 89) |= 16;
-                                                                *p.offset(prime_ * 120 + 92) |= 32;
-                                                                *p.offset(prime_ * 126 + 97) |= 2;
-                                                                *p.offset(prime_ * 128 + 98) |= 64;
-                                                                *p.offset(prime_ * 134 + 103) |= 4;
-                                                                *p.offset(prime_ * 138 + 106) |= 8;
-                                                                *p.offset(prime_ * 140 + 107) |= 128;
-                                                                *p.offset(prime_ * 144 + 111) |= 1;
-                                                                *p.offset(prime_ * 146 + 112) |= 16;
-                                                                *p.offset(prime_ * 150 + 115) |= 32;
-                                                                *p.offset(prime_ * 156 + 120) |= 2;
-                                                                *p.offset(prime_ * 158 + 121) |= 64;
-                                                                *p.offset(prime_ * 164 + 126) |= 4;
-                                                                *p.offset(prime_ * 168 + 129) |= 8;
-                                                                *p.offset(prime_ * 170 + 130) |= 128;
-                                                                *p.offset(prime_ * 174 + 134) |= 1;
-                                                                *p.offset(prime_ * 176 + 135) |= 16;
+                                                                *p.offset(prime_ * 0 + 0) &= 223;
+                                                                *p.offset(prime_ * 6 + 5) &= 253;
+                                                                *p.offset(prime_ * 8 + 6) &= 191;
+                                                                *p.offset(prime_ * 14 + 11) &= 251;
+                                                                *p.offset(prime_ * 18 + 14) &= 247;
+                                                                *p.offset(prime_ * 20 + 15) &= 127;
+                                                                *p.offset(prime_ * 24 + 19) &= 254;
+                                                                *p.offset(prime_ * 26 + 20) &= 239;
+                                                                *p.offset(prime_ * 30 + 23) &= 223;
+                                                                *p.offset(prime_ * 36 + 28) &= 253;
+                                                                *p.offset(prime_ * 38 + 29) &= 191;
+                                                                *p.offset(prime_ * 44 + 34) &= 251;
+                                                                *p.offset(prime_ * 48 + 37) &= 247;
+                                                                *p.offset(prime_ * 50 + 38) &= 127;
+                                                                *p.offset(prime_ * 54 + 42) &= 254;
+                                                                *p.offset(prime_ * 56 + 43) &= 239;
+                                                                *p.offset(prime_ * 60 + 46) &= 223;
+                                                                *p.offset(prime_ * 66 + 51) &= 253;
+                                                                *p.offset(prime_ * 68 + 52) &= 191;
+                                                                *p.offset(prime_ * 74 + 57) &= 251;
+                                                                *p.offset(prime_ * 78 + 60) &= 247;
+                                                                *p.offset(prime_ * 80 + 61) &= 127;
+                                                                *p.offset(prime_ * 84 + 65) &= 254;
+                                                                *p.offset(prime_ * 86 + 66) &= 239;
+                                                                *p.offset(prime_ * 90 + 69) &= 223;
+                                                                *p.offset(prime_ * 96 + 74) &= 253;
+                                                                *p.offset(prime_ * 98 + 75) &= 191;
+                                                                *p.offset(prime_ * 104 + 80) &= 251;
+                                                                *p.offset(prime_ * 108 + 83) &= 247;
+                                                                *p.offset(prime_ * 110 + 84) &= 127;
+                                                                *p.offset(prime_ * 114 + 88) &= 254;
+                                                                *p.offset(prime_ * 116 + 89) &= 239;
+                                                                *p.offset(prime_ * 120 + 92) &= 223;
+                                                                *p.offset(prime_ * 126 + 97) &= 253;
+                                                                *p.offset(prime_ * 128 + 98) &= 191;
+                                                                *p.offset(prime_ * 134 + 103) &= 251;
+                                                                *p.offset(prime_ * 138 + 106) &= 247;
+                                                                *p.offset(prime_ * 140 + 107) &= 127;
+                                                                *p.offset(prime_ * 144 + 111) &= 254;
+                                                                *p.offset(prime_ * 146 + 112) &= 239;
+                                                                *p.offset(prime_ * 150 + 115) &= 223;
+                                                                *p.offset(prime_ * 156 + 120) &= 253;
+                                                                *p.offset(prime_ * 158 + 121) &= 191;
+                                                                *p.offset(prime_ * 164 + 126) &= 251;
+                                                                *p.offset(prime_ * 168 + 129) &= 247;
+                                                                *p.offset(prime_ * 170 + 130) &= 127;
+                                                                *p.offset(prime_ * 174 + 134) &= 254;
+                                                                *p.offset(prime_ * 176 + 135) &= 239;
 
                                                                 p = p.offset(prime_ * 180 + 138)
                                                             }
                                                             if p >= end { wi = 288; break 'outer; }
-                                                            *p |= 32; p = p.offset(prime_ * 6 + 5);
+                                                            *p &= 223; p = p.offset(prime_ * 6 + 5);
                                                             break 'label289
                                                            }
                                                            if p >= end { wi = 289; break 'outer; }
-                                                           *p |= 2; p = p.offset(prime_ * 2 + 1);
+                                                           *p &= 253; p = p.offset(prime_ * 2 + 1);
                                                            break 'label290
                                                           }
                                                           if p >= end { wi = 290; break 'outer; }
-                                                          *p |= 64; p = p.offset(prime_ * 6 + 5);
+                                                          *p &= 191; p = p.offset(prime_ * 6 + 5);
                                                           break 'label291
                                                          }
                                                          if p >= end { wi = 291; break 'outer; }
-                                                         *p |= 4; p = p.offset(prime_ * 4 + 3);
+                                                         *p &= 251; p = p.offset(prime_ * 4 + 3);
                                                          break 'label292
                                                         }
                                                         if p >= end { wi = 292; break 'outer; }
-                                                        *p |= 8; p = p.offset(prime_ * 2 + 1);
+                                                        *p &= 247; p = p.offset(prime_ * 2 + 1);
                                                         break 'label293
                                                        }
                                                        if p >= end { wi = 293; break 'outer; }
-                                                       *p |= 128; p = p.offset(prime_ * 4 + 4);
+                                                       *p &= 127; p = p.offset(prime_ * 4 + 4);
                                                        break 'label294
                                                       }
                                                       if p >= end { wi = 294; break 'outer; }
-                                                      *p |= 1; p = p.offset(prime_ * 2 + 1);
+                                                      *p &= 254; p = p.offset(prime_ * 2 + 1);
                                                       break 'label295
                                                      }
                                                      if p >= end { wi = 295; break 'outer; }
-                                                     *p |= 16; p = p.offset(prime_ * 4 + 3);
+                                                     *p &= 239; p = p.offset(prime_ * 4 + 3);
                                                      break 'label296
                                                     }
                                                     if p >= end { wi = 296; break 'outer; }
-                                                    *p |= 32; p = p.offset(prime_ * 6 + 5);
+                                                    *p &= 223; p = p.offset(prime_ * 6 + 5);
                                                     break 'label297
                                                    }
                                                    if p >= end { wi = 297; break 'outer; }
-                                                   *p |= 2; p = p.offset(prime_ * 2 + 1);
+                                                   *p &= 253; p = p.offset(prime_ * 2 + 1);
                                                    break 'label298
                                                   }
                                                   if p >= end { wi = 298; break 'outer; }
-                                                  *p |= 64; p = p.offset(prime_ * 6 + 5);
+                                                  *p &= 191; p = p.offset(prime_ * 6 + 5);
                                                   break 'label299
                                                  }
                                                  if p >= end { wi = 299; break 'outer; }
-                                                 *p |= 4; p = p.offset(prime_ * 4 + 3);
+                                                 *p &= 251; p = p.offset(prime_ * 4 + 3);
                                                  break 'label300
                                                 }
                                                 if p >= end { wi = 300; break 'outer; }
-                                                *p |= 8; p = p.offset(prime_ * 2 + 1);
+                                                *p &= 247; p = p.offset(prime_ * 2 + 1);
                                                 break 'label301
                                                }
                                                if p >= end { wi = 301; break 'outer; }
-                                               *p |= 128; p = p.offset(prime_ * 4 + 4);
+                                               *p &= 127; p = p.offset(prime_ * 4 + 4);
                                                break 'label302
                                               }
                                               if p >= end { wi = 302; break 'outer; }
-                                              *p |= 1; p = p.offset(prime_ * 2 + 1);
+                                              *p &= 254; p = p.offset(prime_ * 2 + 1);
                                               break 'label303
                                              }
                                              if p >= end { wi = 303; break 'outer; }
-                                             *p |= 16; p = p.offset(prime_ * 4 + 3);
+                                             *p &= 239; p = p.offset(prime_ * 4 + 3);
                                              break 'label304
                                             }
                                             if p >= end { wi = 304; break 'outer; }
-                                            *p |= 32; p = p.offset(prime_ * 6 + 5);
+                                            *p &= 223; p = p.offset(prime_ * 6 + 5);
                                             break 'label305
                                            }
                                            if p >= end { wi = 305; break 'outer; }
-                                           *p |= 2; p = p.offset(prime_ * 2 + 1);
+                                           *p &= 253; p = p.offset(prime_ * 2 + 1);
                                            break 'label306
                                           }
                                           if p >= end { wi = 306; break 'outer; }
-                                          *p |= 64; p = p.offset(prime_ * 6 + 5);
+                                          *p &= 191; p = p.offset(prime_ * 6 + 5);
                                           break 'label307
                                          }
                                          if p >= end { wi = 307; break 'outer; }
-                                         *p |= 4; p = p.offset(prime_ * 4 + 3);
+                                         *p &= 251; p = p.offset(prime_ * 4 + 3);
                                          break 'label308
                                         }
                                         if p >= end { wi = 308; break 'outer; }
-                                        *p |= 8; p = p.offset(prime_ * 2 + 1);
+                                        *p &= 247; p = p.offset(prime_ * 2 + 1);
                                         break 'label309
                                        }
                                        if p >= end { wi = 309; break 'outer; }
-                                       *p |= 128; p = p.offset(prime_ * 4 + 4);
+                                       *p &= 127; p = p.offset(prime_ * 4 + 4);
                                        break 'label310
                                       }
                                       if p >= end { wi = 310; break 'outer; }
-                                      *p |= 1; p = p.offset(prime_ * 2 + 1);
+                                      *p &= 254; p = p.offset(prime_ * 2 + 1);
                                       break 'label311
                                      }
                                      if p >= end { wi = 311; break 'outer; }
-                                     *p |= 16; p = p.offset(prime_ * 4 + 3);
+                                     *p &= 239; p = p.offset(prime_ * 4 + 3);
                                      break 'label312
                                     }
                                     if p >= end { wi = 312; break 'outer; }
-                                    *p |= 32; p = p.offset(prime_ * 6 + 5);
+                                    *p &= 223; p = p.offset(prime_ * 6 + 5);
                                     break 'label313
                                    }
                                    if p >= end { wi = 313; break 'outer; }
-                                   *p |= 2; p = p.offset(prime_ * 2 + 1);
+                                   *p &= 253; p = p.offset(prime_ * 2 + 1);
                                    break 'label314
                                   }
                                   if p >= end { wi = 314; break 'outer; }
-                                  *p |= 64; p = p.offset(prime_ * 6 + 5);
+                                  *p &= 191; p = p.offset(prime_ * 6 + 5);
                                   break 'label315
                                  }
                                  if p >= end { wi = 315; break 'outer; }
-                                 *p |= 4; p = p.offset(prime_ * 4 + 3);
+                                 *p &= 251; p = p.offset(prime_ * 4 + 3);
                                  break 'label316
                                 }
                                 if p >= end { wi = 316; break 'outer; }
-                                *p |= 8; p = p.offset(prime_ * 2 + 1);
+                                *p &= 247; p = p.offset(prime_ * 2 + 1);
                                 break 'label317
                                }
                                if p >= end { wi = 317; break 'outer; }
-                               *p |= 128; p = p.offset(prime_ * 4 + 4);
+                               *p &= 127; p = p.offset(prime_ * 4 + 4);
                                break 'label318
                               }
                               if p >= end { wi = 318; break 'outer; }
-                              *p |= 1; p = p.offset(prime_ * 2 + 1);
+                              *p &= 254; p = p.offset(prime_ * 2 + 1);
                               break 'label319
                              }
                              if p >= end { wi = 319; break 'outer; }
-                             *p |= 16; p = p.offset(prime_ * 4 + 3);
+                             *p &= 239; p = p.offset(prime_ * 4 + 3);
                              break 'label320
                             }
                             if p >= end { wi = 320; break 'outer; }
-                            *p |= 32; p = p.offset(prime_ * 6 + 5);
+                            *p &= 223; p = p.offset(prime_ * 6 + 5);
                             break 'label321
                            }
                            if p >= end { wi = 321; break 'outer; }
-                           *p |= 2; p = p.offset(prime_ * 2 + 1);
+                           *p &= 253; p = p.offset(prime_ * 2 + 1);
                            break 'label322
                           }
                           if p >= end { wi = 322; break 'outer; }
-                          *p |= 64; p = p.offset(prime_ * 6 + 5);
+                          *p &= 191; p = p.offset(prime_ * 6 + 5);
                           break 'label323
                          }
                          if p >= end { wi = 323; break 'outer; }
-                         *p |= 4; p = p.offset(prime_ * 4 + 3);
+                         *p &= 251; p = p.offset(prime_ * 4 + 3);
                          break 'label324
                         }
                         if p >= end { wi = 324; break 'outer; }
-                        *p |= 8; p = p.offset(prime_ * 2 + 1);
+                        *p &= 247; p = p.offset(prime_ * 2 + 1);
                         break 'label325
                        }
                        if p >= end { wi = 325; break 'outer; }
-                       *p |= 128; p = p.offset(prime_ * 4 + 4);
+                       *p &= 127; p = p.offset(prime_ * 4 + 4);
                        break 'label326
                       }
                       if p >= end { wi = 326; break 'outer; }
-                      *p |= 1; p = p.offset(prime_ * 2 + 1);
+                      *p &= 254; p = p.offset(prime_ * 2 + 1);
                       break 'label327
                      }
                      if p >= end { wi = 327; break 'outer; }
-                     *p |= 16; p = p.offset(prime_ * 4 + 3);
+                     *p &= 239; p = p.offset(prime_ * 4 + 3);
                      break 'label328
                     }
                     if p >= end { wi = 328; break 'outer; }
-                    *p |= 32; p = p.offset(prime_ * 6 + 5);
+                    *p &= 223; p = p.offset(prime_ * 6 + 5);
                     break 'label329
                    }
                    if p >= end { wi = 329; break 'outer; }
-                   *p |= 2; p = p.offset(prime_ * 2 + 1);
+                   *p &= 253; p = p.offset(prime_ * 2 + 1);
                    break 'label330
                   }
                   if p >= end { wi = 330; break 'outer; }
-                  *p |= 64; p = p.offset(prime_ * 6 + 5);
+                  *p &= 191; p = p.offset(prime_ * 6 + 5);
                   break 'label331
                  }
                  if p >= end { wi = 331; break 'outer; }
-                 *p |= 4; p = p.offset(prime_ * 4 + 3);
+                 *p &= 251; p = p.offset(prime_ * 4 + 3);
                  break 'label332
                 }
                 if p >= end { wi = 332; break 'outer; }
-                *p |= 8; p = p.offset(prime_ * 2 + 1);
+                *p &= 247; p = p.offset(prime_ * 2 + 1);
                 break 'label333
                }
                if p >= end { wi = 333; break 'outer; }
-               *p |= 128; p = p.offset(prime_ * 4 + 4);
+               *p &= 127; p = p.offset(prime_ * 4 + 4);
                break 'label334
               }
               if p >= end { wi = 334; break 'outer; }
-              *p |= 1; p = p.offset(prime_ * 2 + 1);
+              *p &= 254; p = p.offset(prime_ * 2 + 1);
               break 'label335
              }
              if p >= end { wi = 335; break 'outer; }
-             *p |= 16; p = p.offset(prime_ * 4 + 3);
+             *p &= 239; p = p.offset(prime_ * 4 + 3);
              wi = 288
             }
         }
@@ -3180,247 +3180,247 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                             }
                                                             while p < loop_end {
                                                                 p = ::b(p);
-                                                                *p.offset(prime_ * 0 + 0) |= 1;
-                                                                *p.offset(prime_ * 2 + 1) |= 128;
-                                                                *p.offset(prime_ * 8 + 7) |= 64;
-                                                                *p.offset(prime_ * 12 + 11) |= 32;
-                                                                *p.offset(prime_ * 14 + 13) |= 16;
-                                                                *p.offset(prime_ * 18 + 17) |= 8;
-                                                                *p.offset(prime_ * 20 + 19) |= 4;
-                                                                *p.offset(prime_ * 24 + 23) |= 2;
-                                                                *p.offset(prime_ * 30 + 29) |= 1;
-                                                                *p.offset(prime_ * 32 + 30) |= 128;
-                                                                *p.offset(prime_ * 38 + 36) |= 64;
-                                                                *p.offset(prime_ * 42 + 40) |= 32;
-                                                                *p.offset(prime_ * 44 + 42) |= 16;
-                                                                *p.offset(prime_ * 48 + 46) |= 8;
-                                                                *p.offset(prime_ * 50 + 48) |= 4;
-                                                                *p.offset(prime_ * 54 + 52) |= 2;
-                                                                *p.offset(prime_ * 60 + 58) |= 1;
-                                                                *p.offset(prime_ * 62 + 59) |= 128;
-                                                                *p.offset(prime_ * 68 + 65) |= 64;
-                                                                *p.offset(prime_ * 72 + 69) |= 32;
-                                                                *p.offset(prime_ * 74 + 71) |= 16;
-                                                                *p.offset(prime_ * 78 + 75) |= 8;
-                                                                *p.offset(prime_ * 80 + 77) |= 4;
-                                                                *p.offset(prime_ * 84 + 81) |= 2;
-                                                                *p.offset(prime_ * 90 + 87) |= 1;
-                                                                *p.offset(prime_ * 92 + 88) |= 128;
-                                                                *p.offset(prime_ * 98 + 94) |= 64;
-                                                                *p.offset(prime_ * 102 + 98) |= 32;
-                                                                *p.offset(prime_ * 104 + 100) |= 16;
-                                                                *p.offset(prime_ * 108 + 104) |= 8;
-                                                                *p.offset(prime_ * 110 + 106) |= 4;
-                                                                *p.offset(prime_ * 114 + 110) |= 2;
-                                                                *p.offset(prime_ * 120 + 116) |= 1;
-                                                                *p.offset(prime_ * 122 + 117) |= 128;
-                                                                *p.offset(prime_ * 128 + 123) |= 64;
-                                                                *p.offset(prime_ * 132 + 127) |= 32;
-                                                                *p.offset(prime_ * 134 + 129) |= 16;
-                                                                *p.offset(prime_ * 138 + 133) |= 8;
-                                                                *p.offset(prime_ * 140 + 135) |= 4;
-                                                                *p.offset(prime_ * 144 + 139) |= 2;
-                                                                *p.offset(prime_ * 150 + 145) |= 1;
-                                                                *p.offset(prime_ * 152 + 146) |= 128;
-                                                                *p.offset(prime_ * 158 + 152) |= 64;
-                                                                *p.offset(prime_ * 162 + 156) |= 32;
-                                                                *p.offset(prime_ * 164 + 158) |= 16;
-                                                                *p.offset(prime_ * 168 + 162) |= 8;
-                                                                *p.offset(prime_ * 170 + 164) |= 4;
-                                                                *p.offset(prime_ * 174 + 168) |= 2;
+                                                                *p.offset(prime_ * 0 + 0) &= 254;
+                                                                *p.offset(prime_ * 2 + 1) &= 127;
+                                                                *p.offset(prime_ * 8 + 7) &= 191;
+                                                                *p.offset(prime_ * 12 + 11) &= 223;
+                                                                *p.offset(prime_ * 14 + 13) &= 239;
+                                                                *p.offset(prime_ * 18 + 17) &= 247;
+                                                                *p.offset(prime_ * 20 + 19) &= 251;
+                                                                *p.offset(prime_ * 24 + 23) &= 253;
+                                                                *p.offset(prime_ * 30 + 29) &= 254;
+                                                                *p.offset(prime_ * 32 + 30) &= 127;
+                                                                *p.offset(prime_ * 38 + 36) &= 191;
+                                                                *p.offset(prime_ * 42 + 40) &= 223;
+                                                                *p.offset(prime_ * 44 + 42) &= 239;
+                                                                *p.offset(prime_ * 48 + 46) &= 247;
+                                                                *p.offset(prime_ * 50 + 48) &= 251;
+                                                                *p.offset(prime_ * 54 + 52) &= 253;
+                                                                *p.offset(prime_ * 60 + 58) &= 254;
+                                                                *p.offset(prime_ * 62 + 59) &= 127;
+                                                                *p.offset(prime_ * 68 + 65) &= 191;
+                                                                *p.offset(prime_ * 72 + 69) &= 223;
+                                                                *p.offset(prime_ * 74 + 71) &= 239;
+                                                                *p.offset(prime_ * 78 + 75) &= 247;
+                                                                *p.offset(prime_ * 80 + 77) &= 251;
+                                                                *p.offset(prime_ * 84 + 81) &= 253;
+                                                                *p.offset(prime_ * 90 + 87) &= 254;
+                                                                *p.offset(prime_ * 92 + 88) &= 127;
+                                                                *p.offset(prime_ * 98 + 94) &= 191;
+                                                                *p.offset(prime_ * 102 + 98) &= 223;
+                                                                *p.offset(prime_ * 104 + 100) &= 239;
+                                                                *p.offset(prime_ * 108 + 104) &= 247;
+                                                                *p.offset(prime_ * 110 + 106) &= 251;
+                                                                *p.offset(prime_ * 114 + 110) &= 253;
+                                                                *p.offset(prime_ * 120 + 116) &= 254;
+                                                                *p.offset(prime_ * 122 + 117) &= 127;
+                                                                *p.offset(prime_ * 128 + 123) &= 191;
+                                                                *p.offset(prime_ * 132 + 127) &= 223;
+                                                                *p.offset(prime_ * 134 + 129) &= 239;
+                                                                *p.offset(prime_ * 138 + 133) &= 247;
+                                                                *p.offset(prime_ * 140 + 135) &= 251;
+                                                                *p.offset(prime_ * 144 + 139) &= 253;
+                                                                *p.offset(prime_ * 150 + 145) &= 254;
+                                                                *p.offset(prime_ * 152 + 146) &= 127;
+                                                                *p.offset(prime_ * 158 + 152) &= 191;
+                                                                *p.offset(prime_ * 162 + 156) &= 223;
+                                                                *p.offset(prime_ * 164 + 158) &= 239;
+                                                                *p.offset(prime_ * 168 + 162) &= 247;
+                                                                *p.offset(prime_ * 170 + 164) &= 251;
+                                                                *p.offset(prime_ * 174 + 168) &= 253;
 
                                                                 p = p.offset(prime_ * 180 + 174)
                                                             }
                                                             if p >= end { wi = 336; break 'outer; }
-                                                            *p |= 1; p = p.offset(prime_ * 2 + 1);
+                                                            *p &= 254; p = p.offset(prime_ * 2 + 1);
                                                             break 'label337
                                                            }
                                                            if p >= end { wi = 337; break 'outer; }
-                                                           *p |= 128; p = p.offset(prime_ * 6 + 6);
+                                                           *p &= 127; p = p.offset(prime_ * 6 + 6);
                                                            break 'label338
                                                           }
                                                           if p >= end { wi = 338; break 'outer; }
-                                                          *p |= 64; p = p.offset(prime_ * 4 + 4);
+                                                          *p &= 191; p = p.offset(prime_ * 4 + 4);
                                                           break 'label339
                                                          }
                                                          if p >= end { wi = 339; break 'outer; }
-                                                         *p |= 32; p = p.offset(prime_ * 2 + 2);
+                                                         *p &= 223; p = p.offset(prime_ * 2 + 2);
                                                          break 'label340
                                                         }
                                                         if p >= end { wi = 340; break 'outer; }
-                                                        *p |= 16; p = p.offset(prime_ * 4 + 4);
+                                                        *p &= 239; p = p.offset(prime_ * 4 + 4);
                                                         break 'label341
                                                        }
                                                        if p >= end { wi = 341; break 'outer; }
-                                                       *p |= 8; p = p.offset(prime_ * 2 + 2);
+                                                       *p &= 247; p = p.offset(prime_ * 2 + 2);
                                                        break 'label342
                                                       }
                                                       if p >= end { wi = 342; break 'outer; }
-                                                      *p |= 4; p = p.offset(prime_ * 4 + 4);
+                                                      *p &= 251; p = p.offset(prime_ * 4 + 4);
                                                       break 'label343
                                                      }
                                                      if p >= end { wi = 343; break 'outer; }
-                                                     *p |= 2; p = p.offset(prime_ * 6 + 6);
+                                                     *p &= 253; p = p.offset(prime_ * 6 + 6);
                                                      break 'label344
                                                     }
                                                     if p >= end { wi = 344; break 'outer; }
-                                                    *p |= 1; p = p.offset(prime_ * 2 + 1);
+                                                    *p &= 254; p = p.offset(prime_ * 2 + 1);
                                                     break 'label345
                                                    }
                                                    if p >= end { wi = 345; break 'outer; }
-                                                   *p |= 128; p = p.offset(prime_ * 6 + 6);
+                                                   *p &= 127; p = p.offset(prime_ * 6 + 6);
                                                    break 'label346
                                                   }
                                                   if p >= end { wi = 346; break 'outer; }
-                                                  *p |= 64; p = p.offset(prime_ * 4 + 4);
+                                                  *p &= 191; p = p.offset(prime_ * 4 + 4);
                                                   break 'label347
                                                  }
                                                  if p >= end { wi = 347; break 'outer; }
-                                                 *p |= 32; p = p.offset(prime_ * 2 + 2);
+                                                 *p &= 223; p = p.offset(prime_ * 2 + 2);
                                                  break 'label348
                                                 }
                                                 if p >= end { wi = 348; break 'outer; }
-                                                *p |= 16; p = p.offset(prime_ * 4 + 4);
+                                                *p &= 239; p = p.offset(prime_ * 4 + 4);
                                                 break 'label349
                                                }
                                                if p >= end { wi = 349; break 'outer; }
-                                               *p |= 8; p = p.offset(prime_ * 2 + 2);
+                                               *p &= 247; p = p.offset(prime_ * 2 + 2);
                                                break 'label350
                                               }
                                               if p >= end { wi = 350; break 'outer; }
-                                              *p |= 4; p = p.offset(prime_ * 4 + 4);
+                                              *p &= 251; p = p.offset(prime_ * 4 + 4);
                                               break 'label351
                                              }
                                              if p >= end { wi = 351; break 'outer; }
-                                             *p |= 2; p = p.offset(prime_ * 6 + 6);
+                                             *p &= 253; p = p.offset(prime_ * 6 + 6);
                                              break 'label352
                                             }
                                             if p >= end { wi = 352; break 'outer; }
-                                            *p |= 1; p = p.offset(prime_ * 2 + 1);
+                                            *p &= 254; p = p.offset(prime_ * 2 + 1);
                                             break 'label353
                                            }
                                            if p >= end { wi = 353; break 'outer; }
-                                           *p |= 128; p = p.offset(prime_ * 6 + 6);
+                                           *p &= 127; p = p.offset(prime_ * 6 + 6);
                                            break 'label354
                                           }
                                           if p >= end { wi = 354; break 'outer; }
-                                          *p |= 64; p = p.offset(prime_ * 4 + 4);
+                                          *p &= 191; p = p.offset(prime_ * 4 + 4);
                                           break 'label355
                                          }
                                          if p >= end { wi = 355; break 'outer; }
-                                         *p |= 32; p = p.offset(prime_ * 2 + 2);
+                                         *p &= 223; p = p.offset(prime_ * 2 + 2);
                                          break 'label356
                                         }
                                         if p >= end { wi = 356; break 'outer; }
-                                        *p |= 16; p = p.offset(prime_ * 4 + 4);
+                                        *p &= 239; p = p.offset(prime_ * 4 + 4);
                                         break 'label357
                                        }
                                        if p >= end { wi = 357; break 'outer; }
-                                       *p |= 8; p = p.offset(prime_ * 2 + 2);
+                                       *p &= 247; p = p.offset(prime_ * 2 + 2);
                                        break 'label358
                                       }
                                       if p >= end { wi = 358; break 'outer; }
-                                      *p |= 4; p = p.offset(prime_ * 4 + 4);
+                                      *p &= 251; p = p.offset(prime_ * 4 + 4);
                                       break 'label359
                                      }
                                      if p >= end { wi = 359; break 'outer; }
-                                     *p |= 2; p = p.offset(prime_ * 6 + 6);
+                                     *p &= 253; p = p.offset(prime_ * 6 + 6);
                                      break 'label360
                                     }
                                     if p >= end { wi = 360; break 'outer; }
-                                    *p |= 1; p = p.offset(prime_ * 2 + 1);
+                                    *p &= 254; p = p.offset(prime_ * 2 + 1);
                                     break 'label361
                                    }
                                    if p >= end { wi = 361; break 'outer; }
-                                   *p |= 128; p = p.offset(prime_ * 6 + 6);
+                                   *p &= 127; p = p.offset(prime_ * 6 + 6);
                                    break 'label362
                                   }
                                   if p >= end { wi = 362; break 'outer; }
-                                  *p |= 64; p = p.offset(prime_ * 4 + 4);
+                                  *p &= 191; p = p.offset(prime_ * 4 + 4);
                                   break 'label363
                                  }
                                  if p >= end { wi = 363; break 'outer; }
-                                 *p |= 32; p = p.offset(prime_ * 2 + 2);
+                                 *p &= 223; p = p.offset(prime_ * 2 + 2);
                                  break 'label364
                                 }
                                 if p >= end { wi = 364; break 'outer; }
-                                *p |= 16; p = p.offset(prime_ * 4 + 4);
+                                *p &= 239; p = p.offset(prime_ * 4 + 4);
                                 break 'label365
                                }
                                if p >= end { wi = 365; break 'outer; }
-                               *p |= 8; p = p.offset(prime_ * 2 + 2);
+                               *p &= 247; p = p.offset(prime_ * 2 + 2);
                                break 'label366
                               }
                               if p >= end { wi = 366; break 'outer; }
-                              *p |= 4; p = p.offset(prime_ * 4 + 4);
+                              *p &= 251; p = p.offset(prime_ * 4 + 4);
                               break 'label367
                              }
                              if p >= end { wi = 367; break 'outer; }
-                             *p |= 2; p = p.offset(prime_ * 6 + 6);
+                             *p &= 253; p = p.offset(prime_ * 6 + 6);
                              break 'label368
                             }
                             if p >= end { wi = 368; break 'outer; }
-                            *p |= 1; p = p.offset(prime_ * 2 + 1);
+                            *p &= 254; p = p.offset(prime_ * 2 + 1);
                             break 'label369
                            }
                            if p >= end { wi = 369; break 'outer; }
-                           *p |= 128; p = p.offset(prime_ * 6 + 6);
+                           *p &= 127; p = p.offset(prime_ * 6 + 6);
                            break 'label370
                           }
                           if p >= end { wi = 370; break 'outer; }
-                          *p |= 64; p = p.offset(prime_ * 4 + 4);
+                          *p &= 191; p = p.offset(prime_ * 4 + 4);
                           break 'label371
                          }
                          if p >= end { wi = 371; break 'outer; }
-                         *p |= 32; p = p.offset(prime_ * 2 + 2);
+                         *p &= 223; p = p.offset(prime_ * 2 + 2);
                          break 'label372
                         }
                         if p >= end { wi = 372; break 'outer; }
-                        *p |= 16; p = p.offset(prime_ * 4 + 4);
+                        *p &= 239; p = p.offset(prime_ * 4 + 4);
                         break 'label373
                        }
                        if p >= end { wi = 373; break 'outer; }
-                       *p |= 8; p = p.offset(prime_ * 2 + 2);
+                       *p &= 247; p = p.offset(prime_ * 2 + 2);
                        break 'label374
                       }
                       if p >= end { wi = 374; break 'outer; }
-                      *p |= 4; p = p.offset(prime_ * 4 + 4);
+                      *p &= 251; p = p.offset(prime_ * 4 + 4);
                       break 'label375
                      }
                      if p >= end { wi = 375; break 'outer; }
-                     *p |= 2; p = p.offset(prime_ * 6 + 6);
+                     *p &= 253; p = p.offset(prime_ * 6 + 6);
                      break 'label376
                     }
                     if p >= end { wi = 376; break 'outer; }
-                    *p |= 1; p = p.offset(prime_ * 2 + 1);
+                    *p &= 254; p = p.offset(prime_ * 2 + 1);
                     break 'label377
                    }
                    if p >= end { wi = 377; break 'outer; }
-                   *p |= 128; p = p.offset(prime_ * 6 + 6);
+                   *p &= 127; p = p.offset(prime_ * 6 + 6);
                    break 'label378
                   }
                   if p >= end { wi = 378; break 'outer; }
-                  *p |= 64; p = p.offset(prime_ * 4 + 4);
+                  *p &= 191; p = p.offset(prime_ * 4 + 4);
                   break 'label379
                  }
                  if p >= end { wi = 379; break 'outer; }
-                 *p |= 32; p = p.offset(prime_ * 2 + 2);
+                 *p &= 223; p = p.offset(prime_ * 2 + 2);
                  break 'label380
                 }
                 if p >= end { wi = 380; break 'outer; }
-                *p |= 16; p = p.offset(prime_ * 4 + 4);
+                *p &= 239; p = p.offset(prime_ * 4 + 4);
                 break 'label381
                }
                if p >= end { wi = 381; break 'outer; }
-               *p |= 8; p = p.offset(prime_ * 2 + 2);
+               *p &= 247; p = p.offset(prime_ * 2 + 2);
                break 'label382
               }
               if p >= end { wi = 382; break 'outer; }
-              *p |= 4; p = p.offset(prime_ * 4 + 4);
+              *p &= 251; p = p.offset(prime_ * 4 + 4);
               break 'label383
              }
              if p >= end { wi = 383; break 'outer; }
-             *p |= 2; p = p.offset(prime_ * 6 + 6);
+             *p &= 253; p = p.offset(prime_ * 6 + 6);
              wi = 336
             }
         }

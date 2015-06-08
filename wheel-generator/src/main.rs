@@ -157,8 +157,9 @@ pub const MODULO: usize = {modulo};
         }).collect();
 
         for (i, &(sl, offset, bit)) in twiddles.iter().enumerate() {
-            println!("    WheelElem {{ unset_bit: 1u8 << {}u8, next_mult_factor: {}, correction: {}, next: {} }},", bit, sl, offset,
-                   if i == COUNT-1 {-(i as isize)}else{1});
+            println!("    WheelElem {{ unset_bit: {}, next_mult_factor: {}, correction: {}, next: {} }},",
+                     !(1u8 << bit), sl, offset,
+                     if i == COUNT-1 {-(i as isize)}else{1});
         }
         all_twiddles.push((m, twiddles));
     }
@@ -216,8 +217,8 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
         let mut offset_so_far = 0;
         for &(sl, offset, bit) in twiddles {
             println!("\
-{indent}    *p.offset(prime_ * {} + {}) |= {};",
-                     sl_so_far, offset_so_far, 1 << bit, indent = indent);
+{indent}    *p.offset(prime_ * {} + {}) &= {};",
+                     sl_so_far, offset_so_far, !(1u8 << bit), indent = indent);
             sl_so_far += sl;
             offset_so_far += offset;
         }
@@ -236,11 +237,11 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
             };
             println!("\
 {indent} if p >= end {{ wi = {val}; break 'outer; }}
-{indent} *p |= {}; p = p.offset(prime_ * {} + {});
+{indent} *p &= {}; p = p.offset(prime_ * {} + {});
 {indent} {}
 {indent}}}",
 
-                     1 << bit,
+                     !(1u8 << bit),
                      sl, offset,
                      end,
                      val = wheel_start + j,

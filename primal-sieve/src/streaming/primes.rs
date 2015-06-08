@@ -63,7 +63,7 @@ impl Primes {
         Primes {
             early: Early::Two,
             base: 0,
-            current: !iter.next().unwrap(),
+            current: iter.next().unwrap(),
             elems: iter,
             streaming: streaming,
             queued: VecDeque::new(),
@@ -95,7 +95,6 @@ impl Iterator for Primes {
         'find_c: while c == 0 {
             for next in &mut self.elems {
                 self.base += ITER_BASE_STEP;
-                let next = !next;
                 if next != 0 {
                     c = next;
                     break 'find_c

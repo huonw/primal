@@ -72,7 +72,7 @@ impl Sieve {
     pub fn is_prime(&self, n: usize) -> bool {
         match self.index_for(n) {
             (false, _, _) => n == 2 || n == 3 || n == 5 || n == 7,
-            (true, base, tweak) => !self.seen[base][tweak],
+            (true, base, tweak) => self.seen[base][tweak],
         }
     }
 
@@ -99,15 +99,15 @@ impl Sieve {
 
                 for v in &self.seen[..base] {
                     let bytes = v.as_bytes();
-                    count += 8 * bytes.len() - hamming::weight(bytes) as usize;
+                    count += hamming::weight(bytes) as usize;
                 }
                 let (tweak_byte, tweak_bit) = (tweak / 8, tweak % 8);
 
                 let bytes = self.seen[base].as_bytes();
-                count += 8 * tweak_byte - hamming::weight(&bytes[..tweak_byte]) as usize;
+                count += hamming::weight(&bytes[..tweak_byte]) as usize;
                 let byte = bytes[tweak_byte];
                 for i in 0..tweak_bit + includes as usize {
-                    count += (byte & (1 << i) == 0) as usize
+                    count += (byte & (1 << i) != 0) as usize
                 }
                 count
             }
@@ -202,7 +202,7 @@ impl Sieve {
         let base_u64_count = base * self.seen[0].len() / 64 + tweak_u64;
 
         let mut elems = self.seen[base].as_u64s()[tweak_u64..].iter();
-        let current = !elems.next().unwrap() & tweak_mask;
+        let current = elems.next().unwrap() & tweak_mask;
 
         PrimesFrom {
             early: early,
@@ -259,7 +259,6 @@ impl<'a> Iterator for PrimesFrom<'a> {
         'find_c: while c == 0 {
             for &next in &mut self.elems {
                 self.base += ITER_BASE_STEP;
-                let next = !next;
                 if next != 0 {
                     c = next;
                     break 'find_c

@@ -32,7 +32,6 @@ mod presieve;
 #[derive(Debug)]
 pub struct StreamingSieve {
     small: Option<::Sieve>,
-    // stores which numbers *aren't* prime, i.e. true == composite.
     sieve: BitVec,
     primes: Vec<wheel::State<wheel::Wheel210>>,
     small_primes: Vec<wheel::State<wheel::Wheel30>>,
@@ -66,7 +65,7 @@ impl StreamingSieve {
 
         StreamingSieve {
             small: small,
-            sieve: BitVec::from_elem(elems, false),
+            sieve: BitVec::from_elem(elems, true),
             primes: vec![],
             small_primes: vec![],
             large_primes: vec![],
@@ -108,16 +107,16 @@ impl StreamingSieve {
                 for _ in 0..base {
                     let (_, bitv) = sieve.next().unwrap();
                     let bytes = bitv.as_bytes();
-                    count += 8 * bytes.len() - hamming::weight(bytes) as usize;
+                    count += hamming::weight(bytes) as usize;
                 }
                 let (tweak_byte, tweak_bit) = (tweak / 8, tweak % 8);
                 let (_, last) = sieve.next().unwrap();
                 let bytes = last.as_bytes();
-                count += 8 * tweak_byte - hamming::weight(&bytes[..tweak_byte]) as usize;
+                count += hamming::weight(&bytes[..tweak_byte]) as usize;
                 if tweak_bit > 0 || includes {
                     let byte = bytes[tweak_byte];
                     for i in 0..tweak_bit + includes as usize {
-                        count += (byte & (1 << i) == 0) as usize
+                        count += (byte & (1 << i) != 0) as usize
                     }
                 }
                 count
@@ -225,7 +224,7 @@ impl StreamingSieve {
 
         if low == 0 {
             // 1 is not prime.
-            self.sieve.set(0, true);
+            self.sieve.set(0, false);
             self.presieve.mark_small_primes(&mut self.sieve);
         }
 
@@ -267,7 +266,7 @@ mod tests {
             for val in next {
                 let i = wheel::BYTE_MODULO * base + coprime[index];
                 if i >= LIMIT { break }
-                assert!(primes.is_prime(i) == !val,
+                assert!(primes.is_prime(i) == val,
                         "failed for {} (is prime = {})", i, primes.is_prime(i));
 
                 index += 1;

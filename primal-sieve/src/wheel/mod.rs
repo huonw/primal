@@ -187,7 +187,7 @@ fn raw_set_bit(wheel: &'static [WheelElem],
     unsafe {
         let WheelElem { unset_bit, next_mult_factor, correction, next } =
             *wheel.get_unchecked(*wi);
-        *x.get_unchecked_mut(*si) |= unset_bit;
+        *x.get_unchecked_mut(*si) &= unset_bit;
 
         *si += prime * next_mult_factor as usize;
         *si += correction as usize;

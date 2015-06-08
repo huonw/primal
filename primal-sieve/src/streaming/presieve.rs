@@ -43,8 +43,9 @@ impl Presieve {
                     sievers.push(wheel::compute_wheel_elem(wheel::Wheel30, x, prod));
                 }
             }
-            let mut sieve =  BitVec::from_elem(len, false);
+            let mut sieve =  BitVec::from_elem(len, true);
             StreamingSieve::small_primes_sieve(&mut sieve, &mut sievers);
+            println!("{} {:?}", idx, &sieve.as_bytes()[0..2]);
             Presieve {
                 sieve: sieve,
                 presieve_prod: prod,
@@ -59,7 +60,7 @@ impl Presieve {
         for &x in &PRESIEVE_PRIMES[..self.presieve_idx] {
             let (use_, idx) = wheel::bit_index(x);
             if use_ {
-                sieve.set(idx, false)
+                sieve.set(idx, true)
             }
         }
     }
