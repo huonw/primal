@@ -109,16 +109,9 @@ impl StreamingSieve {
                     let bytes = bitv.as_bytes();
                     count += hamming::weight(bytes) as usize;
                 }
-                let (tweak_byte, tweak_bit) = (tweak / 8, tweak % 8);
+
                 let (_, last) = sieve.next().unwrap();
-                let bytes = last.as_bytes();
-                count += hamming::weight(&bytes[..tweak_byte]) as usize;
-                if tweak_bit > 0 || includes {
-                    let byte = bytes[tweak_byte];
-                    for i in 0..tweak_bit + includes as usize {
-                        count += (byte & (1 << i) != 0) as usize
-                    }
-                }
+                count += last.count_ones_before(tweak + includes as usize);
                 count
             }
         }

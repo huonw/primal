@@ -3,7 +3,7 @@ use wheel;
 use streaming;
 use hamming;
 
-use std::cmp::{self, Ordering};
+use std::cmp;
 
 /// A heavily optimised prime sieve.
 ///
@@ -122,14 +122,8 @@ impl Sieve {
                 };
 
                 count += self.count_upto_chunk(base);
-                let (tweak_byte, tweak_bit) = (tweak / 8, tweak % 8);
+                count += self.seen[base].bits.count_ones_before(tweak + includes as usize);
 
-                let bytes = self.seen[base].bits.as_bytes();
-                count += hamming::weight(&bytes[..tweak_byte]) as usize;
-                let byte = bytes[tweak_byte];
-                for i in 0..tweak_bit + includes as usize {
-                    count += (byte & (1 << i) != 0) as usize
-                }
                 count
             }
         }
@@ -219,49 +213,8 @@ impl Sieve {
                 let chunk_idx = self.seen.binary_search_by(|x| x.count.cmp(&bit_n))
                                          .unwrap_or_else(|x| x);
                 let chunk_bits = self.count_upto_chunk(chunk_idx);
-                let mut bit = bit_n - chunk_bits;
-                let all_bytes = self.seen[chunk_idx].bits.as_bytes();
-                let mut bytes = all_bytes;
-
-                while bytes.len() > 240 {
-                    let ix = bytes.len() / 2;
-                    let (first, second) = bytes.split_at(ix);
-
-                    let count = hamming::weight(first) as usize;
-                    match count.cmp(&bit) {
-                        Ordering::Equal | Ordering::Greater => {
-                            bytes = first;
-                        }
-                        Ordering::Less => {
-                            bit -= count;
-                            bytes = second;
-                        }
-                    }
-                }
-
-                let mut byte_idx = bytes.as_ptr() as usize - all_bytes.as_ptr() as usize;
-
-                let mut b = 0;
-                for &b_ in bytes {
-                    b = b_;
-                    let count = b_.count_ones() as usize;
-                    if count >= bit {
-                        break
-                    }
-
-                    byte_idx += 1;
-                    bit -= count
-                }
-                assert!(b != 0);
-                // clear the bottom bit-1 set bits
-                for _ in 1..bit {
-                    b = b & (b - 1);
-                }
-                assert!(b != 0);
-                let bit_idx = chunk_idx * self.seen[0].bits.len()
-                    + byte_idx * 8
-                    + b.trailing_zeros() as usize;
-                wheel::from_bit_index(bit_idx)
+                let bit_idx = self.seen[chunk_idx].bits.find_nth_bit(bit_n - chunk_bits - 1);
+                wheel::from_bit_index(chunk_idx * self.seen[0].bits.len() + bit_idx.unwrap())
             }
         }
     }
