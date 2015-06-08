@@ -287,7 +287,7 @@ impl Sieve {
     ///     println!("{}", p);
     /// }
     /// ```
-    pub fn primes_from<'a>(&'a self, n: usize) -> PrimesFrom<'a> {
+    pub fn primes_from<'a>(&'a self, n: usize) -> SievePrimes<'a> {
         assert!(n <= self.upper_bound());
         let early = match n {
             0...2 => Early::Two,
@@ -304,7 +304,7 @@ impl Sieve {
         let mut elems = self.seen[base].bits.as_u64s()[tweak_u64..].iter();
         let current = elems.next().unwrap() & tweak_mask;
 
-        PrimesFrom {
+        SievePrimes {
             early: early,
             base: base_u64_count * ITER_BASE_STEP,
             current: current,
@@ -326,8 +326,9 @@ enum Early {
     Done,
 }
 
+/// An iterator over the primes stored in a `Sieve` instance.
 #[derive(Clone)]
-pub struct PrimesFrom<'a> {
+pub struct SievePrimes<'a> {
     early: Early,
     base: usize,
     current: u64,
@@ -336,7 +337,7 @@ pub struct PrimesFrom<'a> {
     bits: slice::Iter<'a, Item>,
 }
 
-impl<'a> Iterator for PrimesFrom<'a> {
+impl<'a> Iterator for SievePrimes<'a> {
     type Item = usize;
 
     fn next(&mut self) -> Option<usize> {

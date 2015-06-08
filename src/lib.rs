@@ -77,7 +77,7 @@ pub use primal_estimate::nth_prime as estimate_nth_prime;
 pub use primal_check::miller_rabin as is_prime;
 pub use primal_check::{as_perfect_power, as_prime_power};
 
-pub use primal_sieve::{StreamingSieve, Sieve, Primes};
+pub use primal_sieve::{StreamingSieve, Sieve, SievePrimes, Primes};
 
 
 #[cfg(all(test, feature = "unstable"))]

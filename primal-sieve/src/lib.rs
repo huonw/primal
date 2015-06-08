@@ -36,4 +36,4 @@ pub use streaming::primes::Primes;
 mod wheel;
 mod sieve;
 
-pub use sieve::Sieve;
+pub use sieve::{Sieve, SievePrimes};
