@@ -90,6 +90,18 @@ impl StreamingSieve {
     /// Count the number of primes upto and including `n`, that is, 𝜋,
     /// the [prime counting
     /// function](https://en.wikipedia.org/wiki/Prime-counting_function).
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// assert_eq!(primal::StreamingSieve::count_upto(10), 4);
+    /// // the endpoint is included
+    /// assert_eq!(primal::StreamingSieve::count_upto(11), 5);
+    ///
+    /// assert_eq!(primal::StreamingSieve::count_upto(100), 25);
+    /// assert_eq!(primal::StreamingSieve::count_upto(1000), 168);
+    /// ```
     pub fn count_upto(n: usize) -> usize {
         match n {
             0...1 => 0,

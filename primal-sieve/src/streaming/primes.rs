@@ -49,6 +49,16 @@ pub struct Primes {
 
 impl Primes {
     /// The sequence `2, 3, 5, 7, 11, ...`.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// // print the first 20 primes
+    /// for p in primal::Primes::all().take(20) {
+    ///     println!("{}", p);
+    /// }
+    /// ```
     pub fn all() -> Primes {
         let mut streaming = StreamingSieve::new(streaming::SEG_LEN);
         let mut iter = {

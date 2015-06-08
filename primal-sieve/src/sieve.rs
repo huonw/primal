@@ -83,6 +83,18 @@ impl Sieve {
         }
     }
     /// Return the largest number that this sieve knows about.
+    ///
+    /// It will be at least as large as the number passed to `new`,
+    /// but may be slightly larger.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// let sieve = primal::Sieve::new(1000);
+    ///
+    /// assert!(sieve.upper_bound() >= 1000);
+    /// ```
     pub fn upper_bound(&self) -> usize {
         let last_bit = self.nbits;
         wheel::from_bit_index(last_bit) - 1
@@ -92,7 +104,27 @@ impl Sieve {
     /// # Panics
     ///
     /// If `n` is out of range (greater than `self.upper_bound()`),
-    /// `count_upto` will panic.
+    /// `is_prime` will panic.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// let sieve = primal::Sieve::new(1000);
+    ///
+    /// assert_eq!(sieve.is_prime(0), false);
+    /// assert_eq!(sieve.is_prime(1), false);
+    /// assert_eq!(sieve.is_prime(2), true);
+    /// assert_eq!(sieve.is_prime(3), true);
+    /// assert_eq!(sieve.is_prime(4), false);
+    /// assert_eq!(sieve.is_prime(5), true);
+    ///
+    /// assert_eq!(sieve.is_prime(991), true);
+    /// assert_eq!(sieve.is_prime(993), false);
+    /// assert_eq!(sieve.is_prime(995), false);
+    /// assert_eq!(sieve.is_prime(997), true);
+    /// assert_eq!(sieve.is_prime(999), false);
+    /// ```
     pub fn is_prime(&self, n: usize) -> bool {
         match self.index_for(n) {
             (false, _, _) => n == 2 || n == 3 || n == 5 || n == 7,
@@ -106,6 +138,20 @@ impl Sieve {
     ///
     /// If `n` is out of range (greater than `self.upper_bound()`),
     /// `count_upto` will panic.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// let sieve = primal::Sieve::new(1000);
+    ///
+    /// assert_eq!(sieve.count_upto(10), 4);
+    /// // the endpoint is included
+    /// assert_eq!(sieve.count_upto(11), 5);
+    ///
+    /// assert_eq!(sieve.count_upto(100), 25);
+    /// assert_eq!(sieve.count_upto(1000), 168);
+    /// ```
     pub fn count_upto(&self, n: usize) -> usize {
         assert!(n <= self.upper_bound());
         match n {
@@ -146,6 +192,31 @@ impl Sieve {
     /// Notably, any number between `U` and `U^2` can always be fully
     /// factored, since these numbers are guaranteed to only have zero
     /// or one prime factors larger than `U`.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// let sieve = primal::Sieve::new(100);
+    ///
+    /// assert_eq!(sieve.factor(2), Ok(vec![(2, 1)]));
+    /// assert_eq!(sieve.factor(4), Ok(vec![(2, 2)]));
+    /// assert_eq!(sieve.factor(1 << 31), Ok(vec![(2, 31)]));
+    ///
+    /// assert_eq!(sieve.factor(18), Ok(vec![(2, 1), (3, 2)]));
+    ///
+    /// assert_eq!(sieve.factor(25 * 81), Ok(vec![(3, 4), (5, 2)]));
+    ///
+    /// // "large" prime factors are OK, as long as there's only one
+    /// assert_eq!(sieve.factor(2 * 3 * 97 * 97 * 991),
+    ///            Ok(vec![(2, 1), (3, 1), (97, 2), (991, 1)]));
+    ///
+    /// // too many large factors is problematic
+    /// assert_eq!(sieve.factor(991 * 991),
+    ///            Err((991 * 991, vec![])));
+    /// assert_eq!(sieve.factor(2 * 3 * 97 * 97 * 991 * 991),
+    ///            Err((991 * 991, vec![(2, 1), (3, 1), (97, 2)])));
+    /// ```
     pub fn factor(&self, mut n: usize) -> Result<Vec<(usize,usize)>,
                                                  (usize, Vec<(usize, usize)>)>
     {
@@ -197,6 +268,9 @@ impl Sieve {
     /// let (_, hi) = primal::estimate_nth_prime(1_000);
     ///
     /// let sieve = primal::Sieve::new(hi as usize);
+    ///
+    /// assert_eq!(sieve.nth_prime(10), 29);
+    /// assert_eq!(sieve.nth_prime(100), 541);
     /// assert_eq!(sieve.nth_prime(1_000), 7919);
     /// ```
     pub fn nth_prime(&self, n: usize) -> usize {
@@ -236,7 +310,9 @@ impl Sieve {
     /// ```rust
     /// # extern crate primal;
     /// let sieve = primal::Sieve::new(1_000);
-    /// for p in sieve.primes_from(100).take_while(|x| *x <= 1000) {
+    ///
+    /// // print the three digit primes
+    /// for p in sieve.primes_from(100).take_while(|x| *x < 1000) {
     ///     println!("{}", p);
     /// }
     /// ```
