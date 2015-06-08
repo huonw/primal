@@ -3,7 +3,7 @@ use wheel;
 use streaming;
 use hamming;
 
-use std::cmp;
+use std::cmp::{self, Ordering};
 
 /// A heavily optimised prime sieve.
 ///
@@ -74,6 +74,14 @@ impl Sieve {
         let (base, tweak) = self.split_index(idx);
         (b, base, tweak)
     }
+
+    fn count_upto_chunk(&self, n: usize) -> usize {
+        if n == 0 {
+            0
+        } else {
+            self.seen[n - 1].count
+        }
+    }
     /// Return the largest number that this sieve knows about.
     pub fn upper_bound(&self) -> usize {
         let last_bit = self.nbits;
@@ -113,9 +121,7 @@ impl Sieve {
                     _ => unimplemented!()
                 };
 
-                if base > 0 {
-                    count += self.seen[base - 1].count;
-                }
+                count += self.count_upto_chunk(base);
                 let (tweak_byte, tweak_bit) = (tweak / 8, tweak % 8);
 
                 let bytes = self.seen[base].bits.as_bytes();
@@ -179,6 +185,85 @@ impl Sieve {
             }
         }
         Ok(ret)
+    }
+
+    /// Compute *p<sub>n</sub>*, the `n` prime number, 1-indexed
+    /// (i.e. *p<sub>1</sub>* = 2, *p<sub>2</sub>* = 3).
+    ///
+    /// # Panics
+    ///
+    /// `n` must be larger than 0 and less than the total number of
+    /// primes in this sieve (that is,
+    /// `self.count_upto(self.upper_bound())`).
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// let (_, hi) = primal::estimate_nth_prime(1_000);
+    ///
+    /// let sieve = primal::Sieve::new(hi as usize);
+    /// assert_eq!(sieve.nth_prime(1_000), 7919);
+    /// ```
+    pub fn nth_prime(&self, n: usize) -> usize {
+        assert!(0 < n && n <= self.count_upto_chunk(self.seen.len()));
+        match n {
+            1 => 2,
+            2 => 3,
+            3 => 5,
+            _ => {
+                // the bit vectors don't store the first three primes,
+                // so we're looking for this (one-indexed) bit
+                let bit_n = n - 3;
+
+                let chunk_idx = self.seen.binary_search_by(|x| x.count.cmp(&bit_n))
+                                         .unwrap_or_else(|x| x);
+                let chunk_bits = self.count_upto_chunk(chunk_idx);
+                let mut bit = bit_n - chunk_bits;
+                let all_bytes = self.seen[chunk_idx].bits.as_bytes();
+                let mut bytes = all_bytes;
+
+                while bytes.len() > 240 {
+                    let ix = bytes.len() / 2;
+                    let (first, second) = bytes.split_at(ix);
+
+                    let count = hamming::weight(first) as usize;
+                    match count.cmp(&bit) {
+                        Ordering::Equal | Ordering::Greater => {
+                            bytes = first;
+                        }
+                        Ordering::Less => {
+                            bit -= count;
+                            bytes = second;
+                        }
+                    }
+                }
+
+                let mut byte_idx = bytes.as_ptr() as usize - all_bytes.as_ptr() as usize;
+
+                let mut b = 0;
+                for &b_ in bytes {
+                    b = b_;
+                    let count = b_.count_ones() as usize;
+                    if count >= bit {
+                        break
+                    }
+
+                    byte_idx += 1;
+                    bit -= count
+                }
+                assert!(b != 0);
+                // clear the bottom bit-1 set bits
+                for _ in 1..bit {
+                    b = b & (b - 1);
+                }
+                assert!(b != 0);
+                let bit_idx = chunk_idx * self.seen[0].bits.len()
+                    + byte_idx * 8
+                    + b.trailing_zeros() as usize;
+                wheel::from_bit_index(bit_idx)
+            }
+        }
     }
 
     /// Return an iterator over the primes from `n` (inclusive) to the
@@ -488,6 +573,18 @@ mod tests {
                    Err((7561, vec![])));
         assert_eq!(primes.factor(2 * 3 * 7561),
                    Err((7561, vec![(2, 1), (3, 1)])));
+    }
+
+    #[test]
+    fn nth_prime() {
+        let primes = Sieve::new(2_000_000);
+
+        for (i, p) in primes.primes_from(0).enumerate() {
+            let n = i + 1;
+            if n < 2000 || n % 1000 == 0 {
+                assert_eq!(primes.nth_prime(n), p);
+            }
+        }
     }
 }
 
