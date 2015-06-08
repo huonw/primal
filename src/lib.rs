@@ -214,7 +214,7 @@
 //! # assert_eq!(p, 193);
 //! ```
 //!
-//! This takes around 3.5 seconds to spit out the same number. Slower
+//! This takes around 3.5 seconds to print the same number. Slower
 //! than the iterator!
 //!
 //! I was just using this silly condition as an example of something
@@ -235,7 +235,7 @@
 //!     if primal::is_prime(p) { break }
 //! }
 //! println!("the prime is {}", p);
-//! assert_eq!(p, 3_221_225_473);
+//! # assert_eq!(p, 3_221_225_473);
 //! ```
 //!
 //! This takes 6 <em>micro</em>seconds: more than 500,000&times;
