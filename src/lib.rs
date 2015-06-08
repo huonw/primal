@@ -31,6 +31,8 @@
 //!
 //! # Examples
 //!
+//! ## "Indexing" Primes
+//!
 //! Let's find the 10001st prime. The easiest way is to enumerate the
 //! primes, and find the 10001st:
 //!
@@ -117,6 +119,127 @@
 //! (By the way, the version using 10<sup>10</sup> as the bound
 //! instead of the more accurate estimate still only takes ~3
 //! seconds.)
+//!
+//! ## Counting Primes
+//!
+//! Another problem: count the number of primes below 1 million. This
+//! is evaluating the [prime-counting function
+//! π](https://en.wikipedia.org/wiki/Prime-counting_function),
+//! i.e. π(10<sup>6</sup>).
+//!
+//! As above, there's a few ways to attack this: the iterator, and the
+//! sieves.
+//!
+//! ```rust
+//! const LIMIT: usize = 1_000_000;
+//!
+//! // iterator
+//! let count = primal::Primes::all().take_while(|p| *p < LIMIT).count();
+//! println!("there are {} primes below 1 million", count); // 78498
+//!
+//! // sieves
+//! let sieve = primal::Sieve::new(LIMIT);
+//! let count = sieve.prime_pi(LIMIT);
+//! println!("there are {} primes below 1 million", count);
+//!
+//! let count = primal::StreamingSieve::prime_pi(LIMIT);
+//! println!("there are {} primes below 1 million", count);
+//! ```
+//!
+//! `StreamingSieve` is fastest (380 microseconds) followed by `Sieve`
+//! (400) with `Primes` bringing up the rear at 1300 microseconds. Of
+//! course, repeated queries will be faster with `Sieve` than with
+//! `StreamingSieve`, but that flexibility comes at the cost of extra
+//! memory use.
+//!
+//! If an approximation is all that is required, `estimate_prime_pi`
+//! provides close upper and lower bounds:
+//!
+//! ```rust
+//! let (lo, hi) = primal::estimate_prime_pi(1_000_000);
+//! println!("there are between {} and {} primes below 1 million", lo, hi);
+//! // 78304, 78573
+//! ```
+//!
+//! ## Searching Primes
+//!
+//! Now for something where `Primes` might be useful: find the first
+//! prime where the binary expansion (not including trailing zeros)
+//! ends like `00..001` with at least 27 zeros. This condition is
+//! checked by:
+//!
+//! ```rust
+//! fn check(p: usize) -> bool {
+//!     p > 1 && (p / 2).trailing_zeros() >= 27
+//! }
+//! ```
+//!
+//! I have no idea how large the prime might be: I know it's
+//! guaranteed to be at *least* 2<sup>27 + 1</sup> + 1, but not an
+//! upper limit.
+//!
+//! The `Primes` iterator works perfectly for this:
+//!
+//! ```rust
+//! # fn check(p: usize) -> bool {  p > 1 && (p / 2).trailing_zeros() >= 5 } // 27 is too slow
+//! let p = primal::Primes::all().find(|p| check(*p)).unwrap();
+//! println!("the prime is {}", p);
+//! # assert_eq!(p, 193);
+//! ```
+//!
+//! It takes about 3.1 seconds for my computer to spit out 3,221,225,473.
+//!
+//! Using a sieve is a little trickier: one approach is to start with
+//! some estimated upper bound (like double the absolute lower bound),
+//! look for a valid prime. If one isn't found, double the upper bound
+//! and start again. The `primes_from` method allows for saving a
+//! little bit of work: we can start iterating from an arbitrary point
+//! in the sequence, such as the lower bound.
+//!
+//! ```rust
+//! # fn check(p: usize) -> bool {  p > 1 && (p / 2).trailing_zeros() >= 5 } // 27 is too slow
+//! let p;
+//! let mut lower_bound = 1 << (27 + 1);
+//! # let mut lower_bound = 1 << (5 + 1);
+//! loop {
+//!     // our upper bound is double the lower bound
+//!     let sieve = primal::Sieve::new(lower_bound * 2);
+//!     if let Some(p_) = sieve.primes_from(lower_bound).find(|p| check(*p)) {
+//!         p = p_;
+//!         break
+//!     }
+//!     lower_bound *= 2;
+//! }
+//! println!("the prime is {}", p);
+//! # assert_eq!(p, 193);
+//! ```
+//!
+//! This takes around 3.5 seconds to spit out the same number. Slower
+//! than the iterator!
+//!
+//! I was just using this silly condition as an example of something
+//! that doesn't have an obvious upper bound, rather than a problem
+//! that is hard to do fast. There's a much faster way to tackle it,
+//! by inverting the problem: construct numbers that satisfy `check`,
+//! and check the primality of those.
+//!
+//! The numbers that satisfy `check` are `k * (1 << (27 + 1)) + 1` for
+//! `k >= 1`, so the only hard bit is testing primality. Fortunately,
+//! `primal` offers the `is_prime` function which is an efficient way
+//! to do primality tests, even of very large numbers.
+//!
+//! ```rust
+//! let mut p = 0;
+//! for k in 1.. {
+//!     p = k * (1 << (27 + 1)) + 1;
+//!     if primal::is_prime(p) { break }
+//! }
+//! println!("the prime is {}", p);
+//! assert_eq!(p, 3_221_225_473);
+//! ```
+//!
+//! This takes 6 <em>micro</em>seconds: more than 500,000&times;
+//! faster than the iterator!
 
 #![cfg_attr(all(test, feature = "unstable"), feature(test, step_by))]
 
