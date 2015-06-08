@@ -66,6 +66,20 @@ pub fn as_perfect_power(x: u64) -> (u64, u8) {
 /// (that is, including when `x` is itself a prime).
 ///
 /// Returns `None` if `x` not a perfect power.
+///
+/// # Examples
+///
+/// ```rust
+/// # extern crate primal_check as primal;
+/// assert_eq!(primal::as_prime_power(2), Some((2, 1)));
+/// assert_eq!(primal::as_prime_power(4), Some((2, 2)));
+/// assert_eq!(primal::as_prime_power(8), Some((2, 3)));
+/// assert_eq!(primal::as_prime_power(1024), Some((2, 10)));
+///
+/// assert_eq!(primal::as_prime_power(1000), None);
+///
+/// assert_eq!(primal::as_prime_power(15), None);
+/// ```
 pub fn as_prime_power(x: u64) -> Option<(u64, u8)> {
     let (y, k) = as_perfect_power(x);
     if ::miller_rabin(y) {
