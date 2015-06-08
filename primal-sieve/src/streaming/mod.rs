@@ -27,7 +27,7 @@ mod presieve;
 ///
 /// ```rust
 /// # extern crate primal;
-/// let count = primal::StreamingSieve::count_upto(123456);
+/// let count = primal::StreamingSieve::prime_pi(123456);
 /// println!("𝜋(123456) = {}", count);
 /// ```
 #[derive(Debug)]
@@ -95,14 +95,14 @@ impl StreamingSieve {
     ///
     /// ```rust
     /// # extern crate primal;
-    /// assert_eq!(primal::StreamingSieve::count_upto(10), 4);
+    /// assert_eq!(primal::StreamingSieve::prime_pi(10), 4);
     /// // the endpoint is included
-    /// assert_eq!(primal::StreamingSieve::count_upto(11), 5);
+    /// assert_eq!(primal::StreamingSieve::prime_pi(11), 5);
     ///
-    /// assert_eq!(primal::StreamingSieve::count_upto(100), 25);
-    /// assert_eq!(primal::StreamingSieve::count_upto(1000), 168);
+    /// assert_eq!(primal::StreamingSieve::prime_pi(100), 25);
+    /// assert_eq!(primal::StreamingSieve::prime_pi(1000), 168);
     /// ```
-    pub fn count_upto(n: usize) -> usize {
+    pub fn prime_pi(n: usize) -> usize {
         match n {
             0...1 => 0,
             2 => 1,
@@ -137,7 +137,7 @@ impl StreamingSieve {
     ///
     /// `n` must be larger than 0 and less than the total number of
     /// primes in this sieve (that is,
-    /// `self.count_upto(self.upper_bound())`).
+    /// `self.prime_pi(self.upper_bound())`).
     ///
     /// # Example
     ///
@@ -324,12 +324,12 @@ mod tests {
         }
     }
     #[test]
-    fn count_upto() {
+    fn prime_pi() {
         let limit = 2_000_000;
         let real = Primes::sieve(limit);
 
         for i in (0..20).chain((0..100).map(|n| n * 19998 + 1)) {
-            let val = StreamingSieve::count_upto(i);
+            let val = StreamingSieve::prime_pi(i);
             let true_ = real.primes().take_while(|p| *p <= i).count();
             assert!(val == true_, "failed for {}, true {}, computed {}",
                     i, true_, val)

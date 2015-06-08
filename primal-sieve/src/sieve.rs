@@ -21,7 +21,7 @@ use std::cmp;
 /// ```rust
 /// # extern crate primal;
 /// let sieve = primal::Sieve::new(10_000_000);
-/// assert_eq!(sieve.count_upto(123456), 11601);
+/// assert_eq!(sieve.prime_pi(123456), 11601);
 ///
 /// assert!(sieve.is_prime(6395047));
 /// assert!(!sieve.is_prime(6395048));
@@ -75,7 +75,7 @@ impl Sieve {
         (b, base, tweak)
     }
 
-    fn count_upto_chunk(&self, n: usize) -> usize {
+    fn prime_pi_chunk(&self, n: usize) -> usize {
         if n == 0 {
             0
         } else {
@@ -137,7 +137,7 @@ impl Sieve {
     /// # Panics
     ///
     /// If `n` is out of range (greater than `self.upper_bound()`),
-    /// `count_upto` will panic.
+    /// `prime_pi` will panic.
     ///
     /// # Examples
     ///
@@ -145,14 +145,14 @@ impl Sieve {
     /// # extern crate primal;
     /// let sieve = primal::Sieve::new(1000);
     ///
-    /// assert_eq!(sieve.count_upto(10), 4);
+    /// assert_eq!(sieve.prime_pi(10), 4);
     /// // the endpoint is included
-    /// assert_eq!(sieve.count_upto(11), 5);
+    /// assert_eq!(sieve.prime_pi(11), 5);
     ///
-    /// assert_eq!(sieve.count_upto(100), 25);
-    /// assert_eq!(sieve.count_upto(1000), 168);
+    /// assert_eq!(sieve.prime_pi(100), 25);
+    /// assert_eq!(sieve.prime_pi(1000), 168);
     /// ```
-    pub fn count_upto(&self, n: usize) -> usize {
+    pub fn prime_pi(&self, n: usize) -> usize {
         assert!(n <= self.upper_bound());
         match n {
             0...1 => 0,
@@ -167,7 +167,7 @@ impl Sieve {
                     _ => unimplemented!()
                 };
 
-                count += self.count_upto_chunk(base);
+                count += self.prime_pi_chunk(base);
                 count += self.seen[base].bits.count_ones_before(tweak + includes as usize);
 
                 count
@@ -259,7 +259,7 @@ impl Sieve {
     ///
     /// `n` must be larger than 0 and less than the total number of
     /// primes in this sieve (that is,
-    /// `self.count_upto(self.upper_bound())`).
+    /// `self.prime_pi(self.upper_bound())`).
     ///
     /// # Example
     ///
@@ -274,7 +274,7 @@ impl Sieve {
     /// assert_eq!(sieve.nth_prime(1_000), 7919);
     /// ```
     pub fn nth_prime(&self, n: usize) -> usize {
-        assert!(0 < n && n <= self.count_upto_chunk(self.seen.len()));
+        assert!(0 < n && n <= self.prime_pi_chunk(self.seen.len()));
         match n {
             1 => 2,
             2 => 3,
@@ -286,7 +286,7 @@ impl Sieve {
 
                 let chunk_idx = self.seen.binary_search_by(|x| x.count.cmp(&bit_n))
                                          .unwrap_or_else(|x| x);
-                let chunk_bits = self.count_upto_chunk(chunk_idx);
+                let chunk_bits = self.prime_pi_chunk(chunk_idx);
                 let bit_idx = self.seen[chunk_idx].bits.find_nth_bit(bit_n - chunk_bits - 1);
                 wheel::from_bit_index(chunk_idx * self.seen[0].bits.len() + bit_idx.unwrap())
             }
@@ -303,7 +303,7 @@ impl Sieve {
     /// # Panics
     ///
     /// If `n` is out of range (greater than `self.upper_bound()`),
-    /// `count_upto` will panic.
+    /// `prime_pi` will panic.
     ///
     /// # Examples
     ///
@@ -451,7 +451,7 @@ mod tests {
 
         let upto = 2_000_000;
         assert_eq!(primes.primes_from(0).take_while(|x| *x <= upto).count(),
-                   primes.count_upto(upto));
+                   primes.prime_pi(upto));
     }
     #[test]
     fn primes_from_equality() {
@@ -466,7 +466,7 @@ mod tests {
             assert_eq!(r, p);
             i += 1;
         }
-        assert_eq!(i, primes.count_upto(limit));
+        assert_eq!(i, primes.prime_pi(limit));
     }
     #[test]
     fn primes_from_no_overrun() {
@@ -496,13 +496,13 @@ mod tests {
     }
 
     #[test]
-    fn count_upto() {
+    fn prime_pi() {
         let limit = 2_000_000;
         let primes = Sieve::new(limit);
         let real = Primes::sieve(limit);
 
         for i in (0..20).chain((0..100).map(|n| n * 19998 + 1)) {
-            let val = primes.count_upto(i);
+            let val = primes.prime_pi(i);
             let true_ = real.primes().take_while(|p| *p <= i).count();
             assert!(val == true_, "failed for {}, true {}, computed {}",
                     i, true_, val)
@@ -640,20 +640,20 @@ mod benches {
         b.iter(|| Sieve::new(10_000_000))
     }
 
-    fn count_upto(b: &mut Bencher, n: usize) {
+    fn prime_pi(b: &mut Bencher, n: usize) {
         let s = Sieve::new(n + 1);
 
-        b.iter(|| s.count_upto(n));
+        b.iter(|| s.prime_pi(n));
     }
 
     #[bench]
-    fn count_upto_small(b: &mut Bencher) { count_upto(b, 100) }
+    fn prime_pi_small(b: &mut Bencher) { prime_pi(b, 100) }
     #[bench]
-    fn count_upto_medium(b: &mut Bencher) { count_upto(b, 10_000) }
+    fn prime_pi_medium(b: &mut Bencher) { prime_pi(b, 10_000) }
     #[bench]
-    fn count_upto_large(b: &mut Bencher) { count_upto(b, 100_000) }
+    fn prime_pi_large(b: &mut Bencher) { prime_pi(b, 100_000) }
     #[bench]
-    fn count_upto_huge(b: &mut Bencher) { count_upto(b, 10_000_000) }
+    fn prime_pi_huge(b: &mut Bencher) { prime_pi(b, 10_000_000) }
 
     fn bench_iterate(b: &mut Bencher, upto: usize) {
         let sieve = Sieve::new(upto);

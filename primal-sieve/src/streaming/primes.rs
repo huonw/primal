@@ -155,7 +155,7 @@ mod tests {
             assert_eq!(c, r);
             i += 1;
         }
-        assert_eq!(sieve.count_upto(limit), i);
+        assert_eq!(sieve.prime_pi(limit), i);
     }
 }
 
