@@ -21,7 +21,7 @@ fn mod_exp(mut x: u64, mut d: u64, n: u64) -> u64 {
 ///
 /// Doing a lot of primality tests with numbers strictly below some
 /// upper bound will be faster using the `is_prime` method of a
-/// `Primes` instance.
+/// `Sieve` instance.
 pub fn miller_rabin(n: u64) -> bool {
     const HINT: &'static [u64] = &[2];
 
