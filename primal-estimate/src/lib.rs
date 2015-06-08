@@ -22,6 +22,18 @@ mod tables;
 /// 1998.
 ///
 /// [pdf]: http://www.unilim.fr/laco/theses/1998/T1998_01.html
+///
+/// # Examples
+///
+/// ```rust
+/// # extern crate primal;
+/// // the number of primes below 1e9
+/// let count_billion = 50_847_534;
+///
+/// let (low, high) = primal::estimate_prime_pi(1_000_000_000);
+/// // check the bounds are satisfied
+/// assert!(low <= count_billion && count_billion <= high);
+/// ```
 pub fn prime_pi(n: u64) -> (u64, u64) {
     if n < tables::SMALL_PRIME_PI.len() as u64 {
         let x = tables::SMALL_PRIME_PI[n as usize] as u64;
@@ -81,6 +93,18 @@ pub fn prime_pi(n: u64) -> (u64, u64) {
 /// de nombres premiers."][pdf] PhD diss., Université de Limoges, 1998.
 ///
 /// [pdf]: http://www.unilim.fr/laco/theses/1998/T1998_01.html
+///
+/// # Examples
+///
+/// ```rust
+/// # extern crate primal;
+/// // the 1e9-th prime
+/// let billionth = 22_801_763_489;
+///
+/// let (low, high) = primal::estimate_nth_prime(1_000_000_000);
+/// // check the bounds are satisfied
+/// assert!(low <= billionth && billionth <= high);
+/// ```
 pub fn nth_prime(n: u64) -> (u64, u64) {
     if n == 0 {
         (0, 0)
