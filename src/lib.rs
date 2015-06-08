@@ -16,7 +16,7 @@
 //!
 //! `primal` takes around 2.8 seconds and less than 3MB of RAM to
 //! count the exact number of primes below 10<sup>10</sup> (455052511)
-//! on the author's laptop (i7-3517U).
+//! on my laptop (i7-3517U).
 //!
 //! [*Source*](http://github.com/huonw/primal)
 //!
@@ -29,7 +29,7 @@
 //! primal = "0.2"
 //! ```
 //!
-//! # Example
+//! # Examples
 //!
 //! Let's find the 10001st prime. The easiest way is to enumerate the
 //! primes, and find the 10001st:
@@ -40,29 +40,83 @@
 //! println!("The 10001st prime is {}", p); // 104743
 //! ```
 //!
-//! `Primes` is flexible at the cost of performance, so if we wish to
-//! optimise we could instead explicitly sieve and then find the
-//! appropriate prime.  Unfortunately, `Sieve` requires a limit to
-//! know how far to sieve: we need some way to find an upper bound to
-//! be guaranteed to be at least as large the 10001st prime. We could
-//! guess that, say, 10<sup>8</sup> will be large enough and use that,
-//! but that's probably a huge overestimate. We could also try
-//! filtering with exponentially larger upper bounds until we find one
-//! that works (e.g. doubling each time), or... we could just take a
-//! shortcut and use deeper mathematics via
+//! This takes around 400 microseconds on my computer, which seems
+//! nice and quick, but, `Primes` is flexible at the cost of
+//! performance: we can make it faster. The `StreamingSieve` type
+//! offers a specialised `nth_prime` function:
+//!
+//! ```rust
+//! let p = primal::StreamingSieve::nth_prime(10001);
+//! println!("The 10001st prime is {}", p); // 104743
+//! ```
+//!
+//! This runs in only 10 microseconds! `StreamingSieve` is extremely
+//! efficient and uses very little memory. It is the best way to solve
+//! this task with `primal`.
+//!
+//! Since that was so easy, let's now make the problem bigger and
+//! harder: find the sum of the 100,000th, 200,000th, 300,000th, ...,
+//! 10,000,000th primes (100 in total).
+//!
+//! We could call `StreamingSieve::nth_prime` repeatedly:
+//!
+//! ```rust,no_run
+//! // the primes we want to find
+//! let ns = (1..100 + 1).map(|x| x * 100_000).collect::<Vec<_>>();
+//!
+//! // search and sum them up
+//! let sum = ns.iter()
+//!             .map(|n| primal::StreamingSieve::nth_prime(*n))
+//!             .fold(0, |a, b| a + b);
+//! println!("the sum is {}", sum);
+//! ```
+//!
+//! This takes around 1.6s seconds to print `the sum is 8795091674`;
+//! not so speedy. Each call to `nth_prime` is individually fast (400
+//! microseconds for 100,000 to 40 milliseconds for 10,000,000) but
+//! they add up to something bad. Every one is starting from the start
+//! and redoing work that previous calls have done... wouldn't it be
+//! nice if we could just do the computation for 10,000,000 and reuse
+//! that for the smaller ones?
+//!
+//! The `Sieve` type is a wrapper around `StreamingSieve` that
+//! caches information, allowing repeated queries to be answered
+//! efficiently.
+//!
+//! There's one hitch: `Sieve` requires a limit to know how far to
+//! sieve: we need some way to find an upper bound to be guaranteed to
+//! be at least as large as all our primes. We could guess that, say,
+//! 10<sup>10</sup> will be large enough and use that, but that's a
+//! huge overestimate (spoilers: the 10,000,000th prime is around
+//! 2&times;10<sup>8</sup>). We could also try filtering with
+//! exponentially larger upper bounds until we find one that works
+//! (e.g. doubling each time), or, we could just take a shortcut and
+//! use deeper mathematics via
 //! [`estimate_nth_prime`](fn.estimate_nth_prime.html).
 //!
 //! ```rust
+//! // the primes we want to find
+//! let ns = (1..100 + 1).map(|x| x * 100_000).collect::<Vec<_>>();
+//!
 //! // find our upper bound
-//! let (_lo, hi) = primal::estimate_nth_prime(10001);
+//! let (_lo, hi) = primal::estimate_nth_prime(10_000_000);
 //!
 //! // find the primes up to this upper bound
 //! let sieve = primal::Sieve::new(hi as usize);
 //!
-//! let p = sieve.nth_prime(10001);
-//! println!("The 10001st prime is {}", p); // 104743
+//! // now we can efficiently sum them up
+//! let sum = ns.iter()
+//!             .map(|n| sieve.nth_prime(*n))
+//!             .fold(0, |a, b| a + b);
+//! println!("the sum is {}", sum);
 //! ```
 //!
+//! This takes around 40 milliseconds, and gives the same output: much
+//! better!
+//!
+//! (By the way, the version using 10<sup>10</sup> as the bound
+//! instead of the more accurate estimate still only takes ~3
+//! seconds.)
 
 #![cfg_attr(all(test, feature = "unstable"), feature(test, step_by))]
 
