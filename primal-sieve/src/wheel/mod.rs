@@ -64,12 +64,14 @@ pub trait Wheel {
                               bytes: &mut [u8], si_: &mut usize, wi_: &mut usize, prime: usize);
 }
 
+type SI = u32;
+type WI = u16;
 #[derive(Debug)]
 pub struct State<W> {
     wheel: W,
     prime: u32,
-    wheel_index: u16,
-    sieve_index: u16,
+    wheel_index: WI,
+    sieve_index: SI,
 }
 impl<W: Wheel> State<W> {
     #[inline]
@@ -84,8 +86,8 @@ impl<W: Wheel> State<W> {
             raw_set_bit(self.wheel.wheel(),
                         bytes, &mut si, &mut wi, p)
         }
-        self.sieve_index = si.wrapping_sub(top) as u16;
-        self.wheel_index = wi as u16;
+        self.sieve_index = si.wrapping_sub(top) as SI;
+        self.wheel_index = wi as WI;
     }
     #[inline]
     pub fn sieve_pair(&mut self, self2: &mut State<W>, bytes: &mut [u8]) {
@@ -117,10 +119,10 @@ impl<W: Wheel> State<W> {
 
         // if this wraps, we've hit the limit, and so won't be
         // continuing, so whatever, it can be junk.
-        self.sieve_index = si1.wrapping_sub(top) as u16;
-        self.wheel_index = wi1 as u16;
-        self2.sieve_index = si2.wrapping_sub(top) as u16;
-        self2.wheel_index = wi2 as u16;
+        self.sieve_index = si1.wrapping_sub(top) as SI;
+        self.wheel_index = wi1 as WI;
+        self2.sieve_index = si2.wrapping_sub(top) as SI;
+        self2.wheel_index = wi2 as WI;
     }
     pub fn sieve_triple(&mut self, self2: &mut State<W>, self3: &mut State<W>,
                         bytes: &mut [u8]) {
@@ -160,12 +162,12 @@ impl<W: Wheel> State<W> {
         }
         // if this wraps, we've hit the limit, and so won't be
         // continuing, so whatever, it can be junk.
-        self.sieve_index = si1.wrapping_sub(top) as u16;
-        self.wheel_index = wi1 as u16;
-        self2.sieve_index = si2.wrapping_sub(top) as u16;
-        self2.wheel_index = wi2 as u16;
-        self3.sieve_index = si3.wrapping_sub(top) as u16;
-        self3.wheel_index = wi3 as u16;
+        self.sieve_index = si1.wrapping_sub(top) as SI;
+        self.wheel_index = wi1 as WI;
+        self2.sieve_index = si2.wrapping_sub(top) as SI;
+        self2.wheel_index = wi2 as WI;
+        self3.sieve_index = si3.wrapping_sub(top) as SI;
+        self3.wheel_index = wi3 as WI;
     }
 
     pub fn sieve_hardcoded(&mut self, bytes: &mut [u8]) {
@@ -175,8 +177,8 @@ impl<W: Wheel> State<W> {
             self.wheel.hardcoded_sieve(bytes,
                                        &mut si, &mut wi, self.prime as usize)
         }
-        self.sieve_index = si as u16;
-        self.wheel_index = wi as u16;
+        self.sieve_index = si as SI;
+        self.wheel_index = wi as WI;
     }
 }
 
@@ -200,7 +202,6 @@ fn raw_set_bit(wheel: &'static [WheelElem],
         let WheelElem { unset_bit, next_mult_factor, correction, next } =
             *wheel.get_unchecked(*wi);
         *x.get_unchecked_mut(*si) &= unset_bit;
-
         *si += prime * next_mult_factor as usize;
         *si += correction as usize;
         *wi = wi.wrapping_add(next as usize);
@@ -234,13 +235,12 @@ pub fn compute_wheel_elem<W: Wheel>(w: W, p: usize, low: usize) -> State<W> {
         sieve_index += correction as usize;
         wheel_index = wheel_index.wrapping_add(next as usize);
     }
-
     sieve_index -= low / BYTE_MODULO;
     let ret = State {
         wheel: w,
         prime: prime as u32,
-        sieve_index: sieve_index as u16,
-        wheel_index: wheel_index as u16,
+        sieve_index: sieve_index as SI,
+        wheel_index: wheel_index as WI,
     };
     ret
 
