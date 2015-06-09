@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 language: rust
 rust:
   - nightly
@@ -19,5 +19,6 @@ script:
       ./run-in all travis-cargo doc
 after_success:
   - travis-cargo --only 1.0.0 doc-upload
+  - travis-cargo --only nightly coveralls
 notifications:
     webhooks: http://huon.me:54856/travis
