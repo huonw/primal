@@ -28,6 +28,7 @@ use std::cmp;
 /// ```
 #[derive(Debug)]
 pub struct Sieve {
+    seg_bits: usize,
     nbits: usize,
     seen: Vec<Item>,
 }
@@ -54,10 +55,16 @@ impl Sieve {
         let mut seen = Vec::new();
         let mut nbits = 0;
         let mut so_far = 0;
+        let mut seg_bits = None;
         match wheel::small_for(limit) {
             Some(bits) => {
                 nbits = bits.len();
                 seen = vec![Item::new(bits, &mut 0)];
+                // this is a bit of a lie, but this length only
+                // matters when computing indices into `seen`, and
+                // everything will be in the first and only one in
+                // this case.
+                seg_bits = Some(nbits + 1)
             }
             None => {
                 let mut stream = streaming::new(limit);
@@ -65,17 +72,21 @@ impl Sieve {
                 while let Some((n, bits)) = streaming::next(&mut stream) {
                     seen.push(Item::new(bits.clone(), &mut so_far));
                     nbits += cmp::min(bits.len(), wheel::bit_index(limit - n + 1).1);
+                    match seg_bits {
+                        None => seg_bits = Some(bits.len()),
+                        Some(old) => assert_eq!(old, bits.len()),
+                    }
                 }
             }
         }
         Sieve {
+            seg_bits: seg_bits.unwrap(),
             nbits: nbits,
             seen: seen,
         }
     }
     fn split_index(&self, idx: usize) -> (usize, usize) {
-        let len = self.seen[0].bits.len();
-        (idx / len,idx % len)
+        (idx / self.seg_bits, idx % self.seg_bits)
     }
     fn index_for(&self, n: usize) -> (bool, usize, usize) {
         let (b, idx) = wheel::bit_index(n);
@@ -282,7 +293,6 @@ impl Sieve {
     /// assert_eq!(sieve.nth_prime(1_000), 7919);
     /// ```
     pub fn nth_prime(&self, n: usize) -> usize {
-        assert!(0 < n && n <= self.prime_pi_chunk(self.seen.len()));
         match n {
             1 => 2,
             2 => 3,
@@ -297,7 +307,7 @@ impl Sieve {
                                          .unwrap_or_else(|x| x);
                 let chunk_bits = self.prime_pi_chunk(chunk_idx);
                 let bit_idx = self.seen[chunk_idx].bits.find_nth_bit(bit_n - chunk_bits - 1);
-                wheel::from_bit_index(chunk_idx * self.seen[0].bits.len() + bit_idx.unwrap())
+                wheel::from_bit_index(chunk_idx * self.seg_bits + bit_idx.unwrap())
             }
         }
     }
@@ -336,8 +346,8 @@ impl Sieve {
         let (_, base, tweak) = self.index_for(n);
         let (tweak_u64, tweak_bit) = (tweak / 64, tweak % 64);
         let tweak_mask = (!0) << tweak_bit;
-        assert!(self.seen.len() == 1 || self.seen[0].bits.len() % 64 == 0);
-        let base_u64_count = base * self.seen[0].bits.len() / 64 + tweak_u64;
+        assert!(self.seen.len() == 1 || self.seg_bits % 64 == 0);
+        let base_u64_count = base * self.seg_bits / 64 + tweak_u64;
 
         let mut elems = self.seen[base].bits.as_u64s()[tweak_u64..].iter();
         let current = elems.next().unwrap() & tweak_mask;
@@ -425,6 +435,20 @@ impl<'a> Iterator for SievePrimes<'a> {
 mod tests {
     use primal_slowsieve::Primes;
     use super::Sieve;
+
+    #[test]
+    fn small() {
+        let larger = Sieve::new(100_000);
+        for limit in 2..1_000 {
+            let sieve = Sieve::new(limit);
+            assert!(sieve.upper_bound() >= limit);
+            let primes = sieve.prime_pi(limit);
+            assert_eq!(primes, larger.prime_pi(limit));
+            let nth = sieve.nth_prime(primes);
+            assert!(nth <= limit);
+            assert_eq!(nth, larger.nth_prime(primes));
+        }
+    }
 
     #[test]
     fn is_prime() {
