@@ -68,6 +68,12 @@ impl BitVec {
         BitVec { storage: Vec::new(), nbits: 0 }
     }
 
+    pub fn from_u64s(data: Vec<u64>, bits: usize) -> BitVec {
+        assert!(bits <= data.len() * 64);
+        let mut ret = BitVec { storage: data, nbits: bits };
+        ret.fix_last_block();
+        ret
+    }
     #[inline]
     pub fn as_bytes_mut(&mut self) -> &mut [u8] {
         unsafe {

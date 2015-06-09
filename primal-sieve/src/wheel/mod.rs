@@ -1,5 +1,17 @@
+use primal_bit::BitVec;
+
 pub const BYTE_SIZE: usize = 8;
 pub const BYTE_MODULO: usize = 30;
+
+pub fn small_for(x: usize) -> Option<BitVec> {
+    let bits = bits_for(x);
+    if bits < wheel30::SMALL_BITS {
+        let u64s = (bits + 64 - 1) / 64;
+        Some(BitVec::from_u64s(wheel30::SMALL[..u64s].to_owned(), bits))
+    } else {
+        None
+    }
+}
 
 pub fn bits_for(x: usize) -> usize {
     (x * BYTE_SIZE + BYTE_MODULO - 1) / BYTE_MODULO

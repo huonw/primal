@@ -38,11 +38,11 @@ struct Item {
     bits: BitVec,
 }
 impl Item {
-    fn new(x: &BitVec, so_far: &mut usize) -> Item {
+    fn new(x: BitVec, so_far: &mut usize) -> Item {
         *so_far += hamming::weight(x.as_bytes()) as usize;
         Item {
             count: *so_far,
-            bits: x.clone()
+            bits: x,
         }
     }
 }
@@ -51,14 +51,22 @@ impl Sieve {
     /// Create a new instance, sieving out all the primes up to
     /// `limit`.
     pub fn new(limit: usize) -> Sieve {
-        let mut stream = streaming::new(limit);
-
         let mut seen = Vec::new();
         let mut nbits = 0;
         let mut so_far = 0;
-        while let Some((n, bits)) = streaming::next(&mut stream) {
-            seen.push(Item::new(bits, &mut so_far));
-            nbits += cmp::min(bits.len(), wheel::bit_index(limit - n + 1).1);
+        match wheel::small_for(limit) {
+            Some(bits) => {
+                nbits = bits.len();
+                seen = vec![Item::new(bits, &mut 0)];
+            }
+            None => {
+                let mut stream = streaming::new(limit);
+
+                while let Some((n, bits)) = streaming::next(&mut stream) {
+                    seen.push(Item::new(bits.clone(), &mut so_far));
+                    nbits += cmp::min(bits.len(), wheel::bit_index(limit - n + 1).1);
+                }
+            }
         }
         Sieve {
             nbits: nbits,

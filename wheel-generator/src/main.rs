@@ -10,6 +10,10 @@ macro_rules! errln {
     }
 }
 
+fn div_up(x: usize, y: usize) -> usize {
+    (x + y - 1) / y
+}
+
 fn gcd(x: usize, y: usize) -> usize {
     if y == 0 { x }
     else { gcd(y, x % y) }
@@ -24,11 +28,17 @@ fn bit_index(x: usize) -> usize {
     let bits = (1..rem).filter(|y| gcd(*y, BYTE_WHEEL) == 1).count();
     wheel + bits
 }
+fn from_bit_index(x: usize, byte_coprime: &Vec<usize>) -> usize {
+    let (byte, bit) = (x / BYTE_COUNT, x % BYTE_COUNT);
+    byte * BYTE_WHEEL + byte_coprime[bit]
+}
 
 const LIMIT: usize = 2_000_000;
 
 const BYTE_WHEEL: usize = 2 * 3 * 5;
 const BYTE_COUNT: usize = 1 * 2 * 4;
+
+const SMALL_LIMIT: usize = 10_000;
 
 #[cfg(not(feature = "thirty"))]
 const WHEEL: usize = 2 * 3 * 5 * 7;
@@ -48,7 +58,8 @@ fn main() {
     errln!("wheel for {} (count {})", WHEEL, COUNT);
     let sieve = primal_slowsieve::Primes::sieve(LIMIT);
 
-    let coprime = coprime_to(BYTE_WHEEL, LIMIT).into_iter().enumerate().collect::<Vec<_>>();
+    let coprime = coprime_to(BYTE_WHEEL, LIMIT);
+    let annotated_coprime = coprime.iter().cloned().enumerate().collect::<Vec<_>>();
 
     let mut map = BTreeMap::new();
 
@@ -60,12 +71,12 @@ fn main() {
         }
         let approx = sq / BYTE_WHEEL * BYTE_COUNT;
         assert!(approx <= coprime.len());
-        assert!(coprime[approx].1 <= sq);
-        let bits = coprime[approx..].iter()
-                          .filter(|&&(_, x)| x >= sq && x % p == 0)
-                          .take(100)
-                          .map(|&(i, _)| i)
-                          .collect::<Vec<_>>();
+        assert!(coprime[approx] <= sq);
+        let bits = annotated_coprime[approx..].iter()
+                                              .filter(|&&(_, x)| x >= sq && x % p == 0)
+                                              .take(100)
+                                              .map(|&(i, _)| i)
+                                              .collect::<Vec<_>>();
         let bit_diffs = bits.iter().zip(&bits[1..]).map(|(&b1, &b2)| b2 - b1).collect::<Vec<_>>();
         map.entry(p % BYTE_WHEEL).or_insert(vec![]).push((p, bits, bit_diffs));
     }
@@ -101,6 +112,24 @@ pub const MODULO: usize = {modulo};
 ",
              size = COUNT,
              modulo = WHEEL);
+
+    let length_u64s = div_up(SMALL_LIMIT * COUNT, WHEEL * 64);
+    let length_bits = length_u64s * 64;
+    println!("\
+#[allow(dead_code)]
+pub const SMALL_BITS: usize = {};
+#[allow(dead_code)]
+pub const SMALL: &'static [u64; SMALL_BITS / 64] = &[", length_bits);
+    let mut bit = 0;
+    for _ in 0..length_u64s {
+        let mut val = 0;
+        for i in 0..64 {
+            val |= (sieve.is_prime(from_bit_index(bit, &coprime)) as u64) << i;
+            bit += 1;
+        }
+        println!("    0b{:064b},", val);
+    }
+    println!("];");
 
     println!("const INIT: &'static [WheelInit; {}] = &[", WHEEL);
     let mut next = 0;
