@@ -288,6 +288,7 @@ impl Sieve {
             2 => 3,
             3 => 5,
             _ => {
+                assert!(0 < n && n <= 3 + self.prime_pi_chunk(self.seen.len()));
                 // the bit vectors don't store the first three primes,
                 // so we're looking for this (one-indexed) bit
                 let bit_n = n - 3;
@@ -623,6 +624,8 @@ mod tests {
                 assert_eq!(primes.nth_prime(n), p);
             }
         }
+        let total = primes.prime_pi(primes.upper_bound());
+        assert!(primes.nth_prime(total) <= primes.upper_bound());
     }
 }
 
