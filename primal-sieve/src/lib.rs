@@ -21,13 +21,6 @@ fn b<T>(mut p: *mut T) -> *mut T { unsafe { asm!("": "+r"(p)) } p }
 #[inline(always)]
 fn b<T>(p: *mut T) -> *mut T { p }
 
-#[cfg(feature = "unstable")]
-#[inline(always)]
-fn b_imm<T>(mut p: *const T) -> *const T { unsafe { asm!("": "+r"(p)) } p }
-#[cfg(not(feature = "unstable"))]
-#[inline(always)]
-fn b_imm<T>(p: *const T) -> *const T { p }
-
 mod streaming;
 pub use streaming::StreamingSieve;
 pub use streaming::primes::Primes;
