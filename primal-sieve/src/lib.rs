@@ -21,6 +21,17 @@ fn b<T>(mut p: *mut T) -> *mut T { unsafe { asm!("": "+r"(p)) } p }
 #[inline(always)]
 fn b<T>(p: *mut T) -> *mut T { p }
 
+#[cfg(feature = "safe")]
+macro_rules! safe_assert {
+    ($x: expr) => {
+        assert!($x);
+    }
+}
+#[cfg(not(feature = "safe"))]
+macro_rules! safe_assert {
+    ($x: expr) => { () }
+}
+
 mod streaming;
 pub use streaming::StreamingSieve;
 pub use streaming::primes::Primes;

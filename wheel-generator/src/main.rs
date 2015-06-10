@@ -246,8 +246,10 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
         let mut offset_so_far = 0;
         for &(sl, offset, bit) in twiddles {
             println!("\
-{indent}    *p.offset(prime_ * {} + {}) &= {};",
-                     sl_so_far, offset_so_far, !(1u8 << bit), indent = indent);
+{indent}    safe_assert!(start <= p.offset(prime_ * {sl} + {off}) &&
+{indent}                 p.offset(prime_ * {sl} + {off}) < end);
+{indent}    *p.offset(prime_ * {sl} + {off}) &= {bit};",
+                     sl = sl_so_far, off = offset_so_far, bit = !(1u8 << bit), indent = indent);
             sl_so_far += sl;
             offset_so_far += offset;
         }
@@ -266,6 +268,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
             };
             println!("\
 {indent} if p >= end {{ wi = {val}; break 'outer; }}
+{indent} safe_assert!(start <= p && p < end);
 {indent} *p &= {}; p = p.offset(prime_ * {} + {});
 {indent} {}
 {indent}}}",

@@ -17,6 +17,7 @@ script:
       ./run-in all travis-cargo --only nightly test &&
       ./run-in all travis-cargo bench &&
       ./run-in all travis-cargo doc
+  - ./run-in sieve travis-cargo --only nightly test -- --features safe
 after_success:
   - travis-cargo --only 1.0.0 doc-upload
 notifications:

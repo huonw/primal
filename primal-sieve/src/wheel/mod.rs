@@ -196,6 +196,7 @@ pub struct WheelElem {
 }
 
 #[inline(always)]
+#[cfg(not(feature = "safe"))]
 fn raw_set_bit(wheel: &'static [WheelElem],
                x: &mut [u8], si: &mut usize, wi: &mut usize, prime: usize) {
     unsafe {
@@ -207,6 +208,17 @@ fn raw_set_bit(wheel: &'static [WheelElem],
         *wi = wi.wrapping_add(next as usize);
     }
 }
+#[inline(always)]
+#[cfg(feature = "safe")]
+fn raw_set_bit(wheel: &'static [WheelElem],
+               x: &mut [u8], si: &mut usize, wi: &mut usize, prime: usize) {
+    let WheelElem { unset_bit, next_mult_factor, correction, next } = wheel[*wi];
+    x[*si] &= unset_bit;
+    *si += prime * next_mult_factor as usize;
+    *si += correction as usize;
+    *wi = wi.wrapping_add(next as usize);
+}
+
 
 const WHEEL_OFFSETS: &'static [usize; BYTE_MODULO] = &[
     0, 0, 0, 0, 0, 0,

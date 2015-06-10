@@ -25,3 +25,4 @@ primal = { path = "..", version = "*" }
 
 [features]
 unstable = []
+safe = []
