@@ -678,7 +678,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
     let bytes = bytes;
     let start = bytes.as_mut_ptr();
     let len = bytes.len() as isize;
-    let largest_step = (178 * prime + 168) as isize;
+    let largest_step = ::std::cmp::min(len, (178 * prime + 168) as isize);
     let loop_len = len - largest_step;
     let loop_end = start.offset(loop_len);
     let end = start.offset(len);
