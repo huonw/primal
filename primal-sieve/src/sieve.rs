@@ -1,4 +1,5 @@
 use primal_bit::BitVec;
+use primal_estimate::nth_prime;
 use wheel;
 use streaming;
 use hamming;
@@ -84,6 +85,17 @@ impl Sieve {
             nbits: nbits,
             seen: seen,
         }
+    }
+    /// Create a new instance, with at least `nprimes` primes in it.
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// let sieve = primal::Sieve::new_at_least(1_000);
+    /// assert_eq!(sieve.nth_prime(1_000), 7919);
+    /// ```
+    pub fn new_at_least(nprimes: u64) -> Sieve {
+        let (_, hi) = nth_prime(nprimes);
+        return Sieve::new(hi as usize + 1);
     }
     fn split_index(&self, idx: usize) -> (usize, usize) {
         (idx / self.seg_bits, idx % self.seg_bits)
@@ -291,9 +303,7 @@ impl Sieve {
     ///
     /// ```rust
     /// # extern crate primal;
-    /// let (_, hi) = primal::estimate_nth_prime(1_000);
-    ///
-    /// let sieve = primal::Sieve::new(hi as usize);
+    /// let sieve = primal::Sieve::new_at_least(1_000);
     ///
     /// assert_eq!(sieve.nth_prime(10), 29);
     /// assert_eq!(sieve.nth_prime(100), 541);
@@ -466,6 +476,20 @@ mod tests {
         for i in 0..limit {
             assert!(primes.is_prime(i) == real.is_prime(i),
                     "failed for {} (real = {})", i, real.is_prime(i));
+        }
+    }
+    
+    #[test]
+    fn n_primes() {
+        let max_primes = vec![1, 2, 3, 4, 5, 6, 7, 8, 2_000_000];
+        let primes_n = vec![2, 3, 5, 7, 11, 13, 17, 19, 32_452_843];
+        for (&max_prime, prime_n_expected) in max_primes.iter().zip(primes_n) {
+            let primes = Sieve::new_at_least(max_prime);
+            println!("{} :: prime_pi({}) = {}", max_prime, primes.upper_bound(), primes.prime_pi(primes.upper_bound()));
+            let prime_n = primes.nth_prime(max_prime as usize);
+            println!("prime_n: {}", prime_n);
+            
+            assert_eq!(prime_n, prime_n_expected);
         }
     }
 
