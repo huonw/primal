@@ -40,6 +40,7 @@
 //! // (.nth is zero indexed.)
 //! let p = primal::Primes::all().nth(10001 - 1).unwrap();
 //! println!("The 10001st prime is {}", p); // 104743
+//! # assert_eq!(p, 104743);
 //! ```
 //!
 //! This takes around 400 microseconds on my computer, which seems
@@ -50,6 +51,7 @@
 //! ```rust
 //! let p = primal::StreamingSieve::nth_prime(10001);
 //! println!("The 10001st prime is {}", p); // 104743
+//! # assert_eq!(p, 104743);
 //! ```
 //!
 //! This runs in only 10 microseconds! `StreamingSieve` is extremely
@@ -111,6 +113,7 @@
 //!             .map(|n| sieve.nth_prime(*n))
 //!             .fold(0, |a, b| a + b);
 //! println!("the sum is {}", sum);
+//! # assert_eq!(sum, 8795091674);
 //! ```
 //!
 //! This takes around 40 milliseconds, and gives the same output: much
@@ -136,14 +139,17 @@
 //! // iterator
 //! let count = primal::Primes::all().take_while(|p| *p < LIMIT).count();
 //! println!("there are {} primes below 1 million", count); // 78498
+//! # assert_eq!(count, 78498);
 //!
 //! // sieves
 //! let sieve = primal::Sieve::new(LIMIT);
 //! let count = sieve.prime_pi(LIMIT);
 //! println!("there are {} primes below 1 million", count);
+//! # assert_eq!(count, 78498);
 //!
 //! let count = primal::StreamingSieve::prime_pi(LIMIT);
 //! println!("there are {} primes below 1 million", count);
+//! # assert_eq!(count, 78498);
 //! ```
 //!
 //! `StreamingSieve` is fastest (380 microseconds) followed by `Sieve`
@@ -159,6 +165,8 @@
 //! let (lo, hi) = primal::estimate_prime_pi(1_000_000);
 //! println!("there are between {} and {} primes below 1 million", lo, hi);
 //! // 78304, 78573
+//! # assert_eq!(lo, 78304);
+//! # assert_eq!(hi, 78573);
 //! ```
 //!
 //! ## Searching Primes
