@@ -1,7 +1,6 @@
 use wheel;
 use streaming::{self, StreamingSieve};
 use std::vec;
-use std::collections::VecDeque;
 
 const ITER_BASE_STEP: usize = 8 * wheel::BYTE_MODULO;
 
@@ -28,8 +27,8 @@ enum Early {
 /// `Sieve` and using its `primes_from` method may be more efficient,
 /// especially if the bound is small.
 ///
-/// This requires *O(min(p, sqrt(X))* memory to yield prime `p`, where
-/// `X` is the maximum value of `usize`.
+/// This requires *O(sqrt(p))* memory to yield prime `p`, where `X` is
+/// the maximum value of `usize`.
 ///
 /// # Examples
 ///
@@ -44,7 +43,8 @@ pub struct Primes {
     current: u64,
     elems: vec::IntoIter<u64>,
     streaming: StreamingSieve,
-    queued: VecDeque<Queued>,
+    sieving_primes: Option<Box<Primes>>,
+    left_over: Option<usize>,
 }
 
 impl Primes {
@@ -60,7 +60,18 @@ impl Primes {
     /// }
     /// ```
     pub fn all() -> Primes {
-        let mut streaming = StreamingSieve::new(streaming::SEG_LEN);
+        Primes::sqrt(SQRT)
+    }
+
+    fn sqrt(sqrt: usize) -> Primes {
+        let (sieving, limit) = if sqrt < streaming::isqrt(streaming::SEG_LEN) {
+            (None, sqrt)
+        } else {
+            (Some(Box::new(Primes::sqrt(streaming::isqrt(sqrt)))),
+             streaming::SEG_LEN)
+        };
+        let mut streaming = StreamingSieve::new(limit);
+
         let mut iter = {
             let (_, bits) = streaming.next().unwrap();
             bits.as_u64s().to_owned().into_iter()
@@ -76,7 +87,8 @@ impl Primes {
             current: iter.next().unwrap(),
             elems: iter,
             streaming: streaming,
-            queued: VecDeque::new(),
+            sieving_primes: sieving,
+            left_over: None,
         }
     }
 }
@@ -112,27 +124,28 @@ impl Iterator for Primes {
             }
             let low = self.streaming.low;
             let high = low + streaming::SEG_LEN;
-            while let Some(p) = self.queued.pop_front() {
-                let q = p as usize;
-                if q * q < high {
-                    self.streaming.add_sieving_prime(q, low)
-                } else {
-                    self.queued.push_front(p);
+
+            for q in self.left_over.into_iter().chain(self.sieving_primes.as_mut().unwrap()) {
+                if q * q > high {
+                    self.left_over = Some(q);
                     break
                 }
+                if q > streaming::isqrt(streaming::SEG_LEN) {
+                    self.streaming.add_sieving_prime(q, low);
+                }
             }
+
             match self.streaming.next() {
                 Some((_, bits)) => self.elems = bits.as_u64s().to_owned().into_iter(),
                 None => return None,
             }
+
+
         }
 
         let lsb = c.trailing_zeros();
         self.current = c & (c - 1);
         let p = self.base + wheel::TRUE_AT_BIT_64[lsb as usize];
-        if ((streaming::SEG_LEN as f64).sqrt() as usize) < p && p < SQRT {
-            self.queued.push_back(p as Queued);
-        }
         Some(p)
     }
 }
@@ -144,7 +157,7 @@ mod tests {
 
     #[test]
     fn equality() {
-        let limit = 2_000_000;
+        let limit = 20_000_000;
         let sieve = Sieve::new(limit);
 
         let real = sieve.primes_from(0).take_while(|x| *x < limit);

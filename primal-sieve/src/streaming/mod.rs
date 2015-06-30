@@ -48,6 +48,10 @@ const CACHE: usize = 32 << 10;
 const SEG_ELEMS: usize = 8 * CACHE;
 const SEG_LEN: usize = SEG_ELEMS * wheel::BYTE_MODULO / wheel::BYTE_SIZE;
 
+fn isqrt(x: usize) -> usize {
+    (x as f64).sqrt() as usize
+}
+
 impl StreamingSieve {
     /// Create a new instance of the streaming sieve that will
     /// correctly progressively filter primes up to `limit`.
@@ -61,7 +65,7 @@ impl StreamingSieve {
         let small = if limit < current * current {
             None
         } else {
-            Some(::Sieve::new((limit as f64).sqrt() as usize + 1))
+            Some(::Sieve::new(isqrt(limit) + 1))
         };
 
         StreamingSieve {
