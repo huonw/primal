@@ -240,12 +240,11 @@ impl Sieve {
                                                  (usize, Vec<(usize, usize)>)>
     {
         if n == 0 { return Err((0, vec![])) }
+        if n == 1 { return Ok(vec![]) }
 
         let mut ret = Vec::new();
 
         for p in self.primes_from(0) {
-            if n == 1 { break }
-
             let mut count = 0;
             while n % p == 0 {
                 n /= p;
@@ -254,7 +253,13 @@ impl Sieve {
             if count > 0 {
                 ret.push((p,count));
             }
+
+            if let Some(pp) = p.checked_mul(p) {
+                if pp < n { continue }
+            }
+            break
         }
+
         if n != 1 {
             let b = self.upper_bound();
             if let Some(bb) = b.checked_mul(b) {
