@@ -710,6 +710,23 @@ mod benches {
     #[bench]
     fn prime_pi_huge(b: &mut Bencher) { prime_pi(b, 10_000_000) }
 
+    fn factor(b: &mut Bencher, n: usize) {
+        let s = Sieve::new(0x10000);
+
+        b.iter(|| s.factor(n).ok());
+    }
+
+    #[bench]
+    fn factor_small_prime(b: &mut Bencher) { factor(b, 131) }
+    #[bench]
+    fn factor_medium_prime(b: &mut Bencher) { factor(b, 7561) }
+    #[bench]
+    fn factor_large_prime(b: &mut Bencher) { factor(b, 65521) }
+    #[bench]
+    fn factor_over_prime(b: &mut Bencher) { factor(b, 1048573) }
+    #[bench]
+    fn factor_composite(b: &mut Bencher) { factor(b, 2*3*5*7*11*13*17*19) }
+
     fn bench_iterate(b: &mut Bencher, upto: usize) {
         let sieve = Sieve::new(upto);
 
