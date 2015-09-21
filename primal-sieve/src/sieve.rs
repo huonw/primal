@@ -620,6 +620,24 @@ mod tests {
     }
 
     #[test]
+    fn factor_overflow() {
+        // if bound^2 overflows usize, we can factor any usize,
+        // but must take care to not hit overflow assertions.
+
+        // set up a limit that would overflow if naively squared, and a
+        // prime greater than that limit.  (these are more than double)
+        #[cfg(target_pointer_width = "32")]
+        const LIMIT_PRIME: (usize, usize) = (0x10000, 0x2001d);
+        #[cfg(target_pointer_width = "64")]
+        const LIMIT_PRIME: (usize, usize) = (0x100000000, 0x200000011);
+
+        let (limit, prime) = LIMIT_PRIME;
+        let primes = Sieve::new(limit);
+        assert!(prime > primes.upper_bound());
+        assert_eq!(primes.factor(prime), Ok(vec![(prime, 1)]));
+    }
+
+    #[test]
     fn factor_failures() {
         let primes = Sieve::new(30);
 
