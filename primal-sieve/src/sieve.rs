@@ -257,16 +257,18 @@ impl Sieve {
         }
         if n != 1 {
             let b = self.upper_bound();
-            if b * b >= n {
-                // n is not divisible by anything from 1...sqrt(n), so
-                // must be prime itself! (That is, even though we
-                // don't know this prime specifically, we can infer
-                // that it must be prime.)
-                ret.push((n, 1));
-            } else {
-                // large factors :(
-                return Err((n, ret))
+            if let Some(bb) = b.checked_mul(b) {
+                if bb < n {
+                    // large factors :(
+                    return Err((n, ret))
+                }
             }
+
+            // n is not divisible by anything from 1...sqrt(n), so
+            // must be prime itself! (That is, even though we
+            // don't know this prime specifically, we can infer
+            // that it must be prime.)
+            ret.push((n, 1));
         }
         Ok(ret)
     }
