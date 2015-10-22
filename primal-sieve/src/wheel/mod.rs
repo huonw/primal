@@ -14,7 +14,7 @@ pub fn small_for(x: usize) -> Option<BitVec> {
 }
 
 pub fn bits_for(x: usize) -> usize {
-    (x * BYTE_SIZE + BYTE_MODULO - 1) / BYTE_MODULO
+    (x.wrapping_mul(BYTE_SIZE).wrapping_add(BYTE_MODULO - 1)).wrapping_div(BYTE_MODULO)
 }
 
 pub fn bit_index(n: usize) -> (bool, usize) {
