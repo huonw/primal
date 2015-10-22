@@ -14,6 +14,11 @@ pub fn small_for(x: usize) -> Option<BitVec> {
 }
 
 pub fn bits_for(x: usize) -> usize {
+    use std::usize;
+    let limit = (usize::MAX - BYTE_MODULO + 1) / BYTE_SIZE;
+    assert!(x < limit,
+            "cannot sieve upto {}, which is larger than {}",
+            x, limit);
     (x * BYTE_SIZE + BYTE_MODULO - 1) / BYTE_MODULO
 }
 

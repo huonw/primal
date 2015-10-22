@@ -676,6 +676,14 @@ mod tests {
         let total = primes.prime_pi(primes.upper_bound());
         assert!(primes.nth_prime(total) <= primes.upper_bound());
     }
+
+    #[test]
+    #[should_panic = "cannot sieve upto"]
+    fn too_large() {
+        // with a wheel size of 30, this would take more bits than fit
+        // in a usize.
+        Sieve::new(::std::usize::MAX / 30 * 8);
+    }
 }
 
 #[cfg(all(test, feature = "unstable"))]
