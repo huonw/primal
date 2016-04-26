@@ -33,8 +33,6 @@ fn from_bit_index(x: usize, byte_coprime: &Vec<usize>) -> usize {
     byte * BYTE_WHEEL + byte_coprime[bit]
 }
 
-const LIMIT: usize = 2_000_000;
-
 const BYTE_WHEEL: usize = 2 * 3 * 5;
 const BYTE_COUNT: usize = 1 * 2 * 4;
 
@@ -44,47 +42,95 @@ const SMALL_LIMIT: usize = 10_000;
 const WHEEL: usize = 2 * 3 * 5 * 7;
 #[cfg(not(feature = "thirty"))]
 const COUNT: usize = 1 * 2 * 4 * 6;
-#[cfg(not(feature = "thirty"))]
-const START_AT: usize = 11;
 
 #[cfg(feature = "thirty")]
 const WHEEL: usize = 2 * 3 * 5;
 #[cfg(feature = "thirty")]
 const COUNT: usize = 1 * 2 * 4;
-#[cfg(feature = "thirty")]
-const START_AT: usize = 7;
 
 fn main() {
     errln!("wheel for {} (count {})", WHEEL, COUNT);
-    let sieve = primal_slowsieve::Primes::sieve(LIMIT);
-
-    let coprime = coprime_to(BYTE_WHEEL, LIMIT);
-    let annotated_coprime = coprime.iter().cloned().enumerate().collect::<Vec<_>>();
-
-    let mut map = BTreeMap::new();
-
-    for p in sieve.primes().filter(|&p| p >= START_AT).take(1000) {
-        //println!("prime {} mod {}.", p, p % WHEEL);
-        let sq = p * p;
-        if sq >= LIMIT {
-            break
-        }
-        let approx = sq / BYTE_WHEEL * BYTE_COUNT;
-        assert!(approx <= coprime.len());
-        assert!(coprime[approx] <= sq);
-        let bits = annotated_coprime[approx..].iter()
-                                              .filter(|&&(_, x)| x >= sq && x % p == 0)
-                                              .take(100)
-                                              .map(|&(i, _)| i)
-                                              .collect::<Vec<_>>();
-        let bit_diffs = bits.iter().zip(&bits[1..]).map(|(&b1, &b2)| b2 - b1).collect::<Vec<_>>();
-        map.entry(p % BYTE_WHEEL).or_insert(vec![]).push((p, bits, bit_diffs));
+    let byte_coprime = coprime_to(BYTE_WHEEL, BYTE_WHEEL);
+    let coprime = coprime_to(WHEEL, WHEEL);
+    let mut diff_to_next = BTreeMap::new();
+    for (i, &c) in coprime.iter().enumerate() {
+        let next = coprime[(i + 1) % coprime.len()];
+        diff_to_next.insert(c, ((WHEEL + next) - c) % WHEEL);
     }
+
+    // The main workhorse.
+    //
+    // The sieve is driven by crossing off things that are definitely
+    // not prime, and performance is driven by minimising how much
+    // crossing off happens.
+    //
+    // Suppose we have a wheel of size 30 = 2 * 3 * 5. Given a prime p
+    // = 30n + i, there's only 8 possible values of i: C = {1, 7, 11,
+    // 13, 17, 19, 23, 29}. As is standard, we know that all values
+    // below p * p will have already been crossed off by the time
+    // we're crossing off with p, so we only need to start
+    // there... but we can do better. The idea behind the wheel also
+    // implies that {p * (30k + 0), p * (30k + 2), p * (30k + 3), ...,
+    // (30k + 28)} will have been crossed off already (for all k), in
+    // particular, we only need to consider multiplication by 30k + j
+    // for j in C.
+    //
+    // If we have some multiple m = q * p, we need to work out how to
+    // get to the next one, m'. One possibility would be to literally
+    // store q and then find the next q' (next number congruent mod 30
+    // to an element of C), but we can do better (common theme, huh?):
+    // m' = m + (j' - j) * p, so just the difference between
+    // successive j's is needed (this difference is diff_mult_factor
+    // in the following table). These differences are of course cycle
+    // with period |C| = 8, conveniently.
+    //
+    // The last really tricky part is we want to address and
+    // manipulate individual bits efficiently, which means storing
+    // byte indices and precomputing appropriate bitmasks. This
+    // essentially means we divide p and m by 30, rounding down, and
+    // hence lose information in two ways: we don't know were to
+    // write, nor can we compute the exact right byte
+    // automatically. The former is managed by bitmasks that change
+    // with j, and the latter is managed by "corrections". Corrections
+    // are additive factors that are used like [m'/30] = [m/30] + (j'
+    // - j) *[p/30] + correction, where [x] == floor(x). Both these
+    // management tools are cyclic with period 8.
+    //
+    // (Another slight complication is that we can use a computation
+    // wheel that is different to the in-memory wheel, which means we
+    // skip over more writes by taking bigger steps, but don't get the
+    // memory savings.)
+    #[derive(Debug)]
+    struct Info {
+        total_mult_factor: usize,
+        diff_mult_factor: usize,
+        total_add_factor: usize,
+        correction: usize,
+        unset_bit: u8,
+    }
+    let infos = byte_coprime.iter()
+        .map(|c| {
+            coprime.iter()
+                .map(|&cc| {
+                    let total_add_factor = c * cc;
+                    let diff = diff_to_next[&cc];
+                    Info {
+                        total_mult_factor: cc,
+                        total_add_factor: total_add_factor,
+                        diff_mult_factor: diff,
+                        correction: (total_add_factor + diff * c) / BYTE_WHEEL - total_add_factor / BYTE_WHEEL,
+                        unset_bit: !(1 << (bit_index(total_add_factor) % 8))
+                    }
+                })
+                .collect::<Vec<_>>()
+        })
+        .collect::<Vec<_>>();
+
 
     println!("// automatically generated
 use wheel::{{WheelInit, Wheel, WheelElem}};
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Wheel{modulo};
 impl Wheel for Wheel{modulo} {{
     #[inline(always)]
@@ -115,22 +161,28 @@ pub const MODULO: usize = {modulo};
 
     let length_u64s = div_up(SMALL_LIMIT * COUNT, WHEEL * 64);
     let length_bits = length_u64s * 64;
+    let sieve = primal_slowsieve::Primes::sieve(length_bits * WHEEL / COUNT);
     println!("\
 #[allow(dead_code)]
 pub const SMALL_BITS: usize = {};
 #[allow(dead_code)]
 pub const SMALL: &'static [u64; SMALL_BITS / 64] = &[", length_bits);
     let mut bit = 0;
+    // precompute the sieve for a little while.
     for _ in 0..length_u64s {
         let mut val = 0;
         for i in 0..64 {
-            val |= (sieve.is_prime(from_bit_index(bit, &coprime)) as u64) << i;
+            val |= (sieve.is_prime(from_bit_index(bit, &byte_coprime)) as u64) << i;
             bit += 1;
         }
         println!("    0b{:064b},", val);
     }
     println!("];");
 
+    // compute the initialisers: push an arbitrary number up to the
+    // next one that isn't eliminated by the wheel, indicating which
+    // multiple it is (for indexing into the next one, which is
+    // ordered by multiple)
     println!("const INIT: &'static [WheelInit; {}] = &[", WHEEL);
     let mut next = 0;
     for (i, &y) in coprime_to(WHEEL, WHEEL).iter().enumerate() {
@@ -142,66 +194,32 @@ pub const SMALL: &'static [u64; SMALL_BITS / 64] = &[", length_bits);
     }
     println!("];");
 
-    let mut all_twiddles = vec![];
+    // now print the full wheel!
     println!("const WHEEL: &'static [WheelElem; {}] = &[", BYTE_COUNT * COUNT);
-    for (m, bitss) in &map {
-        println!("    // remainder {}", m);
-        assert!(bitss.len() >= 2);
-        let (p1, _, ref bits1) = bitss[0];
-        let (p2, _, ref bits2) = bitss[1];
+    for (c, cur_infos) in byte_coprime.iter().zip(&infos) {
+        println!("    // remainder {}", c);
 
-        let x1 = p1 / BYTE_WHEEL;
-        let x2 = p2 / BYTE_WHEEL;
-        let xdiff = x2 - x1;
-        //println!("{} {} {}", x1, x2, xdiff);
-        let lines = bits1.iter().zip(bits2).map(|(y1, y2)| {
-            let ydiff = y2 - y1;
-            assert!(ydiff % xdiff == 0);
-            let slope = ydiff / xdiff;
-            //println!("\t{} {} {}", y1, y2, ydiff);
-            //println!("\t\t{}", slope);
-            let shift = y1 - slope * x1;
-            (slope, shift)
-        }).collect::<Vec<_>>();
-
-        // verify the lines are true
-        for &(p, _, ref bits) in bitss {
-            let x = p / BYTE_WHEEL;
-            for (&b, &(sl, sh)) in bits.iter().zip(&lines) {
-                assert!(sl * x + sh == b, "{} {}", p, b);
-            }
-        }
-
-        let start_bit = bit_index(p1 * p1) % 8;
-        assert_eq!(bit_index(p2 * p2) % 8, start_bit);
-        let mut bit = start_bit;
-        let twiddles: Vec<_> = lines[..COUNT].iter().map(|&(sl, sh)| {
-            assert_eq!(sl % 8, 0);
-            let sl = sl / 8;
-            let old_bit = bit;
-            let new_bit = bit + sh;
-            let offset = new_bit / 8;
-            bit = new_bit % 8;
-            (sl, offset, old_bit)
-        }).collect();
-
-        for (i, &(sl, offset, bit)) in twiddles.iter().enumerate() {
+        for (i, info) in cur_infos.iter().enumerate() {
             println!("    WheelElem {{ unset_bit: {}, next_mult_factor: {}, correction: {}, next: {} }},",
-                     !(1u8 << bit), sl, offset,
-                     if i == COUNT-1 {-(i as isize)}else{1});
+                     info.unset_bit,
+                     info.diff_mult_factor,
+                     info.correction,
+                     if i == COUNT - 1 { -(i as isize) } else { 1 })
         }
-        all_twiddles.push((m, twiddles));
     }
     println!("];");
 
-    let big_slope = all_twiddles[0].1[..COUNT-1].iter().fold(0, |a, &(sl, _offset, _)| a + sl);
-    let big_step = all_twiddles[BYTE_COUNT - 1].1[..COUNT-1].iter().fold(0, |a, &(_sl, offset, _)| a + offset);
+    // the hard-coded sieve is a code version of WHEEL, designed for
+    // cases when `prime` is small and hence a lot of writes are
+    // peformed: loops can be unrolled.
+    //
+    // this (ab)uses labelled breaks to jump around more efficiently ala goto.
     println!("\
 pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize, prime: usize) {{
     let bytes = bytes;
     let start = bytes.as_mut_ptr();
     let len = bytes.len() as isize;
-    let largest_step = ::std::cmp::min(len, ({big_slope} * prime + {big_step}) as isize);
+    let largest_step = ::std::cmp::min(len, {wheel} * (prime as isize + 1) - 1);
     let loop_len = len - largest_step;
     let loop_end = start.offset(loop_len);
     let end = start.offset(len);
@@ -212,14 +230,13 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
 
     'outer: loop {{
     match wi {{",
-             big_slope = big_slope,
-             big_step = big_step);
-    for (i, &(m, ref twiddles)) in all_twiddles.iter().enumerate() {
+             wheel = WHEEL);
+    for (i, (&c, cur_infos)) in coprime.iter().zip(&infos).enumerate() {
         let wheel_start = i * COUNT;
         let wheel_end = (i + 1) * COUNT;
         println!("        {}...{} => {{ // {} * x + {}",
                  wheel_start, wheel_end - 1,
-                 BYTE_WHEEL, m);
+                 BYTE_WHEEL, c);
         let mut indent: String = "            ".into();
         println!("\
 {indent}loop {{",
@@ -242,24 +259,24 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
 {indent}    p = ::b(p);",
                  indent = indent);
 
-        let mut sl_so_far = 0;
-        let mut offset_so_far = 0;
-        for &(sl, offset, bit) in twiddles {
+        for info in cur_infos {
             println!("\
 {indent}    safe_assert!(start <= p.offset(prime_ * {sl} + {off}) &&
 {indent}                 p.offset(prime_ * {sl} + {off}) < end);
 {indent}    *p.offset(prime_ * {sl} + {off}) &= {bit};",
-                     sl = sl_so_far, off = offset_so_far, bit = !(1u8 << bit), indent = indent);
-            sl_so_far += sl;
-            offset_so_far += offset;
+                     // p starts at offset 1 * prime_, so strip off
+                     // that factor.
+                     sl = info.total_mult_factor - 1,
+                     off = info.total_add_factor / WHEEL,
+                     bit = info.unset_bit, indent = indent);
         }
         println!("
 {indent}    p = p.offset(prime_ * {} + {})
 {indent}}}",
-                 sl_so_far, offset_so_far,
+                 WHEEL, c,
                  indent = indent);
 
-        for (j, &(sl, offset, bit)) in twiddles.iter().enumerate() {
+        for (j, info) in cur_infos.iter().enumerate() {
             indent.pop();
             let end = if j + 1 == COUNT {
                 format!("wi = {}", wheel_start)
@@ -273,8 +290,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
 {indent} {}
 {indent}}}",
 
-                     !(1u8 << bit),
-                     sl, offset,
+                     info.unset_bit, info.diff_mult_factor, info.correction,
                      end,
                      val = wheel_start + j,
                      indent = indent);
@@ -286,5 +302,5 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
     }}
     *si_ = (p as usize).wrapping_sub(end as usize);
     *wi_ = wi;
-}}");
+}}")
 }

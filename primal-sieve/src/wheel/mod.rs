@@ -1,3 +1,4 @@
+use std::cmp;
 use primal_bit::BitVec;
 
 pub const BYTE_SIZE: usize = 8;
@@ -235,32 +236,27 @@ const WHEEL_OFFSETS: &'static [usize; BYTE_MODULO] = &[
 
 #[inline(never)]
 pub fn compute_wheel_elem<W: Wheel>(w: W, p: usize, low: usize) -> State<W> {
-    let mut mult = p * p;
+    let q = cmp::max(low / p + 1, p);
+    // the smallest (interesting) multiple of p larger than low
+    let mut mult = p * q;
 
-    let init = &w.init()[p % w.modulo()];
-    let next_mult_factor = init.next_mult_factor;
-    mult += p * next_mult_factor as usize;
+    let init = &w.init()[q % w.modulo()];
+    // push it up to the smallest multiple that is in the wheel
+    mult += p * init.next_mult_factor as usize;
 
-    let mut wheel_index = WHEEL_OFFSETS[p % BYTE_MODULO] * w.size();
-    let mut sieve_index = mult * BYTE_SIZE / BYTE_MODULO / 8;
+    // find the memory location to write to
+    let low_offset = mult - low;
+    let sieve_index = low_offset / BYTE_MODULO;
+    // and now the right info to write
+    let wheel_index = WHEEL_OFFSETS[p % BYTE_MODULO] * w.size() + init.wheel_index as usize;
 
     let prime = p / BYTE_MODULO;
-    // run the wheel until its above `low`... this is ugly and should be done analytically.
-    while sieve_index * BYTE_MODULO < low {
-        let WheelElem { next_mult_factor, correction, next, .. } = w.wheel()[wheel_index];
-        sieve_index += prime * next_mult_factor as usize;
-        sieve_index += correction as usize;
-        wheel_index = wheel_index.wrapping_add(next as usize);
-    }
-    sieve_index -= low / BYTE_MODULO;
-    let ret = State {
+    State {
         wheel: w,
         prime: prime as u32,
         sieve_index: sieve_index as SI,
         wheel_index: wheel_index as WI,
-    };
-    ret
-
+    }
 }
 
 mod wheel30;

@@ -1,7 +1,7 @@
 // automatically generated
 use wheel::{WheelInit, Wheel, WheelElem};
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Wheel210;
 impl Wheel for Wheel210 {
     #[inline(always)]
@@ -282,8 +282,7 @@ const INIT: &'static [WheelInit; 210] = &[
 ];
 const WHEEL: &'static [WheelElem; 384] = &[
     // remainder 1
-    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 10, correction: 0, next: 1 },
     WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
     WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
     WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
@@ -294,13 +293,31 @@ const WHEEL: &'static [WheelElem; 384] = &[
     WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
     WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
     WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 0, next: 1 },
     WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 0, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
     WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
     WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 8, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 8, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 0, next: 1 },
     WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
     WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
     WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
@@ -311,27 +328,10 @@ const WHEEL: &'static [WheelElem; 384] = &[
     WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
     WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
     WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 0, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 10, correction: 0, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: -47 },
     // remainder 7
-    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 10, correction: 2, next: 1 },
     WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
@@ -342,13 +342,31 @@ const WHEEL: &'static [WheelElem; 384] = &[
     WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
     WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 2, next: 1 },
     WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 1, next: 1 },
     WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 1, next: 1 },
     WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
     WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 8, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 8, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 2, next: 1 },
     WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
@@ -359,131 +377,108 @@ const WHEEL: &'static [WheelElem; 384] = &[
     WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 0, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 1, next: -47 },
-    // remainder 11
-    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: -47 },
-    // remainder 13
-    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 10, correction: 2, next: 1 },
     WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: -47 },
+    // remainder 11
+    WheelElem { unset_bit: 251, next_mult_factor: 10, correction: 4, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 8, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 8, correction: 3, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 0, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 10, correction: 4, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: -47 },
+    // remainder 13
+    WheelElem { unset_bit: 247, next_mult_factor: 10, correction: 4, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 8, correction: 4, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 8, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 10, correction: 4, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 2, correction: 1, next: -47 },
     // remainder 17
-    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 10, correction: 6, next: 1 },
     WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: 1 },
     WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
@@ -494,13 +489,31 @@ const WHEEL: &'static [WheelElem; 384] = &[
     WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
     WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
     WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 3, next: 1 },
     WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 3, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
     WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 8, correction: 4, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 8, correction: 4, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 3, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 4, next: 1 },
     WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: 1 },
     WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
@@ -511,27 +524,10 @@ const WHEEL: &'static [WheelElem; 384] = &[
     WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: 1 },
     WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 3, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 2, next: -47 },
+    WheelElem { unset_bit: 191, next_mult_factor: 10, correction: 6, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: -47 },
     // remainder 19
-    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 10, correction: 6, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
     WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
     WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: 1 },
@@ -542,13 +538,31 @@ const WHEEL: &'static [WheelElem; 384] = &[
     WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
     WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 4, next: 1 },
     WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 4, next: 1 },
     WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
     WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 8, correction: 5, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 8, correction: 5, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 4, next: 1 },
     WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
     WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: 1 },
     WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
@@ -559,27 +573,10 @@ const WHEEL: &'static [WheelElem; 384] = &[
     WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
     WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
     WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 4, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 2, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 2, correction: 2, next: -47 },
+    WheelElem { unset_bit: 254, next_mult_factor: 10, correction: 6, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 2, correction: 1, next: -47 },
     // remainder 23
-    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 10, correction: 8, next: 1 },
     WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
     WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
@@ -590,13 +587,31 @@ const WHEEL: &'static [WheelElem; 384] = &[
     WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
     WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 4, next: 1 },
     WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 5, next: 1 },
     WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 5, next: 1 },
     WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
     WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 8, correction: 6, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 8, correction: 6, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 5, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 6, correction: 4, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
     WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: 1 },
@@ -607,27 +622,10 @@ const WHEEL: &'static [WheelElem; 384] = &[
     WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
     WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 5, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 3, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 3, next: -47 },
+    WheelElem { unset_bit: 239, next_mult_factor: 10, correction: 8, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 2, correction: 1, next: -47 },
     // remainder 29
-    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 10, correction: 10, next: 1 },
     WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
     WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
     WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
@@ -638,13 +636,31 @@ const WHEEL: &'static [WheelElem; 384] = &[
     WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
     WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
     WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 6, correction: 6, next: 1 },
     WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 6, next: 1 },
     WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
     WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 6, next: 1 },
     WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
     WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 8, correction: 7, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 8, correction: 7, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 223, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
+    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
+    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
+    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 6, next: 1 },
+    WheelElem { unset_bit: 191, next_mult_factor: 6, correction: 6, next: 1 },
     WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
     WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
     WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
@@ -655,30 +671,14 @@ const WHEEL: &'static [WheelElem; 384] = &[
     WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
     WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
     WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: 1 },
-    WheelElem { unset_bit: 127, next_mult_factor: 6, correction: 6, next: 1 },
-    WheelElem { unset_bit: 191, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 223, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 239, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 247, next_mult_factor: 2, correction: 2, next: 1 },
-    WheelElem { unset_bit: 251, next_mult_factor: 4, correction: 4, next: 1 },
-    WheelElem { unset_bit: 253, next_mult_factor: 6, correction: 6, next: -47 },
+    WheelElem { unset_bit: 251, next_mult_factor: 10, correction: 10, next: 1 },
+    WheelElem { unset_bit: 254, next_mult_factor: 2, correction: 1, next: -47 },
 ];
 pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize, prime: usize) {
     let bytes = bytes;
     let start = bytes.as_mut_ptr();
     let len = bytes.len() as isize;
-    let largest_step = ::std::cmp::min(len, (178 * prime + 168) as isize);
+    let largest_step = ::std::cmp::min(len, 210 * (prime as isize + 1) - 1);
     let loop_len = len - largest_step;
     let loop_end = start.offset(loop_len);
     let end = start.offset(len);
@@ -795,9 +795,6 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
                                                                 *p.offset(prime_ * 0 + 0) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 6 + 0) &&
-                                                                             p.offset(prime_ * 6 + 0) < end);
-                                                                *p.offset(prime_ * 6 + 0) &= 253;
                                                                 safe_assert!(start <= p.offset(prime_ * 10 + 0) &&
                                                                              p.offset(prime_ * 10 + 0) < end);
                                                                 *p.offset(prime_ * 10 + 0) &= 251;
@@ -816,362 +813,365 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                 safe_assert!(start <= p.offset(prime_ * 28 + 0) &&
                                                                              p.offset(prime_ * 28 + 0) < end);
                                                                 *p.offset(prime_ * 28 + 0) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 30 + 1) &&
-                                                                             p.offset(prime_ * 30 + 1) < end);
-                                                                *p.offset(prime_ * 30 + 1) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 36 + 1) &&
-                                                                             p.offset(prime_ * 36 + 1) < end);
-                                                                *p.offset(prime_ * 36 + 1) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 40 + 1) &&
-                                                                             p.offset(prime_ * 40 + 1) < end);
-                                                                *p.offset(prime_ * 40 + 1) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 42 + 1) &&
-                                                                             p.offset(prime_ * 42 + 1) < end);
-                                                                *p.offset(prime_ * 42 + 1) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 46 + 1) &&
-                                                                             p.offset(prime_ * 46 + 1) < end);
-                                                                *p.offset(prime_ * 46 + 1) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 48 + 1) &&
-                                                                             p.offset(prime_ * 48 + 1) < end);
-                                                                *p.offset(prime_ * 48 + 1) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 52 + 1) &&
-                                                                             p.offset(prime_ * 52 + 1) < end);
-                                                                *p.offset(prime_ * 52 + 1) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 58 + 1) &&
-                                                                             p.offset(prime_ * 58 + 1) < end);
-                                                                *p.offset(prime_ * 58 + 1) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 60 + 2) &&
-                                                                             p.offset(prime_ * 60 + 2) < end);
-                                                                *p.offset(prime_ * 60 + 2) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 66 + 2) &&
-                                                                             p.offset(prime_ * 66 + 2) < end);
-                                                                *p.offset(prime_ * 66 + 2) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 70 + 2) &&
-                                                                             p.offset(prime_ * 70 + 2) < end);
-                                                                *p.offset(prime_ * 70 + 2) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 72 + 2) &&
-                                                                             p.offset(prime_ * 72 + 2) < end);
-                                                                *p.offset(prime_ * 72 + 2) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 76 + 2) &&
-                                                                             p.offset(prime_ * 76 + 2) < end);
-                                                                *p.offset(prime_ * 76 + 2) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 78 + 2) &&
-                                                                             p.offset(prime_ * 78 + 2) < end);
-                                                                *p.offset(prime_ * 78 + 2) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 82 + 2) &&
-                                                                             p.offset(prime_ * 82 + 2) < end);
-                                                                *p.offset(prime_ * 82 + 2) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 88 + 2) &&
-                                                                             p.offset(prime_ * 88 + 2) < end);
-                                                                *p.offset(prime_ * 88 + 2) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 90 + 3) &&
-                                                                             p.offset(prime_ * 90 + 3) < end);
-                                                                *p.offset(prime_ * 90 + 3) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 96 + 3) &&
-                                                                             p.offset(prime_ * 96 + 3) < end);
-                                                                *p.offset(prime_ * 96 + 3) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 100 + 3) &&
-                                                                             p.offset(prime_ * 100 + 3) < end);
-                                                                *p.offset(prime_ * 100 + 3) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 102 + 3) &&
-                                                                             p.offset(prime_ * 102 + 3) < end);
-                                                                *p.offset(prime_ * 102 + 3) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 106 + 3) &&
-                                                                             p.offset(prime_ * 106 + 3) < end);
-                                                                *p.offset(prime_ * 106 + 3) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 108 + 3) &&
-                                                                             p.offset(prime_ * 108 + 3) < end);
-                                                                *p.offset(prime_ * 108 + 3) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 112 + 3) &&
-                                                                             p.offset(prime_ * 112 + 3) < end);
-                                                                *p.offset(prime_ * 112 + 3) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 118 + 3) &&
-                                                                             p.offset(prime_ * 118 + 3) < end);
-                                                                *p.offset(prime_ * 118 + 3) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 120 + 4) &&
-                                                                             p.offset(prime_ * 120 + 4) < end);
-                                                                *p.offset(prime_ * 120 + 4) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 126 + 4) &&
-                                                                             p.offset(prime_ * 126 + 4) < end);
-                                                                *p.offset(prime_ * 126 + 4) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 130 + 4) &&
-                                                                             p.offset(prime_ * 130 + 4) < end);
-                                                                *p.offset(prime_ * 130 + 4) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 132 + 4) &&
-                                                                             p.offset(prime_ * 132 + 4) < end);
-                                                                *p.offset(prime_ * 132 + 4) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 136 + 4) &&
-                                                                             p.offset(prime_ * 136 + 4) < end);
-                                                                *p.offset(prime_ * 136 + 4) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 138 + 4) &&
-                                                                             p.offset(prime_ * 138 + 4) < end);
-                                                                *p.offset(prime_ * 138 + 4) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 142 + 4) &&
-                                                                             p.offset(prime_ * 142 + 4) < end);
-                                                                *p.offset(prime_ * 142 + 4) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 148 + 4) &&
-                                                                             p.offset(prime_ * 148 + 4) < end);
-                                                                *p.offset(prime_ * 148 + 4) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 150 + 5) &&
-                                                                             p.offset(prime_ * 150 + 5) < end);
-                                                                *p.offset(prime_ * 150 + 5) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 156 + 5) &&
-                                                                             p.offset(prime_ * 156 + 5) < end);
-                                                                *p.offset(prime_ * 156 + 5) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 160 + 5) &&
-                                                                             p.offset(prime_ * 160 + 5) < end);
-                                                                *p.offset(prime_ * 160 + 5) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 162 + 5) &&
-                                                                             p.offset(prime_ * 162 + 5) < end);
-                                                                *p.offset(prime_ * 162 + 5) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 166 + 5) &&
-                                                                             p.offset(prime_ * 166 + 5) < end);
-                                                                *p.offset(prime_ * 166 + 5) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 168 + 5) &&
-                                                                             p.offset(prime_ * 168 + 5) < end);
-                                                                *p.offset(prime_ * 168 + 5) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 172 + 5) &&
-                                                                             p.offset(prime_ * 172 + 5) < end);
-                                                                *p.offset(prime_ * 172 + 5) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 178 + 5) &&
-                                                                             p.offset(prime_ * 178 + 5) < end);
-                                                                *p.offset(prime_ * 178 + 5) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 30 + 0) &&
+                                                                             p.offset(prime_ * 30 + 0) < end);
+                                                                *p.offset(prime_ * 30 + 0) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 36 + 0) &&
+                                                                             p.offset(prime_ * 36 + 0) < end);
+                                                                *p.offset(prime_ * 36 + 0) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 40 + 0) &&
+                                                                             p.offset(prime_ * 40 + 0) < end);
+                                                                *p.offset(prime_ * 40 + 0) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 42 + 0) &&
+                                                                             p.offset(prime_ * 42 + 0) < end);
+                                                                *p.offset(prime_ * 42 + 0) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 46 + 0) &&
+                                                                             p.offset(prime_ * 46 + 0) < end);
+                                                                *p.offset(prime_ * 46 + 0) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 52 + 0) &&
+                                                                             p.offset(prime_ * 52 + 0) < end);
+                                                                *p.offset(prime_ * 52 + 0) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 58 + 0) &&
+                                                                             p.offset(prime_ * 58 + 0) < end);
+                                                                *p.offset(prime_ * 58 + 0) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 60 + 0) &&
+                                                                             p.offset(prime_ * 60 + 0) < end);
+                                                                *p.offset(prime_ * 60 + 0) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 66 + 0) &&
+                                                                             p.offset(prime_ * 66 + 0) < end);
+                                                                *p.offset(prime_ * 66 + 0) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 70 + 0) &&
+                                                                             p.offset(prime_ * 70 + 0) < end);
+                                                                *p.offset(prime_ * 70 + 0) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 72 + 0) &&
+                                                                             p.offset(prime_ * 72 + 0) < end);
+                                                                *p.offset(prime_ * 72 + 0) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 78 + 0) &&
+                                                                             p.offset(prime_ * 78 + 0) < end);
+                                                                *p.offset(prime_ * 78 + 0) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 82 + 0) &&
+                                                                             p.offset(prime_ * 82 + 0) < end);
+                                                                *p.offset(prime_ * 82 + 0) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 88 + 0) &&
+                                                                             p.offset(prime_ * 88 + 0) < end);
+                                                                *p.offset(prime_ * 88 + 0) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 96 + 0) &&
+                                                                             p.offset(prime_ * 96 + 0) < end);
+                                                                *p.offset(prime_ * 96 + 0) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 100 + 0) &&
+                                                                             p.offset(prime_ * 100 + 0) < end);
+                                                                *p.offset(prime_ * 100 + 0) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 102 + 0) &&
+                                                                             p.offset(prime_ * 102 + 0) < end);
+                                                                *p.offset(prime_ * 102 + 0) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 106 + 0) &&
+                                                                             p.offset(prime_ * 106 + 0) < end);
+                                                                *p.offset(prime_ * 106 + 0) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 108 + 0) &&
+                                                                             p.offset(prime_ * 108 + 0) < end);
+                                                                *p.offset(prime_ * 108 + 0) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 112 + 0) &&
+                                                                             p.offset(prime_ * 112 + 0) < end);
+                                                                *p.offset(prime_ * 112 + 0) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 120 + 0) &&
+                                                                             p.offset(prime_ * 120 + 0) < end);
+                                                                *p.offset(prime_ * 120 + 0) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 126 + 0) &&
+                                                                             p.offset(prime_ * 126 + 0) < end);
+                                                                *p.offset(prime_ * 126 + 0) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 130 + 0) &&
+                                                                             p.offset(prime_ * 130 + 0) < end);
+                                                                *p.offset(prime_ * 130 + 0) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 136 + 0) &&
+                                                                             p.offset(prime_ * 136 + 0) < end);
+                                                                *p.offset(prime_ * 136 + 0) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 138 + 0) &&
+                                                                             p.offset(prime_ * 138 + 0) < end);
+                                                                *p.offset(prime_ * 138 + 0) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 142 + 0) &&
+                                                                             p.offset(prime_ * 142 + 0) < end);
+                                                                *p.offset(prime_ * 142 + 0) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 148 + 0) &&
+                                                                             p.offset(prime_ * 148 + 0) < end);
+                                                                *p.offset(prime_ * 148 + 0) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 150 + 0) &&
+                                                                             p.offset(prime_ * 150 + 0) < end);
+                                                                *p.offset(prime_ * 150 + 0) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 156 + 0) &&
+                                                                             p.offset(prime_ * 156 + 0) < end);
+                                                                *p.offset(prime_ * 156 + 0) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 162 + 0) &&
+                                                                             p.offset(prime_ * 162 + 0) < end);
+                                                                *p.offset(prime_ * 162 + 0) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 166 + 0) &&
+                                                                             p.offset(prime_ * 166 + 0) < end);
+                                                                *p.offset(prime_ * 166 + 0) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 168 + 0) &&
+                                                                             p.offset(prime_ * 168 + 0) < end);
+                                                                *p.offset(prime_ * 168 + 0) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 172 + 0) &&
+                                                                             p.offset(prime_ * 172 + 0) < end);
+                                                                *p.offset(prime_ * 172 + 0) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 178 + 0) &&
+                                                                             p.offset(prime_ * 178 + 0) < end);
+                                                                *p.offset(prime_ * 178 + 0) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 180 + 0) &&
+                                                                             p.offset(prime_ * 180 + 0) < end);
+                                                                *p.offset(prime_ * 180 + 0) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 186 + 0) &&
+                                                                             p.offset(prime_ * 186 + 0) < end);
+                                                                *p.offset(prime_ * 186 + 0) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 190 + 0) &&
+                                                                             p.offset(prime_ * 190 + 0) < end);
+                                                                *p.offset(prime_ * 190 + 0) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 192 + 0) &&
+                                                                             p.offset(prime_ * 192 + 0) < end);
+                                                                *p.offset(prime_ * 192 + 0) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 196 + 0) &&
+                                                                             p.offset(prime_ * 196 + 0) < end);
+                                                                *p.offset(prime_ * 196 + 0) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 198 + 0) &&
+                                                                             p.offset(prime_ * 198 + 0) < end);
+                                                                *p.offset(prime_ * 198 + 0) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 208 + 0) &&
+                                                                             p.offset(prime_ * 208 + 0) < end);
+                                                                *p.offset(prime_ * 208 + 0) &= 127;
 
-                                                                p = p.offset(prime_ * 180 + 6)
+                                                                p = p.offset(prime_ * 210 + 1)
                                                             }
                                                             if p >= end { wi = 0; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 254; p = p.offset(prime_ * 6 + 0);
+                                                            *p &= 254; p = p.offset(prime_ * 10 + 0);
                                                             break 'label1
                                                            }
                                                            if p >= end { wi = 1; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 253; p = p.offset(prime_ * 4 + 0);
+                                                           *p &= 251; p = p.offset(prime_ * 2 + 0);
                                                            break 'label2
                                                           }
                                                           if p >= end { wi = 2; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 251; p = p.offset(prime_ * 2 + 0);
+                                                          *p &= 247; p = p.offset(prime_ * 4 + 0);
                                                           break 'label3
                                                          }
                                                          if p >= end { wi = 3; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 247; p = p.offset(prime_ * 4 + 0);
+                                                         *p &= 239; p = p.offset(prime_ * 2 + 0);
                                                          break 'label4
                                                         }
                                                         if p >= end { wi = 4; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 239; p = p.offset(prime_ * 2 + 0);
+                                                        *p &= 223; p = p.offset(prime_ * 4 + 0);
                                                         break 'label5
                                                        }
                                                        if p >= end { wi = 5; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 223; p = p.offset(prime_ * 4 + 0);
+                                                       *p &= 191; p = p.offset(prime_ * 6 + 0);
                                                        break 'label6
                                                       }
                                                       if p >= end { wi = 6; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 191; p = p.offset(prime_ * 6 + 0);
+                                                      *p &= 127; p = p.offset(prime_ * 2 + 1);
                                                       break 'label7
                                                      }
                                                      if p >= end { wi = 7; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 127; p = p.offset(prime_ * 2 + 1);
+                                                     *p &= 254; p = p.offset(prime_ * 6 + 0);
                                                      break 'label8
                                                     }
                                                     if p >= end { wi = 8; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 254; p = p.offset(prime_ * 6 + 0);
+                                                    *p &= 253; p = p.offset(prime_ * 4 + 0);
                                                     break 'label9
                                                    }
                                                    if p >= end { wi = 9; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 253; p = p.offset(prime_ * 4 + 0);
+                                                   *p &= 251; p = p.offset(prime_ * 2 + 0);
                                                    break 'label10
                                                   }
                                                   if p >= end { wi = 10; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 251; p = p.offset(prime_ * 2 + 0);
+                                                  *p &= 247; p = p.offset(prime_ * 4 + 0);
                                                   break 'label11
                                                  }
                                                  if p >= end { wi = 11; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 247; p = p.offset(prime_ * 4 + 0);
+                                                 *p &= 239; p = p.offset(prime_ * 6 + 0);
                                                  break 'label12
                                                 }
                                                 if p >= end { wi = 12; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 239; p = p.offset(prime_ * 2 + 0);
+                                                *p &= 191; p = p.offset(prime_ * 6 + 0);
                                                 break 'label13
                                                }
                                                if p >= end { wi = 13; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 223; p = p.offset(prime_ * 4 + 0);
+                                               *p &= 127; p = p.offset(prime_ * 2 + 1);
                                                break 'label14
                                               }
                                               if p >= end { wi = 14; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 191; p = p.offset(prime_ * 6 + 0);
+                                              *p &= 254; p = p.offset(prime_ * 6 + 0);
                                               break 'label15
                                              }
                                              if p >= end { wi = 15; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 127; p = p.offset(prime_ * 2 + 1);
+                                             *p &= 253; p = p.offset(prime_ * 4 + 0);
                                              break 'label16
                                             }
                                             if p >= end { wi = 16; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 254; p = p.offset(prime_ * 6 + 0);
+                                            *p &= 251; p = p.offset(prime_ * 2 + 0);
                                             break 'label17
                                            }
                                            if p >= end { wi = 17; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 253; p = p.offset(prime_ * 4 + 0);
+                                           *p &= 247; p = p.offset(prime_ * 6 + 0);
                                            break 'label18
                                           }
                                           if p >= end { wi = 18; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 251; p = p.offset(prime_ * 2 + 0);
+                                          *p &= 223; p = p.offset(prime_ * 4 + 0);
                                           break 'label19
                                          }
                                          if p >= end { wi = 19; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 247; p = p.offset(prime_ * 4 + 0);
+                                         *p &= 191; p = p.offset(prime_ * 6 + 0);
                                          break 'label20
                                         }
                                         if p >= end { wi = 20; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 239; p = p.offset(prime_ * 2 + 0);
+                                        *p &= 127; p = p.offset(prime_ * 8 + 1);
                                         break 'label21
                                        }
                                        if p >= end { wi = 21; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 223; p = p.offset(prime_ * 4 + 0);
+                                       *p &= 253; p = p.offset(prime_ * 4 + 0);
                                        break 'label22
                                       }
                                       if p >= end { wi = 22; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 191; p = p.offset(prime_ * 6 + 0);
+                                      *p &= 251; p = p.offset(prime_ * 2 + 0);
                                       break 'label23
                                      }
                                      if p >= end { wi = 23; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 127; p = p.offset(prime_ * 2 + 1);
+                                     *p &= 247; p = p.offset(prime_ * 4 + 0);
                                      break 'label24
                                     }
                                     if p >= end { wi = 24; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 254; p = p.offset(prime_ * 6 + 0);
+                                    *p &= 239; p = p.offset(prime_ * 2 + 0);
                                     break 'label25
                                    }
                                    if p >= end { wi = 25; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 253; p = p.offset(prime_ * 4 + 0);
+                                   *p &= 223; p = p.offset(prime_ * 4 + 0);
                                    break 'label26
                                   }
                                   if p >= end { wi = 26; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 251; p = p.offset(prime_ * 2 + 0);
+                                  *p &= 191; p = p.offset(prime_ * 8 + 1);
                                   break 'label27
                                  }
                                  if p >= end { wi = 27; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 247; p = p.offset(prime_ * 4 + 0);
+                                 *p &= 254; p = p.offset(prime_ * 6 + 0);
                                  break 'label28
                                 }
                                 if p >= end { wi = 28; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 239; p = p.offset(prime_ * 2 + 0);
+                                *p &= 253; p = p.offset(prime_ * 4 + 0);
                                 break 'label29
                                }
                                if p >= end { wi = 29; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 223; p = p.offset(prime_ * 4 + 0);
+                               *p &= 251; p = p.offset(prime_ * 6 + 0);
                                break 'label30
                               }
                               if p >= end { wi = 30; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 191; p = p.offset(prime_ * 6 + 0);
+                              *p &= 239; p = p.offset(prime_ * 2 + 0);
                               break 'label31
                              }
                              if p >= end { wi = 31; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 127; p = p.offset(prime_ * 2 + 1);
+                             *p &= 223; p = p.offset(prime_ * 4 + 0);
                              break 'label32
                             }
                             if p >= end { wi = 32; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 254; p = p.offset(prime_ * 6 + 0);
+                            *p &= 191; p = p.offset(prime_ * 6 + 0);
                             break 'label33
                            }
                            if p >= end { wi = 33; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 253; p = p.offset(prime_ * 4 + 0);
+                           *p &= 127; p = p.offset(prime_ * 2 + 1);
                            break 'label34
                           }
                           if p >= end { wi = 34; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 251; p = p.offset(prime_ * 2 + 0);
+                          *p &= 254; p = p.offset(prime_ * 6 + 0);
                           break 'label35
                          }
                          if p >= end { wi = 35; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 247; p = p.offset(prime_ * 4 + 0);
+                         *p &= 253; p = p.offset(prime_ * 6 + 0);
                          break 'label36
                         }
                         if p >= end { wi = 36; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 239; p = p.offset(prime_ * 2 + 0);
+                        *p &= 247; p = p.offset(prime_ * 4 + 0);
                         break 'label37
                        }
                        if p >= end { wi = 37; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 223; p = p.offset(prime_ * 4 + 0);
+                       *p &= 239; p = p.offset(prime_ * 2 + 0);
                        break 'label38
                       }
                       if p >= end { wi = 38; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 191; p = p.offset(prime_ * 6 + 0);
+                      *p &= 223; p = p.offset(prime_ * 4 + 0);
                       break 'label39
                      }
                      if p >= end { wi = 39; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 127; p = p.offset(prime_ * 2 + 1);
+                     *p &= 191; p = p.offset(prime_ * 6 + 0);
                      break 'label40
                     }
                     if p >= end { wi = 40; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 254; p = p.offset(prime_ * 6 + 0);
+                    *p &= 127; p = p.offset(prime_ * 2 + 1);
                     break 'label41
                    }
                    if p >= end { wi = 41; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 253; p = p.offset(prime_ * 4 + 0);
+                   *p &= 254; p = p.offset(prime_ * 6 + 0);
                    break 'label42
                   }
                   if p >= end { wi = 42; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 251; p = p.offset(prime_ * 2 + 0);
+                  *p &= 253; p = p.offset(prime_ * 4 + 0);
                   break 'label43
                  }
                  if p >= end { wi = 43; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 247; p = p.offset(prime_ * 4 + 0);
+                 *p &= 251; p = p.offset(prime_ * 2 + 0);
                  break 'label44
                 }
                 if p >= end { wi = 44; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 239; p = p.offset(prime_ * 2 + 0);
+                *p &= 247; p = p.offset(prime_ * 4 + 0);
                 break 'label45
                }
                if p >= end { wi = 45; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 223; p = p.offset(prime_ * 4 + 0);
+               *p &= 239; p = p.offset(prime_ * 2 + 0);
                break 'label46
               }
               if p >= end { wi = 46; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 191; p = p.offset(prime_ * 6 + 0);
+              *p &= 223; p = p.offset(prime_ * 10 + 0);
               break 'label47
              }
              if p >= end { wi = 47; break 'outer; }
@@ -1180,7 +1180,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
              wi = 0
             }
         }
-        48...95 => { // 30 * x + 7
+        48...95 => { // 30 * x + 11
             loop {
              'label95: loop {
               'label94: loop {
@@ -1285,154 +1285,154 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                 p = ::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
-                                                                *p.offset(prime_ * 0 + 0) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 4 + 1) &&
-                                                                             p.offset(prime_ * 4 + 1) < end);
-                                                                *p.offset(prime_ * 4 + 1) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 6 + 2) &&
-                                                                             p.offset(prime_ * 6 + 2) < end);
-                                                                *p.offset(prime_ * 6 + 2) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 10 + 2) &&
-                                                                             p.offset(prime_ * 10 + 2) < end);
-                                                                *p.offset(prime_ * 10 + 2) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 12 + 3) &&
-                                                                             p.offset(prime_ * 12 + 3) < end);
-                                                                *p.offset(prime_ * 12 + 3) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 16 + 4) &&
-                                                                             p.offset(prime_ * 16 + 4) < end);
-                                                                *p.offset(prime_ * 16 + 4) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 22 + 5) &&
-                                                                             p.offset(prime_ * 22 + 5) < end);
-                                                                *p.offset(prime_ * 22 + 5) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 24 + 6) &&
-                                                                             p.offset(prime_ * 24 + 6) < end);
-                                                                *p.offset(prime_ * 24 + 6) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 30 + 7) &&
-                                                                             p.offset(prime_ * 30 + 7) < end);
-                                                                *p.offset(prime_ * 30 + 7) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 34 + 8) &&
-                                                                             p.offset(prime_ * 34 + 8) < end);
-                                                                *p.offset(prime_ * 34 + 8) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 36 + 9) &&
-                                                                             p.offset(prime_ * 36 + 9) < end);
-                                                                *p.offset(prime_ * 36 + 9) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 40 + 9) &&
-                                                                             p.offset(prime_ * 40 + 9) < end);
-                                                                *p.offset(prime_ * 40 + 9) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 42 + 10) &&
-                                                                             p.offset(prime_ * 42 + 10) < end);
-                                                                *p.offset(prime_ * 42 + 10) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 46 + 11) &&
-                                                                             p.offset(prime_ * 46 + 11) < end);
-                                                                *p.offset(prime_ * 46 + 11) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 52 + 12) &&
-                                                                             p.offset(prime_ * 52 + 12) < end);
-                                                                *p.offset(prime_ * 52 + 12) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 54 + 13) &&
-                                                                             p.offset(prime_ * 54 + 13) < end);
-                                                                *p.offset(prime_ * 54 + 13) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 60 + 14) &&
-                                                                             p.offset(prime_ * 60 + 14) < end);
-                                                                *p.offset(prime_ * 60 + 14) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 64 + 15) &&
-                                                                             p.offset(prime_ * 64 + 15) < end);
-                                                                *p.offset(prime_ * 64 + 15) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 66 + 16) &&
-                                                                             p.offset(prime_ * 66 + 16) < end);
-                                                                *p.offset(prime_ * 66 + 16) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 70 + 16) &&
-                                                                             p.offset(prime_ * 70 + 16) < end);
-                                                                *p.offset(prime_ * 70 + 16) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 72 + 17) &&
-                                                                             p.offset(prime_ * 72 + 17) < end);
-                                                                *p.offset(prime_ * 72 + 17) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 76 + 18) &&
-                                                                             p.offset(prime_ * 76 + 18) < end);
-                                                                *p.offset(prime_ * 76 + 18) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 82 + 19) &&
-                                                                             p.offset(prime_ * 82 + 19) < end);
-                                                                *p.offset(prime_ * 82 + 19) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 84 + 20) &&
-                                                                             p.offset(prime_ * 84 + 20) < end);
-                                                                *p.offset(prime_ * 84 + 20) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 90 + 21) &&
-                                                                             p.offset(prime_ * 90 + 21) < end);
-                                                                *p.offset(prime_ * 90 + 21) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 94 + 22) &&
-                                                                             p.offset(prime_ * 94 + 22) < end);
-                                                                *p.offset(prime_ * 94 + 22) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 96 + 23) &&
-                                                                             p.offset(prime_ * 96 + 23) < end);
-                                                                *p.offset(prime_ * 96 + 23) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 100 + 23) &&
-                                                                             p.offset(prime_ * 100 + 23) < end);
-                                                                *p.offset(prime_ * 100 + 23) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 102 + 24) &&
-                                                                             p.offset(prime_ * 102 + 24) < end);
-                                                                *p.offset(prime_ * 102 + 24) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 106 + 25) &&
-                                                                             p.offset(prime_ * 106 + 25) < end);
-                                                                *p.offset(prime_ * 106 + 25) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 112 + 26) &&
-                                                                             p.offset(prime_ * 112 + 26) < end);
-                                                                *p.offset(prime_ * 112 + 26) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 114 + 27) &&
-                                                                             p.offset(prime_ * 114 + 27) < end);
-                                                                *p.offset(prime_ * 114 + 27) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 120 + 28) &&
-                                                                             p.offset(prime_ * 120 + 28) < end);
-                                                                *p.offset(prime_ * 120 + 28) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 124 + 29) &&
-                                                                             p.offset(prime_ * 124 + 29) < end);
-                                                                *p.offset(prime_ * 124 + 29) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 126 + 30) &&
-                                                                             p.offset(prime_ * 126 + 30) < end);
-                                                                *p.offset(prime_ * 126 + 30) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 130 + 30) &&
-                                                                             p.offset(prime_ * 130 + 30) < end);
-                                                                *p.offset(prime_ * 130 + 30) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 132 + 31) &&
-                                                                             p.offset(prime_ * 132 + 31) < end);
-                                                                *p.offset(prime_ * 132 + 31) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 136 + 32) &&
-                                                                             p.offset(prime_ * 136 + 32) < end);
-                                                                *p.offset(prime_ * 136 + 32) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 142 + 33) &&
-                                                                             p.offset(prime_ * 142 + 33) < end);
-                                                                *p.offset(prime_ * 142 + 33) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 144 + 34) &&
-                                                                             p.offset(prime_ * 144 + 34) < end);
-                                                                *p.offset(prime_ * 144 + 34) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 150 + 35) &&
-                                                                             p.offset(prime_ * 150 + 35) < end);
-                                                                *p.offset(prime_ * 150 + 35) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 154 + 36) &&
-                                                                             p.offset(prime_ * 154 + 36) < end);
-                                                                *p.offset(prime_ * 154 + 36) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 156 + 37) &&
-                                                                             p.offset(prime_ * 156 + 37) < end);
-                                                                *p.offset(prime_ * 156 + 37) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 160 + 37) &&
-                                                                             p.offset(prime_ * 160 + 37) < end);
-                                                                *p.offset(prime_ * 160 + 37) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 162 + 38) &&
-                                                                             p.offset(prime_ * 162 + 38) < end);
-                                                                *p.offset(prime_ * 162 + 38) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 166 + 39) &&
-                                                                             p.offset(prime_ * 166 + 39) < end);
-                                                                *p.offset(prime_ * 166 + 39) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 172 + 40) &&
-                                                                             p.offset(prime_ * 172 + 40) < end);
-                                                                *p.offset(prime_ * 172 + 40) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 174 + 41) &&
-                                                                             p.offset(prime_ * 174 + 41) < end);
-                                                                *p.offset(prime_ * 174 + 41) &= 253;
+                                                                *p.offset(prime_ * 0 + 0) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 10 + 0) &&
+                                                                             p.offset(prime_ * 10 + 0) < end);
+                                                                *p.offset(prime_ * 10 + 0) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 12 + 0) &&
+                                                                             p.offset(prime_ * 12 + 0) < end);
+                                                                *p.offset(prime_ * 12 + 0) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 16 + 0) &&
+                                                                             p.offset(prime_ * 16 + 0) < end);
+                                                                *p.offset(prime_ * 16 + 0) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 18 + 0) &&
+                                                                             p.offset(prime_ * 18 + 0) < end);
+                                                                *p.offset(prime_ * 18 + 0) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 22 + 0) &&
+                                                                             p.offset(prime_ * 22 + 0) < end);
+                                                                *p.offset(prime_ * 22 + 0) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 28 + 0) &&
+                                                                             p.offset(prime_ * 28 + 0) < end);
+                                                                *p.offset(prime_ * 28 + 0) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 30 + 1) &&
+                                                                             p.offset(prime_ * 30 + 1) < end);
+                                                                *p.offset(prime_ * 30 + 1) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 36 + 1) &&
+                                                                             p.offset(prime_ * 36 + 1) < end);
+                                                                *p.offset(prime_ * 36 + 1) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 40 + 1) &&
+                                                                             p.offset(prime_ * 40 + 1) < end);
+                                                                *p.offset(prime_ * 40 + 1) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 42 + 1) &&
+                                                                             p.offset(prime_ * 42 + 1) < end);
+                                                                *p.offset(prime_ * 42 + 1) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 46 + 1) &&
+                                                                             p.offset(prime_ * 46 + 1) < end);
+                                                                *p.offset(prime_ * 46 + 1) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 52 + 1) &&
+                                                                             p.offset(prime_ * 52 + 1) < end);
+                                                                *p.offset(prime_ * 52 + 1) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 58 + 1) &&
+                                                                             p.offset(prime_ * 58 + 1) < end);
+                                                                *p.offset(prime_ * 58 + 1) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 60 + 2) &&
+                                                                             p.offset(prime_ * 60 + 2) < end);
+                                                                *p.offset(prime_ * 60 + 2) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 66 + 2) &&
+                                                                             p.offset(prime_ * 66 + 2) < end);
+                                                                *p.offset(prime_ * 66 + 2) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 70 + 2) &&
+                                                                             p.offset(prime_ * 70 + 2) < end);
+                                                                *p.offset(prime_ * 70 + 2) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 72 + 2) &&
+                                                                             p.offset(prime_ * 72 + 2) < end);
+                                                                *p.offset(prime_ * 72 + 2) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 78 + 2) &&
+                                                                             p.offset(prime_ * 78 + 2) < end);
+                                                                *p.offset(prime_ * 78 + 2) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 82 + 2) &&
+                                                                             p.offset(prime_ * 82 + 2) < end);
+                                                                *p.offset(prime_ * 82 + 2) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 88 + 2) &&
+                                                                             p.offset(prime_ * 88 + 2) < end);
+                                                                *p.offset(prime_ * 88 + 2) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 96 + 3) &&
+                                                                             p.offset(prime_ * 96 + 3) < end);
+                                                                *p.offset(prime_ * 96 + 3) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 100 + 3) &&
+                                                                             p.offset(prime_ * 100 + 3) < end);
+                                                                *p.offset(prime_ * 100 + 3) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 102 + 3) &&
+                                                                             p.offset(prime_ * 102 + 3) < end);
+                                                                *p.offset(prime_ * 102 + 3) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 106 + 3) &&
+                                                                             p.offset(prime_ * 106 + 3) < end);
+                                                                *p.offset(prime_ * 106 + 3) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 108 + 3) &&
+                                                                             p.offset(prime_ * 108 + 3) < end);
+                                                                *p.offset(prime_ * 108 + 3) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 112 + 3) &&
+                                                                             p.offset(prime_ * 112 + 3) < end);
+                                                                *p.offset(prime_ * 112 + 3) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 120 + 4) &&
+                                                                             p.offset(prime_ * 120 + 4) < end);
+                                                                *p.offset(prime_ * 120 + 4) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 126 + 4) &&
+                                                                             p.offset(prime_ * 126 + 4) < end);
+                                                                *p.offset(prime_ * 126 + 4) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 130 + 4) &&
+                                                                             p.offset(prime_ * 130 + 4) < end);
+                                                                *p.offset(prime_ * 130 + 4) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 136 + 4) &&
+                                                                             p.offset(prime_ * 136 + 4) < end);
+                                                                *p.offset(prime_ * 136 + 4) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 138 + 4) &&
+                                                                             p.offset(prime_ * 138 + 4) < end);
+                                                                *p.offset(prime_ * 138 + 4) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 142 + 4) &&
+                                                                             p.offset(prime_ * 142 + 4) < end);
+                                                                *p.offset(prime_ * 142 + 4) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 148 + 4) &&
+                                                                             p.offset(prime_ * 148 + 4) < end);
+                                                                *p.offset(prime_ * 148 + 4) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 150 + 5) &&
+                                                                             p.offset(prime_ * 150 + 5) < end);
+                                                                *p.offset(prime_ * 150 + 5) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 156 + 5) &&
+                                                                             p.offset(prime_ * 156 + 5) < end);
+                                                                *p.offset(prime_ * 156 + 5) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 162 + 5) &&
+                                                                             p.offset(prime_ * 162 + 5) < end);
+                                                                *p.offset(prime_ * 162 + 5) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 166 + 5) &&
+                                                                             p.offset(prime_ * 166 + 5) < end);
+                                                                *p.offset(prime_ * 166 + 5) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 168 + 5) &&
+                                                                             p.offset(prime_ * 168 + 5) < end);
+                                                                *p.offset(prime_ * 168 + 5) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 172 + 5) &&
+                                                                             p.offset(prime_ * 172 + 5) < end);
+                                                                *p.offset(prime_ * 172 + 5) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 178 + 5) &&
+                                                                             p.offset(prime_ * 178 + 5) < end);
+                                                                *p.offset(prime_ * 178 + 5) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 180 + 6) &&
+                                                                             p.offset(prime_ * 180 + 6) < end);
+                                                                *p.offset(prime_ * 180 + 6) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 186 + 6) &&
+                                                                             p.offset(prime_ * 186 + 6) < end);
+                                                                *p.offset(prime_ * 186 + 6) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 190 + 6) &&
+                                                                             p.offset(prime_ * 190 + 6) < end);
+                                                                *p.offset(prime_ * 190 + 6) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 192 + 6) &&
+                                                                             p.offset(prime_ * 192 + 6) < end);
+                                                                *p.offset(prime_ * 192 + 6) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 196 + 6) &&
+                                                                             p.offset(prime_ * 196 + 6) < end);
+                                                                *p.offset(prime_ * 196 + 6) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 198 + 6) &&
+                                                                             p.offset(prime_ * 198 + 6) < end);
+                                                                *p.offset(prime_ * 198 + 6) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 208 + 6) &&
+                                                                             p.offset(prime_ * 208 + 6) < end);
+                                                                *p.offset(prime_ * 208 + 6) &= 191;
 
-                                                                p = p.offset(prime_ * 180 + 42)
+                                                                p = p.offset(prime_ * 210 + 11)
                                                             }
                                                             if p >= end { wi = 48; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 223; p = p.offset(prime_ * 4 + 1);
+                                                            *p &= 253; p = p.offset(prime_ * 10 + 2);
                                                             break 'label49
                                                            }
                                                            if p >= end { wi = 49; break 'outer; }
@@ -1487,191 +1487,191 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                  }
                                                  if p >= end { wi = 59; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 127; p = p.offset(prime_ * 2 + 1);
+                                                 *p &= 127; p = p.offset(prime_ * 6 + 2);
                                                  break 'label60
                                                 }
                                                 if p >= end { wi = 60; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 247; p = p.offset(prime_ * 4 + 1);
+                                                *p &= 251; p = p.offset(prime_ * 6 + 1);
                                                 break 'label61
                                                }
                                                if p >= end { wi = 61; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 251; p = p.offset(prime_ * 6 + 1);
+                                               *p &= 191; p = p.offset(prime_ * 2 + 1);
                                                break 'label62
                                               }
                                               if p >= end { wi = 62; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 191; p = p.offset(prime_ * 2 + 1);
+                                              *p &= 253; p = p.offset(prime_ * 6 + 1);
                                               break 'label63
                                              }
                                              if p >= end { wi = 63; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 253; p = p.offset(prime_ * 6 + 1);
+                                             *p &= 223; p = p.offset(prime_ * 4 + 1);
                                              break 'label64
                                             }
                                             if p >= end { wi = 64; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 223; p = p.offset(prime_ * 4 + 1);
+                                            *p &= 239; p = p.offset(prime_ * 2 + 1);
                                             break 'label65
                                            }
                                            if p >= end { wi = 65; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 239; p = p.offset(prime_ * 2 + 1);
+                                           *p &= 254; p = p.offset(prime_ * 6 + 1);
                                            break 'label66
                                           }
                                           if p >= end { wi = 66; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 254; p = p.offset(prime_ * 4 + 0);
+                                          *p &= 247; p = p.offset(prime_ * 4 + 1);
                                           break 'label67
                                          }
                                          if p >= end { wi = 67; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 127; p = p.offset(prime_ * 2 + 1);
+                                         *p &= 251; p = p.offset(prime_ * 6 + 1);
                                          break 'label68
                                         }
                                         if p >= end { wi = 68; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 247; p = p.offset(prime_ * 4 + 1);
+                                        *p &= 191; p = p.offset(prime_ * 8 + 2);
                                         break 'label69
                                        }
                                        if p >= end { wi = 69; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 251; p = p.offset(prime_ * 6 + 1);
+                                       *p &= 223; p = p.offset(prime_ * 4 + 1);
                                        break 'label70
                                       }
                                       if p >= end { wi = 70; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 191; p = p.offset(prime_ * 2 + 1);
+                                      *p &= 239; p = p.offset(prime_ * 2 + 1);
                                       break 'label71
                                      }
                                      if p >= end { wi = 71; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 253; p = p.offset(prime_ * 6 + 1);
+                                     *p &= 254; p = p.offset(prime_ * 4 + 0);
                                      break 'label72
                                     }
                                     if p >= end { wi = 72; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 223; p = p.offset(prime_ * 4 + 1);
+                                    *p &= 127; p = p.offset(prime_ * 2 + 1);
                                     break 'label73
                                    }
                                    if p >= end { wi = 73; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 239; p = p.offset(prime_ * 2 + 1);
+                                   *p &= 247; p = p.offset(prime_ * 4 + 1);
                                    break 'label74
                                   }
                                   if p >= end { wi = 74; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 254; p = p.offset(prime_ * 4 + 0);
+                                  *p &= 251; p = p.offset(prime_ * 8 + 2);
                                   break 'label75
                                  }
                                  if p >= end { wi = 75; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 127; p = p.offset(prime_ * 2 + 1);
+                                 *p &= 253; p = p.offset(prime_ * 6 + 1);
                                  break 'label76
                                 }
                                 if p >= end { wi = 76; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 247; p = p.offset(prime_ * 4 + 1);
+                                *p &= 223; p = p.offset(prime_ * 4 + 1);
                                 break 'label77
                                }
                                if p >= end { wi = 77; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 251; p = p.offset(prime_ * 6 + 1);
+                               *p &= 239; p = p.offset(prime_ * 6 + 1);
                                break 'label78
                               }
                               if p >= end { wi = 78; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 191; p = p.offset(prime_ * 2 + 1);
+                              *p &= 127; p = p.offset(prime_ * 2 + 1);
                               break 'label79
                              }
                              if p >= end { wi = 79; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 253; p = p.offset(prime_ * 6 + 1);
+                             *p &= 247; p = p.offset(prime_ * 4 + 1);
                              break 'label80
                             }
                             if p >= end { wi = 80; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 223; p = p.offset(prime_ * 4 + 1);
+                            *p &= 251; p = p.offset(prime_ * 6 + 1);
                             break 'label81
                            }
                            if p >= end { wi = 81; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 239; p = p.offset(prime_ * 2 + 1);
+                           *p &= 191; p = p.offset(prime_ * 2 + 1);
                            break 'label82
                           }
                           if p >= end { wi = 82; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 254; p = p.offset(prime_ * 4 + 0);
+                          *p &= 253; p = p.offset(prime_ * 6 + 1);
                           break 'label83
                          }
                          if p >= end { wi = 83; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 127; p = p.offset(prime_ * 2 + 1);
+                         *p &= 223; p = p.offset(prime_ * 6 + 2);
                          break 'label84
                         }
                         if p >= end { wi = 84; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 247; p = p.offset(prime_ * 4 + 1);
+                        *p &= 254; p = p.offset(prime_ * 4 + 0);
                         break 'label85
                        }
                        if p >= end { wi = 85; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 251; p = p.offset(prime_ * 6 + 1);
+                       *p &= 127; p = p.offset(prime_ * 2 + 1);
                        break 'label86
                       }
                       if p >= end { wi = 86; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 191; p = p.offset(prime_ * 2 + 1);
+                      *p &= 247; p = p.offset(prime_ * 4 + 1);
                       break 'label87
                      }
                      if p >= end { wi = 87; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 253; p = p.offset(prime_ * 6 + 1);
+                     *p &= 251; p = p.offset(prime_ * 6 + 1);
                      break 'label88
                     }
                     if p >= end { wi = 88; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 223; p = p.offset(prime_ * 4 + 1);
+                    *p &= 191; p = p.offset(prime_ * 2 + 1);
                     break 'label89
                    }
                    if p >= end { wi = 89; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 239; p = p.offset(prime_ * 2 + 1);
+                   *p &= 253; p = p.offset(prime_ * 6 + 1);
                    break 'label90
                   }
                   if p >= end { wi = 90; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 254; p = p.offset(prime_ * 4 + 0);
+                  *p &= 223; p = p.offset(prime_ * 4 + 1);
                   break 'label91
                  }
                  if p >= end { wi = 91; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 127; p = p.offset(prime_ * 2 + 1);
+                 *p &= 239; p = p.offset(prime_ * 2 + 1);
                  break 'label92
                 }
                 if p >= end { wi = 92; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 247; p = p.offset(prime_ * 4 + 1);
+                *p &= 254; p = p.offset(prime_ * 4 + 0);
                 break 'label93
                }
                if p >= end { wi = 93; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 251; p = p.offset(prime_ * 6 + 1);
+               *p &= 127; p = p.offset(prime_ * 2 + 1);
                break 'label94
               }
               if p >= end { wi = 94; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 191; p = p.offset(prime_ * 2 + 1);
+              *p &= 247; p = p.offset(prime_ * 10 + 2);
               break 'label95
              }
              if p >= end { wi = 95; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 253; p = p.offset(prime_ * 6 + 1);
+             *p &= 191; p = p.offset(prime_ * 2 + 1);
              wi = 48
             }
         }
-        96...143 => { // 30 * x + 11
+        96...143 => { // 30 * x + 13
             loop {
              'label143: loop {
               'label142: loop {
@@ -1776,209 +1776,209 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                 p = ::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
-                                                                *p.offset(prime_ * 0 + 0) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 2 + 0) &&
-                                                                             p.offset(prime_ * 2 + 0) < end);
-                                                                *p.offset(prime_ * 2 + 0) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 6 + 2) &&
-                                                                             p.offset(prime_ * 6 + 2) < end);
-                                                                *p.offset(prime_ * 6 + 2) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 8 + 2) &&
-                                                                             p.offset(prime_ * 8 + 2) < end);
-                                                                *p.offset(prime_ * 8 + 2) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 12 + 4) &&
-                                                                             p.offset(prime_ * 12 + 4) < end);
-                                                                *p.offset(prime_ * 12 + 4) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 18 + 6) &&
-                                                                             p.offset(prime_ * 18 + 6) < end);
-                                                                *p.offset(prime_ * 18 + 6) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 20 + 7) &&
-                                                                             p.offset(prime_ * 20 + 7) < end);
-                                                                *p.offset(prime_ * 20 + 7) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 26 + 9) &&
-                                                                             p.offset(prime_ * 26 + 9) < end);
-                                                                *p.offset(prime_ * 26 + 9) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 30 + 11) &&
-                                                                             p.offset(prime_ * 30 + 11) < end);
-                                                                *p.offset(prime_ * 30 + 11) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 32 + 11) &&
-                                                                             p.offset(prime_ * 32 + 11) < end);
-                                                                *p.offset(prime_ * 32 + 11) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 36 + 13) &&
-                                                                             p.offset(prime_ * 36 + 13) < end);
-                                                                *p.offset(prime_ * 36 + 13) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 38 + 13) &&
-                                                                             p.offset(prime_ * 38 + 13) < end);
-                                                                *p.offset(prime_ * 38 + 13) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 42 + 15) &&
-                                                                             p.offset(prime_ * 42 + 15) < end);
-                                                                *p.offset(prime_ * 42 + 15) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 48 + 17) &&
-                                                                             p.offset(prime_ * 48 + 17) < end);
-                                                                *p.offset(prime_ * 48 + 17) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 50 + 18) &&
-                                                                             p.offset(prime_ * 50 + 18) < end);
-                                                                *p.offset(prime_ * 50 + 18) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 56 + 20) &&
-                                                                             p.offset(prime_ * 56 + 20) < end);
-                                                                *p.offset(prime_ * 56 + 20) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 60 + 22) &&
-                                                                             p.offset(prime_ * 60 + 22) < end);
-                                                                *p.offset(prime_ * 60 + 22) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 62 + 22) &&
-                                                                             p.offset(prime_ * 62 + 22) < end);
-                                                                *p.offset(prime_ * 62 + 22) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 66 + 24) &&
-                                                                             p.offset(prime_ * 66 + 24) < end);
-                                                                *p.offset(prime_ * 66 + 24) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 68 + 24) &&
-                                                                             p.offset(prime_ * 68 + 24) < end);
-                                                                *p.offset(prime_ * 68 + 24) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 72 + 26) &&
-                                                                             p.offset(prime_ * 72 + 26) < end);
-                                                                *p.offset(prime_ * 72 + 26) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 78 + 28) &&
-                                                                             p.offset(prime_ * 78 + 28) < end);
-                                                                *p.offset(prime_ * 78 + 28) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 80 + 29) &&
-                                                                             p.offset(prime_ * 80 + 29) < end);
-                                                                *p.offset(prime_ * 80 + 29) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 86 + 31) &&
-                                                                             p.offset(prime_ * 86 + 31) < end);
-                                                                *p.offset(prime_ * 86 + 31) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 90 + 33) &&
-                                                                             p.offset(prime_ * 90 + 33) < end);
-                                                                *p.offset(prime_ * 90 + 33) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 92 + 33) &&
-                                                                             p.offset(prime_ * 92 + 33) < end);
-                                                                *p.offset(prime_ * 92 + 33) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 96 + 35) &&
-                                                                             p.offset(prime_ * 96 + 35) < end);
-                                                                *p.offset(prime_ * 96 + 35) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 98 + 35) &&
-                                                                             p.offset(prime_ * 98 + 35) < end);
-                                                                *p.offset(prime_ * 98 + 35) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 102 + 37) &&
-                                                                             p.offset(prime_ * 102 + 37) < end);
-                                                                *p.offset(prime_ * 102 + 37) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 108 + 39) &&
-                                                                             p.offset(prime_ * 108 + 39) < end);
-                                                                *p.offset(prime_ * 108 + 39) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 110 + 40) &&
-                                                                             p.offset(prime_ * 110 + 40) < end);
-                                                                *p.offset(prime_ * 110 + 40) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 116 + 42) &&
-                                                                             p.offset(prime_ * 116 + 42) < end);
-                                                                *p.offset(prime_ * 116 + 42) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 120 + 44) &&
-                                                                             p.offset(prime_ * 120 + 44) < end);
-                                                                *p.offset(prime_ * 120 + 44) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 122 + 44) &&
-                                                                             p.offset(prime_ * 122 + 44) < end);
-                                                                *p.offset(prime_ * 122 + 44) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 126 + 46) &&
-                                                                             p.offset(prime_ * 126 + 46) < end);
-                                                                *p.offset(prime_ * 126 + 46) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 128 + 46) &&
-                                                                             p.offset(prime_ * 128 + 46) < end);
-                                                                *p.offset(prime_ * 128 + 46) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 132 + 48) &&
-                                                                             p.offset(prime_ * 132 + 48) < end);
-                                                                *p.offset(prime_ * 132 + 48) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 138 + 50) &&
-                                                                             p.offset(prime_ * 138 + 50) < end);
-                                                                *p.offset(prime_ * 138 + 50) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 140 + 51) &&
-                                                                             p.offset(prime_ * 140 + 51) < end);
-                                                                *p.offset(prime_ * 140 + 51) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 146 + 53) &&
-                                                                             p.offset(prime_ * 146 + 53) < end);
-                                                                *p.offset(prime_ * 146 + 53) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 150 + 55) &&
-                                                                             p.offset(prime_ * 150 + 55) < end);
-                                                                *p.offset(prime_ * 150 + 55) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 152 + 55) &&
-                                                                             p.offset(prime_ * 152 + 55) < end);
-                                                                *p.offset(prime_ * 152 + 55) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 156 + 57) &&
-                                                                             p.offset(prime_ * 156 + 57) < end);
-                                                                *p.offset(prime_ * 156 + 57) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 158 + 57) &&
-                                                                             p.offset(prime_ * 158 + 57) < end);
-                                                                *p.offset(prime_ * 158 + 57) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 162 + 59) &&
-                                                                             p.offset(prime_ * 162 + 59) < end);
-                                                                *p.offset(prime_ * 162 + 59) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 168 + 61) &&
-                                                                             p.offset(prime_ * 168 + 61) < end);
-                                                                *p.offset(prime_ * 168 + 61) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 170 + 62) &&
-                                                                             p.offset(prime_ * 170 + 62) < end);
-                                                                *p.offset(prime_ * 170 + 62) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 176 + 64) &&
-                                                                             p.offset(prime_ * 176 + 64) < end);
-                                                                *p.offset(prime_ * 176 + 64) &= 239;
+                                                                *p.offset(prime_ * 0 + 0) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 10 + 0) &&
+                                                                             p.offset(prime_ * 10 + 0) < end);
+                                                                *p.offset(prime_ * 10 + 0) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 12 + 0) &&
+                                                                             p.offset(prime_ * 12 + 0) < end);
+                                                                *p.offset(prime_ * 12 + 0) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 16 + 0) &&
+                                                                             p.offset(prime_ * 16 + 0) < end);
+                                                                *p.offset(prime_ * 16 + 0) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 18 + 0) &&
+                                                                             p.offset(prime_ * 18 + 0) < end);
+                                                                *p.offset(prime_ * 18 + 0) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 22 + 1) &&
+                                                                             p.offset(prime_ * 22 + 1) < end);
+                                                                *p.offset(prime_ * 22 + 1) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 28 + 1) &&
+                                                                             p.offset(prime_ * 28 + 1) < end);
+                                                                *p.offset(prime_ * 28 + 1) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 30 + 1) &&
+                                                                             p.offset(prime_ * 30 + 1) < end);
+                                                                *p.offset(prime_ * 30 + 1) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 36 + 1) &&
+                                                                             p.offset(prime_ * 36 + 1) < end);
+                                                                *p.offset(prime_ * 36 + 1) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 40 + 2) &&
+                                                                             p.offset(prime_ * 40 + 2) < end);
+                                                                *p.offset(prime_ * 40 + 2) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 42 + 2) &&
+                                                                             p.offset(prime_ * 42 + 2) < end);
+                                                                *p.offset(prime_ * 42 + 2) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 46 + 2) &&
+                                                                             p.offset(prime_ * 46 + 2) < end);
+                                                                *p.offset(prime_ * 46 + 2) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 52 + 2) &&
+                                                                             p.offset(prime_ * 52 + 2) < end);
+                                                                *p.offset(prime_ * 52 + 2) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 58 + 3) &&
+                                                                             p.offset(prime_ * 58 + 3) < end);
+                                                                *p.offset(prime_ * 58 + 3) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 60 + 3) &&
+                                                                             p.offset(prime_ * 60 + 3) < end);
+                                                                *p.offset(prime_ * 60 + 3) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 66 + 3) &&
+                                                                             p.offset(prime_ * 66 + 3) < end);
+                                                                *p.offset(prime_ * 66 + 3) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 70 + 3) &&
+                                                                             p.offset(prime_ * 70 + 3) < end);
+                                                                *p.offset(prime_ * 70 + 3) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 72 + 3) &&
+                                                                             p.offset(prime_ * 72 + 3) < end);
+                                                                *p.offset(prime_ * 72 + 3) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 78 + 4) &&
+                                                                             p.offset(prime_ * 78 + 4) < end);
+                                                                *p.offset(prime_ * 78 + 4) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 82 + 4) &&
+                                                                             p.offset(prime_ * 82 + 4) < end);
+                                                                *p.offset(prime_ * 82 + 4) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 88 + 4) &&
+                                                                             p.offset(prime_ * 88 + 4) < end);
+                                                                *p.offset(prime_ * 88 + 4) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 96 + 5) &&
+                                                                             p.offset(prime_ * 96 + 5) < end);
+                                                                *p.offset(prime_ * 96 + 5) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 100 + 5) &&
+                                                                             p.offset(prime_ * 100 + 5) < end);
+                                                                *p.offset(prime_ * 100 + 5) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 102 + 5) &&
+                                                                             p.offset(prime_ * 102 + 5) < end);
+                                                                *p.offset(prime_ * 102 + 5) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 106 + 5) &&
+                                                                             p.offset(prime_ * 106 + 5) < end);
+                                                                *p.offset(prime_ * 106 + 5) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 108 + 5) &&
+                                                                             p.offset(prime_ * 108 + 5) < end);
+                                                                *p.offset(prime_ * 108 + 5) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 112 + 5) &&
+                                                                             p.offset(prime_ * 112 + 5) < end);
+                                                                *p.offset(prime_ * 112 + 5) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 120 + 6) &&
+                                                                             p.offset(prime_ * 120 + 6) < end);
+                                                                *p.offset(prime_ * 120 + 6) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 126 + 6) &&
+                                                                             p.offset(prime_ * 126 + 6) < end);
+                                                                *p.offset(prime_ * 126 + 6) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 130 + 6) &&
+                                                                             p.offset(prime_ * 130 + 6) < end);
+                                                                *p.offset(prime_ * 130 + 6) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 136 + 7) &&
+                                                                             p.offset(prime_ * 136 + 7) < end);
+                                                                *p.offset(prime_ * 136 + 7) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 138 + 7) &&
+                                                                             p.offset(prime_ * 138 + 7) < end);
+                                                                *p.offset(prime_ * 138 + 7) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 142 + 7) &&
+                                                                             p.offset(prime_ * 142 + 7) < end);
+                                                                *p.offset(prime_ * 142 + 7) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 148 + 7) &&
+                                                                             p.offset(prime_ * 148 + 7) < end);
+                                                                *p.offset(prime_ * 148 + 7) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 150 + 7) &&
+                                                                             p.offset(prime_ * 150 + 7) < end);
+                                                                *p.offset(prime_ * 150 + 7) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 156 + 8) &&
+                                                                             p.offset(prime_ * 156 + 8) < end);
+                                                                *p.offset(prime_ * 156 + 8) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 162 + 8) &&
+                                                                             p.offset(prime_ * 162 + 8) < end);
+                                                                *p.offset(prime_ * 162 + 8) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 166 + 8) &&
+                                                                             p.offset(prime_ * 166 + 8) < end);
+                                                                *p.offset(prime_ * 166 + 8) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 168 + 8) &&
+                                                                             p.offset(prime_ * 168 + 8) < end);
+                                                                *p.offset(prime_ * 168 + 8) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 172 + 9) &&
+                                                                             p.offset(prime_ * 172 + 9) < end);
+                                                                *p.offset(prime_ * 172 + 9) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 178 + 9) &&
+                                                                             p.offset(prime_ * 178 + 9) < end);
+                                                                *p.offset(prime_ * 178 + 9) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 180 + 9) &&
+                                                                             p.offset(prime_ * 180 + 9) < end);
+                                                                *p.offset(prime_ * 180 + 9) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 186 + 9) &&
+                                                                             p.offset(prime_ * 186 + 9) < end);
+                                                                *p.offset(prime_ * 186 + 9) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 190 + 10) &&
+                                                                             p.offset(prime_ * 190 + 10) < end);
+                                                                *p.offset(prime_ * 190 + 10) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 192 + 10) &&
+                                                                             p.offset(prime_ * 192 + 10) < end);
+                                                                *p.offset(prime_ * 192 + 10) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 196 + 10) &&
+                                                                             p.offset(prime_ * 196 + 10) < end);
+                                                                *p.offset(prime_ * 196 + 10) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 198 + 10) &&
+                                                                             p.offset(prime_ * 198 + 10) < end);
+                                                                *p.offset(prime_ * 198 + 10) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 208 + 10) &&
+                                                                             p.offset(prime_ * 208 + 10) < end);
+                                                                *p.offset(prime_ * 208 + 10) &= 223;
 
-                                                                p = p.offset(prime_ * 180 + 66)
+                                                                p = p.offset(prime_ * 210 + 13)
                                                             }
                                                             if p >= end { wi = 96; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 254; p = p.offset(prime_ * 2 + 0);
+                                                            *p &= 251; p = p.offset(prime_ * 10 + 4);
                                                             break 'label97
                                                            }
                                                            if p >= end { wi = 97; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 191; p = p.offset(prime_ * 4 + 2);
+                                                           *p &= 254; p = p.offset(prime_ * 2 + 0);
                                                            break 'label98
                                                           }
                                                           if p >= end { wi = 98; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 253; p = p.offset(prime_ * 2 + 0);
+                                                          *p &= 191; p = p.offset(prime_ * 4 + 2);
                                                           break 'label99
                                                          }
                                                          if p >= end { wi = 99; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 127; p = p.offset(prime_ * 4 + 2);
+                                                         *p &= 253; p = p.offset(prime_ * 2 + 0);
                                                          break 'label100
                                                         }
                                                         if p >= end { wi = 100; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 247; p = p.offset(prime_ * 6 + 2);
+                                                        *p &= 127; p = p.offset(prime_ * 4 + 2);
                                                         break 'label101
                                                        }
                                                        if p >= end { wi = 101; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 223; p = p.offset(prime_ * 2 + 1);
+                                                       *p &= 247; p = p.offset(prime_ * 6 + 2);
                                                        break 'label102
                                                       }
                                                       if p >= end { wi = 102; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 251; p = p.offset(prime_ * 6 + 2);
+                                                      *p &= 223; p = p.offset(prime_ * 2 + 1);
                                                       break 'label103
                                                      }
                                                      if p >= end { wi = 103; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 239; p = p.offset(prime_ * 4 + 2);
+                                                     *p &= 251; p = p.offset(prime_ * 6 + 2);
                                                      break 'label104
                                                     }
                                                     if p >= end { wi = 104; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 254; p = p.offset(prime_ * 2 + 0);
+                                                    *p &= 239; p = p.offset(prime_ * 4 + 2);
                                                     break 'label105
                                                    }
                                                    if p >= end { wi = 105; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 191; p = p.offset(prime_ * 4 + 2);
+                                                   *p &= 254; p = p.offset(prime_ * 2 + 0);
                                                    break 'label106
                                                   }
                                                   if p >= end { wi = 106; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 253; p = p.offset(prime_ * 2 + 0);
+                                                  *p &= 191; p = p.offset(prime_ * 4 + 2);
                                                   break 'label107
                                                  }
                                                  if p >= end { wi = 107; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 127; p = p.offset(prime_ * 4 + 2);
+                                                 *p &= 253; p = p.offset(prime_ * 6 + 2);
                                                  break 'label108
                                                 }
                                                 if p >= end { wi = 108; break 'outer; }
@@ -2008,161 +2008,161 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                            }
                                            if p >= end { wi = 113; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 191; p = p.offset(prime_ * 4 + 2);
+                                           *p &= 191; p = p.offset(prime_ * 6 + 2);
                                            break 'label114
                                           }
                                           if p >= end { wi = 114; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 253; p = p.offset(prime_ * 2 + 0);
+                                          *p &= 127; p = p.offset(prime_ * 4 + 2);
                                           break 'label115
                                          }
                                          if p >= end { wi = 115; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 127; p = p.offset(prime_ * 4 + 2);
+                                         *p &= 247; p = p.offset(prime_ * 6 + 2);
                                          break 'label116
                                         }
                                         if p >= end { wi = 116; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 247; p = p.offset(prime_ * 6 + 2);
+                                        *p &= 223; p = p.offset(prime_ * 8 + 3);
                                         break 'label117
                                        }
                                        if p >= end { wi = 117; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 223; p = p.offset(prime_ * 2 + 1);
+                                       *p &= 239; p = p.offset(prime_ * 4 + 2);
                                        break 'label118
                                       }
                                       if p >= end { wi = 118; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 251; p = p.offset(prime_ * 6 + 2);
+                                      *p &= 254; p = p.offset(prime_ * 2 + 0);
                                       break 'label119
                                      }
                                      if p >= end { wi = 119; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 239; p = p.offset(prime_ * 4 + 2);
+                                     *p &= 191; p = p.offset(prime_ * 4 + 2);
                                      break 'label120
                                     }
                                     if p >= end { wi = 120; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 254; p = p.offset(prime_ * 2 + 0);
+                                    *p &= 253; p = p.offset(prime_ * 2 + 0);
                                     break 'label121
                                    }
                                    if p >= end { wi = 121; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 191; p = p.offset(prime_ * 4 + 2);
+                                   *p &= 127; p = p.offset(prime_ * 4 + 2);
                                    break 'label122
                                   }
                                   if p >= end { wi = 122; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 253; p = p.offset(prime_ * 2 + 0);
+                                  *p &= 247; p = p.offset(prime_ * 8 + 3);
                                   break 'label123
                                  }
                                  if p >= end { wi = 123; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 127; p = p.offset(prime_ * 4 + 2);
+                                 *p &= 251; p = p.offset(prime_ * 6 + 2);
                                  break 'label124
                                 }
                                 if p >= end { wi = 124; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 247; p = p.offset(prime_ * 6 + 2);
+                                *p &= 239; p = p.offset(prime_ * 4 + 2);
                                 break 'label125
                                }
                                if p >= end { wi = 125; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 223; p = p.offset(prime_ * 2 + 1);
+                               *p &= 254; p = p.offset(prime_ * 6 + 2);
                                break 'label126
                               }
                               if p >= end { wi = 126; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 251; p = p.offset(prime_ * 6 + 2);
+                              *p &= 253; p = p.offset(prime_ * 2 + 0);
                               break 'label127
                              }
                              if p >= end { wi = 127; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 239; p = p.offset(prime_ * 4 + 2);
+                             *p &= 127; p = p.offset(prime_ * 4 + 2);
                              break 'label128
                             }
                             if p >= end { wi = 128; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 254; p = p.offset(prime_ * 2 + 0);
+                            *p &= 247; p = p.offset(prime_ * 6 + 2);
                             break 'label129
                            }
                            if p >= end { wi = 129; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 191; p = p.offset(prime_ * 4 + 2);
+                           *p &= 223; p = p.offset(prime_ * 2 + 1);
                            break 'label130
                           }
                           if p >= end { wi = 130; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 253; p = p.offset(prime_ * 2 + 0);
+                          *p &= 251; p = p.offset(prime_ * 6 + 2);
                           break 'label131
                          }
                          if p >= end { wi = 131; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 127; p = p.offset(prime_ * 4 + 2);
+                         *p &= 239; p = p.offset(prime_ * 6 + 2);
                          break 'label132
                         }
                         if p >= end { wi = 132; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 247; p = p.offset(prime_ * 6 + 2);
+                        *p &= 191; p = p.offset(prime_ * 4 + 2);
                         break 'label133
                        }
                        if p >= end { wi = 133; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 223; p = p.offset(prime_ * 2 + 1);
+                       *p &= 253; p = p.offset(prime_ * 2 + 0);
                        break 'label134
                       }
                       if p >= end { wi = 134; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 251; p = p.offset(prime_ * 6 + 2);
+                      *p &= 127; p = p.offset(prime_ * 4 + 2);
                       break 'label135
                      }
                      if p >= end { wi = 135; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 239; p = p.offset(prime_ * 4 + 2);
+                     *p &= 247; p = p.offset(prime_ * 6 + 2);
                      break 'label136
                     }
                     if p >= end { wi = 136; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 254; p = p.offset(prime_ * 2 + 0);
+                    *p &= 223; p = p.offset(prime_ * 2 + 1);
                     break 'label137
                    }
                    if p >= end { wi = 137; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 191; p = p.offset(prime_ * 4 + 2);
+                   *p &= 251; p = p.offset(prime_ * 6 + 2);
                    break 'label138
                   }
                   if p >= end { wi = 138; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 253; p = p.offset(prime_ * 2 + 0);
+                  *p &= 239; p = p.offset(prime_ * 4 + 2);
                   break 'label139
                  }
                  if p >= end { wi = 139; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 127; p = p.offset(prime_ * 4 + 2);
+                 *p &= 254; p = p.offset(prime_ * 2 + 0);
                  break 'label140
                 }
                 if p >= end { wi = 140; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 247; p = p.offset(prime_ * 6 + 2);
+                *p &= 191; p = p.offset(prime_ * 4 + 2);
                 break 'label141
                }
                if p >= end { wi = 141; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 223; p = p.offset(prime_ * 2 + 1);
+               *p &= 253; p = p.offset(prime_ * 2 + 0);
                break 'label142
               }
               if p >= end { wi = 142; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 251; p = p.offset(prime_ * 6 + 2);
+              *p &= 127; p = p.offset(prime_ * 10 + 4);
               break 'label143
              }
              if p >= end { wi = 143; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 239; p = p.offset(prime_ * 4 + 2);
+             *p &= 223; p = p.offset(prime_ * 2 + 1);
              wi = 96
             }
         }
-        144...191 => { // 30 * x + 13
+        144...191 => { // 30 * x + 17
             loop {
              'label191: loop {
               'label190: loop {
@@ -2267,239 +2267,239 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                 p = ::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
-                                                                *p.offset(prime_ * 0 + 0) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 4 + 2) &&
-                                                                             p.offset(prime_ * 4 + 2) < end);
-                                                                *p.offset(prime_ * 4 + 2) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 6 + 3) &&
-                                                                             p.offset(prime_ * 6 + 3) < end);
-                                                                *p.offset(prime_ * 6 + 3) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 10 + 4) &&
-                                                                             p.offset(prime_ * 10 + 4) < end);
-                                                                *p.offset(prime_ * 10 + 4) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 16 + 7) &&
-                                                                             p.offset(prime_ * 16 + 7) < end);
-                                                                *p.offset(prime_ * 16 + 7) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 18 + 8) &&
-                                                                             p.offset(prime_ * 18 + 8) < end);
-                                                                *p.offset(prime_ * 18 + 8) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 24 + 11) &&
-                                                                             p.offset(prime_ * 24 + 11) < end);
-                                                                *p.offset(prime_ * 24 + 11) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 28 + 12) &&
-                                                                             p.offset(prime_ * 28 + 12) < end);
-                                                                *p.offset(prime_ * 28 + 12) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 30 + 13) &&
-                                                                             p.offset(prime_ * 30 + 13) < end);
-                                                                *p.offset(prime_ * 30 + 13) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 34 + 15) &&
-                                                                             p.offset(prime_ * 34 + 15) < end);
-                                                                *p.offset(prime_ * 34 + 15) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 36 + 16) &&
-                                                                             p.offset(prime_ * 36 + 16) < end);
-                                                                *p.offset(prime_ * 36 + 16) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 40 + 17) &&
-                                                                             p.offset(prime_ * 40 + 17) < end);
-                                                                *p.offset(prime_ * 40 + 17) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 46 + 20) &&
-                                                                             p.offset(prime_ * 46 + 20) < end);
-                                                                *p.offset(prime_ * 46 + 20) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 48 + 21) &&
-                                                                             p.offset(prime_ * 48 + 21) < end);
-                                                                *p.offset(prime_ * 48 + 21) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 54 + 24) &&
-                                                                             p.offset(prime_ * 54 + 24) < end);
-                                                                *p.offset(prime_ * 54 + 24) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 58 + 25) &&
-                                                                             p.offset(prime_ * 58 + 25) < end);
-                                                                *p.offset(prime_ * 58 + 25) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 60 + 26) &&
-                                                                             p.offset(prime_ * 60 + 26) < end);
-                                                                *p.offset(prime_ * 60 + 26) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 64 + 28) &&
-                                                                             p.offset(prime_ * 64 + 28) < end);
-                                                                *p.offset(prime_ * 64 + 28) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 66 + 29) &&
-                                                                             p.offset(prime_ * 66 + 29) < end);
-                                                                *p.offset(prime_ * 66 + 29) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 70 + 30) &&
-                                                                             p.offset(prime_ * 70 + 30) < end);
-                                                                *p.offset(prime_ * 70 + 30) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 76 + 33) &&
-                                                                             p.offset(prime_ * 76 + 33) < end);
-                                                                *p.offset(prime_ * 76 + 33) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 78 + 34) &&
-                                                                             p.offset(prime_ * 78 + 34) < end);
-                                                                *p.offset(prime_ * 78 + 34) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 84 + 37) &&
-                                                                             p.offset(prime_ * 84 + 37) < end);
-                                                                *p.offset(prime_ * 84 + 37) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 88 + 38) &&
-                                                                             p.offset(prime_ * 88 + 38) < end);
-                                                                *p.offset(prime_ * 88 + 38) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 90 + 39) &&
-                                                                             p.offset(prime_ * 90 + 39) < end);
-                                                                *p.offset(prime_ * 90 + 39) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 94 + 41) &&
-                                                                             p.offset(prime_ * 94 + 41) < end);
-                                                                *p.offset(prime_ * 94 + 41) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 96 + 42) &&
-                                                                             p.offset(prime_ * 96 + 42) < end);
-                                                                *p.offset(prime_ * 96 + 42) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 100 + 43) &&
-                                                                             p.offset(prime_ * 100 + 43) < end);
-                                                                *p.offset(prime_ * 100 + 43) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 106 + 46) &&
-                                                                             p.offset(prime_ * 106 + 46) < end);
-                                                                *p.offset(prime_ * 106 + 46) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 108 + 47) &&
-                                                                             p.offset(prime_ * 108 + 47) < end);
-                                                                *p.offset(prime_ * 108 + 47) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 114 + 50) &&
-                                                                             p.offset(prime_ * 114 + 50) < end);
-                                                                *p.offset(prime_ * 114 + 50) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 118 + 51) &&
-                                                                             p.offset(prime_ * 118 + 51) < end);
-                                                                *p.offset(prime_ * 118 + 51) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 120 + 52) &&
-                                                                             p.offset(prime_ * 120 + 52) < end);
-                                                                *p.offset(prime_ * 120 + 52) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 124 + 54) &&
-                                                                             p.offset(prime_ * 124 + 54) < end);
-                                                                *p.offset(prime_ * 124 + 54) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 126 + 55) &&
-                                                                             p.offset(prime_ * 126 + 55) < end);
-                                                                *p.offset(prime_ * 126 + 55) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 130 + 56) &&
-                                                                             p.offset(prime_ * 130 + 56) < end);
-                                                                *p.offset(prime_ * 130 + 56) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 136 + 59) &&
-                                                                             p.offset(prime_ * 136 + 59) < end);
-                                                                *p.offset(prime_ * 136 + 59) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 138 + 60) &&
-                                                                             p.offset(prime_ * 138 + 60) < end);
-                                                                *p.offset(prime_ * 138 + 60) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 144 + 63) &&
-                                                                             p.offset(prime_ * 144 + 63) < end);
-                                                                *p.offset(prime_ * 144 + 63) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 148 + 64) &&
-                                                                             p.offset(prime_ * 148 + 64) < end);
-                                                                *p.offset(prime_ * 148 + 64) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 150 + 65) &&
-                                                                             p.offset(prime_ * 150 + 65) < end);
-                                                                *p.offset(prime_ * 150 + 65) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 154 + 67) &&
-                                                                             p.offset(prime_ * 154 + 67) < end);
-                                                                *p.offset(prime_ * 154 + 67) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 156 + 68) &&
-                                                                             p.offset(prime_ * 156 + 68) < end);
-                                                                *p.offset(prime_ * 156 + 68) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 160 + 69) &&
-                                                                             p.offset(prime_ * 160 + 69) < end);
-                                                                *p.offset(prime_ * 160 + 69) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 166 + 72) &&
-                                                                             p.offset(prime_ * 166 + 72) < end);
-                                                                *p.offset(prime_ * 166 + 72) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 168 + 73) &&
-                                                                             p.offset(prime_ * 168 + 73) < end);
-                                                                *p.offset(prime_ * 168 + 73) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 174 + 76) &&
-                                                                             p.offset(prime_ * 174 + 76) < end);
-                                                                *p.offset(prime_ * 174 + 76) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 178 + 77) &&
-                                                                             p.offset(prime_ * 178 + 77) < end);
-                                                                *p.offset(prime_ * 178 + 77) &= 191;
+                                                                *p.offset(prime_ * 0 + 0) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 10 + 0) &&
+                                                                             p.offset(prime_ * 10 + 0) < end);
+                                                                *p.offset(prime_ * 10 + 0) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 12 + 0) &&
+                                                                             p.offset(prime_ * 12 + 0) < end);
+                                                                *p.offset(prime_ * 12 + 0) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 16 + 1) &&
+                                                                             p.offset(prime_ * 16 + 1) < end);
+                                                                *p.offset(prime_ * 16 + 1) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 18 + 1) &&
+                                                                             p.offset(prime_ * 18 + 1) < end);
+                                                                *p.offset(prime_ * 18 + 1) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 22 + 1) &&
+                                                                             p.offset(prime_ * 22 + 1) < end);
+                                                                *p.offset(prime_ * 22 + 1) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 28 + 1) &&
+                                                                             p.offset(prime_ * 28 + 1) < end);
+                                                                *p.offset(prime_ * 28 + 1) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 30 + 1) &&
+                                                                             p.offset(prime_ * 30 + 1) < end);
+                                                                *p.offset(prime_ * 30 + 1) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 36 + 2) &&
+                                                                             p.offset(prime_ * 36 + 2) < end);
+                                                                *p.offset(prime_ * 36 + 2) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 40 + 2) &&
+                                                                             p.offset(prime_ * 40 + 2) < end);
+                                                                *p.offset(prime_ * 40 + 2) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 42 + 2) &&
+                                                                             p.offset(prime_ * 42 + 2) < end);
+                                                                *p.offset(prime_ * 42 + 2) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 46 + 2) &&
+                                                                             p.offset(prime_ * 46 + 2) < end);
+                                                                *p.offset(prime_ * 46 + 2) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 52 + 3) &&
+                                                                             p.offset(prime_ * 52 + 3) < end);
+                                                                *p.offset(prime_ * 52 + 3) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 58 + 3) &&
+                                                                             p.offset(prime_ * 58 + 3) < end);
+                                                                *p.offset(prime_ * 58 + 3) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 60 + 3) &&
+                                                                             p.offset(prime_ * 60 + 3) < end);
+                                                                *p.offset(prime_ * 60 + 3) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 66 + 4) &&
+                                                                             p.offset(prime_ * 66 + 4) < end);
+                                                                *p.offset(prime_ * 66 + 4) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 70 + 4) &&
+                                                                             p.offset(prime_ * 70 + 4) < end);
+                                                                *p.offset(prime_ * 70 + 4) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 72 + 4) &&
+                                                                             p.offset(prime_ * 72 + 4) < end);
+                                                                *p.offset(prime_ * 72 + 4) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 78 + 4) &&
+                                                                             p.offset(prime_ * 78 + 4) < end);
+                                                                *p.offset(prime_ * 78 + 4) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 82 + 5) &&
+                                                                             p.offset(prime_ * 82 + 5) < end);
+                                                                *p.offset(prime_ * 82 + 5) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 88 + 5) &&
+                                                                             p.offset(prime_ * 88 + 5) < end);
+                                                                *p.offset(prime_ * 88 + 5) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 96 + 6) &&
+                                                                             p.offset(prime_ * 96 + 6) < end);
+                                                                *p.offset(prime_ * 96 + 6) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 100 + 6) &&
+                                                                             p.offset(prime_ * 100 + 6) < end);
+                                                                *p.offset(prime_ * 100 + 6) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 102 + 6) &&
+                                                                             p.offset(prime_ * 102 + 6) < end);
+                                                                *p.offset(prime_ * 102 + 6) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 106 + 6) &&
+                                                                             p.offset(prime_ * 106 + 6) < end);
+                                                                *p.offset(prime_ * 106 + 6) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 108 + 6) &&
+                                                                             p.offset(prime_ * 108 + 6) < end);
+                                                                *p.offset(prime_ * 108 + 6) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 112 + 6) &&
+                                                                             p.offset(prime_ * 112 + 6) < end);
+                                                                *p.offset(prime_ * 112 + 6) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 120 + 7) &&
+                                                                             p.offset(prime_ * 120 + 7) < end);
+                                                                *p.offset(prime_ * 120 + 7) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 126 + 7) &&
+                                                                             p.offset(prime_ * 126 + 7) < end);
+                                                                *p.offset(prime_ * 126 + 7) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 130 + 8) &&
+                                                                             p.offset(prime_ * 130 + 8) < end);
+                                                                *p.offset(prime_ * 130 + 8) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 136 + 8) &&
+                                                                             p.offset(prime_ * 136 + 8) < end);
+                                                                *p.offset(prime_ * 136 + 8) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 138 + 8) &&
+                                                                             p.offset(prime_ * 138 + 8) < end);
+                                                                *p.offset(prime_ * 138 + 8) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 142 + 8) &&
+                                                                             p.offset(prime_ * 142 + 8) < end);
+                                                                *p.offset(prime_ * 142 + 8) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 148 + 9) &&
+                                                                             p.offset(prime_ * 148 + 9) < end);
+                                                                *p.offset(prime_ * 148 + 9) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 150 + 9) &&
+                                                                             p.offset(prime_ * 150 + 9) < end);
+                                                                *p.offset(prime_ * 150 + 9) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 156 + 9) &&
+                                                                             p.offset(prime_ * 156 + 9) < end);
+                                                                *p.offset(prime_ * 156 + 9) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 162 + 10) &&
+                                                                             p.offset(prime_ * 162 + 10) < end);
+                                                                *p.offset(prime_ * 162 + 10) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 166 + 10) &&
+                                                                             p.offset(prime_ * 166 + 10) < end);
+                                                                *p.offset(prime_ * 166 + 10) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 168 + 10) &&
+                                                                             p.offset(prime_ * 168 + 10) < end);
+                                                                *p.offset(prime_ * 168 + 10) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 172 + 10) &&
+                                                                             p.offset(prime_ * 172 + 10) < end);
+                                                                *p.offset(prime_ * 172 + 10) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 178 + 11) &&
+                                                                             p.offset(prime_ * 178 + 11) < end);
+                                                                *p.offset(prime_ * 178 + 11) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 180 + 11) &&
+                                                                             p.offset(prime_ * 180 + 11) < end);
+                                                                *p.offset(prime_ * 180 + 11) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 186 + 11) &&
+                                                                             p.offset(prime_ * 186 + 11) < end);
+                                                                *p.offset(prime_ * 186 + 11) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 190 + 11) &&
+                                                                             p.offset(prime_ * 190 + 11) < end);
+                                                                *p.offset(prime_ * 190 + 11) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 192 + 11) &&
+                                                                             p.offset(prime_ * 192 + 11) < end);
+                                                                *p.offset(prime_ * 192 + 11) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 196 + 12) &&
+                                                                             p.offset(prime_ * 196 + 12) < end);
+                                                                *p.offset(prime_ * 196 + 12) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 198 + 12) &&
+                                                                             p.offset(prime_ * 198 + 12) < end);
+                                                                *p.offset(prime_ * 198 + 12) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 208 + 12) &&
+                                                                             p.offset(prime_ * 208 + 12) < end);
+                                                                *p.offset(prime_ * 208 + 12) &= 239;
 
-                                                                p = p.offset(prime_ * 180 + 78)
+                                                                p = p.offset(prime_ * 210 + 17)
                                                             }
                                                             if p >= end { wi = 144; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 223; p = p.offset(prime_ * 4 + 2);
+                                                            *p &= 247; p = p.offset(prime_ * 10 + 4);
                                                             break 'label145
                                                            }
                                                            if p >= end { wi = 145; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 251; p = p.offset(prime_ * 2 + 1);
+                                                           *p &= 191; p = p.offset(prime_ * 2 + 1);
                                                            break 'label146
                                                           }
                                                           if p >= end { wi = 146; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 253; p = p.offset(prime_ * 4 + 1);
+                                                          *p &= 223; p = p.offset(prime_ * 4 + 2);
                                                           break 'label147
                                                          }
                                                          if p >= end { wi = 147; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 127; p = p.offset(prime_ * 6 + 3);
+                                                         *p &= 251; p = p.offset(prime_ * 2 + 1);
                                                          break 'label148
                                                         }
                                                         if p >= end { wi = 148; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 239; p = p.offset(prime_ * 2 + 1);
+                                                        *p &= 253; p = p.offset(prime_ * 4 + 1);
                                                         break 'label149
                                                        }
                                                        if p >= end { wi = 149; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 247; p = p.offset(prime_ * 6 + 3);
+                                                       *p &= 127; p = p.offset(prime_ * 6 + 3);
                                                        break 'label150
                                                       }
                                                       if p >= end { wi = 150; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 254; p = p.offset(prime_ * 4 + 1);
+                                                      *p &= 239; p = p.offset(prime_ * 2 + 1);
                                                       break 'label151
                                                      }
                                                      if p >= end { wi = 151; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 191; p = p.offset(prime_ * 2 + 1);
+                                                     *p &= 247; p = p.offset(prime_ * 6 + 3);
                                                      break 'label152
                                                     }
                                                     if p >= end { wi = 152; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 223; p = p.offset(prime_ * 4 + 2);
+                                                    *p &= 254; p = p.offset(prime_ * 4 + 1);
                                                     break 'label153
                                                    }
                                                    if p >= end { wi = 153; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 251; p = p.offset(prime_ * 2 + 1);
+                                                   *p &= 191; p = p.offset(prime_ * 2 + 1);
                                                    break 'label154
                                                   }
                                                   if p >= end { wi = 154; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 253; p = p.offset(prime_ * 4 + 1);
+                                                  *p &= 223; p = p.offset(prime_ * 4 + 2);
                                                   break 'label155
                                                  }
                                                  if p >= end { wi = 155; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 127; p = p.offset(prime_ * 6 + 3);
+                                                 *p &= 251; p = p.offset(prime_ * 6 + 2);
                                                  break 'label156
                                                 }
                                                 if p >= end { wi = 156; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 239; p = p.offset(prime_ * 2 + 1);
+                                                *p &= 127; p = p.offset(prime_ * 6 + 3);
                                                 break 'label157
                                                }
                                                if p >= end { wi = 157; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 247; p = p.offset(prime_ * 6 + 3);
+                                               *p &= 239; p = p.offset(prime_ * 2 + 1);
                                                break 'label158
                                               }
                                               if p >= end { wi = 158; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 254; p = p.offset(prime_ * 4 + 1);
+                                              *p &= 247; p = p.offset(prime_ * 6 + 3);
                                               break 'label159
                                              }
                                              if p >= end { wi = 159; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 191; p = p.offset(prime_ * 2 + 1);
+                                             *p &= 254; p = p.offset(prime_ * 4 + 1);
                                              break 'label160
                                             }
                                             if p >= end { wi = 160; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 223; p = p.offset(prime_ * 4 + 2);
+                                            *p &= 191; p = p.offset(prime_ * 2 + 1);
                                             break 'label161
                                            }
                                            if p >= end { wi = 161; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 251; p = p.offset(prime_ * 2 + 1);
+                                           *p &= 223; p = p.offset(prime_ * 6 + 3);
                                            break 'label162
                                           }
                                           if p >= end { wi = 162; break 'outer; }
@@ -2514,146 +2514,146 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                         }
                                         if p >= end { wi = 164; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 239; p = p.offset(prime_ * 2 + 1);
+                                        *p &= 239; p = p.offset(prime_ * 8 + 4);
                                         break 'label165
                                        }
                                        if p >= end { wi = 165; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 247; p = p.offset(prime_ * 6 + 3);
+                                       *p &= 254; p = p.offset(prime_ * 4 + 1);
                                        break 'label166
                                       }
                                       if p >= end { wi = 166; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 254; p = p.offset(prime_ * 4 + 1);
+                                      *p &= 191; p = p.offset(prime_ * 2 + 1);
                                       break 'label167
                                      }
                                      if p >= end { wi = 167; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 191; p = p.offset(prime_ * 2 + 1);
+                                     *p &= 223; p = p.offset(prime_ * 4 + 2);
                                      break 'label168
                                     }
                                     if p >= end { wi = 168; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 223; p = p.offset(prime_ * 4 + 2);
+                                    *p &= 251; p = p.offset(prime_ * 2 + 1);
                                     break 'label169
                                    }
                                    if p >= end { wi = 169; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 251; p = p.offset(prime_ * 2 + 1);
+                                   *p &= 253; p = p.offset(prime_ * 4 + 1);
                                    break 'label170
                                   }
                                   if p >= end { wi = 170; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 253; p = p.offset(prime_ * 4 + 1);
+                                  *p &= 127; p = p.offset(prime_ * 8 + 4);
                                   break 'label171
                                  }
                                  if p >= end { wi = 171; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 127; p = p.offset(prime_ * 6 + 3);
+                                 *p &= 247; p = p.offset(prime_ * 6 + 3);
                                  break 'label172
                                 }
                                 if p >= end { wi = 172; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 239; p = p.offset(prime_ * 2 + 1);
+                                *p &= 254; p = p.offset(prime_ * 4 + 1);
                                 break 'label173
                                }
                                if p >= end { wi = 173; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 247; p = p.offset(prime_ * 6 + 3);
+                               *p &= 191; p = p.offset(prime_ * 6 + 3);
                                break 'label174
                               }
                               if p >= end { wi = 174; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 254; p = p.offset(prime_ * 4 + 1);
+                              *p &= 251; p = p.offset(prime_ * 2 + 1);
                               break 'label175
                              }
                              if p >= end { wi = 175; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 191; p = p.offset(prime_ * 2 + 1);
+                             *p &= 253; p = p.offset(prime_ * 4 + 1);
                              break 'label176
                             }
                             if p >= end { wi = 176; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 223; p = p.offset(prime_ * 4 + 2);
+                            *p &= 127; p = p.offset(prime_ * 6 + 3);
                             break 'label177
                            }
                            if p >= end { wi = 177; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 251; p = p.offset(prime_ * 2 + 1);
+                           *p &= 239; p = p.offset(prime_ * 2 + 1);
                            break 'label178
                           }
                           if p >= end { wi = 178; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 253; p = p.offset(prime_ * 4 + 1);
+                          *p &= 247; p = p.offset(prime_ * 6 + 3);
                           break 'label179
                          }
                          if p >= end { wi = 179; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 127; p = p.offset(prime_ * 6 + 3);
+                         *p &= 254; p = p.offset(prime_ * 6 + 2);
                          break 'label180
                         }
                         if p >= end { wi = 180; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 239; p = p.offset(prime_ * 2 + 1);
+                        *p &= 223; p = p.offset(prime_ * 4 + 2);
                         break 'label181
                        }
                        if p >= end { wi = 181; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 247; p = p.offset(prime_ * 6 + 3);
+                       *p &= 251; p = p.offset(prime_ * 2 + 1);
                        break 'label182
                       }
                       if p >= end { wi = 182; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 254; p = p.offset(prime_ * 4 + 1);
+                      *p &= 253; p = p.offset(prime_ * 4 + 1);
                       break 'label183
                      }
                      if p >= end { wi = 183; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 191; p = p.offset(prime_ * 2 + 1);
+                     *p &= 127; p = p.offset(prime_ * 6 + 3);
                      break 'label184
                     }
                     if p >= end { wi = 184; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 223; p = p.offset(prime_ * 4 + 2);
+                    *p &= 239; p = p.offset(prime_ * 2 + 1);
                     break 'label185
                    }
                    if p >= end { wi = 185; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 251; p = p.offset(prime_ * 2 + 1);
+                   *p &= 247; p = p.offset(prime_ * 6 + 3);
                    break 'label186
                   }
                   if p >= end { wi = 186; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 253; p = p.offset(prime_ * 4 + 1);
+                  *p &= 254; p = p.offset(prime_ * 4 + 1);
                   break 'label187
                  }
                  if p >= end { wi = 187; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 127; p = p.offset(prime_ * 6 + 3);
+                 *p &= 191; p = p.offset(prime_ * 2 + 1);
                  break 'label188
                 }
                 if p >= end { wi = 188; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 239; p = p.offset(prime_ * 2 + 1);
+                *p &= 223; p = p.offset(prime_ * 4 + 2);
                 break 'label189
                }
                if p >= end { wi = 189; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 247; p = p.offset(prime_ * 6 + 3);
+               *p &= 251; p = p.offset(prime_ * 2 + 1);
                break 'label190
               }
               if p >= end { wi = 190; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 254; p = p.offset(prime_ * 4 + 1);
+              *p &= 253; p = p.offset(prime_ * 10 + 4);
               break 'label191
              }
              if p >= end { wi = 191; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 191; p = p.offset(prime_ * 2 + 1);
+             *p &= 239; p = p.offset(prime_ * 2 + 1);
              wi = 144
             }
         }
-        192...239 => { // 30 * x + 17
+        192...239 => { // 30 * x + 19
             loop {
              'label239: loop {
               'label238: loop {
@@ -2758,254 +2758,254 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                 p = ::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
-                                                                *p.offset(prime_ * 0 + 0) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 2 + 1) &&
-                                                                             p.offset(prime_ * 2 + 1) < end);
-                                                                *p.offset(prime_ * 2 + 1) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 6 + 4) &&
-                                                                             p.offset(prime_ * 6 + 4) < end);
-                                                                *p.offset(prime_ * 6 + 4) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 12 + 7) &&
-                                                                             p.offset(prime_ * 12 + 7) < end);
-                                                                *p.offset(prime_ * 12 + 7) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 14 + 8) &&
-                                                                             p.offset(prime_ * 14 + 8) < end);
-                                                                *p.offset(prime_ * 14 + 8) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 20 + 11) &&
-                                                                             p.offset(prime_ * 20 + 11) < end);
-                                                                *p.offset(prime_ * 20 + 11) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 24 + 14) &&
-                                                                             p.offset(prime_ * 24 + 14) < end);
-                                                                *p.offset(prime_ * 24 + 14) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 26 + 15) &&
-                                                                             p.offset(prime_ * 26 + 15) < end);
-                                                                *p.offset(prime_ * 26 + 15) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 30 + 17) &&
-                                                                             p.offset(prime_ * 30 + 17) < end);
-                                                                *p.offset(prime_ * 30 + 17) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 32 + 18) &&
-                                                                             p.offset(prime_ * 32 + 18) < end);
-                                                                *p.offset(prime_ * 32 + 18) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 36 + 21) &&
-                                                                             p.offset(prime_ * 36 + 21) < end);
-                                                                *p.offset(prime_ * 36 + 21) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 42 + 24) &&
-                                                                             p.offset(prime_ * 42 + 24) < end);
-                                                                *p.offset(prime_ * 42 + 24) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 44 + 25) &&
-                                                                             p.offset(prime_ * 44 + 25) < end);
-                                                                *p.offset(prime_ * 44 + 25) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 50 + 28) &&
-                                                                             p.offset(prime_ * 50 + 28) < end);
-                                                                *p.offset(prime_ * 50 + 28) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 54 + 31) &&
-                                                                             p.offset(prime_ * 54 + 31) < end);
-                                                                *p.offset(prime_ * 54 + 31) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 56 + 32) &&
-                                                                             p.offset(prime_ * 56 + 32) < end);
-                                                                *p.offset(prime_ * 56 + 32) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 60 + 34) &&
-                                                                             p.offset(prime_ * 60 + 34) < end);
-                                                                *p.offset(prime_ * 60 + 34) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 62 + 35) &&
-                                                                             p.offset(prime_ * 62 + 35) < end);
-                                                                *p.offset(prime_ * 62 + 35) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 66 + 38) &&
-                                                                             p.offset(prime_ * 66 + 38) < end);
-                                                                *p.offset(prime_ * 66 + 38) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 72 + 41) &&
-                                                                             p.offset(prime_ * 72 + 41) < end);
-                                                                *p.offset(prime_ * 72 + 41) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 74 + 42) &&
-                                                                             p.offset(prime_ * 74 + 42) < end);
-                                                                *p.offset(prime_ * 74 + 42) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 80 + 45) &&
-                                                                             p.offset(prime_ * 80 + 45) < end);
-                                                                *p.offset(prime_ * 80 + 45) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 84 + 48) &&
-                                                                             p.offset(prime_ * 84 + 48) < end);
-                                                                *p.offset(prime_ * 84 + 48) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 86 + 49) &&
-                                                                             p.offset(prime_ * 86 + 49) < end);
-                                                                *p.offset(prime_ * 86 + 49) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 90 + 51) &&
-                                                                             p.offset(prime_ * 90 + 51) < end);
-                                                                *p.offset(prime_ * 90 + 51) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 92 + 52) &&
-                                                                             p.offset(prime_ * 92 + 52) < end);
-                                                                *p.offset(prime_ * 92 + 52) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 96 + 55) &&
-                                                                             p.offset(prime_ * 96 + 55) < end);
-                                                                *p.offset(prime_ * 96 + 55) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 102 + 58) &&
-                                                                             p.offset(prime_ * 102 + 58) < end);
-                                                                *p.offset(prime_ * 102 + 58) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 104 + 59) &&
-                                                                             p.offset(prime_ * 104 + 59) < end);
-                                                                *p.offset(prime_ * 104 + 59) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 110 + 62) &&
-                                                                             p.offset(prime_ * 110 + 62) < end);
-                                                                *p.offset(prime_ * 110 + 62) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 114 + 65) &&
-                                                                             p.offset(prime_ * 114 + 65) < end);
-                                                                *p.offset(prime_ * 114 + 65) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 116 + 66) &&
-                                                                             p.offset(prime_ * 116 + 66) < end);
-                                                                *p.offset(prime_ * 116 + 66) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 120 + 68) &&
-                                                                             p.offset(prime_ * 120 + 68) < end);
-                                                                *p.offset(prime_ * 120 + 68) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 122 + 69) &&
-                                                                             p.offset(prime_ * 122 + 69) < end);
-                                                                *p.offset(prime_ * 122 + 69) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 126 + 72) &&
-                                                                             p.offset(prime_ * 126 + 72) < end);
-                                                                *p.offset(prime_ * 126 + 72) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 132 + 75) &&
-                                                                             p.offset(prime_ * 132 + 75) < end);
-                                                                *p.offset(prime_ * 132 + 75) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 134 + 76) &&
-                                                                             p.offset(prime_ * 134 + 76) < end);
-                                                                *p.offset(prime_ * 134 + 76) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 140 + 79) &&
-                                                                             p.offset(prime_ * 140 + 79) < end);
-                                                                *p.offset(prime_ * 140 + 79) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 144 + 82) &&
-                                                                             p.offset(prime_ * 144 + 82) < end);
-                                                                *p.offset(prime_ * 144 + 82) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 146 + 83) &&
-                                                                             p.offset(prime_ * 146 + 83) < end);
-                                                                *p.offset(prime_ * 146 + 83) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 150 + 85) &&
-                                                                             p.offset(prime_ * 150 + 85) < end);
-                                                                *p.offset(prime_ * 150 + 85) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 152 + 86) &&
-                                                                             p.offset(prime_ * 152 + 86) < end);
-                                                                *p.offset(prime_ * 152 + 86) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 156 + 89) &&
-                                                                             p.offset(prime_ * 156 + 89) < end);
-                                                                *p.offset(prime_ * 156 + 89) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 162 + 92) &&
-                                                                             p.offset(prime_ * 162 + 92) < end);
-                                                                *p.offset(prime_ * 162 + 92) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 164 + 93) &&
-                                                                             p.offset(prime_ * 164 + 93) < end);
-                                                                *p.offset(prime_ * 164 + 93) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 170 + 96) &&
-                                                                             p.offset(prime_ * 170 + 96) < end);
-                                                                *p.offset(prime_ * 170 + 96) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 174 + 99) &&
-                                                                             p.offset(prime_ * 174 + 99) < end);
-                                                                *p.offset(prime_ * 174 + 99) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 176 + 100) &&
-                                                                             p.offset(prime_ * 176 + 100) < end);
-                                                                *p.offset(prime_ * 176 + 100) &= 251;
+                                                                *p.offset(prime_ * 0 + 0) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 10 + 0) &&
+                                                                             p.offset(prime_ * 10 + 0) < end);
+                                                                *p.offset(prime_ * 10 + 0) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 12 + 1) &&
+                                                                             p.offset(prime_ * 12 + 1) < end);
+                                                                *p.offset(prime_ * 12 + 1) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 16 + 1) &&
+                                                                             p.offset(prime_ * 16 + 1) < end);
+                                                                *p.offset(prime_ * 16 + 1) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 18 + 1) &&
+                                                                             p.offset(prime_ * 18 + 1) < end);
+                                                                *p.offset(prime_ * 18 + 1) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 22 + 1) &&
+                                                                             p.offset(prime_ * 22 + 1) < end);
+                                                                *p.offset(prime_ * 22 + 1) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 28 + 2) &&
+                                                                             p.offset(prime_ * 28 + 2) < end);
+                                                                *p.offset(prime_ * 28 + 2) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 30 + 2) &&
+                                                                             p.offset(prime_ * 30 + 2) < end);
+                                                                *p.offset(prime_ * 30 + 2) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 36 + 2) &&
+                                                                             p.offset(prime_ * 36 + 2) < end);
+                                                                *p.offset(prime_ * 36 + 2) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 40 + 3) &&
+                                                                             p.offset(prime_ * 40 + 3) < end);
+                                                                *p.offset(prime_ * 40 + 3) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 42 + 3) &&
+                                                                             p.offset(prime_ * 42 + 3) < end);
+                                                                *p.offset(prime_ * 42 + 3) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 46 + 3) &&
+                                                                             p.offset(prime_ * 46 + 3) < end);
+                                                                *p.offset(prime_ * 46 + 3) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 52 + 4) &&
+                                                                             p.offset(prime_ * 52 + 4) < end);
+                                                                *p.offset(prime_ * 52 + 4) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 58 + 4) &&
+                                                                             p.offset(prime_ * 58 + 4) < end);
+                                                                *p.offset(prime_ * 58 + 4) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 60 + 4) &&
+                                                                             p.offset(prime_ * 60 + 4) < end);
+                                                                *p.offset(prime_ * 60 + 4) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 66 + 5) &&
+                                                                             p.offset(prime_ * 66 + 5) < end);
+                                                                *p.offset(prime_ * 66 + 5) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 70 + 5) &&
+                                                                             p.offset(prime_ * 70 + 5) < end);
+                                                                *p.offset(prime_ * 70 + 5) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 72 + 5) &&
+                                                                             p.offset(prime_ * 72 + 5) < end);
+                                                                *p.offset(prime_ * 72 + 5) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 78 + 6) &&
+                                                                             p.offset(prime_ * 78 + 6) < end);
+                                                                *p.offset(prime_ * 78 + 6) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 82 + 6) &&
+                                                                             p.offset(prime_ * 82 + 6) < end);
+                                                                *p.offset(prime_ * 82 + 6) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 88 + 7) &&
+                                                                             p.offset(prime_ * 88 + 7) < end);
+                                                                *p.offset(prime_ * 88 + 7) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 96 + 7) &&
+                                                                             p.offset(prime_ * 96 + 7) < end);
+                                                                *p.offset(prime_ * 96 + 7) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 100 + 8) &&
+                                                                             p.offset(prime_ * 100 + 8) < end);
+                                                                *p.offset(prime_ * 100 + 8) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 102 + 8) &&
+                                                                             p.offset(prime_ * 102 + 8) < end);
+                                                                *p.offset(prime_ * 102 + 8) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 106 + 8) &&
+                                                                             p.offset(prime_ * 106 + 8) < end);
+                                                                *p.offset(prime_ * 106 + 8) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 108 + 8) &&
+                                                                             p.offset(prime_ * 108 + 8) < end);
+                                                                *p.offset(prime_ * 108 + 8) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 112 + 9) &&
+                                                                             p.offset(prime_ * 112 + 9) < end);
+                                                                *p.offset(prime_ * 112 + 9) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 120 + 9) &&
+                                                                             p.offset(prime_ * 120 + 9) < end);
+                                                                *p.offset(prime_ * 120 + 9) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 126 + 10) &&
+                                                                             p.offset(prime_ * 126 + 10) < end);
+                                                                *p.offset(prime_ * 126 + 10) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 130 + 10) &&
+                                                                             p.offset(prime_ * 130 + 10) < end);
+                                                                *p.offset(prime_ * 130 + 10) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 136 + 11) &&
+                                                                             p.offset(prime_ * 136 + 11) < end);
+                                                                *p.offset(prime_ * 136 + 11) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 138 + 11) &&
+                                                                             p.offset(prime_ * 138 + 11) < end);
+                                                                *p.offset(prime_ * 138 + 11) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 142 + 11) &&
+                                                                             p.offset(prime_ * 142 + 11) < end);
+                                                                *p.offset(prime_ * 142 + 11) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 148 + 12) &&
+                                                                             p.offset(prime_ * 148 + 12) < end);
+                                                                *p.offset(prime_ * 148 + 12) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 150 + 12) &&
+                                                                             p.offset(prime_ * 150 + 12) < end);
+                                                                *p.offset(prime_ * 150 + 12) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 156 + 12) &&
+                                                                             p.offset(prime_ * 156 + 12) < end);
+                                                                *p.offset(prime_ * 156 + 12) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 162 + 13) &&
+                                                                             p.offset(prime_ * 162 + 13) < end);
+                                                                *p.offset(prime_ * 162 + 13) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 166 + 13) &&
+                                                                             p.offset(prime_ * 166 + 13) < end);
+                                                                *p.offset(prime_ * 166 + 13) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 168 + 13) &&
+                                                                             p.offset(prime_ * 168 + 13) < end);
+                                                                *p.offset(prime_ * 168 + 13) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 172 + 14) &&
+                                                                             p.offset(prime_ * 172 + 14) < end);
+                                                                *p.offset(prime_ * 172 + 14) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 178 + 14) &&
+                                                                             p.offset(prime_ * 178 + 14) < end);
+                                                                *p.offset(prime_ * 178 + 14) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 180 + 14) &&
+                                                                             p.offset(prime_ * 180 + 14) < end);
+                                                                *p.offset(prime_ * 180 + 14) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 186 + 15) &&
+                                                                             p.offset(prime_ * 186 + 15) < end);
+                                                                *p.offset(prime_ * 186 + 15) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 190 + 15) &&
+                                                                             p.offset(prime_ * 190 + 15) < end);
+                                                                *p.offset(prime_ * 190 + 15) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 192 + 15) &&
+                                                                             p.offset(prime_ * 192 + 15) < end);
+                                                                *p.offset(prime_ * 192 + 15) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 196 + 15) &&
+                                                                             p.offset(prime_ * 196 + 15) < end);
+                                                                *p.offset(prime_ * 196 + 15) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 198 + 16) &&
+                                                                             p.offset(prime_ * 198 + 16) < end);
+                                                                *p.offset(prime_ * 198 + 16) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 208 + 16) &&
+                                                                             p.offset(prime_ * 208 + 16) < end);
+                                                                *p.offset(prime_ * 208 + 16) &= 247;
 
-                                                                p = p.offset(prime_ * 180 + 102)
+                                                                p = p.offset(prime_ * 210 + 19)
                                                             }
                                                             if p >= end { wi = 192; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 223; p = p.offset(prime_ * 2 + 1);
+                                                            *p &= 239; p = p.offset(prime_ * 10 + 6);
                                                             break 'label193
                                                            }
                                                            if p >= end { wi = 193; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 191; p = p.offset(prime_ * 4 + 3);
+                                                           *p &= 253; p = p.offset(prime_ * 2 + 1);
                                                            break 'label194
                                                           }
                                                           if p >= end { wi = 194; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 254; p = p.offset(prime_ * 6 + 3);
+                                                          *p &= 251; p = p.offset(prime_ * 4 + 2);
                                                           break 'label195
                                                          }
                                                          if p >= end { wi = 195; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 247; p = p.offset(prime_ * 2 + 1);
+                                                         *p &= 223; p = p.offset(prime_ * 2 + 1);
                                                          break 'label196
                                                         }
                                                         if p >= end { wi = 196; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 239; p = p.offset(prime_ * 6 + 3);
+                                                        *p &= 191; p = p.offset(prime_ * 4 + 3);
                                                         break 'label197
                                                        }
                                                        if p >= end { wi = 197; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 127; p = p.offset(prime_ * 4 + 3);
+                                                       *p &= 254; p = p.offset(prime_ * 6 + 3);
                                                        break 'label198
                                                       }
                                                       if p >= end { wi = 198; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 253; p = p.offset(prime_ * 2 + 1);
+                                                      *p &= 247; p = p.offset(prime_ * 2 + 1);
                                                       break 'label199
                                                      }
                                                      if p >= end { wi = 199; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 251; p = p.offset(prime_ * 4 + 2);
+                                                     *p &= 239; p = p.offset(prime_ * 6 + 3);
                                                      break 'label200
                                                     }
                                                     if p >= end { wi = 200; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 223; p = p.offset(prime_ * 2 + 1);
+                                                    *p &= 127; p = p.offset(prime_ * 4 + 3);
                                                     break 'label201
                                                    }
                                                    if p >= end { wi = 201; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 191; p = p.offset(prime_ * 4 + 3);
+                                                   *p &= 253; p = p.offset(prime_ * 2 + 1);
                                                    break 'label202
                                                   }
                                                   if p >= end { wi = 202; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 254; p = p.offset(prime_ * 6 + 3);
+                                                  *p &= 251; p = p.offset(prime_ * 4 + 2);
                                                   break 'label203
                                                  }
                                                  if p >= end { wi = 203; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 247; p = p.offset(prime_ * 2 + 1);
+                                                 *p &= 223; p = p.offset(prime_ * 6 + 4);
                                                  break 'label204
                                                 }
                                                 if p >= end { wi = 204; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 239; p = p.offset(prime_ * 6 + 3);
+                                                *p &= 254; p = p.offset(prime_ * 6 + 3);
                                                 break 'label205
                                                }
                                                if p >= end { wi = 205; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 127; p = p.offset(prime_ * 4 + 3);
+                                               *p &= 247; p = p.offset(prime_ * 2 + 1);
                                                break 'label206
                                               }
                                               if p >= end { wi = 206; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 253; p = p.offset(prime_ * 2 + 1);
+                                              *p &= 239; p = p.offset(prime_ * 6 + 3);
                                               break 'label207
                                              }
                                              if p >= end { wi = 207; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 251; p = p.offset(prime_ * 4 + 2);
+                                             *p &= 127; p = p.offset(prime_ * 4 + 3);
                                              break 'label208
                                             }
                                             if p >= end { wi = 208; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 223; p = p.offset(prime_ * 2 + 1);
+                                            *p &= 253; p = p.offset(prime_ * 2 + 1);
                                             break 'label209
                                            }
                                            if p >= end { wi = 209; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 191; p = p.offset(prime_ * 4 + 3);
+                                           *p &= 251; p = p.offset(prime_ * 6 + 3);
                                            break 'label210
                                           }
                                           if p >= end { wi = 210; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 254; p = p.offset(prime_ * 6 + 3);
+                                          *p &= 191; p = p.offset(prime_ * 4 + 3);
                                           break 'label211
                                          }
                                          if p >= end { wi = 211; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 247; p = p.offset(prime_ * 2 + 1);
+                                         *p &= 254; p = p.offset(prime_ * 6 + 3);
                                          break 'label212
                                         }
                                         if p >= end { wi = 212; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 239; p = p.offset(prime_ * 6 + 3);
+                                        *p &= 247; p = p.offset(prime_ * 8 + 4);
                                         break 'label213
                                        }
                                        if p >= end { wi = 213; break 'outer; }
@@ -3035,116 +3035,116 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                   }
                                   if p >= end { wi = 218; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 254; p = p.offset(prime_ * 6 + 3);
+                                  *p &= 254; p = p.offset(prime_ * 8 + 4);
                                   break 'label219
                                  }
                                  if p >= end { wi = 219; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 247; p = p.offset(prime_ * 2 + 1);
+                                 *p &= 239; p = p.offset(prime_ * 6 + 3);
                                  break 'label220
                                 }
                                 if p >= end { wi = 220; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 239; p = p.offset(prime_ * 6 + 3);
+                                *p &= 127; p = p.offset(prime_ * 4 + 3);
                                 break 'label221
                                }
                                if p >= end { wi = 221; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 127; p = p.offset(prime_ * 4 + 3);
+                               *p &= 253; p = p.offset(prime_ * 6 + 3);
                                break 'label222
                               }
                               if p >= end { wi = 222; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 253; p = p.offset(prime_ * 2 + 1);
+                              *p &= 223; p = p.offset(prime_ * 2 + 1);
                               break 'label223
                              }
                              if p >= end { wi = 223; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 251; p = p.offset(prime_ * 4 + 2);
+                             *p &= 191; p = p.offset(prime_ * 4 + 3);
                              break 'label224
                             }
                             if p >= end { wi = 224; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 223; p = p.offset(prime_ * 2 + 1);
+                            *p &= 254; p = p.offset(prime_ * 6 + 3);
                             break 'label225
                            }
                            if p >= end { wi = 225; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 191; p = p.offset(prime_ * 4 + 3);
+                           *p &= 247; p = p.offset(prime_ * 2 + 1);
                            break 'label226
                           }
                           if p >= end { wi = 226; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 254; p = p.offset(prime_ * 6 + 3);
+                          *p &= 239; p = p.offset(prime_ * 6 + 3);
                           break 'label227
                          }
                          if p >= end { wi = 227; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 247; p = p.offset(prime_ * 2 + 1);
+                         *p &= 127; p = p.offset(prime_ * 6 + 4);
                          break 'label228
                         }
                         if p >= end { wi = 228; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 239; p = p.offset(prime_ * 6 + 3);
+                        *p &= 251; p = p.offset(prime_ * 4 + 2);
                         break 'label229
                        }
                        if p >= end { wi = 229; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 127; p = p.offset(prime_ * 4 + 3);
+                       *p &= 223; p = p.offset(prime_ * 2 + 1);
                        break 'label230
                       }
                       if p >= end { wi = 230; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 253; p = p.offset(prime_ * 2 + 1);
+                      *p &= 191; p = p.offset(prime_ * 4 + 3);
                       break 'label231
                      }
                      if p >= end { wi = 231; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 251; p = p.offset(prime_ * 4 + 2);
+                     *p &= 254; p = p.offset(prime_ * 6 + 3);
                      break 'label232
                     }
                     if p >= end { wi = 232; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 223; p = p.offset(prime_ * 2 + 1);
+                    *p &= 247; p = p.offset(prime_ * 2 + 1);
                     break 'label233
                    }
                    if p >= end { wi = 233; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 191; p = p.offset(prime_ * 4 + 3);
+                   *p &= 239; p = p.offset(prime_ * 6 + 3);
                    break 'label234
                   }
                   if p >= end { wi = 234; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 254; p = p.offset(prime_ * 6 + 3);
+                  *p &= 127; p = p.offset(prime_ * 4 + 3);
                   break 'label235
                  }
                  if p >= end { wi = 235; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 247; p = p.offset(prime_ * 2 + 1);
+                 *p &= 253; p = p.offset(prime_ * 2 + 1);
                  break 'label236
                 }
                 if p >= end { wi = 236; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 239; p = p.offset(prime_ * 6 + 3);
+                *p &= 251; p = p.offset(prime_ * 4 + 2);
                 break 'label237
                }
                if p >= end { wi = 237; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 127; p = p.offset(prime_ * 4 + 3);
+               *p &= 223; p = p.offset(prime_ * 2 + 1);
                break 'label238
               }
               if p >= end { wi = 238; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 253; p = p.offset(prime_ * 2 + 1);
+              *p &= 191; p = p.offset(prime_ * 10 + 6);
               break 'label239
              }
              if p >= end { wi = 239; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 251; p = p.offset(prime_ * 4 + 2);
+             *p &= 247; p = p.offset(prime_ * 2 + 1);
              wi = 192
             }
         }
-        240...287 => { // 30 * x + 19
+        240...287 => { // 30 * x + 23
             loop {
              'label287: loop {
               'label286: loop {
@@ -3249,284 +3249,284 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                 p = ::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
-                                                                *p.offset(prime_ * 0 + 0) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 4 + 2) &&
-                                                                             p.offset(prime_ * 4 + 2) < end);
-                                                                *p.offset(prime_ * 4 + 2) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 10 + 6) &&
-                                                                             p.offset(prime_ * 10 + 6) < end);
-                                                                *p.offset(prime_ * 10 + 6) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 12 + 7) &&
-                                                                             p.offset(prime_ * 12 + 7) < end);
-                                                                *p.offset(prime_ * 12 + 7) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 18 + 11) &&
-                                                                             p.offset(prime_ * 18 + 11) < end);
-                                                                *p.offset(prime_ * 18 + 11) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 22 + 13) &&
-                                                                             p.offset(prime_ * 22 + 13) < end);
-                                                                *p.offset(prime_ * 22 + 13) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 24 + 15) &&
-                                                                             p.offset(prime_ * 24 + 15) < end);
-                                                                *p.offset(prime_ * 24 + 15) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 28 + 17) &&
-                                                                             p.offset(prime_ * 28 + 17) < end);
-                                                                *p.offset(prime_ * 28 + 17) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 30 + 19) &&
-                                                                             p.offset(prime_ * 30 + 19) < end);
-                                                                *p.offset(prime_ * 30 + 19) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 34 + 21) &&
-                                                                             p.offset(prime_ * 34 + 21) < end);
-                                                                *p.offset(prime_ * 34 + 21) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 40 + 25) &&
-                                                                             p.offset(prime_ * 40 + 25) < end);
-                                                                *p.offset(prime_ * 40 + 25) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 42 + 26) &&
-                                                                             p.offset(prime_ * 42 + 26) < end);
-                                                                *p.offset(prime_ * 42 + 26) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 48 + 30) &&
-                                                                             p.offset(prime_ * 48 + 30) < end);
-                                                                *p.offset(prime_ * 48 + 30) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 52 + 32) &&
-                                                                             p.offset(prime_ * 52 + 32) < end);
-                                                                *p.offset(prime_ * 52 + 32) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 54 + 34) &&
-                                                                             p.offset(prime_ * 54 + 34) < end);
-                                                                *p.offset(prime_ * 54 + 34) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 58 + 36) &&
-                                                                             p.offset(prime_ * 58 + 36) < end);
-                                                                *p.offset(prime_ * 58 + 36) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 60 + 38) &&
-                                                                             p.offset(prime_ * 60 + 38) < end);
-                                                                *p.offset(prime_ * 60 + 38) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 64 + 40) &&
-                                                                             p.offset(prime_ * 64 + 40) < end);
-                                                                *p.offset(prime_ * 64 + 40) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 70 + 44) &&
-                                                                             p.offset(prime_ * 70 + 44) < end);
-                                                                *p.offset(prime_ * 70 + 44) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 72 + 45) &&
-                                                                             p.offset(prime_ * 72 + 45) < end);
-                                                                *p.offset(prime_ * 72 + 45) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 78 + 49) &&
-                                                                             p.offset(prime_ * 78 + 49) < end);
-                                                                *p.offset(prime_ * 78 + 49) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 82 + 51) &&
-                                                                             p.offset(prime_ * 82 + 51) < end);
-                                                                *p.offset(prime_ * 82 + 51) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 84 + 53) &&
-                                                                             p.offset(prime_ * 84 + 53) < end);
-                                                                *p.offset(prime_ * 84 + 53) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 88 + 55) &&
-                                                                             p.offset(prime_ * 88 + 55) < end);
-                                                                *p.offset(prime_ * 88 + 55) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 90 + 57) &&
-                                                                             p.offset(prime_ * 90 + 57) < end);
-                                                                *p.offset(prime_ * 90 + 57) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 94 + 59) &&
-                                                                             p.offset(prime_ * 94 + 59) < end);
-                                                                *p.offset(prime_ * 94 + 59) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 100 + 63) &&
-                                                                             p.offset(prime_ * 100 + 63) < end);
-                                                                *p.offset(prime_ * 100 + 63) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 102 + 64) &&
-                                                                             p.offset(prime_ * 102 + 64) < end);
-                                                                *p.offset(prime_ * 102 + 64) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 108 + 68) &&
-                                                                             p.offset(prime_ * 108 + 68) < end);
-                                                                *p.offset(prime_ * 108 + 68) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 112 + 70) &&
-                                                                             p.offset(prime_ * 112 + 70) < end);
-                                                                *p.offset(prime_ * 112 + 70) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 114 + 72) &&
-                                                                             p.offset(prime_ * 114 + 72) < end);
-                                                                *p.offset(prime_ * 114 + 72) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 118 + 74) &&
-                                                                             p.offset(prime_ * 118 + 74) < end);
-                                                                *p.offset(prime_ * 118 + 74) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 120 + 76) &&
-                                                                             p.offset(prime_ * 120 + 76) < end);
-                                                                *p.offset(prime_ * 120 + 76) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 124 + 78) &&
-                                                                             p.offset(prime_ * 124 + 78) < end);
-                                                                *p.offset(prime_ * 124 + 78) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 130 + 82) &&
-                                                                             p.offset(prime_ * 130 + 82) < end);
-                                                                *p.offset(prime_ * 130 + 82) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 132 + 83) &&
-                                                                             p.offset(prime_ * 132 + 83) < end);
-                                                                *p.offset(prime_ * 132 + 83) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 138 + 87) &&
-                                                                             p.offset(prime_ * 138 + 87) < end);
-                                                                *p.offset(prime_ * 138 + 87) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 142 + 89) &&
-                                                                             p.offset(prime_ * 142 + 89) < end);
-                                                                *p.offset(prime_ * 142 + 89) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 144 + 91) &&
-                                                                             p.offset(prime_ * 144 + 91) < end);
-                                                                *p.offset(prime_ * 144 + 91) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 148 + 93) &&
-                                                                             p.offset(prime_ * 148 + 93) < end);
-                                                                *p.offset(prime_ * 148 + 93) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 150 + 95) &&
-                                                                             p.offset(prime_ * 150 + 95) < end);
-                                                                *p.offset(prime_ * 150 + 95) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 154 + 97) &&
-                                                                             p.offset(prime_ * 154 + 97) < end);
-                                                                *p.offset(prime_ * 154 + 97) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 160 + 101) &&
-                                                                             p.offset(prime_ * 160 + 101) < end);
-                                                                *p.offset(prime_ * 160 + 101) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 162 + 102) &&
-                                                                             p.offset(prime_ * 162 + 102) < end);
-                                                                *p.offset(prime_ * 162 + 102) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 168 + 106) &&
-                                                                             p.offset(prime_ * 168 + 106) < end);
-                                                                *p.offset(prime_ * 168 + 106) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 172 + 108) &&
-                                                                             p.offset(prime_ * 172 + 108) < end);
-                                                                *p.offset(prime_ * 172 + 108) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 174 + 110) &&
-                                                                             p.offset(prime_ * 174 + 110) < end);
-                                                                *p.offset(prime_ * 174 + 110) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 178 + 112) &&
-                                                                             p.offset(prime_ * 178 + 112) < end);
-                                                                *p.offset(prime_ * 178 + 112) &= 191;
+                                                                *p.offset(prime_ * 0 + 0) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 10 + 0) &&
+                                                                             p.offset(prime_ * 10 + 0) < end);
+                                                                *p.offset(prime_ * 10 + 0) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 12 + 1) &&
+                                                                             p.offset(prime_ * 12 + 1) < end);
+                                                                *p.offset(prime_ * 12 + 1) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 16 + 1) &&
+                                                                             p.offset(prime_ * 16 + 1) < end);
+                                                                *p.offset(prime_ * 16 + 1) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 18 + 1) &&
+                                                                             p.offset(prime_ * 18 + 1) < end);
+                                                                *p.offset(prime_ * 18 + 1) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 22 + 2) &&
+                                                                             p.offset(prime_ * 22 + 2) < end);
+                                                                *p.offset(prime_ * 22 + 2) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 28 + 2) &&
+                                                                             p.offset(prime_ * 28 + 2) < end);
+                                                                *p.offset(prime_ * 28 + 2) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 30 + 2) &&
+                                                                             p.offset(prime_ * 30 + 2) < end);
+                                                                *p.offset(prime_ * 30 + 2) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 36 + 3) &&
+                                                                             p.offset(prime_ * 36 + 3) < end);
+                                                                *p.offset(prime_ * 36 + 3) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 40 + 3) &&
+                                                                             p.offset(prime_ * 40 + 3) < end);
+                                                                *p.offset(prime_ * 40 + 3) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 42 + 3) &&
+                                                                             p.offset(prime_ * 42 + 3) < end);
+                                                                *p.offset(prime_ * 42 + 3) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 46 + 4) &&
+                                                                             p.offset(prime_ * 46 + 4) < end);
+                                                                *p.offset(prime_ * 46 + 4) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 52 + 4) &&
+                                                                             p.offset(prime_ * 52 + 4) < end);
+                                                                *p.offset(prime_ * 52 + 4) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 58 + 5) &&
+                                                                             p.offset(prime_ * 58 + 5) < end);
+                                                                *p.offset(prime_ * 58 + 5) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 60 + 5) &&
+                                                                             p.offset(prime_ * 60 + 5) < end);
+                                                                *p.offset(prime_ * 60 + 5) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 66 + 6) &&
+                                                                             p.offset(prime_ * 66 + 6) < end);
+                                                                *p.offset(prime_ * 66 + 6) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 70 + 6) &&
+                                                                             p.offset(prime_ * 70 + 6) < end);
+                                                                *p.offset(prime_ * 70 + 6) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 72 + 6) &&
+                                                                             p.offset(prime_ * 72 + 6) < end);
+                                                                *p.offset(prime_ * 72 + 6) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 78 + 7) &&
+                                                                             p.offset(prime_ * 78 + 7) < end);
+                                                                *p.offset(prime_ * 78 + 7) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 82 + 7) &&
+                                                                             p.offset(prime_ * 82 + 7) < end);
+                                                                *p.offset(prime_ * 82 + 7) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 88 + 8) &&
+                                                                             p.offset(prime_ * 88 + 8) < end);
+                                                                *p.offset(prime_ * 88 + 8) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 96 + 8) &&
+                                                                             p.offset(prime_ * 96 + 8) < end);
+                                                                *p.offset(prime_ * 96 + 8) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 100 + 9) &&
+                                                                             p.offset(prime_ * 100 + 9) < end);
+                                                                *p.offset(prime_ * 100 + 9) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 102 + 9) &&
+                                                                             p.offset(prime_ * 102 + 9) < end);
+                                                                *p.offset(prime_ * 102 + 9) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 106 + 9) &&
+                                                                             p.offset(prime_ * 106 + 9) < end);
+                                                                *p.offset(prime_ * 106 + 9) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 108 + 9) &&
+                                                                             p.offset(prime_ * 108 + 9) < end);
+                                                                *p.offset(prime_ * 108 + 9) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 112 + 10) &&
+                                                                             p.offset(prime_ * 112 + 10) < end);
+                                                                *p.offset(prime_ * 112 + 10) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 120 + 10) &&
+                                                                             p.offset(prime_ * 120 + 10) < end);
+                                                                *p.offset(prime_ * 120 + 10) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 126 + 11) &&
+                                                                             p.offset(prime_ * 126 + 11) < end);
+                                                                *p.offset(prime_ * 126 + 11) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 130 + 11) &&
+                                                                             p.offset(prime_ * 130 + 11) < end);
+                                                                *p.offset(prime_ * 130 + 11) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 136 + 12) &&
+                                                                             p.offset(prime_ * 136 + 12) < end);
+                                                                *p.offset(prime_ * 136 + 12) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 138 + 12) &&
+                                                                             p.offset(prime_ * 138 + 12) < end);
+                                                                *p.offset(prime_ * 138 + 12) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 142 + 12) &&
+                                                                             p.offset(prime_ * 142 + 12) < end);
+                                                                *p.offset(prime_ * 142 + 12) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 148 + 13) &&
+                                                                             p.offset(prime_ * 148 + 13) < end);
+                                                                *p.offset(prime_ * 148 + 13) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 150 + 13) &&
+                                                                             p.offset(prime_ * 150 + 13) < end);
+                                                                *p.offset(prime_ * 150 + 13) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 156 + 14) &&
+                                                                             p.offset(prime_ * 156 + 14) < end);
+                                                                *p.offset(prime_ * 156 + 14) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 162 + 14) &&
+                                                                             p.offset(prime_ * 162 + 14) < end);
+                                                                *p.offset(prime_ * 162 + 14) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 166 + 15) &&
+                                                                             p.offset(prime_ * 166 + 15) < end);
+                                                                *p.offset(prime_ * 166 + 15) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 168 + 15) &&
+                                                                             p.offset(prime_ * 168 + 15) < end);
+                                                                *p.offset(prime_ * 168 + 15) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 172 + 15) &&
+                                                                             p.offset(prime_ * 172 + 15) < end);
+                                                                *p.offset(prime_ * 172 + 15) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 178 + 16) &&
+                                                                             p.offset(prime_ * 178 + 16) < end);
+                                                                *p.offset(prime_ * 178 + 16) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 180 + 16) &&
+                                                                             p.offset(prime_ * 180 + 16) < end);
+                                                                *p.offset(prime_ * 180 + 16) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 186 + 16) &&
+                                                                             p.offset(prime_ * 186 + 16) < end);
+                                                                *p.offset(prime_ * 186 + 16) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 190 + 17) &&
+                                                                             p.offset(prime_ * 190 + 17) < end);
+                                                                *p.offset(prime_ * 190 + 17) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 192 + 17) &&
+                                                                             p.offset(prime_ * 192 + 17) < end);
+                                                                *p.offset(prime_ * 192 + 17) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 196 + 17) &&
+                                                                             p.offset(prime_ * 196 + 17) < end);
+                                                                *p.offset(prime_ * 196 + 17) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 198 + 18) &&
+                                                                             p.offset(prime_ * 198 + 18) < end);
+                                                                *p.offset(prime_ * 198 + 18) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 208 + 18) &&
+                                                                             p.offset(prime_ * 208 + 18) < end);
+                                                                *p.offset(prime_ * 208 + 18) &= 251;
 
-                                                                p = p.offset(prime_ * 180 + 114)
+                                                                p = p.offset(prime_ * 210 + 23)
                                                             }
                                                             if p >= end { wi = 240; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 254; p = p.offset(prime_ * 4 + 2);
+                                                            *p &= 223; p = p.offset(prime_ * 10 + 6);
                                                             break 'label241
                                                            }
                                                            if p >= end { wi = 241; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 239; p = p.offset(prime_ * 6 + 4);
+                                                           *p &= 127; p = p.offset(prime_ * 2 + 2);
                                                            break 'label242
                                                           }
                                                           if p >= end { wi = 242; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 251; p = p.offset(prime_ * 2 + 1);
+                                                          *p &= 253; p = p.offset(prime_ * 4 + 2);
                                                           break 'label243
                                                          }
                                                          if p >= end { wi = 243; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 223; p = p.offset(prime_ * 6 + 4);
+                                                         *p &= 191; p = p.offset(prime_ * 2 + 2);
                                                          break 'label244
                                                         }
                                                         if p >= end { wi = 244; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 247; p = p.offset(prime_ * 4 + 2);
+                                                        *p &= 254; p = p.offset(prime_ * 4 + 2);
                                                         break 'label245
                                                        }
                                                        if p >= end { wi = 245; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 127; p = p.offset(prime_ * 2 + 2);
+                                                       *p &= 239; p = p.offset(prime_ * 6 + 4);
                                                        break 'label246
                                                       }
                                                       if p >= end { wi = 246; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 253; p = p.offset(prime_ * 4 + 2);
+                                                      *p &= 251; p = p.offset(prime_ * 2 + 1);
                                                       break 'label247
                                                      }
                                                      if p >= end { wi = 247; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 191; p = p.offset(prime_ * 2 + 2);
+                                                     *p &= 223; p = p.offset(prime_ * 6 + 4);
                                                      break 'label248
                                                     }
                                                     if p >= end { wi = 248; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 254; p = p.offset(prime_ * 4 + 2);
+                                                    *p &= 247; p = p.offset(prime_ * 4 + 2);
                                                     break 'label249
                                                    }
                                                    if p >= end { wi = 249; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 239; p = p.offset(prime_ * 6 + 4);
+                                                   *p &= 127; p = p.offset(prime_ * 2 + 2);
                                                    break 'label250
                                                   }
                                                   if p >= end { wi = 250; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 251; p = p.offset(prime_ * 2 + 1);
+                                                  *p &= 253; p = p.offset(prime_ * 4 + 2);
                                                   break 'label251
                                                  }
                                                  if p >= end { wi = 251; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 223; p = p.offset(prime_ * 6 + 4);
+                                                 *p &= 191; p = p.offset(prime_ * 6 + 4);
                                                  break 'label252
                                                 }
                                                 if p >= end { wi = 252; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 247; p = p.offset(prime_ * 4 + 2);
+                                                *p &= 239; p = p.offset(prime_ * 6 + 4);
                                                 break 'label253
                                                }
                                                if p >= end { wi = 253; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 127; p = p.offset(prime_ * 2 + 2);
+                                               *p &= 251; p = p.offset(prime_ * 2 + 1);
                                                break 'label254
                                               }
                                               if p >= end { wi = 254; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 253; p = p.offset(prime_ * 4 + 2);
+                                              *p &= 223; p = p.offset(prime_ * 6 + 4);
                                               break 'label255
                                              }
                                              if p >= end { wi = 255; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 191; p = p.offset(prime_ * 2 + 2);
+                                             *p &= 247; p = p.offset(prime_ * 4 + 2);
                                              break 'label256
                                             }
                                             if p >= end { wi = 256; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 254; p = p.offset(prime_ * 4 + 2);
+                                            *p &= 127; p = p.offset(prime_ * 2 + 2);
                                             break 'label257
                                            }
                                            if p >= end { wi = 257; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 239; p = p.offset(prime_ * 6 + 4);
+                                           *p &= 253; p = p.offset(prime_ * 6 + 4);
                                            break 'label258
                                           }
                                           if p >= end { wi = 258; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 251; p = p.offset(prime_ * 2 + 1);
+                                          *p &= 254; p = p.offset(prime_ * 4 + 2);
                                           break 'label259
                                          }
                                          if p >= end { wi = 259; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 223; p = p.offset(prime_ * 6 + 4);
+                                         *p &= 239; p = p.offset(prime_ * 6 + 4);
                                          break 'label260
                                         }
                                         if p >= end { wi = 260; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 247; p = p.offset(prime_ * 4 + 2);
+                                        *p &= 251; p = p.offset(prime_ * 8 + 5);
                                         break 'label261
                                        }
                                        if p >= end { wi = 261; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 127; p = p.offset(prime_ * 2 + 2);
+                                       *p &= 247; p = p.offset(prime_ * 4 + 2);
                                        break 'label262
                                       }
                                       if p >= end { wi = 262; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 253; p = p.offset(prime_ * 4 + 2);
+                                      *p &= 127; p = p.offset(prime_ * 2 + 2);
                                       break 'label263
                                      }
                                      if p >= end { wi = 263; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 191; p = p.offset(prime_ * 2 + 2);
+                                     *p &= 253; p = p.offset(prime_ * 4 + 2);
                                      break 'label264
                                     }
                                     if p >= end { wi = 264; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 254; p = p.offset(prime_ * 4 + 2);
+                                    *p &= 191; p = p.offset(prime_ * 2 + 2);
                                     break 'label265
                                    }
                                    if p >= end { wi = 265; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 239; p = p.offset(prime_ * 6 + 4);
+                                   *p &= 254; p = p.offset(prime_ * 4 + 2);
                                    break 'label266
                                   }
                                   if p >= end { wi = 266; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 251; p = p.offset(prime_ * 2 + 1);
+                                  *p &= 239; p = p.offset(prime_ * 8 + 5);
                                   break 'label267
                                  }
                                  if p >= end { wi = 267; break 'outer; }
@@ -3541,101 +3541,101 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                }
                                if p >= end { wi = 269; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 127; p = p.offset(prime_ * 2 + 2);
+                               *p &= 127; p = p.offset(prime_ * 6 + 4);
                                break 'label270
                               }
                               if p >= end { wi = 270; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 253; p = p.offset(prime_ * 4 + 2);
+                              *p &= 191; p = p.offset(prime_ * 2 + 2);
                               break 'label271
                              }
                              if p >= end { wi = 271; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 191; p = p.offset(prime_ * 2 + 2);
+                             *p &= 254; p = p.offset(prime_ * 4 + 2);
                              break 'label272
                             }
                             if p >= end { wi = 272; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 254; p = p.offset(prime_ * 4 + 2);
+                            *p &= 239; p = p.offset(prime_ * 6 + 4);
                             break 'label273
                            }
                            if p >= end { wi = 273; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 239; p = p.offset(prime_ * 6 + 4);
+                           *p &= 251; p = p.offset(prime_ * 2 + 1);
                            break 'label274
                           }
                           if p >= end { wi = 274; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 251; p = p.offset(prime_ * 2 + 1);
+                          *p &= 223; p = p.offset(prime_ * 6 + 4);
                           break 'label275
                          }
                          if p >= end { wi = 275; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 223; p = p.offset(prime_ * 6 + 4);
+                         *p &= 247; p = p.offset(prime_ * 6 + 4);
                          break 'label276
                         }
                         if p >= end { wi = 276; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 247; p = p.offset(prime_ * 4 + 2);
+                        *p &= 253; p = p.offset(prime_ * 4 + 2);
                         break 'label277
                        }
                        if p >= end { wi = 277; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 127; p = p.offset(prime_ * 2 + 2);
+                       *p &= 191; p = p.offset(prime_ * 2 + 2);
                        break 'label278
                       }
                       if p >= end { wi = 278; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 253; p = p.offset(prime_ * 4 + 2);
+                      *p &= 254; p = p.offset(prime_ * 4 + 2);
                       break 'label279
                      }
                      if p >= end { wi = 279; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 191; p = p.offset(prime_ * 2 + 2);
+                     *p &= 239; p = p.offset(prime_ * 6 + 4);
                      break 'label280
                     }
                     if p >= end { wi = 280; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 254; p = p.offset(prime_ * 4 + 2);
+                    *p &= 251; p = p.offset(prime_ * 2 + 1);
                     break 'label281
                    }
                    if p >= end { wi = 281; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 239; p = p.offset(prime_ * 6 + 4);
+                   *p &= 223; p = p.offset(prime_ * 6 + 4);
                    break 'label282
                   }
                   if p >= end { wi = 282; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 251; p = p.offset(prime_ * 2 + 1);
+                  *p &= 247; p = p.offset(prime_ * 4 + 2);
                   break 'label283
                  }
                  if p >= end { wi = 283; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 223; p = p.offset(prime_ * 6 + 4);
+                 *p &= 127; p = p.offset(prime_ * 2 + 2);
                  break 'label284
                 }
                 if p >= end { wi = 284; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 247; p = p.offset(prime_ * 4 + 2);
+                *p &= 253; p = p.offset(prime_ * 4 + 2);
                 break 'label285
                }
                if p >= end { wi = 285; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 127; p = p.offset(prime_ * 2 + 2);
+               *p &= 191; p = p.offset(prime_ * 2 + 2);
                break 'label286
               }
               if p >= end { wi = 286; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 253; p = p.offset(prime_ * 4 + 2);
+              *p &= 254; p = p.offset(prime_ * 10 + 6);
               break 'label287
              }
              if p >= end { wi = 287; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 191; p = p.offset(prime_ * 2 + 2);
+             *p &= 251; p = p.offset(prime_ * 2 + 1);
              wi = 240
             }
         }
-        288...335 => { // 30 * x + 23
+        288...335 => { // 30 * x + 29
             loop {
              'label335: loop {
               'label334: loop {
@@ -3740,299 +3740,299 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                 p = ::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
-                                                                *p.offset(prime_ * 0 + 0) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 6 + 5) &&
-                                                                             p.offset(prime_ * 6 + 5) < end);
-                                                                *p.offset(prime_ * 6 + 5) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 8 + 6) &&
-                                                                             p.offset(prime_ * 8 + 6) < end);
-                                                                *p.offset(prime_ * 8 + 6) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 14 + 11) &&
-                                                                             p.offset(prime_ * 14 + 11) < end);
-                                                                *p.offset(prime_ * 14 + 11) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 18 + 14) &&
-                                                                             p.offset(prime_ * 18 + 14) < end);
-                                                                *p.offset(prime_ * 18 + 14) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 20 + 15) &&
-                                                                             p.offset(prime_ * 20 + 15) < end);
-                                                                *p.offset(prime_ * 20 + 15) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 24 + 19) &&
-                                                                             p.offset(prime_ * 24 + 19) < end);
-                                                                *p.offset(prime_ * 24 + 19) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 26 + 20) &&
-                                                                             p.offset(prime_ * 26 + 20) < end);
-                                                                *p.offset(prime_ * 26 + 20) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 30 + 23) &&
-                                                                             p.offset(prime_ * 30 + 23) < end);
-                                                                *p.offset(prime_ * 30 + 23) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 36 + 28) &&
-                                                                             p.offset(prime_ * 36 + 28) < end);
-                                                                *p.offset(prime_ * 36 + 28) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 38 + 29) &&
-                                                                             p.offset(prime_ * 38 + 29) < end);
-                                                                *p.offset(prime_ * 38 + 29) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 44 + 34) &&
-                                                                             p.offset(prime_ * 44 + 34) < end);
-                                                                *p.offset(prime_ * 44 + 34) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 48 + 37) &&
-                                                                             p.offset(prime_ * 48 + 37) < end);
-                                                                *p.offset(prime_ * 48 + 37) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 50 + 38) &&
-                                                                             p.offset(prime_ * 50 + 38) < end);
-                                                                *p.offset(prime_ * 50 + 38) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 54 + 42) &&
-                                                                             p.offset(prime_ * 54 + 42) < end);
-                                                                *p.offset(prime_ * 54 + 42) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 56 + 43) &&
-                                                                             p.offset(prime_ * 56 + 43) < end);
-                                                                *p.offset(prime_ * 56 + 43) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 60 + 46) &&
-                                                                             p.offset(prime_ * 60 + 46) < end);
-                                                                *p.offset(prime_ * 60 + 46) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 66 + 51) &&
-                                                                             p.offset(prime_ * 66 + 51) < end);
-                                                                *p.offset(prime_ * 66 + 51) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 68 + 52) &&
-                                                                             p.offset(prime_ * 68 + 52) < end);
-                                                                *p.offset(prime_ * 68 + 52) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 74 + 57) &&
-                                                                             p.offset(prime_ * 74 + 57) < end);
-                                                                *p.offset(prime_ * 74 + 57) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 78 + 60) &&
-                                                                             p.offset(prime_ * 78 + 60) < end);
-                                                                *p.offset(prime_ * 78 + 60) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 80 + 61) &&
-                                                                             p.offset(prime_ * 80 + 61) < end);
-                                                                *p.offset(prime_ * 80 + 61) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 84 + 65) &&
-                                                                             p.offset(prime_ * 84 + 65) < end);
-                                                                *p.offset(prime_ * 84 + 65) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 86 + 66) &&
-                                                                             p.offset(prime_ * 86 + 66) < end);
-                                                                *p.offset(prime_ * 86 + 66) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 90 + 69) &&
-                                                                             p.offset(prime_ * 90 + 69) < end);
-                                                                *p.offset(prime_ * 90 + 69) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 96 + 74) &&
-                                                                             p.offset(prime_ * 96 + 74) < end);
-                                                                *p.offset(prime_ * 96 + 74) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 98 + 75) &&
-                                                                             p.offset(prime_ * 98 + 75) < end);
-                                                                *p.offset(prime_ * 98 + 75) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 104 + 80) &&
-                                                                             p.offset(prime_ * 104 + 80) < end);
-                                                                *p.offset(prime_ * 104 + 80) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 108 + 83) &&
-                                                                             p.offset(prime_ * 108 + 83) < end);
-                                                                *p.offset(prime_ * 108 + 83) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 110 + 84) &&
-                                                                             p.offset(prime_ * 110 + 84) < end);
-                                                                *p.offset(prime_ * 110 + 84) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 114 + 88) &&
-                                                                             p.offset(prime_ * 114 + 88) < end);
-                                                                *p.offset(prime_ * 114 + 88) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 116 + 89) &&
-                                                                             p.offset(prime_ * 116 + 89) < end);
-                                                                *p.offset(prime_ * 116 + 89) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 120 + 92) &&
-                                                                             p.offset(prime_ * 120 + 92) < end);
-                                                                *p.offset(prime_ * 120 + 92) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 126 + 97) &&
-                                                                             p.offset(prime_ * 126 + 97) < end);
-                                                                *p.offset(prime_ * 126 + 97) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 128 + 98) &&
-                                                                             p.offset(prime_ * 128 + 98) < end);
-                                                                *p.offset(prime_ * 128 + 98) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 134 + 103) &&
-                                                                             p.offset(prime_ * 134 + 103) < end);
-                                                                *p.offset(prime_ * 134 + 103) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 138 + 106) &&
-                                                                             p.offset(prime_ * 138 + 106) < end);
-                                                                *p.offset(prime_ * 138 + 106) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 140 + 107) &&
-                                                                             p.offset(prime_ * 140 + 107) < end);
-                                                                *p.offset(prime_ * 140 + 107) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 144 + 111) &&
-                                                                             p.offset(prime_ * 144 + 111) < end);
-                                                                *p.offset(prime_ * 144 + 111) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 146 + 112) &&
-                                                                             p.offset(prime_ * 146 + 112) < end);
-                                                                *p.offset(prime_ * 146 + 112) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 150 + 115) &&
-                                                                             p.offset(prime_ * 150 + 115) < end);
-                                                                *p.offset(prime_ * 150 + 115) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 156 + 120) &&
-                                                                             p.offset(prime_ * 156 + 120) < end);
-                                                                *p.offset(prime_ * 156 + 120) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 158 + 121) &&
-                                                                             p.offset(prime_ * 158 + 121) < end);
-                                                                *p.offset(prime_ * 158 + 121) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 164 + 126) &&
-                                                                             p.offset(prime_ * 164 + 126) < end);
-                                                                *p.offset(prime_ * 164 + 126) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 168 + 129) &&
-                                                                             p.offset(prime_ * 168 + 129) < end);
-                                                                *p.offset(prime_ * 168 + 129) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 170 + 130) &&
-                                                                             p.offset(prime_ * 170 + 130) < end);
-                                                                *p.offset(prime_ * 170 + 130) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 174 + 134) &&
-                                                                             p.offset(prime_ * 174 + 134) < end);
-                                                                *p.offset(prime_ * 174 + 134) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 176 + 135) &&
-                                                                             p.offset(prime_ * 176 + 135) < end);
-                                                                *p.offset(prime_ * 176 + 135) &= 239;
+                                                                *p.offset(prime_ * 0 + 0) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 10 + 1) &&
+                                                                             p.offset(prime_ * 10 + 1) < end);
+                                                                *p.offset(prime_ * 10 + 1) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 12 + 1) &&
+                                                                             p.offset(prime_ * 12 + 1) < end);
+                                                                *p.offset(prime_ * 12 + 1) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 16 + 1) &&
+                                                                             p.offset(prime_ * 16 + 1) < end);
+                                                                *p.offset(prime_ * 16 + 1) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 18 + 2) &&
+                                                                             p.offset(prime_ * 18 + 2) < end);
+                                                                *p.offset(prime_ * 18 + 2) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 22 + 2) &&
+                                                                             p.offset(prime_ * 22 + 2) < end);
+                                                                *p.offset(prime_ * 22 + 2) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 28 + 3) &&
+                                                                             p.offset(prime_ * 28 + 3) < end);
+                                                                *p.offset(prime_ * 28 + 3) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 30 + 3) &&
+                                                                             p.offset(prime_ * 30 + 3) < end);
+                                                                *p.offset(prime_ * 30 + 3) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 36 + 4) &&
+                                                                             p.offset(prime_ * 36 + 4) < end);
+                                                                *p.offset(prime_ * 36 + 4) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 40 + 4) &&
+                                                                             p.offset(prime_ * 40 + 4) < end);
+                                                                *p.offset(prime_ * 40 + 4) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 42 + 4) &&
+                                                                             p.offset(prime_ * 42 + 4) < end);
+                                                                *p.offset(prime_ * 42 + 4) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 46 + 5) &&
+                                                                             p.offset(prime_ * 46 + 5) < end);
+                                                                *p.offset(prime_ * 46 + 5) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 52 + 5) &&
+                                                                             p.offset(prime_ * 52 + 5) < end);
+                                                                *p.offset(prime_ * 52 + 5) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 58 + 6) &&
+                                                                             p.offset(prime_ * 58 + 6) < end);
+                                                                *p.offset(prime_ * 58 + 6) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 60 + 6) &&
+                                                                             p.offset(prime_ * 60 + 6) < end);
+                                                                *p.offset(prime_ * 60 + 6) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 66 + 7) &&
+                                                                             p.offset(prime_ * 66 + 7) < end);
+                                                                *p.offset(prime_ * 66 + 7) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 70 + 7) &&
+                                                                             p.offset(prime_ * 70 + 7) < end);
+                                                                *p.offset(prime_ * 70 + 7) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 72 + 7) &&
+                                                                             p.offset(prime_ * 72 + 7) < end);
+                                                                *p.offset(prime_ * 72 + 7) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 78 + 8) &&
+                                                                             p.offset(prime_ * 78 + 8) < end);
+                                                                *p.offset(prime_ * 78 + 8) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 82 + 9) &&
+                                                                             p.offset(prime_ * 82 + 9) < end);
+                                                                *p.offset(prime_ * 82 + 9) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 88 + 9) &&
+                                                                             p.offset(prime_ * 88 + 9) < end);
+                                                                *p.offset(prime_ * 88 + 9) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 96 + 10) &&
+                                                                             p.offset(prime_ * 96 + 10) < end);
+                                                                *p.offset(prime_ * 96 + 10) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 100 + 11) &&
+                                                                             p.offset(prime_ * 100 + 11) < end);
+                                                                *p.offset(prime_ * 100 + 11) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 102 + 11) &&
+                                                                             p.offset(prime_ * 102 + 11) < end);
+                                                                *p.offset(prime_ * 102 + 11) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 106 + 11) &&
+                                                                             p.offset(prime_ * 106 + 11) < end);
+                                                                *p.offset(prime_ * 106 + 11) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 108 + 11) &&
+                                                                             p.offset(prime_ * 108 + 11) < end);
+                                                                *p.offset(prime_ * 108 + 11) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 112 + 12) &&
+                                                                             p.offset(prime_ * 112 + 12) < end);
+                                                                *p.offset(prime_ * 112 + 12) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 120 + 13) &&
+                                                                             p.offset(prime_ * 120 + 13) < end);
+                                                                *p.offset(prime_ * 120 + 13) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 126 + 13) &&
+                                                                             p.offset(prime_ * 126 + 13) < end);
+                                                                *p.offset(prime_ * 126 + 13) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 130 + 14) &&
+                                                                             p.offset(prime_ * 130 + 14) < end);
+                                                                *p.offset(prime_ * 130 + 14) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 136 + 15) &&
+                                                                             p.offset(prime_ * 136 + 15) < end);
+                                                                *p.offset(prime_ * 136 + 15) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 138 + 15) &&
+                                                                             p.offset(prime_ * 138 + 15) < end);
+                                                                *p.offset(prime_ * 138 + 15) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 142 + 15) &&
+                                                                             p.offset(prime_ * 142 + 15) < end);
+                                                                *p.offset(prime_ * 142 + 15) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 148 + 16) &&
+                                                                             p.offset(prime_ * 148 + 16) < end);
+                                                                *p.offset(prime_ * 148 + 16) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 150 + 16) &&
+                                                                             p.offset(prime_ * 150 + 16) < end);
+                                                                *p.offset(prime_ * 150 + 16) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 156 + 17) &&
+                                                                             p.offset(prime_ * 156 + 17) < end);
+                                                                *p.offset(prime_ * 156 + 17) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 162 + 17) &&
+                                                                             p.offset(prime_ * 162 + 17) < end);
+                                                                *p.offset(prime_ * 162 + 17) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 166 + 18) &&
+                                                                             p.offset(prime_ * 166 + 18) < end);
+                                                                *p.offset(prime_ * 166 + 18) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 168 + 18) &&
+                                                                             p.offset(prime_ * 168 + 18) < end);
+                                                                *p.offset(prime_ * 168 + 18) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 172 + 18) &&
+                                                                             p.offset(prime_ * 172 + 18) < end);
+                                                                *p.offset(prime_ * 172 + 18) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 178 + 19) &&
+                                                                             p.offset(prime_ * 178 + 19) < end);
+                                                                *p.offset(prime_ * 178 + 19) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 180 + 19) &&
+                                                                             p.offset(prime_ * 180 + 19) < end);
+                                                                *p.offset(prime_ * 180 + 19) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 186 + 20) &&
+                                                                             p.offset(prime_ * 186 + 20) < end);
+                                                                *p.offset(prime_ * 186 + 20) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 190 + 20) &&
+                                                                             p.offset(prime_ * 190 + 20) < end);
+                                                                *p.offset(prime_ * 190 + 20) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 192 + 21) &&
+                                                                             p.offset(prime_ * 192 + 21) < end);
+                                                                *p.offset(prime_ * 192 + 21) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 196 + 21) &&
+                                                                             p.offset(prime_ * 196 + 21) < end);
+                                                                *p.offset(prime_ * 196 + 21) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 198 + 21) &&
+                                                                             p.offset(prime_ * 198 + 21) < end);
+                                                                *p.offset(prime_ * 198 + 21) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 208 + 22) &&
+                                                                             p.offset(prime_ * 208 + 22) < end);
+                                                                *p.offset(prime_ * 208 + 22) &= 253;
 
-                                                                p = p.offset(prime_ * 180 + 138)
+                                                                p = p.offset(prime_ * 210 + 29)
                                                             }
                                                             if p >= end { wi = 288; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 223; p = p.offset(prime_ * 6 + 5);
+                                                            *p &= 191; p = p.offset(prime_ * 10 + 8);
                                                             break 'label289
                                                            }
                                                            if p >= end { wi = 289; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 253; p = p.offset(prime_ * 2 + 1);
+                                                           *p &= 247; p = p.offset(prime_ * 2 + 1);
                                                            break 'label290
                                                           }
                                                           if p >= end { wi = 290; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 191; p = p.offset(prime_ * 6 + 5);
+                                                          *p &= 127; p = p.offset(prime_ * 4 + 4);
                                                           break 'label291
                                                          }
                                                          if p >= end { wi = 291; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 251; p = p.offset(prime_ * 4 + 3);
+                                                         *p &= 254; p = p.offset(prime_ * 2 + 1);
                                                          break 'label292
                                                         }
                                                         if p >= end { wi = 292; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 247; p = p.offset(prime_ * 2 + 1);
+                                                        *p &= 239; p = p.offset(prime_ * 4 + 3);
                                                         break 'label293
                                                        }
                                                        if p >= end { wi = 293; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 127; p = p.offset(prime_ * 4 + 4);
+                                                       *p &= 223; p = p.offset(prime_ * 6 + 5);
                                                        break 'label294
                                                       }
                                                       if p >= end { wi = 294; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 254; p = p.offset(prime_ * 2 + 1);
+                                                      *p &= 253; p = p.offset(prime_ * 2 + 1);
                                                       break 'label295
                                                      }
                                                      if p >= end { wi = 295; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 239; p = p.offset(prime_ * 4 + 3);
+                                                     *p &= 191; p = p.offset(prime_ * 6 + 5);
                                                      break 'label296
                                                     }
                                                     if p >= end { wi = 296; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 223; p = p.offset(prime_ * 6 + 5);
+                                                    *p &= 251; p = p.offset(prime_ * 4 + 3);
                                                     break 'label297
                                                    }
                                                    if p >= end { wi = 297; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 253; p = p.offset(prime_ * 2 + 1);
+                                                   *p &= 247; p = p.offset(prime_ * 2 + 1);
                                                    break 'label298
                                                   }
                                                   if p >= end { wi = 298; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 191; p = p.offset(prime_ * 6 + 5);
+                                                  *p &= 127; p = p.offset(prime_ * 4 + 4);
                                                   break 'label299
                                                  }
                                                  if p >= end { wi = 299; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 251; p = p.offset(prime_ * 4 + 3);
+                                                 *p &= 254; p = p.offset(prime_ * 6 + 4);
                                                  break 'label300
                                                 }
                                                 if p >= end { wi = 300; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 247; p = p.offset(prime_ * 2 + 1);
+                                                *p &= 223; p = p.offset(prime_ * 6 + 5);
                                                 break 'label301
                                                }
                                                if p >= end { wi = 301; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 127; p = p.offset(prime_ * 4 + 4);
+                                               *p &= 253; p = p.offset(prime_ * 2 + 1);
                                                break 'label302
                                               }
                                               if p >= end { wi = 302; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 254; p = p.offset(prime_ * 2 + 1);
+                                              *p &= 191; p = p.offset(prime_ * 6 + 5);
                                               break 'label303
                                              }
                                              if p >= end { wi = 303; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 239; p = p.offset(prime_ * 4 + 3);
+                                             *p &= 251; p = p.offset(prime_ * 4 + 3);
                                              break 'label304
                                             }
                                             if p >= end { wi = 304; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 223; p = p.offset(prime_ * 6 + 5);
+                                            *p &= 247; p = p.offset(prime_ * 2 + 1);
                                             break 'label305
                                            }
                                            if p >= end { wi = 305; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 253; p = p.offset(prime_ * 2 + 1);
+                                           *p &= 127; p = p.offset(prime_ * 6 + 5);
                                            break 'label306
                                           }
                                           if p >= end { wi = 306; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 191; p = p.offset(prime_ * 6 + 5);
+                                          *p &= 239; p = p.offset(prime_ * 4 + 3);
                                           break 'label307
                                          }
                                          if p >= end { wi = 307; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 251; p = p.offset(prime_ * 4 + 3);
+                                         *p &= 223; p = p.offset(prime_ * 6 + 5);
                                          break 'label308
                                         }
                                         if p >= end { wi = 308; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 247; p = p.offset(prime_ * 2 + 1);
+                                        *p &= 253; p = p.offset(prime_ * 8 + 6);
                                         break 'label309
                                        }
                                        if p >= end { wi = 309; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 127; p = p.offset(prime_ * 4 + 4);
+                                       *p &= 251; p = p.offset(prime_ * 4 + 3);
                                        break 'label310
                                       }
                                       if p >= end { wi = 310; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 254; p = p.offset(prime_ * 2 + 1);
+                                      *p &= 247; p = p.offset(prime_ * 2 + 1);
                                       break 'label311
                                      }
                                      if p >= end { wi = 311; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 239; p = p.offset(prime_ * 4 + 3);
+                                     *p &= 127; p = p.offset(prime_ * 4 + 4);
                                      break 'label312
                                     }
                                     if p >= end { wi = 312; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 223; p = p.offset(prime_ * 6 + 5);
+                                    *p &= 254; p = p.offset(prime_ * 2 + 1);
                                     break 'label313
                                    }
                                    if p >= end { wi = 313; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 253; p = p.offset(prime_ * 2 + 1);
+                                   *p &= 239; p = p.offset(prime_ * 4 + 3);
                                    break 'label314
                                   }
                                   if p >= end { wi = 314; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 191; p = p.offset(prime_ * 6 + 5);
+                                  *p &= 223; p = p.offset(prime_ * 8 + 6);
                                   break 'label315
                                  }
                                  if p >= end { wi = 315; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 251; p = p.offset(prime_ * 4 + 3);
+                                 *p &= 191; p = p.offset(prime_ * 6 + 5);
                                  break 'label316
                                 }
                                 if p >= end { wi = 316; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 247; p = p.offset(prime_ * 2 + 1);
+                                *p &= 251; p = p.offset(prime_ * 4 + 3);
                                 break 'label317
                                }
                                if p >= end { wi = 317; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 127; p = p.offset(prime_ * 4 + 4);
+                               *p &= 247; p = p.offset(prime_ * 6 + 5);
                                break 'label318
                               }
                               if p >= end { wi = 318; break 'outer; }
@@ -4062,71 +4062,71 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                          }
                          if p >= end { wi = 323; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 251; p = p.offset(prime_ * 4 + 3);
+                         *p &= 251; p = p.offset(prime_ * 6 + 4);
                          break 'label324
                         }
                         if p >= end { wi = 324; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 247; p = p.offset(prime_ * 2 + 1);
+                        *p &= 127; p = p.offset(prime_ * 4 + 4);
                         break 'label325
                        }
                        if p >= end { wi = 325; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 127; p = p.offset(prime_ * 4 + 4);
+                       *p &= 254; p = p.offset(prime_ * 2 + 1);
                        break 'label326
                       }
                       if p >= end { wi = 326; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 254; p = p.offset(prime_ * 2 + 1);
+                      *p &= 239; p = p.offset(prime_ * 4 + 3);
                       break 'label327
                      }
                      if p >= end { wi = 327; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 239; p = p.offset(prime_ * 4 + 3);
+                     *p &= 223; p = p.offset(prime_ * 6 + 5);
                      break 'label328
                     }
                     if p >= end { wi = 328; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 223; p = p.offset(prime_ * 6 + 5);
+                    *p &= 253; p = p.offset(prime_ * 2 + 1);
                     break 'label329
                    }
                    if p >= end { wi = 329; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 253; p = p.offset(prime_ * 2 + 1);
+                   *p &= 191; p = p.offset(prime_ * 6 + 5);
                    break 'label330
                   }
                   if p >= end { wi = 330; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 191; p = p.offset(prime_ * 6 + 5);
+                  *p &= 251; p = p.offset(prime_ * 4 + 3);
                   break 'label331
                  }
                  if p >= end { wi = 331; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 251; p = p.offset(prime_ * 4 + 3);
+                 *p &= 247; p = p.offset(prime_ * 2 + 1);
                  break 'label332
                 }
                 if p >= end { wi = 332; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 247; p = p.offset(prime_ * 2 + 1);
+                *p &= 127; p = p.offset(prime_ * 4 + 4);
                 break 'label333
                }
                if p >= end { wi = 333; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 127; p = p.offset(prime_ * 4 + 4);
+               *p &= 254; p = p.offset(prime_ * 2 + 1);
                break 'label334
               }
               if p >= end { wi = 334; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 254; p = p.offset(prime_ * 2 + 1);
+              *p &= 239; p = p.offset(prime_ * 10 + 8);
               break 'label335
              }
              if p >= end { wi = 335; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 239; p = p.offset(prime_ * 4 + 3);
+             *p &= 253; p = p.offset(prime_ * 2 + 1);
              wi = 288
             }
         }
-        336...383 => { // 30 * x + 29
+        336...383 => { // 30 * x + 31
             loop {
              'label383: loop {
               'label382: loop {
@@ -4231,329 +4231,329 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                 p = ::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
-                                                                *p.offset(prime_ * 0 + 0) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 2 + 1) &&
-                                                                             p.offset(prime_ * 2 + 1) < end);
-                                                                *p.offset(prime_ * 2 + 1) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 8 + 7) &&
-                                                                             p.offset(prime_ * 8 + 7) < end);
-                                                                *p.offset(prime_ * 8 + 7) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 12 + 11) &&
-                                                                             p.offset(prime_ * 12 + 11) < end);
-                                                                *p.offset(prime_ * 12 + 11) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 14 + 13) &&
-                                                                             p.offset(prime_ * 14 + 13) < end);
-                                                                *p.offset(prime_ * 14 + 13) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 18 + 17) &&
-                                                                             p.offset(prime_ * 18 + 17) < end);
-                                                                *p.offset(prime_ * 18 + 17) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 20 + 19) &&
-                                                                             p.offset(prime_ * 20 + 19) < end);
-                                                                *p.offset(prime_ * 20 + 19) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 24 + 23) &&
-                                                                             p.offset(prime_ * 24 + 23) < end);
-                                                                *p.offset(prime_ * 24 + 23) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 30 + 29) &&
-                                                                             p.offset(prime_ * 30 + 29) < end);
-                                                                *p.offset(prime_ * 30 + 29) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 32 + 30) &&
-                                                                             p.offset(prime_ * 32 + 30) < end);
-                                                                *p.offset(prime_ * 32 + 30) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 38 + 36) &&
-                                                                             p.offset(prime_ * 38 + 36) < end);
-                                                                *p.offset(prime_ * 38 + 36) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 42 + 40) &&
-                                                                             p.offset(prime_ * 42 + 40) < end);
-                                                                *p.offset(prime_ * 42 + 40) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 44 + 42) &&
-                                                                             p.offset(prime_ * 44 + 42) < end);
-                                                                *p.offset(prime_ * 44 + 42) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 48 + 46) &&
-                                                                             p.offset(prime_ * 48 + 46) < end);
-                                                                *p.offset(prime_ * 48 + 46) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 50 + 48) &&
-                                                                             p.offset(prime_ * 50 + 48) < end);
-                                                                *p.offset(prime_ * 50 + 48) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 54 + 52) &&
-                                                                             p.offset(prime_ * 54 + 52) < end);
-                                                                *p.offset(prime_ * 54 + 52) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 60 + 58) &&
-                                                                             p.offset(prime_ * 60 + 58) < end);
-                                                                *p.offset(prime_ * 60 + 58) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 62 + 59) &&
-                                                                             p.offset(prime_ * 62 + 59) < end);
-                                                                *p.offset(prime_ * 62 + 59) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 68 + 65) &&
-                                                                             p.offset(prime_ * 68 + 65) < end);
-                                                                *p.offset(prime_ * 68 + 65) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 72 + 69) &&
-                                                                             p.offset(prime_ * 72 + 69) < end);
-                                                                *p.offset(prime_ * 72 + 69) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 74 + 71) &&
-                                                                             p.offset(prime_ * 74 + 71) < end);
-                                                                *p.offset(prime_ * 74 + 71) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 78 + 75) &&
-                                                                             p.offset(prime_ * 78 + 75) < end);
-                                                                *p.offset(prime_ * 78 + 75) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 80 + 77) &&
-                                                                             p.offset(prime_ * 80 + 77) < end);
-                                                                *p.offset(prime_ * 80 + 77) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 84 + 81) &&
-                                                                             p.offset(prime_ * 84 + 81) < end);
-                                                                *p.offset(prime_ * 84 + 81) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 90 + 87) &&
-                                                                             p.offset(prime_ * 90 + 87) < end);
-                                                                *p.offset(prime_ * 90 + 87) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 92 + 88) &&
-                                                                             p.offset(prime_ * 92 + 88) < end);
-                                                                *p.offset(prime_ * 92 + 88) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 98 + 94) &&
-                                                                             p.offset(prime_ * 98 + 94) < end);
-                                                                *p.offset(prime_ * 98 + 94) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 102 + 98) &&
-                                                                             p.offset(prime_ * 102 + 98) < end);
-                                                                *p.offset(prime_ * 102 + 98) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 104 + 100) &&
-                                                                             p.offset(prime_ * 104 + 100) < end);
-                                                                *p.offset(prime_ * 104 + 100) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 108 + 104) &&
-                                                                             p.offset(prime_ * 108 + 104) < end);
-                                                                *p.offset(prime_ * 108 + 104) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 110 + 106) &&
-                                                                             p.offset(prime_ * 110 + 106) < end);
-                                                                *p.offset(prime_ * 110 + 106) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 114 + 110) &&
-                                                                             p.offset(prime_ * 114 + 110) < end);
-                                                                *p.offset(prime_ * 114 + 110) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 120 + 116) &&
-                                                                             p.offset(prime_ * 120 + 116) < end);
-                                                                *p.offset(prime_ * 120 + 116) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 122 + 117) &&
-                                                                             p.offset(prime_ * 122 + 117) < end);
-                                                                *p.offset(prime_ * 122 + 117) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 128 + 123) &&
-                                                                             p.offset(prime_ * 128 + 123) < end);
-                                                                *p.offset(prime_ * 128 + 123) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 132 + 127) &&
-                                                                             p.offset(prime_ * 132 + 127) < end);
-                                                                *p.offset(prime_ * 132 + 127) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 134 + 129) &&
-                                                                             p.offset(prime_ * 134 + 129) < end);
-                                                                *p.offset(prime_ * 134 + 129) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 138 + 133) &&
-                                                                             p.offset(prime_ * 138 + 133) < end);
-                                                                *p.offset(prime_ * 138 + 133) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 140 + 135) &&
-                                                                             p.offset(prime_ * 140 + 135) < end);
-                                                                *p.offset(prime_ * 140 + 135) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 144 + 139) &&
-                                                                             p.offset(prime_ * 144 + 139) < end);
-                                                                *p.offset(prime_ * 144 + 139) &= 253;
-                                                                safe_assert!(start <= p.offset(prime_ * 150 + 145) &&
-                                                                             p.offset(prime_ * 150 + 145) < end);
-                                                                *p.offset(prime_ * 150 + 145) &= 254;
-                                                                safe_assert!(start <= p.offset(prime_ * 152 + 146) &&
-                                                                             p.offset(prime_ * 152 + 146) < end);
-                                                                *p.offset(prime_ * 152 + 146) &= 127;
-                                                                safe_assert!(start <= p.offset(prime_ * 158 + 152) &&
-                                                                             p.offset(prime_ * 158 + 152) < end);
-                                                                *p.offset(prime_ * 158 + 152) &= 191;
-                                                                safe_assert!(start <= p.offset(prime_ * 162 + 156) &&
-                                                                             p.offset(prime_ * 162 + 156) < end);
-                                                                *p.offset(prime_ * 162 + 156) &= 223;
-                                                                safe_assert!(start <= p.offset(prime_ * 164 + 158) &&
-                                                                             p.offset(prime_ * 164 + 158) < end);
-                                                                *p.offset(prime_ * 164 + 158) &= 239;
-                                                                safe_assert!(start <= p.offset(prime_ * 168 + 162) &&
-                                                                             p.offset(prime_ * 168 + 162) < end);
-                                                                *p.offset(prime_ * 168 + 162) &= 247;
-                                                                safe_assert!(start <= p.offset(prime_ * 170 + 164) &&
-                                                                             p.offset(prime_ * 170 + 164) < end);
-                                                                *p.offset(prime_ * 170 + 164) &= 251;
-                                                                safe_assert!(start <= p.offset(prime_ * 174 + 168) &&
-                                                                             p.offset(prime_ * 174 + 168) < end);
-                                                                *p.offset(prime_ * 174 + 168) &= 253;
+                                                                *p.offset(prime_ * 0 + 0) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 10 + 1) &&
+                                                                             p.offset(prime_ * 10 + 1) < end);
+                                                                *p.offset(prime_ * 10 + 1) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 12 + 1) &&
+                                                                             p.offset(prime_ * 12 + 1) < end);
+                                                                *p.offset(prime_ * 12 + 1) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 16 + 2) &&
+                                                                             p.offset(prime_ * 16 + 2) < end);
+                                                                *p.offset(prime_ * 16 + 2) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 18 + 2) &&
+                                                                             p.offset(prime_ * 18 + 2) < end);
+                                                                *p.offset(prime_ * 18 + 2) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 22 + 3) &&
+                                                                             p.offset(prime_ * 22 + 3) < end);
+                                                                *p.offset(prime_ * 22 + 3) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 28 + 4) &&
+                                                                             p.offset(prime_ * 28 + 4) < end);
+                                                                *p.offset(prime_ * 28 + 4) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 30 + 4) &&
+                                                                             p.offset(prime_ * 30 + 4) < end);
+                                                                *p.offset(prime_ * 30 + 4) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 36 + 5) &&
+                                                                             p.offset(prime_ * 36 + 5) < end);
+                                                                *p.offset(prime_ * 36 + 5) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 40 + 5) &&
+                                                                             p.offset(prime_ * 40 + 5) < end);
+                                                                *p.offset(prime_ * 40 + 5) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 42 + 5) &&
+                                                                             p.offset(prime_ * 42 + 5) < end);
+                                                                *p.offset(prime_ * 42 + 5) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 46 + 6) &&
+                                                                             p.offset(prime_ * 46 + 6) < end);
+                                                                *p.offset(prime_ * 46 + 6) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 52 + 7) &&
+                                                                             p.offset(prime_ * 52 + 7) < end);
+                                                                *p.offset(prime_ * 52 + 7) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 58 + 8) &&
+                                                                             p.offset(prime_ * 58 + 8) < end);
+                                                                *p.offset(prime_ * 58 + 8) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 60 + 8) &&
+                                                                             p.offset(prime_ * 60 + 8) < end);
+                                                                *p.offset(prime_ * 60 + 8) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 66 + 9) &&
+                                                                             p.offset(prime_ * 66 + 9) < end);
+                                                                *p.offset(prime_ * 66 + 9) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 70 + 9) &&
+                                                                             p.offset(prime_ * 70 + 9) < end);
+                                                                *p.offset(prime_ * 70 + 9) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 72 + 10) &&
+                                                                             p.offset(prime_ * 72 + 10) < end);
+                                                                *p.offset(prime_ * 72 + 10) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 78 + 10) &&
+                                                                             p.offset(prime_ * 78 + 10) < end);
+                                                                *p.offset(prime_ * 78 + 10) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 82 + 11) &&
+                                                                             p.offset(prime_ * 82 + 11) < end);
+                                                                *p.offset(prime_ * 82 + 11) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 88 + 12) &&
+                                                                             p.offset(prime_ * 88 + 12) < end);
+                                                                *p.offset(prime_ * 88 + 12) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 96 + 13) &&
+                                                                             p.offset(prime_ * 96 + 13) < end);
+                                                                *p.offset(prime_ * 96 + 13) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 100 + 13) &&
+                                                                             p.offset(prime_ * 100 + 13) < end);
+                                                                *p.offset(prime_ * 100 + 13) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 102 + 14) &&
+                                                                             p.offset(prime_ * 102 + 14) < end);
+                                                                *p.offset(prime_ * 102 + 14) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 106 + 14) &&
+                                                                             p.offset(prime_ * 106 + 14) < end);
+                                                                *p.offset(prime_ * 106 + 14) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 108 + 15) &&
+                                                                             p.offset(prime_ * 108 + 15) < end);
+                                                                *p.offset(prime_ * 108 + 15) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 112 + 15) &&
+                                                                             p.offset(prime_ * 112 + 15) < end);
+                                                                *p.offset(prime_ * 112 + 15) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 120 + 16) &&
+                                                                             p.offset(prime_ * 120 + 16) < end);
+                                                                *p.offset(prime_ * 120 + 16) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 126 + 17) &&
+                                                                             p.offset(prime_ * 126 + 17) < end);
+                                                                *p.offset(prime_ * 126 + 17) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 130 + 18) &&
+                                                                             p.offset(prime_ * 130 + 18) < end);
+                                                                *p.offset(prime_ * 130 + 18) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 136 + 18) &&
+                                                                             p.offset(prime_ * 136 + 18) < end);
+                                                                *p.offset(prime_ * 136 + 18) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 138 + 19) &&
+                                                                             p.offset(prime_ * 138 + 19) < end);
+                                                                *p.offset(prime_ * 138 + 19) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 142 + 19) &&
+                                                                             p.offset(prime_ * 142 + 19) < end);
+                                                                *p.offset(prime_ * 142 + 19) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 148 + 20) &&
+                                                                             p.offset(prime_ * 148 + 20) < end);
+                                                                *p.offset(prime_ * 148 + 20) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 150 + 20) &&
+                                                                             p.offset(prime_ * 150 + 20) < end);
+                                                                *p.offset(prime_ * 150 + 20) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 156 + 21) &&
+                                                                             p.offset(prime_ * 156 + 21) < end);
+                                                                *p.offset(prime_ * 156 + 21) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 162 + 22) &&
+                                                                             p.offset(prime_ * 162 + 22) < end);
+                                                                *p.offset(prime_ * 162 + 22) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 166 + 23) &&
+                                                                             p.offset(prime_ * 166 + 23) < end);
+                                                                *p.offset(prime_ * 166 + 23) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 168 + 23) &&
+                                                                             p.offset(prime_ * 168 + 23) < end);
+                                                                *p.offset(prime_ * 168 + 23) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 172 + 23) &&
+                                                                             p.offset(prime_ * 172 + 23) < end);
+                                                                *p.offset(prime_ * 172 + 23) &= 253;
+                                                                safe_assert!(start <= p.offset(prime_ * 178 + 24) &&
+                                                                             p.offset(prime_ * 178 + 24) < end);
+                                                                *p.offset(prime_ * 178 + 24) &= 254;
+                                                                safe_assert!(start <= p.offset(prime_ * 180 + 24) &&
+                                                                             p.offset(prime_ * 180 + 24) < end);
+                                                                *p.offset(prime_ * 180 + 24) &= 127;
+                                                                safe_assert!(start <= p.offset(prime_ * 186 + 25) &&
+                                                                             p.offset(prime_ * 186 + 25) < end);
+                                                                *p.offset(prime_ * 186 + 25) &= 191;
+                                                                safe_assert!(start <= p.offset(prime_ * 190 + 26) &&
+                                                                             p.offset(prime_ * 190 + 26) < end);
+                                                                *p.offset(prime_ * 190 + 26) &= 223;
+                                                                safe_assert!(start <= p.offset(prime_ * 192 + 26) &&
+                                                                             p.offset(prime_ * 192 + 26) < end);
+                                                                *p.offset(prime_ * 192 + 26) &= 239;
+                                                                safe_assert!(start <= p.offset(prime_ * 196 + 27) &&
+                                                                             p.offset(prime_ * 196 + 27) < end);
+                                                                *p.offset(prime_ * 196 + 27) &= 247;
+                                                                safe_assert!(start <= p.offset(prime_ * 198 + 27) &&
+                                                                             p.offset(prime_ * 198 + 27) < end);
+                                                                *p.offset(prime_ * 198 + 27) &= 251;
+                                                                safe_assert!(start <= p.offset(prime_ * 208 + 28) &&
+                                                                             p.offset(prime_ * 208 + 28) < end);
+                                                                *p.offset(prime_ * 208 + 28) &= 254;
 
-                                                                p = p.offset(prime_ * 180 + 174)
+                                                                p = p.offset(prime_ * 210 + 31)
                                                             }
                                                             if p >= end { wi = 336; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 254; p = p.offset(prime_ * 2 + 1);
+                                                            *p &= 127; p = p.offset(prime_ * 10 + 10);
                                                             break 'label337
                                                            }
                                                            if p >= end { wi = 337; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 127; p = p.offset(prime_ * 6 + 6);
+                                                           *p &= 223; p = p.offset(prime_ * 2 + 2);
                                                            break 'label338
                                                           }
                                                           if p >= end { wi = 338; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 191; p = p.offset(prime_ * 4 + 4);
+                                                          *p &= 239; p = p.offset(prime_ * 4 + 4);
                                                           break 'label339
                                                          }
                                                          if p >= end { wi = 339; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 223; p = p.offset(prime_ * 2 + 2);
+                                                         *p &= 247; p = p.offset(prime_ * 2 + 2);
                                                          break 'label340
                                                         }
                                                         if p >= end { wi = 340; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 239; p = p.offset(prime_ * 4 + 4);
+                                                        *p &= 251; p = p.offset(prime_ * 4 + 4);
                                                         break 'label341
                                                        }
                                                        if p >= end { wi = 341; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 247; p = p.offset(prime_ * 2 + 2);
+                                                       *p &= 253; p = p.offset(prime_ * 6 + 6);
                                                        break 'label342
                                                       }
                                                       if p >= end { wi = 342; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 251; p = p.offset(prime_ * 4 + 4);
+                                                      *p &= 254; p = p.offset(prime_ * 2 + 1);
                                                       break 'label343
                                                      }
                                                      if p >= end { wi = 343; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 253; p = p.offset(prime_ * 6 + 6);
+                                                     *p &= 127; p = p.offset(prime_ * 6 + 6);
                                                      break 'label344
                                                     }
                                                     if p >= end { wi = 344; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 254; p = p.offset(prime_ * 2 + 1);
+                                                    *p &= 191; p = p.offset(prime_ * 4 + 4);
                                                     break 'label345
                                                    }
                                                    if p >= end { wi = 345; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 127; p = p.offset(prime_ * 6 + 6);
+                                                   *p &= 223; p = p.offset(prime_ * 2 + 2);
                                                    break 'label346
                                                   }
                                                   if p >= end { wi = 346; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 191; p = p.offset(prime_ * 4 + 4);
+                                                  *p &= 239; p = p.offset(prime_ * 4 + 4);
                                                   break 'label347
                                                  }
                                                  if p >= end { wi = 347; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 223; p = p.offset(prime_ * 2 + 2);
+                                                 *p &= 247; p = p.offset(prime_ * 6 + 6);
                                                  break 'label348
                                                 }
                                                 if p >= end { wi = 348; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 239; p = p.offset(prime_ * 4 + 4);
+                                                *p &= 253; p = p.offset(prime_ * 6 + 6);
                                                 break 'label349
                                                }
                                                if p >= end { wi = 349; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 247; p = p.offset(prime_ * 2 + 2);
+                                               *p &= 254; p = p.offset(prime_ * 2 + 1);
                                                break 'label350
                                               }
                                               if p >= end { wi = 350; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 251; p = p.offset(prime_ * 4 + 4);
+                                              *p &= 127; p = p.offset(prime_ * 6 + 6);
                                               break 'label351
                                              }
                                              if p >= end { wi = 351; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 253; p = p.offset(prime_ * 6 + 6);
+                                             *p &= 191; p = p.offset(prime_ * 4 + 4);
                                              break 'label352
                                             }
                                             if p >= end { wi = 352; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 254; p = p.offset(prime_ * 2 + 1);
+                                            *p &= 223; p = p.offset(prime_ * 2 + 2);
                                             break 'label353
                                            }
                                            if p >= end { wi = 353; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 127; p = p.offset(prime_ * 6 + 6);
+                                           *p &= 239; p = p.offset(prime_ * 6 + 6);
                                            break 'label354
                                           }
                                           if p >= end { wi = 354; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 191; p = p.offset(prime_ * 4 + 4);
+                                          *p &= 251; p = p.offset(prime_ * 4 + 4);
                                           break 'label355
                                          }
                                          if p >= end { wi = 355; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 223; p = p.offset(prime_ * 2 + 2);
+                                         *p &= 253; p = p.offset(prime_ * 6 + 6);
                                          break 'label356
                                         }
                                         if p >= end { wi = 356; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 239; p = p.offset(prime_ * 4 + 4);
+                                        *p &= 254; p = p.offset(prime_ * 8 + 7);
                                         break 'label357
                                        }
                                        if p >= end { wi = 357; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 247; p = p.offset(prime_ * 2 + 2);
+                                       *p &= 191; p = p.offset(prime_ * 4 + 4);
                                        break 'label358
                                       }
                                       if p >= end { wi = 358; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 251; p = p.offset(prime_ * 4 + 4);
+                                      *p &= 223; p = p.offset(prime_ * 2 + 2);
                                       break 'label359
                                      }
                                      if p >= end { wi = 359; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 253; p = p.offset(prime_ * 6 + 6);
+                                     *p &= 239; p = p.offset(prime_ * 4 + 4);
                                      break 'label360
                                     }
                                     if p >= end { wi = 360; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 254; p = p.offset(prime_ * 2 + 1);
+                                    *p &= 247; p = p.offset(prime_ * 2 + 2);
                                     break 'label361
                                    }
                                    if p >= end { wi = 361; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 127; p = p.offset(prime_ * 6 + 6);
+                                   *p &= 251; p = p.offset(prime_ * 4 + 4);
                                    break 'label362
                                   }
                                   if p >= end { wi = 362; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 191; p = p.offset(prime_ * 4 + 4);
+                                  *p &= 253; p = p.offset(prime_ * 8 + 7);
                                   break 'label363
                                  }
                                  if p >= end { wi = 363; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 223; p = p.offset(prime_ * 2 + 2);
+                                 *p &= 127; p = p.offset(prime_ * 6 + 6);
                                  break 'label364
                                 }
                                 if p >= end { wi = 364; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 239; p = p.offset(prime_ * 4 + 4);
+                                *p &= 191; p = p.offset(prime_ * 4 + 4);
                                 break 'label365
                                }
                                if p >= end { wi = 365; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 247; p = p.offset(prime_ * 2 + 2);
+                               *p &= 223; p = p.offset(prime_ * 6 + 6);
                                break 'label366
                               }
                               if p >= end { wi = 366; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 251; p = p.offset(prime_ * 4 + 4);
+                              *p &= 247; p = p.offset(prime_ * 2 + 2);
                               break 'label367
                              }
                              if p >= end { wi = 367; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 253; p = p.offset(prime_ * 6 + 6);
+                             *p &= 251; p = p.offset(prime_ * 4 + 4);
                              break 'label368
                             }
                             if p >= end { wi = 368; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 254; p = p.offset(prime_ * 2 + 1);
+                            *p &= 253; p = p.offset(prime_ * 6 + 6);
                             break 'label369
                            }
                            if p >= end { wi = 369; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 127; p = p.offset(prime_ * 6 + 6);
+                           *p &= 254; p = p.offset(prime_ * 2 + 1);
                            break 'label370
                           }
                           if p >= end { wi = 370; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 191; p = p.offset(prime_ * 4 + 4);
+                          *p &= 127; p = p.offset(prime_ * 6 + 6);
                           break 'label371
                          }
                          if p >= end { wi = 371; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 223; p = p.offset(prime_ * 2 + 2);
+                         *p &= 191; p = p.offset(prime_ * 6 + 6);
                          break 'label372
                         }
                         if p >= end { wi = 372; break 'outer; }
@@ -4608,12 +4608,12 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
               }
               if p >= end { wi = 382; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 251; p = p.offset(prime_ * 4 + 4);
+              *p &= 251; p = p.offset(prime_ * 10 + 10);
               break 'label383
              }
              if p >= end { wi = 383; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 253; p = p.offset(prime_ * 6 + 6);
+             *p &= 254; p = p.offset(prime_ * 2 + 1);
              wi = 336
             }
         }
