@@ -59,12 +59,8 @@ impl Sieve {
         match wheel::small_for(limit) {
             Some(bits) => {
                 nbits = bits.len();
-                seen = vec![Item::new(bits, &mut 0)];
-                // this is a bit of a lie, but this length only
-                // matters when computing indices into `seen`, and
-                // everything will be in the first and only one in
-                // this case.
-                seg_bits = Some(nbits + 1)
+                seen.push(Item::new(bits, &mut 0));
+                seg_bits = Some(nbits)
             }
             None => {
                 let mut stream = streaming::new(limit);
@@ -79,8 +75,18 @@ impl Sieve {
                 }
             }
         }
+        // this is a bit of a lie, but this length only matters when
+        // computing indices into `seen`, and everything will be in
+        // the first and only one in this case, so we better ensure
+        // that all queries get fed into that array (there's been
+        // panics from the limit being used as a query for
+        // e.g. prime_pi, as split_index would return (1, 0),
+        // suggesting that code look at a non-existant element of
+        // seen).
+        let seg_bits_adjust = if seen.len() == 1 { 1 } else { 0 };
+
         Sieve {
-            seg_bits: seg_bits.unwrap(),
+            seg_bits: seg_bits.unwrap() + seg_bits_adjust,
             nbits: nbits,
             seen: seen,
         }
@@ -683,6 +689,17 @@ mod tests {
         // with a wheel size of 30, this would take more bits than fit
         // in a usize.
         Sieve::new(::std::usize::MAX / 30 * 8);
+    }
+
+    #[test]
+    fn prime_pi_sieve_limit() {
+        // previously, these numbers would result in an index
+        // out-of-bounds when used as the limit and the number fed to
+        // prime_pi.
+        for limit in 19998..20004 {
+            let sieve = Sieve::new(limit);
+            sieve.prime_pi(limit);
+        }
     }
 }
 
