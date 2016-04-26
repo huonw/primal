@@ -20,8 +20,8 @@ primal-estimate = { path = "../primal-estimate", version = "0.2" }
 hamming = "0.1"
 
 [dev-dependencies]
-primal-slowsieve = { path = "../primal-slowsieve", version = "*" }
-primal = { path = "..", version = "*" }
+primal-slowsieve = { path = "../primal-slowsieve", version = "0.2" }
+primal = { path = "..", version = "0.2" }
 
 [features]
 unstable = []

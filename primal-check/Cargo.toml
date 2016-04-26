@@ -17,7 +17,7 @@ Fast standalone primality testing.
 num = "0"
 
 [dev-dependencies]
-primal = { path = "..", version = "*" }
+primal = { path = "..", version = "0.2" }
 
 [features]
 unstable = []
