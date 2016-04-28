@@ -175,9 +175,9 @@ impl StreamingSieve {
 
     fn add_sieving_prime(&mut self, p: usize, low: usize) {
         if p <= CACHE / 2 {
-            self.small_primes.push(wheel::compute_wheel_elem(wheel::Wheel30, p, low));
+            self.small_primes.push(wheel::State::new(wheel::Wheel30, p, low));
         } else {
-            let elem = wheel::compute_wheel_elem(wheel::Wheel210, p, low);
+            let elem = wheel::State::new(wheel::Wheel210, p, low);
             if p < CACHE * 5 / 2 {
                 self.primes.push(elem)
             } else {
@@ -188,16 +188,13 @@ impl StreamingSieve {
 
     fn find_new_sieving_primes(&mut self, low: usize, high: usize) {
         if let Some(small) = self.small.take() {
-            let mut s = self.current;
-            assert!(s % 2 == 1);
-            while s * s <= high {
-                if small.is_prime(s) {
-                    self.add_sieving_prime(s, low)
+            for p in small.primes_from(self.current) {
+                if p * p >= high {
+                    self.current = p;
+                    break
                 }
-                s += 2
+                self.add_sieving_prime(p, low);
             }
-
-            self.current = s;
             self.small = Some(small);
         }
     }

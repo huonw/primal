@@ -5,6 +5,4 @@ authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 [dependencies]
 primal-slowsieve = { path = "../primal-slowsieve", version = "0.2" }
-
-[features]
-thirty = []
+primal-check = { path = "../primal-check", version = "0.2" }

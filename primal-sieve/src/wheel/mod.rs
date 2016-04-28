@@ -4,6 +4,14 @@ use primal_bit::BitVec;
 pub const BYTE_SIZE: usize = 8;
 pub const BYTE_MODULO: usize = 30;
 
+const WHEEL_OFFSETS: &'static [usize; BYTE_MODULO] = &[
+    0, 0, 0, 0, 0, 0,
+    0, 1, 0, 0, 0, 2,
+    0, 3, 0, 0, 0, 4,
+    0, 5, 0, 0, 0, 6,
+    0, 0, 0, 0, 0, 7,
+    ];
+
 pub fn small_for(x: usize) -> Option<BitVec> {
     let bits = bits_for(x);
     if bits < wheel30::SMALL_BITS {
@@ -80,6 +88,30 @@ pub struct State<W> {
     sieve_index: SI,
 }
 impl<W: Wheel> State<W> {
+    pub fn new(w: W, p: usize, low: usize) -> State<W> {
+        let q = cmp::max(low / p + 1, p);
+        // the smallest (interesting) multiple of p larger than low
+        let mut mult = p * q;
+
+        let init = &w.init()[q % w.modulo()];
+        // push it up to the smallest multiple that is in the wheel
+        mult += p * init.next_mult_factor as usize;
+
+        // find the memory location to write to
+        let low_offset = mult - low;
+        let sieve_index = low_offset / BYTE_MODULO;
+        // and now the right info to write
+        let wheel_index = WHEEL_OFFSETS[p % BYTE_MODULO] * w.size() + init.wheel_index as usize;
+
+        let prime = p / BYTE_MODULO;
+        State {
+            wheel: w,
+            prime: prime as u32,
+            sieve_index: sieve_index as SI,
+            wheel_index: wheel_index as WI,
+        }
+    }
+
     #[inline]
     pub fn sieve(&mut self, bytes: &mut [u8]) {
         let bytes = bytes;
@@ -223,40 +255,6 @@ fn raw_set_bit(wheel: &'static [WheelElem],
     *si += prime * next_mult_factor as usize;
     *si += correction as usize;
     *wi = wi.wrapping_add(next as usize);
-}
-
-
-const WHEEL_OFFSETS: &'static [usize; BYTE_MODULO] = &[
-    0, 0, 0, 0, 0, 0,
-    0, 1, 0, 0, 0, 2,
-    0, 3, 0, 0, 0, 4,
-    0, 5, 0, 0, 0, 6,
-    0, 0, 0, 0, 0, 7,
-    ];
-
-#[inline(never)]
-pub fn compute_wheel_elem<W: Wheel>(w: W, p: usize, low: usize) -> State<W> {
-    let q = cmp::max(low / p + 1, p);
-    // the smallest (interesting) multiple of p larger than low
-    let mut mult = p * q;
-
-    let init = &w.init()[q % w.modulo()];
-    // push it up to the smallest multiple that is in the wheel
-    mult += p * init.next_mult_factor as usize;
-
-    // find the memory location to write to
-    let low_offset = mult - low;
-    let sieve_index = low_offset / BYTE_MODULO;
-    // and now the right info to write
-    let wheel_index = WHEEL_OFFSETS[p % BYTE_MODULO] * w.size() + init.wheel_index as usize;
-
-    let prime = p / BYTE_MODULO;
-    State {
-        wheel: w,
-        prime: prime as u32,
-        sieve_index: sieve_index as SI,
-        wheel_index: wheel_index as WI,
-    }
 }
 
 mod wheel30;

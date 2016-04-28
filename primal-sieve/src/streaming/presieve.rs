@@ -40,7 +40,7 @@ impl Presieve {
             for &x in &PRESIEVE_PRIMES[..idx] {
                 let (use_, _idx) = wheel::bit_index(x);
                 if use_ {
-                    sievers.push(wheel::compute_wheel_elem(wheel::Wheel30, x, prod));
+                    sievers.push(wheel::State::new(wheel::Wheel30, x, prod));
                 }
             }
             let mut sieve =  BitVec::from_elem(len, true);

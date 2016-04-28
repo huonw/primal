@@ -1,8 +1,9 @@
 extern crate primal_slowsieve;
+extern crate primal_check;
 
 use std::io::prelude::*;
-use std::io;
-use std::collections::BTreeMap;
+use std::{io, env};
+use std::collections::{BTreeMap, HashSet};
 
 macro_rules! errln {
     ($($fmt: tt)*) => {
@@ -38,24 +39,29 @@ const BYTE_COUNT: usize = 1 * 2 * 4;
 
 const SMALL_LIMIT: usize = 10_000;
 
-#[cfg(not(feature = "thirty"))]
-const WHEEL: usize = 2 * 3 * 5 * 7;
-#[cfg(not(feature = "thirty"))]
-const COUNT: usize = 1 * 2 * 4 * 6;
-
-#[cfg(feature = "thirty")]
-const WHEEL: usize = 2 * 3 * 5;
-#[cfg(feature = "thirty")]
-const COUNT: usize = 1 * 2 * 4;
-
 fn main() {
-    errln!("wheel for {} (count {})", WHEEL, COUNT);
+    let primes = env::args()
+        .skip(1)
+        .map(|x| x.parse::<usize>().expect(&format!("could not parse `{}` as a positive integer", x)))
+        .collect::<Vec<_>>();
+
+    assert!(primes.len() > 0, "need at least one prime to make a wheel");
+    for p in &primes {
+        assert!(primal_check::miller_rabin(*p as u64), "{} is not prime", p);
+    }
+    assert!(primes.len() == primes.iter().collect::<HashSet<_>>().len(),
+            "some primes were non-unique");
+
+    let wheel = primes.iter().fold(1, |x, y| x * *y);
+    let count = primes.iter().fold(1, |x, y| x * (*y - 1));
+
+    errln!("wheel for {} (count {})", wheel, count);
     let byte_coprime = coprime_to(BYTE_WHEEL, BYTE_WHEEL);
-    let coprime = coprime_to(WHEEL, WHEEL);
+    let coprime = coprime_to(wheel, wheel);
     let mut diff_to_next = BTreeMap::new();
     for (i, &c) in coprime.iter().enumerate() {
         let next = coprime[(i + 1) % coprime.len()];
-        diff_to_next.insert(c, ((WHEEL + next) - c) % WHEEL);
+        diff_to_next.insert(c, ((wheel + next) - c) % wheel);
     }
 
     // The main workhorse.
@@ -156,12 +162,12 @@ pub const SIZE: usize = {size};
 
 pub const MODULO: usize = {modulo};
 ",
-             size = COUNT,
-             modulo = WHEEL);
+             size = count,
+             modulo = wheel);
 
-    let length_u64s = div_up(SMALL_LIMIT * COUNT, WHEEL * 64);
+    let length_u64s = div_up(SMALL_LIMIT * count, wheel * 64);
     let length_bits = length_u64s * 64;
-    let sieve = primal_slowsieve::Primes::sieve(length_bits * WHEEL / COUNT);
+    let sieve = primal_slowsieve::Primes::sieve(length_bits * wheel / count);
     println!("\
 #[allow(dead_code)]
 pub const SMALL_BITS: usize = {};
@@ -183,9 +189,9 @@ pub const SMALL: &'static [u64; SMALL_BITS / 64] = &[", length_bits);
     // next one that isn't eliminated by the wheel, indicating which
     // multiple it is (for indexing into the next one, which is
     // ordered by multiple)
-    println!("const INIT: &'static [WheelInit; {}] = &[", WHEEL);
+    println!("const INIT: &'static [WheelInit; {}] = &[", wheel);
     let mut next = 0;
-    for (i, &y) in coprime_to(WHEEL, WHEEL).iter().enumerate() {
+    for (i, &y) in coprime_to(wheel, wheel).iter().enumerate() {
         for x in next..y + 1 {
             println!("    WheelInit {{ next_mult_factor: {}, wheel_index: {} }}, // {}",
                      y - x, i, x)
@@ -195,7 +201,7 @@ pub const SMALL: &'static [u64; SMALL_BITS / 64] = &[", length_bits);
     println!("];");
 
     // now print the full wheel!
-    println!("const WHEEL: &'static [WheelElem; {}] = &[", BYTE_COUNT * COUNT);
+    println!("const WHEEL: &'static [WheelElem; {}] = &[", BYTE_COUNT * count);
     for (c, cur_infos) in byte_coprime.iter().zip(&infos) {
         println!("    // remainder {}", c);
 
@@ -204,7 +210,7 @@ pub const SMALL: &'static [u64; SMALL_BITS / 64] = &[", length_bits);
                      info.unset_bit,
                      info.diff_mult_factor,
                      info.correction,
-                     if i == COUNT - 1 { -(i as isize) } else { 1 })
+                     if i == count - 1 { -(i as isize) } else { 1 })
         }
     }
     println!("];");
@@ -230,10 +236,10 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
 
     'outer: loop {{
     match wi {{",
-             wheel = WHEEL);
+             wheel = wheel);
     for (i, (&c, cur_infos)) in coprime.iter().zip(&infos).enumerate() {
-        let wheel_start = i * COUNT;
-        let wheel_end = (i + 1) * COUNT;
+        let wheel_start = i * count;
+        let wheel_end = (i + 1) * count;
         println!("        {}...{} => {{ // {} * x + {}",
                  wheel_start, wheel_end - 1,
                  BYTE_WHEEL, c);
@@ -241,17 +247,17 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
         println!("\
 {indent}loop {{",
                      indent = indent);
-        for j in (0..COUNT).rev() {
+        for j in (0..count).rev() {
             indent.push_str(" ");
             println!("{}'label{}: loop {{", indent, wheel_start + j);
         }
 
         println!("\
 {indent} match wi {{", indent = indent);
-        for j in 0..COUNT - 1 {
+        for j in 0..count - 1 {
             println!("{}  {1} => break 'label{1},", indent, wheel_start + j);
         }
-        println!("{}  _ => break 'label{},", indent, wheel_start + COUNT - 1);
+        println!("{}  _ => break 'label{},", indent, wheel_start + count - 1);
         println!("{} }}", indent);
         println!("{}}}", indent);
         println!("\
@@ -267,18 +273,18 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                      // p starts at offset 1 * prime_, so strip off
                      // that factor.
                      sl = info.total_mult_factor - 1,
-                     off = info.total_add_factor / WHEEL,
+                     off = info.total_add_factor / wheel,
                      bit = info.unset_bit, indent = indent);
         }
         println!("
 {indent}    p = p.offset(prime_ * {} + {})
 {indent}}}",
-                 WHEEL, c,
+                 wheel, c,
                  indent = indent);
 
         for (j, info) in cur_infos.iter().enumerate() {
             indent.pop();
-            let end = if j + 1 == COUNT {
+            let end = if j + 1 == count {
                 format!("wi = {}", wheel_start)
             } else {
                 format!("break 'label{}", wheel_start + j + 1)
