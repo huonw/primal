@@ -174,11 +174,11 @@ impl StreamingSieve {
     }
 
     fn add_sieving_prime(&mut self, p: usize, low: usize) {
-        if p <= SEG_LEN / 100 {
+        if p <= CACHE / 2 {
             self.small_primes.push(wheel::compute_wheel_elem(wheel::Wheel30, p, low));
         } else {
             let elem = wheel::compute_wheel_elem(wheel::Wheel210, p, low);
-            if p < SEG_LEN / 2 {
+            if p < CACHE * 5 / 2 {
                 self.primes.push(elem)
             } else {
                 self.large_primes.push(elem)
