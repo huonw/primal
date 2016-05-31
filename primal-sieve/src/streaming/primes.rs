@@ -1,6 +1,7 @@
 use wheel;
 use streaming::{self, StreamingSieve};
 use std::vec;
+use std::sync::Arc;
 
 const ITER_BASE_STEP: usize = 8 * wheel::BYTE_MODULO;
 
@@ -70,14 +71,14 @@ impl Primes {
             (Some(Box::new(Primes::sqrt(streaming::isqrt(sqrt)))),
              streaming::SEG_LEN)
         };
-        let mut streaming = StreamingSieve::new(limit);
+        let mut streaming = StreamingSieve::new(0, limit);
 
         let mut iter = {
             let (_, bits) = streaming.next().unwrap();
             bits.as_u64s().to_owned().into_iter()
         };
         // we manually add the primes
-        streaming.small = None;
+        streaming.small = Arc::new(None);
         // go to the end.
         streaming.limit = !0;
 

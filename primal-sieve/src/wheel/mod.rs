@@ -88,7 +88,7 @@ pub struct State<W> {
     sieve_index: SI,
 }
 impl<W: Wheel> State<W> {
-    pub fn new(w: W, p: usize, low: usize) -> State<W> {
+    pub fn new(w: W, p: usize, low: usize, offset: bool) -> State<W> {
         let q = cmp::max(low / p + 1, p);
         // the smallest (interesting) multiple of p larger than low
         let mut mult = p * q;
@@ -98,7 +98,7 @@ impl<W: Wheel> State<W> {
         mult += p * init.next_mult_factor as usize;
 
         // find the memory location to write to
-        let low_offset = mult - low;
+        let low_offset = if offset { mult - low } else { mult };
         let sieve_index = low_offset / BYTE_MODULO;
         // and now the right info to write
         let wheel_index = WHEEL_OFFSETS[p % BYTE_MODULO] * w.size() + init.wheel_index as usize;
@@ -110,6 +110,12 @@ impl<W: Wheel> State<W> {
             sieve_index: sieve_index as SI,
             wheel_index: wheel_index as WI,
         }
+    }
+
+    pub fn adjust_big_sieve_index(&mut self, log2_size: usize) -> usize {
+        let ret = self.sieve_index >> log2_size;
+        self.sieve_index &= (1 << log2_size) - 1;
+        ret as usize
     }
 
     #[inline]
@@ -126,6 +132,21 @@ impl<W: Wheel> State<W> {
         }
         self.sieve_index = si.wrapping_sub(top) as SI;
         self.wheel_index = wi as WI;
+    }
+    #[inline]
+    pub fn sieve_once(&mut self, bytes: &mut [u8]) -> usize {
+        let bytes = bytes;
+        let top = bytes.len();
+
+        let mut si = self.sieve_index as usize;
+        let mut wi = self.wheel_index as usize;
+        let p = self.prime as usize;
+        raw_set_bit(self.wheel.wheel(),
+                    bytes, &mut si, &mut wi, p);
+        self.sieve_index = si as SI;
+        self.wheel_index = wi as WI;
+
+        si
     }
     #[inline]
     pub fn sieve_pair(&mut self, self2: &mut State<W>, bytes: &mut [u8]) {
@@ -162,6 +183,34 @@ impl<W: Wheel> State<W> {
         self2.sieve_index = si2.wrapping_sub(top) as SI;
         self2.wheel_index = wi2 as WI;
     }
+
+    pub fn sieve_pair_once(&mut self, self2: &mut State<W>,
+                           bytes: &mut [u8]) -> (usize, usize)
+    {
+        let bytes = bytes;
+        let top = bytes.len();
+        let wheel = self.wheel.wheel();
+
+        let mut si1 = self.sieve_index as usize;
+        let mut wi1 = self.wheel_index as usize;
+        let p1 = self.prime as usize;
+        let mut si2 = self2.sieve_index as usize;
+        let mut wi2 = self2.wheel_index as usize;
+        let p2 = self2.prime as usize;
+
+        raw_set_bit(wheel,
+                    bytes, &mut si1, &mut wi1, p1);
+        raw_set_bit(wheel,
+                    bytes, &mut si2, &mut wi2, p2);
+
+        self.sieve_index = (si1 & (top - 1)) as SI;
+        self.wheel_index = wi1 as WI;
+        self2.sieve_index = (si2 & (top - 1)) as SI;
+        self2.wheel_index = wi2 as WI;
+
+        (si1, si2)
+    }
+
     pub fn sieve_triple(&mut self, self2: &mut State<W>, self3: &mut State<W>,
                         bytes: &mut [u8]) {
         let bytes = bytes;

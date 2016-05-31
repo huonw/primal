@@ -17,6 +17,7 @@ A high performance prime sieve.
 primal-bit = { path = "../primal-bit", version = "0.2.2" }
 primal-estimate = { path = "../primal-estimate", version = "0.2" }
 
+threadpool = "1.0"
 hamming = "0.1"
 
 [dev-dependencies]

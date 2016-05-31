@@ -10,6 +10,7 @@
 extern crate primal_bit;
 extern crate primal_estimate;
 extern crate hamming;
+extern crate threadpool;
 
 // black boxes for pointers; LLVM isn't so happy without
 // them. Unfortunately only usable with unstable, but the code isn't

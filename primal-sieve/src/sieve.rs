@@ -325,6 +325,66 @@ impl Sieve {
         }
     }
 
+    /// Return the smallest prime larger than `n`.
+    ///
+    /// # Panics
+    ///
+    /// This function panics if the prime after `n` is greater than
+    /// the upper bound of this sieve (`self.upper_bound()`), which
+    /// notably includes when `n` itself is larger.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// let sieve = primal::Sieve::new(1000);
+    ///
+    /// assert_eq!(sieve.next_prime(0), 2);
+    /// assert_eq!(sieve.next_prime(1), 2);
+    /// assert_eq!(sieve.next_prime(2), 3);
+    /// assert_eq!(sieve.next_prime(3), 5);
+    /// assert_eq!(sieve.next_prime(4), 5);
+    /// assert_eq!(sieve.next_prime(5), 7);
+    ///
+    /// assert_eq!(sieve.next_prime(990), 991);
+    /// assert_eq!(sieve.next_prime(991), 997);
+    /// ```
+    pub fn next_prime(&self, n: usize) -> usize {
+        match n {
+            0 | 1 => 2,
+            2 => 3,
+            3 | 4 => 5,
+            _ => {
+                assert!(n < self.upper_bound());
+
+                let (_, base, tweak) = self.index_for(n);
+                let (mut tweak_u64, tweak_bit) = (tweak / 64, tweak % 64);
+                let low = (base * self.seg_bits / 64 + tweak_u64) * ITER_BASE_STEP;
+                let tweak_mask = (!0) << tweak_bit;
+
+                let current = self.seen[base].bits.as_u64s()[tweak_u64];
+                if current & tweak_mask != 0 {
+                    let lsb = current.trailing_zeros();
+                    return low + wheel::TRUE_AT_BIT_64[lsb as usize]
+                }
+                tweak_u64 += 1;
+
+                for seen in &self.seen[base..] {
+                    for &c in seen.bits.as_u64s()[tweak_u64..].iter() {
+                        if c != 0 {
+                            let lsb = c.trailing_zeros();
+                            return low + wheel::TRUE_AT_BIT_64[lsb as usize]
+                        }
+                    }
+
+                    // starting a new bit vector, from the start.
+                    tweak_u64 = 0;
+                }
+                panic!("next_prime: prime too large")
+            }
+        }
+    }
+
     /// Return an iterator over the primes from `n` (inclusive) to the
     /// end of this sieve.
     ///
