@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Primes","An iterator over all primes."],["Sieve","A heavily optimised prime sieve."],["SievePrimes","An iterator over the primes stored in a `Sieve` instance."],["StreamingSieve","A heavily optimised prime sieve."]]});

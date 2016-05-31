@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Sieve` struct in crate `primal_sieve`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Sieve">
+
+    <title>primal_sieve::Sieve - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>primal_sieve</a></p><script>window.sidebarCurrent = {name: 'Sieve', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>primal_sieve</a>::<wbr><a class='struct' href=''>Sieve</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-518' class='srclink' href='../src/primal_sieve/primal-sieve/src/sieve.rs.html#30-34' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Sieve {
+    // some fields omitted
+}</pre><div class='docblock'><p>A heavily optimised prime sieve.</p>
+
+<p>This stores information about primes up to some specified limit,
+allowing efficient queries of information about them. This caches
+the successive outputs of <code>StreamingSieve</code> and has very similar
+performance, modulo the differences in memory use: to cache the
+information <code>Sieve</code> uses approximately <code>limit / 30 + O(sqrt(limit))</code> bytes of memory. Consider directly using
+<code>StreamingSieve</code> if repeated queries are unnecessary, since that
+uses only <code>O(sqrt(limit))</code> bytes.</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>sieve</span> <span class='op'>=</span> <span class='ident'>primal</span>::<span class='ident'>Sieve</span>::<span class='ident'>new</span>(<span class='number'>10_000_000</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>prime_pi</span>(<span class='number'>123456</span>), <span class='number'>11601</span>);
+
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>is_prime</span>(<span class='number'>6395047</span>));
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>sieve</span>.<span class='ident'>is_prime</span>(<span class='number'>6395048</span>));</pre>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../primal_sieve/struct.Sieve.html' title='primal_sieve::Sieve'>Sieve</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(limit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='../primal_sieve/struct.Sieve.html' title='primal_sieve::Sieve'>Sieve</a></code></h4>
+<div class='docblock'><p>Create a new instance, sieving out all the primes up to
+<code>limit</code>.</p>
+</div><h4 id='method.upper_bound' class='method'><code>fn <a href='#method.upper_bound' class='fnname'>upper_bound</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+<div class='docblock'><p>Return the largest number that this sieve knows about.</p>
+
+<p>It will be at least as large as the number passed to <code>new</code>,
+but may be slightly larger.</p>
+
+<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>sieve</span> <span class='op'>=</span> <span class='ident'>primal</span>::<span class='ident'>Sieve</span>::<span class='ident'>new</span>(<span class='number'>1000</span>);
+
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>upper_bound</span>() <span class='op'>&gt;=</span> <span class='number'>1000</span>);</pre>
+</div><h4 id='method.is_prime' class='method'><code>fn <a href='#method.is_prime' class='fnname'>is_prime</a>(&amp;self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Determine if <code>n</code> is a prime number.</p>
+
+<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
+<p>If <code>n</code> is out of range (greater than <code>self.upper_bound()</code>),
+<code>is_prime</code> will panic.</p>
+
+<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>sieve</span> <span class='op'>=</span> <span class='ident'>primal</span>::<span class='ident'>Sieve</span>::<span class='ident'>new</span>(<span class='number'>1000</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>is_prime</span>(<span class='number'>0</span>), <span class='boolval'>false</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>is_prime</span>(<span class='number'>1</span>), <span class='boolval'>false</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>is_prime</span>(<span class='number'>2</span>), <span class='boolval'>true</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>is_prime</span>(<span class='number'>3</span>), <span class='boolval'>true</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>is_prime</span>(<span class='number'>4</span>), <span class='boolval'>false</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>is_prime</span>(<span class='number'>5</span>), <span class='boolval'>true</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>is_prime</span>(<span class='number'>991</span>), <span class='boolval'>true</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>is_prime</span>(<span class='number'>993</span>), <span class='boolval'>false</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>is_prime</span>(<span class='number'>995</span>), <span class='boolval'>false</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>is_prime</span>(<span class='number'>997</span>), <span class='boolval'>true</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>is_prime</span>(<span class='number'>999</span>), <span class='boolval'>false</span>);</pre>
+</div><h4 id='method.prime_pi' class='method'><code>fn <a href='#method.prime_pi' class='fnname'>prime_pi</a>(&amp;self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+<div class='docblock'><p>Count the number of primes upto and including <code>n</code>.</p>
+
+<h1 id='panics-1' class='section-header'><a href='#panics-1'>Panics</a></h1>
+<p>If <code>n</code> is out of range (greater than <code>self.upper_bound()</code>),
+<code>prime_pi</code> will panic.</p>
+
+<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>sieve</span> <span class='op'>=</span> <span class='ident'>primal</span>::<span class='ident'>Sieve</span>::<span class='ident'>new</span>(<span class='number'>1000</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>prime_pi</span>(<span class='number'>10</span>), <span class='number'>4</span>);
+<span class='comment'>// the endpoint is included</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>prime_pi</span>(<span class='number'>11</span>), <span class='number'>5</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>prime_pi</span>(<span class='number'>100</span>), <span class='number'>25</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>prime_pi</span>(<span class='number'>1000</span>), <span class='number'>168</span>);</pre>
+</div><h4 id='method.factor' class='method'><code>fn <a href='#method.factor' class='fnname'>factor</a>(&amp;self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>&gt;, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>&gt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>&gt;</code></h4>
+<div class='docblock'><p>Factorise <code>n</code> into (prime, exponent) pairs.</p>
+
+<p>Returns <code>Err((leftover, partial factorisation))</code> if <code>n</code> cannot
+be fully factored, or if <code>n</code> is zero (<code>leftover == 0</code>). A
+number can not be completely factored if and only if the prime
+factors of <code>n</code> are too large for this sieve, that is, if there
+is</p>
+
+<ul>
+<li>a prime factor larger than <code>U^2</code>, or</li>
+<li>more than one prime factor between <code>U</code> and <code>U^2</code></li>
+</ul>
+
+<p>where <code>U</code> is the upper bound of the primes stored in this
+sieve.</p>
+
+<p>Notably, any number between <code>U</code> and <code>U^2</code> can always be fully
+factored, since these numbers are guaranteed to only have zero
+or one prime factors larger than <code>U</code>.</p>
+
+<h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>sieve</span> <span class='op'>=</span> <span class='ident'>primal</span>::<span class='ident'>Sieve</span>::<span class='ident'>new</span>(<span class='number'>100</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>factor</span>(<span class='number'>2</span>), <span class='prelude-val'>Ok</span>(<span class='macro'>vec</span><span class='macro'>!</span>[(<span class='number'>2</span>, <span class='number'>1</span>)]));
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>factor</span>(<span class='number'>4</span>), <span class='prelude-val'>Ok</span>(<span class='macro'>vec</span><span class='macro'>!</span>[(<span class='number'>2</span>, <span class='number'>2</span>)]));
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>factor</span>(<span class='number'>1</span> <span class='op'>&lt;&lt;</span> <span class='number'>31</span>), <span class='prelude-val'>Ok</span>(<span class='macro'>vec</span><span class='macro'>!</span>[(<span class='number'>2</span>, <span class='number'>31</span>)]));
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>factor</span>(<span class='number'>18</span>), <span class='prelude-val'>Ok</span>(<span class='macro'>vec</span><span class='macro'>!</span>[(<span class='number'>2</span>, <span class='number'>1</span>), (<span class='number'>3</span>, <span class='number'>2</span>)]));
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>factor</span>(<span class='number'>25</span> <span class='op'>*</span> <span class='number'>81</span>), <span class='prelude-val'>Ok</span>(<span class='macro'>vec</span><span class='macro'>!</span>[(<span class='number'>3</span>, <span class='number'>4</span>), (<span class='number'>5</span>, <span class='number'>2</span>)]));
+
+<span class='comment'>// &quot;large&quot; prime factors are OK, as long as there&#39;s only one</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>factor</span>(<span class='number'>2</span> <span class='op'>*</span> <span class='number'>3</span> <span class='op'>*</span> <span class='number'>97</span> <span class='op'>*</span> <span class='number'>97</span> <span class='op'>*</span> <span class='number'>991</span>),
+           <span class='prelude-val'>Ok</span>(<span class='macro'>vec</span><span class='macro'>!</span>[(<span class='number'>2</span>, <span class='number'>1</span>), (<span class='number'>3</span>, <span class='number'>1</span>), (<span class='number'>97</span>, <span class='number'>2</span>), (<span class='number'>991</span>, <span class='number'>1</span>)]));
+
+<span class='comment'>// too many large factors is problematic</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>factor</span>(<span class='number'>991</span> <span class='op'>*</span> <span class='number'>991</span>),
+           <span class='prelude-val'>Err</span>((<span class='number'>991</span> <span class='op'>*</span> <span class='number'>991</span>, <span class='macro'>vec</span><span class='macro'>!</span>[])));
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>factor</span>(<span class='number'>2</span> <span class='op'>*</span> <span class='number'>3</span> <span class='op'>*</span> <span class='number'>97</span> <span class='op'>*</span> <span class='number'>97</span> <span class='op'>*</span> <span class='number'>991</span> <span class='op'>*</span> <span class='number'>991</span>),
+           <span class='prelude-val'>Err</span>((<span class='number'>991</span> <span class='op'>*</span> <span class='number'>991</span>, <span class='macro'>vec</span><span class='macro'>!</span>[(<span class='number'>2</span>, <span class='number'>1</span>), (<span class='number'>3</span>, <span class='number'>1</span>), (<span class='number'>97</span>, <span class='number'>2</span>)])));</pre>
+</div><h4 id='method.nth_prime' class='method'><code>fn <a href='#method.nth_prime' class='fnname'>nth_prime</a>(&amp;self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+<div class='docblock'><p>Compute <em>p<sub>n</sub></em>, the <code>n</code> prime number, 1-indexed
+(i.e. <em>p<sub>1</sub></em> = 2, <em>p<sub>2</sub></em> = 3).</p>
+
+<h1 id='panics-2' class='section-header'><a href='#panics-2'>Panics</a></h1>
+<p><code>n</code> must be larger than 0 and less than the total number of
+primes in this sieve (that is,
+<code>self.prime_pi(self.upper_bound())</code>).</p>
+
+<h1 id='example' class='section-header'><a href='#example'>Example</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> (_, <span class='ident'>hi</span>) <span class='op'>=</span> <span class='ident'>primal</span>::<span class='ident'>estimate_nth_prime</span>(<span class='number'>1_000</span>);
+
+<span class='kw'>let</span> <span class='ident'>sieve</span> <span class='op'>=</span> <span class='ident'>primal</span>::<span class='ident'>Sieve</span>::<span class='ident'>new</span>(<span class='ident'>hi</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>nth_prime</span>(<span class='number'>10</span>), <span class='number'>29</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>nth_prime</span>(<span class='number'>100</span>), <span class='number'>541</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>sieve</span>.<span class='ident'>nth_prime</span>(<span class='number'>1_000</span>), <span class='number'>7919</span>);</pre>
+</div><h4 id='method.primes_from' class='method'><code>fn <a href='#method.primes_from' class='fnname'>primes_from</a>&lt;'a&gt;(&amp;'a self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='../primal_sieve/struct.SievePrimes.html' title='primal_sieve::SievePrimes'>SievePrimes</a>&lt;'a&gt;</code></h4>
+<div class='docblock'><p>Return an iterator over the primes from <code>n</code> (inclusive) to the
+end of this sieve.</p>
+
+<p>NB. it is not guaranteed that the end is the same as the limit
+passed to <code>new</code>: it may be larger. Consider using <code>take_while</code>
+if the limit must be exact.</p>
+
+<h1 id='panics-3' class='section-header'><a href='#panics-3'>Panics</a></h1>
+<p>If <code>n</code> is out of range (greater than <code>self.upper_bound()</code>),
+<code>prime_pi</code> will panic.</p>
+
+<h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>sieve</span> <span class='op'>=</span> <span class='ident'>primal</span>::<span class='ident'>Sieve</span>::<span class='ident'>new</span>(<span class='number'>1_000</span>);
+
+<span class='comment'>// print the three digit primes</span>
+<span class='kw'>for</span> <span class='ident'>p</span> <span class='kw'>in</span> <span class='ident'>sieve</span>.<span class='ident'>primes_from</span>(<span class='number'>100</span>).<span class='ident'>take_while</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='op'>*</span><span class='ident'>x</span> <span class='op'>&lt;</span> <span class='number'>1000</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>p</span>);
+}</pre>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../primal_sieve/struct.Sieve.html' title='primal_sieve::Sieve'>Sieve</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "primal_sieve";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

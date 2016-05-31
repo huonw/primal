@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `hamming` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, hamming">
+
+    <title>hamming - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'hamming', ty: 'mod', relpath: '../'};</script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>hamming</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-0' class='srclink' href='../src/hamming/lib.rs.html#1-29' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>A crate to count ones and xor bytes, fast (aka popcount, hamming
+weight and hamming distance).</p>
+
+<h1 id='installation' class='section-header'><a href='#installation'>Installation</a></h1>
+<p>Add this to your <code>Cargo.toml</code>:</p>
+
+<pre><code class="language-toml">[dependencies]
+hamming = &quot;0.1&quot;
+</code></pre>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>hamming</span>::<span class='ident'>weight</span>(<span class='kw-2'>&amp;</span>[<span class='number'>1</span>, <span class='number'>0xFF</span>, <span class='number'>1</span>, <span class='number'>0xFF</span>]), <span class='number'>1</span> <span class='op'>+</span> <span class='number'>8</span> <span class='op'>+</span> <span class='number'>1</span> <span class='op'>+</span> <span class='number'>8</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>hamming</span>::<span class='ident'>distance</span>(<span class='kw-2'>&amp;</span>[<span class='number'>1</span>, <span class='number'>0xFF</span>], <span class='kw-2'>&amp;</span>[<span class='number'>0xFF</span>, <span class='number'>1</span>]), <span class='number'>7</span> <span class='op'>+</span> <span class='number'>7</span>);</pre>
+</div><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.distance.html'
+                                  title='hamming::distance'>distance</a></td>
+                           <td class='docblock short'>
+                                <p>Computes the bitwise <a href="https://en.wikipedia.org/wiki/Hamming_distance">Hamming
+distance</a> between
+<code>x</code> and <code>y</code>, that is, the number of bits where <code>x</code> and <code>y</code> differ,
+or, the number of set bits in the xor of <code>x</code> and <code>y</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.distance_fast.html'
+                                  title='hamming::distance_fast'>distance_fast</a></td>
+                           <td class='docblock short'>
+                                <p>Computes the bitwise <a href="https://en.wikipedia.org/wiki/Hamming_distance">Hamming
+distance</a> between
+<code>x</code> and <code>y</code>, that is, the number of bits where <code>x</code> and <code>y</code> differ,
+or, the number of set bits in the xor of <code>x</code> and <code>y</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.weight.html'
+                                  title='hamming::weight'>weight</a></td>
+                           <td class='docblock short'>
+                                <p>Computes the <a href="https://en.wikipedia.org/wiki/Hamming_weight">Hamming
+weight</a> of <code>x</code>, that
+is, the population count, or number of ones.</p>
+                           </td>
+                       </tr></table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "hamming";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>
