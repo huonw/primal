@@ -16,7 +16,7 @@ A high performance prime sieve.
 [dependencies]
 primal-bit = { path = "../primal-bit", version = "0.2.2" }
 primal-estimate = { path = "../primal-estimate", version = "0.2" }
-
+smallvec = "0.4.1"
 hamming = "0.1"
 
 [dev-dependencies]
