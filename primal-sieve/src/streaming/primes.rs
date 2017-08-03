@@ -8,10 +8,6 @@ const ITER_BASE_STEP: usize = 8 * wheel::BYTE_MODULO;
 const SQRT: usize = 1 << 16;
 #[cfg(target_pointer_width = "64")]
 const SQRT: usize = 1 << 32;
-#[cfg(target_pointer_width = "32")]
-type Queued = u16;
-#[cfg(target_pointer_width = "64")]
-type Queued = u32;
 
 enum Early {
     Two,
