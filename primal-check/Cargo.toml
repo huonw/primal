@@ -14,7 +14,7 @@ Fast standalone primality testing.
 """
 
 [dependencies]
-num = "0"
+num-integer = "0.1"
 
 [dev-dependencies]
 primal = { path = "..", version = "0.2" }

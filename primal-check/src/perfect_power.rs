@@ -1,4 +1,4 @@
-use num::Integer;
+use num_integer::Integer;
 
 fn wrapping_pow(mut base: u64, mut exp: u32) -> u64 {
     let mut acc: u64 = 1;
@@ -135,7 +135,7 @@ mod tests {
             // include 1 to test p itself.
             for (q, is_prime) in Some((1, true)).into_iter().chain(subprimes) {
                 let pq = p * q as u64;
-                for n in (1..MAX.log(pq as f64) as u32) {
+                for n in 1..(MAX.log(pq as f64) as u32) {
                     let x = pq.pow(n);
 
                     let expected = (pq, n as u8);

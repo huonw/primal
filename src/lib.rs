@@ -249,7 +249,7 @@
 //! This takes 6 <em>micro</em>seconds: more than 500,000&times;
 //! faster than the iterator!
 
-#![cfg_attr(all(test, feature = "unstable"), feature(test, step_by))]
+#![cfg_attr(all(test, feature = "unstable"), feature(test, iterator_step_by))]
 
 extern crate primal_estimate;
 extern crate primal_check;

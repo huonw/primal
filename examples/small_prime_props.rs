@@ -51,7 +51,7 @@ fn main() {
         let len = text.len();
         let mut new_prime = true;
 
-        for _ in (last..p) {
+        for _ in last..p {
             if check_width!(1 + len) && !new_prime {
                 print!(" ");
                 width += 1

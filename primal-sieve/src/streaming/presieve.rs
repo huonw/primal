@@ -104,7 +104,7 @@ mod benches {
     use test::Bencher;
     use super::Presieve;
     fn run_presieve(b: &mut Bencher, n: usize) {
-        b.iter(|| super::Presieve::new(::wheel::bits_for(n)))
+        b.iter(|| Presieve::new(::wheel::bits_for(n)))
     }
     #[bench]
     fn presieve_small(b: &mut Bencher) {

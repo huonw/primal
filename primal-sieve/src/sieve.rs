@@ -684,7 +684,7 @@ mod tests {
     }
 
     #[test]
-    #[should_panic = "cannot sieve upto"]
+    #[should_panic(expected = "cannot sieve upto")]
     fn too_large() {
         // with a wheel size of 30, this would take more bits than fit
         // in a usize.
