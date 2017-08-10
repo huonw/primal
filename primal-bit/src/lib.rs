@@ -170,15 +170,8 @@ impl BitVec {
     /// }
     /// ```
     pub fn from_elem(nbits: usize, bit: bool) -> BitVec {
-        use std::ptr;
-
         let nblocks = nbits.checked_add(BITS - 1).expect("capacity overflow") / BITS;
-        let mut out_vec = Vec::with_capacity(nblocks);
-
-        unsafe {
-            out_vec.set_len(nblocks);
-            ptr::write_bytes(out_vec.as_mut_ptr(), if bit { !0 } else { 0 }, nblocks);
-        }
+        let out_vec = vec![if bit { !0 } else { 0 }; nblocks];
 
         let mut bit_vec = BitVec {
             storage: out_vec,
