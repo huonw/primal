@@ -5,6 +5,8 @@ use hamming;
 
 use std::cmp;
 
+type SmallVec1<T> = ::smallvec::SmallVec<[T; 1]>;
+
 /// A heavily optimised prime sieve.
 ///
 /// This stores information about primes up to some specified limit,
@@ -30,7 +32,7 @@ use std::cmp;
 pub struct Sieve {
     seg_bits: usize,
     nbits: usize,
-    seen: Vec<Item>,
+    seen: SmallVec1<Item>,
 }
 
 #[derive(Debug)]
@@ -52,7 +54,7 @@ impl Sieve {
     /// Create a new instance, sieving out all the primes up to
     /// `limit`.
     pub fn new(limit: usize) -> Sieve {
-        let mut seen = Vec::new();
+        let mut seen = SmallVec1::new();
         let mut nbits = 0;
         let mut so_far = 0;
         let mut seg_bits = None;

@@ -15,7 +15,6 @@ extern crate hamming;
 use std::cmp::{self, Ordering};
 use std::fmt;
 use std::hash;
-use std::iter::repeat;
 use std::ops::Index;
 
 const BITS: usize = 64;
@@ -172,10 +171,13 @@ impl BitVec {
     /// ```
     pub fn from_elem(nbits: usize, bit: bool) -> BitVec {
         let nblocks = nbits.checked_add(BITS - 1).expect("capacity overflow") / BITS;
+        let out_vec = vec![if bit { !0 } else { 0 }; nblocks];
+
         let mut bit_vec = BitVec {
-            storage: repeat(if bit { !0 } else { 0 }).take(nblocks).collect(),
-            nbits: nbits
+            storage: out_vec,
+            nbits: nbits,
         };
+
         bit_vec.fix_last_block();
         bit_vec
     }
