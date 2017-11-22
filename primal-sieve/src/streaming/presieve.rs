@@ -73,7 +73,7 @@ impl Presieve {
         copy_all(sieve.as_bytes_mut(),
                  self.sieve.as_bytes(),
                  offset);
-        fn copy_all(mut dst: &mut [u8], src: &[u8], init_offset: usize) {
+        fn copy_all(dst: &mut [u8], src: &[u8], init_offset: usize) {
             let mut pos = 0;
             // pre-fill data at the start, as a rotation of `src`.
             pos += memcpy(&mut dst[pos..], &src[init_offset..]);
