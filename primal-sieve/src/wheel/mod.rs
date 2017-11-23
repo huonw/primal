@@ -23,12 +23,11 @@ pub fn small_for(x: usize) -> Option<BitVec> {
 }
 
 pub fn bits_for(x: usize) -> usize {
-    use std::usize;
-    let limit = (usize::MAX - BYTE_MODULO + 1) / BYTE_SIZE;
-    assert!(x < limit,
-            "cannot sieve upto {}, which is larger than {}",
-            x, limit);
-    (x * BYTE_SIZE + BYTE_MODULO - 1) / BYTE_MODULO
+    // ceil((x * BYTE_SIZE) / BYTE_MODULO)
+    // computed using the remainder to avoid overflow
+    let d = x / BYTE_MODULO;
+    let r = x % BYTE_MODULO;
+    d * BYTE_SIZE + (r * BYTE_SIZE + BYTE_MODULO - 1) / BYTE_MODULO
 }
 
 pub fn bit_index(n: usize) -> (bool, usize) {
@@ -47,12 +46,21 @@ pub fn bit_index(n: usize) -> (bool, usize) {
     let init = &POS[n % BYTE_MODULO];
     (init.0, (n / BYTE_MODULO) * BYTE_SIZE + init.1 as usize)
 }
+
+pub fn upper_bound(nbits: usize) -> usize {
+    // basically from_bit_index(nbits)-1, but without overflow
+    (nbits / BYTE_SIZE).checked_mul(BYTE_MODULO)
+        .and_then(|n| n.checked_add(TRUE_AT_BIT[nbits % BYTE_SIZE] - 1))
+        .unwrap_or(::std::usize::MAX)
+}
+
 pub fn from_bit_index(bit: usize) -> usize {
-    const TRUE_AT_BIT: &'static [usize; 8] = &[
-        1, 7, 11, 13, 17, 19, 23, 29
-            ];
     (bit / BYTE_SIZE) * BYTE_MODULO + TRUE_AT_BIT[bit % BYTE_SIZE]
 }
+
+const TRUE_AT_BIT: &'static [usize; 8] = &[
+    1, 7, 11, 13, 17, 19, 23, 29
+        ];
 
 pub const TRUE_AT_BIT_64: &'static [usize; 64] = &[
     1 + 30*0, 7 + 30*0, 11 + 30*0, 13 + 30*0, 17 + 30*0, 19 + 30*0, 23 + 30*0, 29 + 30*0,

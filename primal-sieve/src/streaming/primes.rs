@@ -119,10 +119,10 @@ impl Iterator for Primes {
                 }
             }
             let low = self.streaming.low;
-            let high = low + streaming::SEG_LEN;
+            let high = low.saturating_add(streaming::SEG_LEN);
 
             for q in self.left_over.into_iter().chain(self.sieving_primes.as_mut().unwrap()) {
-                if q * q > high {
+                if q.saturating_mul(q) >= high {
                     self.left_over = Some(q);
                     break
                 }
@@ -151,9 +151,7 @@ mod tests {
     use Sieve;
     use super::Primes;
 
-    #[test]
-    fn equality() {
-        let limit = 20_000_000;
+    fn check_equality(limit: usize) {
         let sieve = Sieve::new(limit);
 
         let real = sieve.primes_from(0).take_while(|x| *x < limit);
@@ -165,6 +163,17 @@ mod tests {
             i += 1;
         }
         assert_eq!(sieve.prime_pi(limit), i);
+    }
+
+    #[test]
+    fn equality() {
+        check_equality(20_000_000);
+    }
+
+    #[test]
+    fn equality_huge() {
+        // This takes a minute or so in debug mode, but it does work!
+        check_equality(::std::u32::MAX as usize);
     }
 }
 

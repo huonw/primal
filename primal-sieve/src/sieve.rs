@@ -68,8 +68,9 @@ impl Sieve {
                 let mut stream = streaming::new(limit);
 
                 while let Some((n, bits)) = streaming::next(&mut stream) {
+                    let bits_limit = wheel::bit_index((limit - n).saturating_add(1)).1;
                     seen.push(Item::new(bits.clone(), &mut so_far));
-                    nbits += cmp::min(bits.len(), wheel::bit_index(limit - n + 1).1);
+                    nbits += cmp::min(bits.len(), bits_limit);
                     match seg_bits {
                         None => seg_bits = Some(bits.len()),
                         Some(old) => assert_eq!(old, bits.len()),
@@ -123,9 +124,9 @@ impl Sieve {
     /// assert!(sieve.upper_bound() >= 1000);
     /// ```
     pub fn upper_bound(&self) -> usize {
-        let last_bit = self.nbits;
-        wheel::from_bit_index(last_bit) - 1
+        wheel::upper_bound(self.nbits)
     }
+
     /// Determine if `n` is a prime number.
     ///
     /// # Panics
@@ -436,13 +437,15 @@ impl<'a> Iterator for SievePrimes<'a> {
 
         let lsb = c.trailing_zeros();
         self.current = c & (c - 1);
-        let p = self.base + wheel::TRUE_AT_BIT_64[lsb as usize];
-        if p <= self.limit {
-            Some(p)
-        } else {
-            self.current = 0;
-            None
+
+        let w = wheel::TRUE_AT_BIT_64[lsb as usize];
+        if let Some(p) = self.base.checked_add(w) {
+            if p <= self.limit {
+                return Some(p);
+            }
         }
+        self.current = 0;
+        None
     }
 }
 
@@ -686,11 +689,23 @@ mod tests {
     }
 
     #[test]
-    #[should_panic(expected = "cannot sieve upto")]
-    fn too_large() {
-        // with a wheel size of 30, this would take more bits than fit
-        // in a usize.
-        Sieve::new(::std::usize::MAX / 30 * 8);
+    fn u32_primes() {
+        const COUNT: usize = 203_280_221; // number of 32-bit primes
+        const LAST: usize = 4_294_967_291; // last 32-bit prime
+        const SUM: u64 = 425_649_736_193_687_430; // sum of 32-bit primes
+
+        let sieve = Sieve::new(::std::u32::MAX as usize);
+        assert!(sieve.upper_bound() >= LAST);
+        assert_eq!(sieve.primes_from(LAST - 100).last(), Some(LAST));
+
+        let mut count = 0;
+        let mut sum = 0;
+        for p in sieve.primes_from(0) {
+            count += 1;
+            sum += p as u64;
+        }
+        assert_eq!(count, COUNT);
+        assert_eq!(sum, SUM);
     }
 
     #[test]
