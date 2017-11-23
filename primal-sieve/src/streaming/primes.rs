@@ -61,7 +61,7 @@ impl Primes {
 
     fn sqrt(sqrt: usize) -> Primes {
         let (sieving, limit) = if sqrt < streaming::isqrt(streaming::SEG_LEN) {
-            (None, sqrt)
+            (None, sqrt * sqrt)
         } else {
             (Some(Box::new(Primes::sqrt(streaming::isqrt(sqrt)))),
              streaming::SEG_LEN)
