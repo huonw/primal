@@ -34,3 +34,17 @@ after_success:
 
 notifications:
     webhooks: http://huon.me:54856/travis
+
+matrix:
+  include:
+    - rust: nightly
+      env: TARGET='i686-unknown-linux-gnu'
+      addons:
+        apt:
+          packages:
+            - gcc-multilib
+      before_script:
+        - rustup target add $TARGET
+        - pip install 'travis-cargo<0.2' --user && export PATH=$HOME/.local/bin:$PATH
+      script:
+        - ./run-in all travis-cargo test -- --target $TARGET
