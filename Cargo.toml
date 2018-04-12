@@ -25,7 +25,7 @@ primal-sieve = { path = "primal-sieve", version = "0.2" }
 
 [dev-dependencies]
 primal-slowsieve = { path = "primal-slowsieve", version = "0.2" }
-time = "0.1, <=0.1.37" # 0.1.38 doesn't work with rust 1.8
+time = "0.1"
 
 [features]
 unstable = ["primal-sieve/unstable"]
