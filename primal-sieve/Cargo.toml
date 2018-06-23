@@ -1,6 +1,6 @@
 [package]
 name = "primal-sieve"
-version = "0.2.8"
+version = "0.2.9"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 homepage = "https://github.com/huonw/primal"
