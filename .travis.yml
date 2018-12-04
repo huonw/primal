@@ -20,7 +20,7 @@ matrix:
 
       - rust: beta
 
-      - rust: 1.13.0
+      - rust: 1.20.0
 
       - rust: stable
         services: docker
