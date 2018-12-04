@@ -27,7 +27,6 @@ script:
       ./run-in all travis-cargo doc
   - ./run-in sieve travis-cargo --skip 1.0.0 test -- --features safe
 after_success:
-  - travis-cargo --only stable doc-upload
   - |
        ./run-in all travis-cargo --only stable coverage --merge-into $(pwd)/coverage_results --no-sudo --verify
        primal-bit/kcov/build/src/kcov --coveralls-id=${TRAVIS_JOB_ID} coverage_results --merge coverage_results

@@ -22,4 +22,4 @@ used for things like enumerating and counting primes.
 count the exact number of primes below 10<sup>10</sup> (455052511)
 on the author's laptop (i7-3517U).
 
-[**Documentation**](http://huonw.github.io/primal/primal/)
+[**Documentation**](http://docs.rs/primal/)

@@ -5,7 +5,7 @@ authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 homepage = "https://github.com/huonw/primal"
 repository = "https://github.com/huonw/primal"
-documentation = "http://huonw.github.io/primal/primal_check/"
+documentation = "http://docs.rs/primal-check/"
 license = "MIT/Apache-2.0"
 keywords = ["math", "mathematics", "primes", "number-theory"]
 
