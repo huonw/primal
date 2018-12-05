@@ -539,8 +539,13 @@ mod tests {
             assert!(primes.upper_bound() >= i);
         }
 
-        for i in 1..200 {
-            let i = i * 10000;
+        let range = if cfg!(feature = "slow_tests") {
+            1..200
+        } else {
+            100..120
+        };
+        for i in range {
+            let i = i * 10_000;
             let primes = Sieve::new(i);
             assert!(primes.upper_bound() >= i);
         }
@@ -548,11 +553,15 @@ mod tests {
 
     #[test]
     fn prime_pi() {
-        let limit = 2_000_000;
+        let (limit, mult) = if cfg!(feature = "slow_tests") {
+            (2_000_000, 19_998)
+        } else {
+            (200_000, 1_998)
+        };
         let primes = Sieve::new(limit);
         let real = Primes::sieve(limit);
 
-        for i in (0..20).chain((0..100).map(|n| n * 19998 + 1)) {
+        for i in (0..20).chain((0..100).map(|n| n * mult + 1)) {
             let val = primes.prime_pi(i);
             let true_ = real.primes().take_while(|p| *p <= i).count();
             assert!(val == true_, "failed for {}, true {}, computed {}",
@@ -638,6 +647,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(not(feature = "slow_tests"), ignore)]
     fn factor_overflow() {
         // if bound^2 overflows usize, we can factor any usize,
         // but must take care to not hit overflow assertions.
@@ -689,6 +699,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(not(feature = "slow_tests"), ignore)]
     fn u32_primes() {
         const COUNT: usize = 203_280_221; // number of 32-bit primes
         const LAST: usize = 4_294_967_291; // last 32-bit prime

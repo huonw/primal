@@ -326,10 +326,14 @@ mod tests {
     }
     #[test]
     fn prime_pi() {
-        let limit = 2_000_000;
+        let (limit, mult) = if cfg!(feature = "slow_tests") {
+            (2_000_000, 19_998)
+        } else {
+            (200_000, 1_998)
+        };
         let real = Primes::sieve(limit);
 
-        for i in (0..20).chain((0..100).map(|n| n * 19998 + 1)) {
+        for i in (0..20).chain((0..100).map(|n| n * mult + 1)) {
             let val = StreamingSieve::prime_pi(i);
             let true_ = real.primes().take_while(|p| *p <= i).count();
             assert!(val == true_, "failed for {}, true {}, computed {}",

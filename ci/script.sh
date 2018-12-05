@@ -27,6 +27,8 @@ $cargo doc --all $target_param --features "$features"
 
 $cargo test -p primal-sieve --features "$features primal-sieve/safe"
 
+$cargo test --all --release --features "$features primal-sieve/slow_tests primal-slowsieve/slow_tests"
+
 if [ ! -z "$COVERAGE" ]; then
     if [ ! -z "$TARGET" ]; then
         echo "cannot record coverage while cross compiling"

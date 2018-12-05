@@ -21,3 +21,4 @@ hamming = "0.1"
 
 [features]
 unstable = []
+slow_tests = []

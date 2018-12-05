@@ -26,3 +26,4 @@ primal = { path = "..", version = "0.2" }
 [features]
 unstable = []
 safe = []
+slow_tests = []

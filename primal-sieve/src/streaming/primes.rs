@@ -172,8 +172,13 @@ mod tests {
 
     #[test]
     fn equality_huge() {
-        // This takes a minute or so in debug mode, but it does work!
-        check_equality(::std::u32::MAX as usize);
+        let limit = if cfg!(feature = "slow_tests") {
+            // This takes a minute or so in debug mode, but it does work!
+            ::std::u32::MAX as usize
+        } else {
+            100_000_000
+        };
+        check_equality(limit);
     }
 }
 
