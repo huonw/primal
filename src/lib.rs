@@ -249,13 +249,9 @@
 //! This takes 6 <em>micro</em>seconds: more than 500,000&times;
 //! faster than the iterator!
 
-#![cfg_attr(all(test, feature = "unstable"), feature(test, iterator_step_by))]
-
 extern crate primal_estimate;
 extern crate primal_check;
 extern crate primal_sieve;
-
-#[cfg(all(test, feature = "unstable"))] extern crate test;
 
 pub use primal_estimate::prime_pi as estimate_prime_pi;
 pub use primal_estimate::nth_prime as estimate_nth_prime;
@@ -263,31 +259,3 @@ pub use primal_check::miller_rabin as is_prime;
 pub use primal_check::{as_perfect_power, as_prime_power};
 
 pub use primal_sieve::{StreamingSieve, Sieve, SievePrimes, Primes};
-
-
-#[cfg(all(test, feature = "unstable"))]
-mod benches {
-    extern crate test;
-
-    use super::{Sieve, is_prime};
-    use self::test::Bencher;
-
-
-    const N: usize = 1_000_000;
-    const STEP: usize = 101;
-    #[bench]
-    fn bench_miller_rabin_tests(b: &mut Bencher) {
-        b.iter(|| {
-            (1..N).step_by(STEP)
-                .filter(|&n| is_prime(n as u64)).count()
-        })
-    }
-    #[bench]
-    fn bench_sieve_tests(b: &mut Bencher) {
-        b.iter(|| {
-            let sieve = Sieve::new(1_000_000);
-            (1..N).step_by(STEP)
-                .filter(|&n| sieve.is_prime(n)).count()
-        })
-    }
-}

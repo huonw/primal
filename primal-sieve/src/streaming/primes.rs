@@ -181,21 +181,3 @@ mod tests {
         check_equality(limit);
     }
 }
-
-#[cfg(all(test, feature = "unstable"))]
-mod benches {
-    use super::Primes;
-    use test::Bencher;
-    fn bench_iterate(b: &mut Bencher, upto: usize) {
-        b.iter(|| {
-            Primes::all().take_while(|x| *x <= upto).count()
-        })
-    }
-
-    #[bench]
-    fn iterate_small(b: &mut Bencher) { bench_iterate(b, 100) }
-    #[bench]
-    fn iterate_large(b: &mut Bencher) { bench_iterate(b, 100_000) }
-    #[bench]
-    fn iterate_huge(b: &mut Bencher) { bench_iterate(b, 10_000_000) }
-}

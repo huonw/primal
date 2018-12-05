@@ -19,6 +19,13 @@ primal-bit = { path = "../primal-bit", version = "0.2" }
 primal-estimate = { path = "../primal-estimate", version = "0.2" }
 hamming = "0.1"
 
+[dev-dependencies]
+criterion = "0.2"
+
+[[bench]]
+name = "bench"
+harness = false
+
 [features]
 unstable = []
 slow_tests = []

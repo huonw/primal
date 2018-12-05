@@ -2,8 +2,6 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
-#![cfg_attr(all(test, feature = "unstable"), feature(test))]
-#[cfg(all(test, feature = "unstable"))] extern crate test;
 extern crate primal_bit;
 extern crate primal_estimate;
 extern crate hamming;
@@ -429,40 +427,4 @@ mod tests {
                     i, true_, val)
         }
     }
-}
-
-#[cfg(all(test, feature = "unstable"))]
-mod benches {
-    use super::Primes;
-    use test::Bencher;
-
-    #[bench]
-    fn sieve_small(b: &mut Bencher) {
-        b.iter(|| Primes::sieve(100))
-    }
-    #[bench]
-    fn sieve_medium(b: &mut Bencher) {
-        b.iter(|| Primes::sieve(10_000))
-    }
-    #[bench]
-    fn sieve_large(b: &mut Bencher) {
-        b.iter(|| Primes::sieve(100_000))
-    }
-    #[bench]
-    fn sieve_huge(b: &mut Bencher) {
-        b.iter(|| Primes::sieve(10_000_000))
-    }
-
-    fn bench_iterate(b: &mut Bencher, upto: usize) {
-        let sieve = Primes::sieve(upto);
-
-        b.iter(|| {
-            sieve.primes().count()
-        })
-    }
-
-    #[bench]
-    fn iterate_small(b: &mut Bencher) { bench_iterate(b, 100) }
-    #[bench]
-    fn iterate_large(b: &mut Bencher) { bench_iterate(b, 100_000) }
 }

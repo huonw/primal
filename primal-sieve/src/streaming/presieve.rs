@@ -98,32 +98,3 @@ impl Presieve {
         }
     }
 }
-
-#[cfg(all(test, feature = "unstable"))]
-mod benches {
-    use test::Bencher;
-    use super::Presieve;
-    fn run_presieve(b: &mut Bencher, n: usize) {
-        b.iter(|| Presieve::new(::wheel::bits_for(n)))
-    }
-    #[bench]
-    fn presieve_small(b: &mut Bencher) {
-        run_presieve(b, 100)
-    }
-    #[bench]
-    fn presieve_medium(b: &mut Bencher) {
-        run_presieve(b, 10_000)
-    }
-    #[bench]
-    fn presieve_large(b: &mut Bencher) {
-        run_presieve(b, 100_000)
-    }
-    #[bench]
-    fn presieve_larger(b: &mut Bencher) {
-        run_presieve(b, 1_000_000)
-    }
-    #[bench]
-    fn presieve_huge(b: &mut Bencher) {
-        run_presieve(b, 10_000_000)
-    }
-}

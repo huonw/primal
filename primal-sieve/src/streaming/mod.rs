@@ -353,37 +353,3 @@ mod tests {
         }
     }
 }
-
-#[cfg(all(test, feature = "unstable"))]
-mod benches {
-    use test::Bencher;
-    use super::StreamingSieve;
-
-    fn run(b: &mut Bencher, n: usize) {
-        b.iter(|| {
-            let mut sieve = StreamingSieve::new(n);
-            while sieve.next().is_some() {}
-        })
-    }
-
-    #[bench]
-    fn sieve_small(b: &mut Bencher) {
-        run(b, 100)
-    }
-    #[bench]
-    fn sieve_medium(b: &mut Bencher) {
-        run(b, 10_000)
-    }
-    #[bench]
-    fn sieve_large(b: &mut Bencher) {
-        run(b, 100_000)
-    }
-    #[bench]
-    fn sieve_larger(b: &mut Bencher) {
-        run(b, 1_000_000)
-    }
-    #[bench]
-    fn sieve_huge(b: &mut Bencher) {
-        run(b, 10_000_000)
-    }
-}

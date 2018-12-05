@@ -22,6 +22,11 @@ hamming = "0.1"
 [dev-dependencies]
 primal-slowsieve = { path = "../primal-slowsieve", version = "0.2" }
 primal = { path = "..", version = "0.2" }
+criterion = "0.2"
+
+[[bench]]
+name = "bench"
+harness = false
 
 [features]
 unstable = []

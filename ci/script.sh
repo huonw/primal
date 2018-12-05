@@ -22,7 +22,7 @@ if [ "$TRAVIS_RUST_VERSION" = "1.20.0" ]; then
 fi
 
 $cargo test --all $target_param --features "$features"
-$cargo bench --all $target_param --features "$features"
+$cargo bench --all $target_param --features "$features" -- --test # don't actually record numbers
 $cargo doc --all $target_param --features "$features"
 
 $cargo test -p primal-sieve --features "$features primal-sieve/safe"
