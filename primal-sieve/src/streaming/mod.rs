@@ -326,10 +326,14 @@ mod tests {
     }
     #[test]
     fn prime_pi() {
-        let limit = 2_000_000;
+        let (limit, mult) = if cfg!(feature = "slow_tests") {
+            (2_000_000, 19_998)
+        } else {
+            (200_000, 1_998)
+        };
         let real = Primes::sieve(limit);
 
-        for i in (0..20).chain((0..100).map(|n| n * 19998 + 1)) {
+        for i in (0..20).chain((0..100).map(|n| n * mult + 1)) {
             let val = StreamingSieve::prime_pi(i);
             let true_ = real.primes().take_while(|p| *p <= i).count();
             assert!(val == true_, "failed for {}, true {}, computed {}",
@@ -347,39 +351,5 @@ mod tests {
                 assert_eq!(StreamingSieve::nth_prime(n), p);
             }
         }
-    }
-}
-
-#[cfg(all(test, feature = "unstable"))]
-mod benches {
-    use test::Bencher;
-    use super::StreamingSieve;
-
-    fn run(b: &mut Bencher, n: usize) {
-        b.iter(|| {
-            let mut sieve = StreamingSieve::new(n);
-            while sieve.next().is_some() {}
-        })
-    }
-
-    #[bench]
-    fn sieve_small(b: &mut Bencher) {
-        run(b, 100)
-    }
-    #[bench]
-    fn sieve_medium(b: &mut Bencher) {
-        run(b, 10_000)
-    }
-    #[bench]
-    fn sieve_large(b: &mut Bencher) {
-        run(b, 100_000)
-    }
-    #[bench]
-    fn sieve_larger(b: &mut Bencher) {
-        run(b, 1_000_000)
-    }
-    #[bench]
-    fn sieve_huge(b: &mut Bencher) {
-        run(b, 10_000_000)
     }
 }

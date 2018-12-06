@@ -5,7 +5,7 @@ authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 homepage = "https://github.com/huonw/primal"
 repository = "https://github.com/huonw/primal"
-documentation = "http://huonw.github.io/primal/primal_sieve/"
+documentation = "http://docs.rs/primal-sieve/"
 license = "MIT/Apache-2.0"
 keywords = ["math", "mathematics", "primes", "number-theory"]
 
@@ -22,7 +22,13 @@ hamming = "0.1"
 [dev-dependencies]
 primal-slowsieve = { path = "../primal-slowsieve", version = "0.2" }
 primal = { path = "..", version = "0.2" }
+criterion = "0.2"
+
+[[bench]]
+name = "bench"
+harness = false
 
 [features]
 unstable = []
 safe = []
+slow_tests = []

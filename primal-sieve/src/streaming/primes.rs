@@ -172,25 +172,12 @@ mod tests {
 
     #[test]
     fn equality_huge() {
-        // This takes a minute or so in debug mode, but it does work!
-        check_equality(::std::u32::MAX as usize);
+        let limit = if cfg!(feature = "slow_tests") {
+            // This takes a minute or so in debug mode, but it does work!
+            ::std::u32::MAX as usize
+        } else {
+            100_000_000
+        };
+        check_equality(limit);
     }
-}
-
-#[cfg(all(test, feature = "unstable"))]
-mod benches {
-    use super::Primes;
-    use test::Bencher;
-    fn bench_iterate(b: &mut Bencher, upto: usize) {
-        b.iter(|| {
-            Primes::all().take_while(|x| *x <= upto).count()
-        })
-    }
-
-    #[bench]
-    fn iterate_small(b: &mut Bencher) { bench_iterate(b, 100) }
-    #[bench]
-    fn iterate_large(b: &mut Bencher) { bench_iterate(b, 100_000) }
-    #[bench]
-    fn iterate_huge(b: &mut Bencher) { bench_iterate(b, 10_000_000) }
 }

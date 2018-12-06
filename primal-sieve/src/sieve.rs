@@ -539,8 +539,13 @@ mod tests {
             assert!(primes.upper_bound() >= i);
         }
 
-        for i in 1..200 {
-            let i = i * 10000;
+        let range = if cfg!(feature = "slow_tests") {
+            1..200
+        } else {
+            100..120
+        };
+        for i in range {
+            let i = i * 10_000;
             let primes = Sieve::new(i);
             assert!(primes.upper_bound() >= i);
         }
@@ -548,11 +553,15 @@ mod tests {
 
     #[test]
     fn prime_pi() {
-        let limit = 2_000_000;
+        let (limit, mult) = if cfg!(feature = "slow_tests") {
+            (2_000_000, 19_998)
+        } else {
+            (200_000, 1_998)
+        };
         let primes = Sieve::new(limit);
         let real = Primes::sieve(limit);
 
-        for i in (0..20).chain((0..100).map(|n| n * 19998 + 1)) {
+        for i in (0..20).chain((0..100).map(|n| n * mult + 1)) {
             let val = primes.prime_pi(i);
             let true_ = real.primes().take_while(|p| *p <= i).count();
             assert!(val == true_, "failed for {}, true {}, computed {}",
@@ -638,6 +647,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(not(feature = "slow_tests"), ignore)]
     fn factor_overflow() {
         // if bound^2 overflows usize, we can factor any usize,
         // but must take care to not hit overflow assertions.
@@ -689,6 +699,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(not(feature = "slow_tests"), ignore)]
     fn u32_primes() {
         const COUNT: usize = 203_280_221; // number of 32-bit primes
         const LAST: usize = 4_294_967_291; // last 32-bit prime
@@ -718,74 +729,4 @@ mod tests {
             sieve.prime_pi(limit);
         }
     }
-}
-
-#[cfg(all(test, feature = "unstable"))]
-mod benches {
-    use super::Sieve;
-    use test::Bencher;
-
-    #[bench]
-    fn sieve_small(b: &mut Bencher) {
-        b.iter(|| Sieve::new(100))
-    }
-    #[bench]
-    fn sieve_medium(b: &mut Bencher) {
-        b.iter(|| Sieve::new(10_000))
-    }
-    #[bench]
-    fn sieve_large(b: &mut Bencher) {
-        b.iter(|| Sieve::new(100_000))
-    }
-    #[bench]
-    fn sieve_huge(b: &mut Bencher) {
-        b.iter(|| Sieve::new(10_000_000))
-    }
-
-    fn prime_pi(b: &mut Bencher, n: usize) {
-        let s = Sieve::new(n + 1);
-
-        b.iter(|| s.prime_pi(n));
-    }
-
-    #[bench]
-    fn prime_pi_small(b: &mut Bencher) { prime_pi(b, 100) }
-    #[bench]
-    fn prime_pi_medium(b: &mut Bencher) { prime_pi(b, 10_000) }
-    #[bench]
-    fn prime_pi_large(b: &mut Bencher) { prime_pi(b, 100_000) }
-    #[bench]
-    fn prime_pi_huge(b: &mut Bencher) { prime_pi(b, 10_000_000) }
-
-    fn factor(b: &mut Bencher, n: usize) {
-        let s = Sieve::new(0x10000);
-
-        b.iter(|| s.factor(n).ok());
-    }
-
-    #[bench]
-    fn factor_small_prime(b: &mut Bencher) { factor(b, 131) }
-    #[bench]
-    fn factor_medium_prime(b: &mut Bencher) { factor(b, 7561) }
-    #[bench]
-    fn factor_large_prime(b: &mut Bencher) { factor(b, 65521) }
-    #[bench]
-    fn factor_over_prime(b: &mut Bencher) { factor(b, 1048573) }
-    #[bench]
-    fn factor_composite(b: &mut Bencher) { factor(b, 2*3*5*7*11*13*17*19) }
-
-    fn bench_iterate(b: &mut Bencher, upto: usize) {
-        let sieve = Sieve::new(upto);
-
-        b.iter(|| {
-            sieve.primes_from(0).count()
-        })
-    }
-
-    #[bench]
-    fn iterate_small(b: &mut Bencher) { bench_iterate(b, 100) }
-    #[bench]
-    fn iterate_large(b: &mut Bencher) { bench_iterate(b, 100_000) }
-    #[bench]
-    fn iterate_huge(b: &mut Bencher) { bench_iterate(b, 10_000_000) }
 }

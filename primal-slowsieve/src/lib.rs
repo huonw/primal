@@ -2,8 +2,6 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
-#![cfg_attr(all(test, feature = "unstable"), feature(test))]
-#[cfg(all(test, feature = "unstable"))] extern crate test;
 extern crate primal_bit;
 extern crate primal_estimate;
 extern crate hamming;
@@ -264,7 +262,12 @@ mod tests {
             assert!(primes.upper_bound() >= i);
         }
 
-        for i in 1..200 {
+        let range = if cfg!(feature = "slow_tests") {
+            1..200
+        } else {
+            100..120
+        };
+        for i in range {
             let i = i * 10000;
             let primes = Primes::sieve(i);
             assert!(primes.upper_bound() >= i);
@@ -410,50 +413,18 @@ mod tests {
 
     #[test]
     fn count_upto() {
-        let limit = 2_000_000;
+        let (limit, mult) = if cfg!(feature = "slow_tests") {
+            (2_000_000, 19_998)
+        } else {
+            (200_000, 1_998)
+        };
         let sieve = Primes::sieve(limit);
 
-        for i in (0..20).chain((0..100).map(|n| n * 19998 + 1)) {
+        for i in (0..20).chain((0..100).map(|n| n * mult + 1)) {
             let val = sieve.count_upto(i);
             let true_ = sieve.primes().take_while(|p| *p <= i).count();
             assert!(val == true_, "failed for {}, true {}, computed {}",
                     i, true_, val)
         }
     }
-}
-
-#[cfg(all(test, feature = "unstable"))]
-mod benches {
-    use super::Primes;
-    use test::Bencher;
-
-    #[bench]
-    fn sieve_small(b: &mut Bencher) {
-        b.iter(|| Primes::sieve(100))
-    }
-    #[bench]
-    fn sieve_medium(b: &mut Bencher) {
-        b.iter(|| Primes::sieve(10_000))
-    }
-    #[bench]
-    fn sieve_large(b: &mut Bencher) {
-        b.iter(|| Primes::sieve(100_000))
-    }
-    #[bench]
-    fn sieve_huge(b: &mut Bencher) {
-        b.iter(|| Primes::sieve(10_000_000))
-    }
-
-    fn bench_iterate(b: &mut Bencher, upto: usize) {
-        let sieve = Primes::sieve(upto);
-
-        b.iter(|| {
-            sieve.primes().count()
-        })
-    }
-
-    #[bench]
-    fn iterate_small(b: &mut Bencher) { bench_iterate(b, 100) }
-    #[bench]
-    fn iterate_large(b: &mut Bencher) { bench_iterate(b, 100_000) }
 }
