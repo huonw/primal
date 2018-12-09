@@ -8,7 +8,8 @@ matrix:
   include:
       - if: NOT type = pull_request
         rust: nightly
-        env: UNSTABLE=1
+        env: UNSTABLE=1 COVERAGE=1
+        sudo: required
 
       - if: NOT type = pull_request
         rust: nightly

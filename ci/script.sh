@@ -36,6 +36,6 @@ if [ ! -z "$COVERAGE" ]; then
     fi
 
     cargo install -v cargo-travis --force
-    cargo coverage -v --all -m coveralls_results --kcov-build-location "$PWD/target" --features "$features"
-    "$PWD/target/kcov-master/build/src/kcov" --coveralls-id="$TRAVIS_JOB_ID" coverage_results --merge coverage_results
+    cargo coverage -v --all -m coverage-reports --kcov-build-location "$PWD/target" --features "$features"
+    bash <(curl -s https://codecov.io/bash) -c -X gcov -X coveragepy -s coverage-reports
 fi
