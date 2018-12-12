@@ -6,10 +6,12 @@ matrix:
   fast_finish: true
 
   include:
-      - rust: nightly
+      - if: NOT type = pull_request
+        rust: nightly
         env: UNSTABLE=1
 
-      - rust: nightly
+      - if: NOT type = pull_request
+        rust: nightly
         services: docker
         env: TARGET=i686-unknown-linux-gnu UNSTABLE=1
         sudo: required
@@ -18,11 +20,14 @@ matrix:
             packages:
               - gcc-multilib
 
-      - rust: beta
+      - if: NOT type = pull_request
+        rust: beta
 
-      - rust: 1.20.0
+      - if: NOT type = pull_request
+        rust: 1.20.0
 
-      - rust: stable
+      - if: NOT type = pull_request
+        rust: stable
         services: docker
         env: TARGET=mips64-unknown-linux-gnuabi64
         sudo: required
@@ -51,5 +56,8 @@ before_script:
 script:
   - ./ci/script.sh
 
-notifications:
-    webhooks: http://huon.me:54856/travis
+branches:
+  only:
+    - staging
+    - trying
+    - master
