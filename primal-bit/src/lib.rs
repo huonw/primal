@@ -10,6 +10,8 @@
 
 //! A very simple bit-vector that serves the needs of `primal`.
 
+#![deny(warnings)]
+
 extern crate hamming;
 
 use std::cmp::{self, Ordering};

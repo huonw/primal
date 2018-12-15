@@ -249,6 +249,8 @@
 //! This takes 6 <em>micro</em>seconds: more than 500,000&times;
 //! faster than the iterator!
 
+#![deny(warnings)]
+
 extern crate primal_estimate;
 extern crate primal_check;
 extern crate primal_sieve;

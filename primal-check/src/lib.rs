@@ -1,6 +1,9 @@
 //! Check some primality-related properties of numbers.
 //!
 //! This crate is designed to be used via `primal`.
+
+#![deny(warnings)]
+
 extern crate num_integer;
 #[cfg(test)]
 extern crate primal;
