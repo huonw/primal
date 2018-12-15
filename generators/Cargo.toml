@@ -1,5 +1,5 @@
 [package]
-name = "wheel-generator"
+name = "generators"
 version = "0.2.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 

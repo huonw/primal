@@ -42,5 +42,5 @@ members = [
     "primal-estimate",
     "primal-sieve",
     "primal-slowsieve",
-    "wheel-generator",
+    "generators",
 ]
