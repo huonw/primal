@@ -2,6 +2,8 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
+#![deny(warnings)]
+
 extern crate primal_bit;
 extern crate primal_estimate;
 extern crate hamming;

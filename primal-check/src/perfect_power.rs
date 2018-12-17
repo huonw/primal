@@ -118,7 +118,7 @@ mod tests {
         for &(x, expected, is_prime) in tests.iter() {
             assert_eq!(as_perfect_power(x), expected);
             assert_eq!(as_prime_power(x),
-                       if is_prime { Some((expected))} else { None })
+                       if is_prime { Some(expected)} else { None })
         }
 
         let sieve = Sieve::new(200);

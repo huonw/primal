@@ -352,4 +352,31 @@ mod tests {
             }
         }
     }
+
+    // These are designed to specifically test the medium sized and
+    // large prime sieving.
+    #[test]
+    fn prime_pi_huge() {
+        #[cfg(all(feature = "slow_tests", target_pointer_width = "64"))]
+        const LIMIT_RESULT: (usize, usize) = (10_000_000_000, 455_052_511);
+        #[cfg(all(feature = "slow_tests", target_pointer_width = "32"))]
+        const LIMIT_RESULT: (usize, usize) = (4_294_000_000, 203_236_859);
+        #[cfg(not(feature = "slow_tests"))]
+        const LIMIT_RESULT: (usize, usize) = (500_000_000, 26_355_867);
+
+        assert_eq!(StreamingSieve::prime_pi(LIMIT_RESULT.0), LIMIT_RESULT.1);
+    }
+
+
+    #[test]
+    fn nth_prime_huge() {
+        #[cfg(all(feature = "slow_tests", target_pointer_width = "64"))]
+        const LIMIT_RESULT: (usize, usize) = (455_052_512, 10_000_000_019);
+        #[cfg(all(feature = "slow_tests", target_pointer_width = "32"))]
+        const LIMIT_RESULT: (usize, usize) = (203_236_860, 4_294_000_079);
+        #[cfg(not(feature = "slow_tests"))]
+        const LIMIT_RESULT: (usize, usize) = (26_355_868, 500_000_003);
+
+        assert_eq!(StreamingSieve::nth_prime(LIMIT_RESULT.0), LIMIT_RESULT.1);
+    }
 }

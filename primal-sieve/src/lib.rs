@@ -3,6 +3,7 @@
 //! This is designed to be used via the `primal` crate.
 
 #![cfg_attr(feature = "unstable", feature(asm))]
+#![deny(warnings)]
 
 #[cfg(test)] extern crate primal_slowsieve;
 extern crate primal_bit;
