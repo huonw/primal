@@ -44,35 +44,30 @@ pub fn prime_pi(n: u64) -> (u64, u64) {
         let n_ = n as f64;
         let lg = n_.ln();
         let inv_lg = 1.0 / lg;
-        let n_lg = n_ * inv_lg;
+        let n_inv_lg = n_ * inv_lg;
 
-        // numbers refer to parts of theorem 1.10 of [2].
-        let lo = if n >= 32299 {
-            // 6.
-            n_lg * (1.0 + inv_lg * (1.0 + 1.8 * inv_lg))
-        } else if n >= 5393 {
-            // 5.
-            n_ / (lg - 1.0)
-        } else if n >= 599 {
-            // 1.
-            n_lg * (1.0 + inv_lg)
-        } else {
+        let lo = match () {
+            // [2] Theorem 1.10 (6.)
+            _ if n >= 32299_u64 => n_inv_lg * (1.0 + inv_lg * (1.0 + 1.8 * inv_lg)),
+            // [2] Theorem 1.10 (5.)
+            _ if n >= 5393_u64 => n_ / (lg - 1.0),
+            // [2] Theorem 1.10 (1.)
+            _ if n >= 599_u64 => n_inv_lg * (1.0 + inv_lg),
             // [1]
-            n_ / (lg + 2.0)
+            _ => n_ / (lg + 2.0),
         };
 
-        let hi = if n >= 13_220_000_000 {
-            // 3.
-            n_lg * (1.0 + 1.0992 * inv_lg)
-        } else if n >= 355991 {
-            // 7.
-            n_lg * (1.0 + inv_lg * (1.0 + 2.51 * inv_lg))
-        } else if n >= 60184 {
-            // 4.
-            n_ / (lg - 1.1)
-        } else {
-            // 2.
-            n_lg * (1.0 + 1.2762 * inv_lg)
+        let hi = match () {
+            // [2] Theorem 1.10 (3.)
+            _ if n >= 97488263876_u64 => n_inv_lg * (1.0 + inv_lg * (1.0 + 2.51 * inv_lg)),
+            // [2] Theorem 1.10 (3.)
+            _ if n >= 13220000000_u64 => n_inv_lg * (1.0 + 1.0992 * inv_lg),
+            // [2] Theorem 1.10 (3.)
+            _ if n >= 355991_u64 => n_inv_lg * (1.0 + inv_lg * (1.0 + 2.51 * inv_lg)),
+            // [2] Theorem 1.10 (4.)
+            _ if n >= 60184_u64 => n_ / (lg - 1.1),
+            // [2] Theorem 1.10 (2.)
+            _ => n_inv_lg * (1.0 + 1.2762 * inv_lg),
         };
 
         (lo as u64, hi as u64)
@@ -108,6 +103,9 @@ pub fn prime_pi(n: u64) -> (u64, u64) {
 /// assert!(low <= billionth && billionth <= high);
 /// ```
 pub fn nth_prime(n: u64) -> (u64, u64) {
+    const MAX_VALID_INPUT: u64 = 425374023340481408;
+    assert!(n <= MAX_VALID_INPUT, "nth_prime({}) overflows a u64", n);
+
     if n == 0 {
         (0, 0)
     } else if n <= tables::SMALL_PRIMES.len() as u64 {
@@ -119,31 +117,28 @@ pub fn nth_prime(n: u64) -> (u64, u64) {
         let lg = n_.ln();
         let lglg = lg.ln();
 
-        let lo = lg + lglg - 1.0 + if n > 3 {//13196 {
+        let lo = match () {
             // [2] Theorem 1.6
-            (lglg - 2.1) / lg
-        } else {
+            _ if n >= 3520_u64 => n_ * (lg + lglg - 1.0 + (lglg - 2.1) / lg),
             // [1] Theorem A (ii)
-            0.0
+            _ => n_ * (lg + lglg - 1.0),
         };
 
-        let hi = lg + lglg + if n >= 39017 {
-            // [2] Theorem 1.8
-            -0.9484
-        } else if n >= 27076 {
+        let hi = match () {
             // [2] Theorem 1.7
-            -1.0 + (lglg - 1.8) / lg
-        } else if n >= 15985 {
+            _ if n >= 159440049565448_u64 => n_ * (lg + lglg - 1.0 + (lglg - 1.8) / lg),
+            // [2] Theorem 1.8
+            _ if n >= 39017_u64 => n_ * (lg + lglg - 0.9484),
+            // [2] Theorem 1.7
+            _ if n >= 27076_u64 => n_ * (lg + lglg - 1.0 + (lglg - 1.8) / lg),
             // [1] Theorem A (v)
-            -0.9427
-        } else if n >= 13 {
+            _ if n >= 15985_u64 => n_ * (lg + lglg - 0.9427),
             // [1] Theorem A (v)
-            -1.0 + 1.8 * lglg / lg
-        } else {
+            _ if n >= 13_u64 => n_ * (lg + lglg - 1.0 + 1.8 * lglg / lg),
             // [1] Theorem A (iv)
-            0.0
+            _ => n_ * (lg + lglg),
         };
-        ((n_ * lo) as u64, (n_ * hi) as u64)
+        (lo as u64, hi as u64)
     }
 }
 
