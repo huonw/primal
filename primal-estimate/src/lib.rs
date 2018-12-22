@@ -21,7 +21,7 @@ mod tables;
 ///
 /// \[2]: Dusart, Pierre. ["Autour de la fonction qui compte le nombre
 /// de nombres premiers."][pdf] PhD diss., Université de Limoges,
-/// 1998.
+/// 1998\.
 ///
 /// [pdf]: http://www.unilim.fr/laco/theses/1998/T1998_01.html
 ///
@@ -96,7 +96,8 @@ pub fn prime_pi(n: u64) -> (u64, u64) {
 /// nombres de Bordeaux 8.1 (1996): 215-242.
 ///
 /// \[2]: Dusart, Pierre. ["Autour de la fonction qui compte le nombre
-/// de nombres premiers."][pdf] PhD diss., Université de Limoges, 1998.
+/// de nombres premiers."][pdf] PhD diss., Université de Limoges,
+/// 1998\.
 ///
 /// [pdf]: http://www.unilim.fr/laco/theses/1998/T1998_01.html
 ///
