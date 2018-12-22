@@ -64,8 +64,15 @@ mod prime_pi {
     // Limoges, 1998.
     //
     // [pdf]: http://www.unilim.fr/laco/theses/1998/T1998_01.html
+    //
+    // [3]: Dusart, Pierre. "Estimates of Some Functions Over Primes
+    // without R.H."
+    // ArXiv:[1002.0442](http://arxiv.org/abs/1002.0442). 2010.
     estimates! {
         LOW: {
+            88_783, "[3] Theorem 6.9 (6.7)" => |_, _, _, inv_lg, n_inv_lg| {
+                n_inv_lg * (1.0 + inv_lg * (1.0 + 2.0 * inv_lg))
+            },
             32_299, "[2] Theorem 1.10 (6.)" => |_, _, _, inv_lg, n_inv_lg| {
                 n_inv_lg * (1.0 + inv_lg * (1.0 + 1.8 * inv_lg))
             },
@@ -82,6 +89,9 @@ mod prime_pi {
         HIGH: {
             13_220_000_000_u64, "[2] Theorem 1.10 (3.)" => |_, _, _, inv_lg, n_inv_lg| {
                 n_inv_lg * (1.0 + 1.0992 * inv_lg)
+            },
+            2_953_652_287_u64, "[3] Theorem 6.9 (6.7)" => |_, _, _, inv_lg, n_inv_lg| {
+                n_inv_lg * (1.0 + inv_lg * (1.0 + 2.334 * inv_lg))
             },
             355_991, "[2] Theorem 1.10 (3.)" => |_, _, _, inv_lg, n_inv_lg| {
                 n_inv_lg * (1.0 + inv_lg * (1.0 + 2.51 * inv_lg))
@@ -105,6 +115,10 @@ mod nth_prime {
     // de nombres premiers."][pdf] PhD diss., Université de Limoges, 1998.
     //
     // [pdf]: http://www.unilim.fr/laco/theses/1998/T1998_01.html
+    //
+    // [3]: Dusart, Pierre. "Estimates of Some Functions Over Primes
+    // without R.H."
+    // ArXiv:[1002.0442](http://arxiv.org/abs/1002.0442). 2010.
     estimates! {
         LOW: {
             3, "[2] Theorem 1.6" => |n_, lg, lglg, _, _| {
@@ -115,6 +129,12 @@ mod nth_prime {
             },
         }
         HIGH: {
+            688_383, "[3] Proposition 6.6" => |n_, lg, lglg, _, _| {
+                n_ * (lg + lglg - 1.0 + (lglg - 2.0) / lg)
+            },
+            178_974, "[3] Lemma 6.5" => |n_, lg, lglg, _, _| {
+                n_ * (lg + lglg - 1.0 + (lglg - 1.95) / lg)
+            },
             39_017, "[2] Theorem 1.8" => |n_, lg, lglg, _, _| {
                 n_ * (lg + lglg - 0.9484)
             },
