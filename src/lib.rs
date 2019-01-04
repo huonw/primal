@@ -164,8 +164,8 @@
 //! ```rust
 //! let (lo, hi) = primal::estimate_prime_pi(1_000_000);
 //! println!("there are between {} and {} primes below 1 million", lo, hi);
-//! // 78304, 78573
-//! # assert_eq!(lo, 78304);
+//! // 78380, 78573
+//! # assert_eq!(lo, 78380);
 //! # assert_eq!(hi, 78573);
 //! ```
 //!
