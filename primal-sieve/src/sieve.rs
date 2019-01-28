@@ -1,4 +1,5 @@
 use primal_bit::BitVec;
+use primal_estimate::nth_prime;
 use wheel;
 use streaming;
 use hamming;
@@ -93,6 +94,17 @@ impl Sieve {
             nbits: nbits,
             seen: seen,
         }
+    }
+    /// Create a new instance, with at least `nprimes` primes in it.
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// let sieve = primal::Sieve::new_at_least(1_000);
+    /// assert_eq!(sieve.nth_prime(1_000), 7919);
+    /// ```
+    pub fn new_at_least(nprimes: u64) -> Sieve {
+        let (_, hi) = nth_prime(nprimes);
+        return Sieve::new(hi as usize + 1);
     }
     fn split_index(&self, idx: usize) -> (usize, usize) {
         (idx / self.seg_bits, idx % self.seg_bits)
@@ -300,9 +312,7 @@ impl Sieve {
     ///
     /// ```rust
     /// # extern crate primal;
-    /// let (_, hi) = primal::estimate_nth_prime(1_000);
-    ///
-    /// let sieve = primal::Sieve::new(hi as usize);
+    /// let sieve = primal::Sieve::new_at_least(1_000);
     ///
     /// assert_eq!(sieve.nth_prime(10), 29);
     /// assert_eq!(sieve.nth_prime(100), 541);
@@ -376,6 +386,33 @@ impl Sieve {
             limit: self.upper_bound(),
             bits: self.seen[base + 1..].iter(),
         }
+    }
+    
+    /// Return an iterator over the primes from 2 to the end of this 
+    /// sieve. Equivalent to `sieve.primes_from(2)`.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// let sieve = primal::Sieve::new(1_000);
+    ///
+    /// // print all primes < 1000
+    /// for p in sieve.iter().take_while(|x| *x < 1000) {
+    ///     println!("{}", p);
+    /// }
+    /// ```
+    pub fn iter(& self) -> SievePrimes {
+        self.primes_from(2)
+    }
+}
+
+impl<'a> IntoIterator for &'a Sieve {
+    type Item = usize;
+    type IntoIter = SievePrimes<'a>;
+    
+    fn into_iter(self) -> SievePrimes<'a> {
+        self.primes_from(2)
     }
 }
 
@@ -453,6 +490,8 @@ impl<'a> Iterator for SievePrimes<'a> {
 mod tests {
     use primal_slowsieve::Primes;
     use super::Sieve;
+    use std::collections::HashSet;
+    use std::iter::FromIterator;
 
     #[test]
     fn small() {
@@ -477,6 +516,20 @@ mod tests {
         for i in 0..limit {
             assert!(primes.is_prime(i) == real.is_prime(i),
                     "failed for {} (real = {})", i, real.is_prime(i));
+        }
+    }
+    
+    #[test]
+    fn n_primes() {
+        let max_primes = vec![1, 2, 3, 4, 5, 6, 7, 8, 2_000_000];
+        let primes_n = vec![2, 3, 5, 7, 11, 13, 17, 19, 32_452_843];
+        for (&max_prime, prime_n_expected) in max_primes.iter().zip(primes_n) {
+            let primes = Sieve::new_at_least(max_prime);
+            println!("{} :: prime_pi({}) = {}", max_prime, primes.upper_bound(), primes.prime_pi(primes.upper_bound()));
+            let prime_n = primes.nth_prime(max_prime as usize);
+            println!("prime_n: {}", prime_n);
+            
+            assert_eq!(prime_n, prime_n_expected);
         }
     }
 
@@ -696,6 +749,45 @@ mod tests {
         }
         let total = primes.prime_pi(primes.upper_bound());
         assert!(primes.nth_prime(total) <= primes.upper_bound());
+    }
+    
+    #[test]
+    fn into_iterator() {
+        let s = Sieve::new(1_000);
+        let mut last_found = 0;
+        
+        let prime_set = vec![2, 3, 5, 7, 11, 13, 17, 19, 997];
+        let mut to_be_found : HashSet<usize> = HashSet::from_iter(prime_set);
+        
+        for n in &s {
+            println!("{}", n);
+            last_found = n;
+            to_be_found.remove(&n);
+            assert!(n >= 2);
+        }
+        
+        assert_eq!(to_be_found.len(), 0);
+        
+        assert!(last_found >= 997);
+    }
+    
+    #[test]
+    fn iterator() {
+        let s = Sieve::new(1_000);
+        let mut last_found = 0;
+        
+        let prime_set = vec![2, 3, 5, 7, 11, 13, 17, 19, 997];
+        let mut to_be_found : HashSet<usize> = HashSet::from_iter(prime_set);
+        
+        for n in s.iter() {
+            println!("{}", n);
+            last_found = n;
+            to_be_found.remove(&n);
+            assert!(n >= 2);
+        }
+        
+        assert_eq!(to_be_found.len(), 0);
+        assert!(last_found >= 997);
     }
 
     #[test]
