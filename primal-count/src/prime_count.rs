@@ -1,6 +1,5 @@
 use crate::util::{integer_square_root, integer_cubic_root, integer_quartic_root};
 use std::collections::HashMap;
-use std::cmp::Ordering::*;
 
 fn create_prime_array(bound: usize) -> Vec<usize> {
     // Returns an array of primes up to and including bound
@@ -73,6 +72,10 @@ fn meissel_fn_small(m: usize, n: usize, prime_array: &Vec<usize>, meissel_cache:
     }
 }
 
+pub fn meissel_fn(m: usize, n: usize, prime_array: &Vec<usize>, meissel_cache: &mut HashMap<(usize, usize), usize>) -> usize {
+    meissel_fn_small(m, n, &prime_array, meissel_cache)
+}
+
 fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache: &mut HashMap<usize, usize>, meissel_cache: &mut HashMap<(usize, usize), usize>) -> usize {
     // Initialise prime array:
     match prime_cache.get(&bound).map(|entry| entry.clone()){
@@ -98,7 +101,7 @@ fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache:
             let b = num_primes_less_than_memoized(sqrt_bound, primes, prime_cache, meissel_cache);
 
             // Issues with underflow here if b + a < 2
-            let mut result = meissel_fn_small(bound, a, &primes, meissel_cache) + ((b + a - 2) * (b - a + 1)) / 2;
+            let mut result = meissel_fn(bound, a, &primes, meissel_cache) + ((b + a - 2) * (b - a + 1)) / 2;
 
             for i in a..b {
                 let ith_prime = primes[i];
@@ -107,7 +110,7 @@ fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache:
                     let bi = num_primes_less_than_memoized(integer_square_root(bound / ith_prime), primes, prime_cache, meissel_cache);
                     for j in i..bi {
                         let jth_prime = primes[j];
-                        result -= (num_primes_less_than_memoized(bound / ith_prime / jth_prime, primes, prime_cache, meissel_cache) - j);
+                        result -= num_primes_less_than_memoized(bound / ith_prime / jth_prime, primes, prime_cache, meissel_cache) - j;
                     }
                 }
             }
