@@ -42,5 +42,6 @@ members = [
     "primal-estimate",
     "primal-sieve",
     "primal-slowsieve",
+    "primal-count",
     "generators",
 ]
