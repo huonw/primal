@@ -8,7 +8,7 @@ fn create_prime_array(bound: usize) -> Vec<usize> {
     let mut sieve = vec![true; bound + 1];
     sieve[0] = false;
     sieve[1] = false;
-    for value in 2..bound+1 {
+    for value in 2..=bound {
         if sieve[value] {
             // Add the prime to our vector
             vec.push(value);
