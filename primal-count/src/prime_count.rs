@@ -123,7 +123,7 @@ fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache:
 }
 
 // Top level function
-pub fn num_primes_less_than_main(bound: usize) -> usize {
+pub fn primes_below(bound: usize) -> usize {
     let primes = create_prime_array(integer_square_root(bound));
     let mut value_cache = HashMap::new();
 
