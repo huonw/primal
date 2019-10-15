@@ -45,18 +45,18 @@ mod tests {
     }
 
     #[test]
-    fn test_num_primes_less_than_main() {
-        use crate::prime_count::num_primes_less_than_main;
-        assert_eq!(num_primes_less_than_main(7), 4);
-        assert_eq!(num_primes_less_than_main(100), 25);
-        assert_eq!(num_primes_less_than_main(2143), 324);
-        assert_eq!(num_primes_less_than_main(1_000_000), 78_498);
-        assert_eq!(num_primes_less_than_main(1_000_000_000), 50_847_534);
-        // assert_eq!(num_primes_less_than_main(1_000_000_000_000), 37_607_912_018);
-        // assert_eq!(num_primes_less_than_main(1_000_000_000_000_000), 29_844_570_422_669);
+    fn test_primes_below() {
+        use crate::prime_count::primes_below;
+        assert_eq!(primes_below(7), 4);
+        assert_eq!(primes_below(100), 25);
+        assert_eq!(primes_below(2143), 324);
+        assert_eq!(primes_below(1_000_000), 78_498);
+        assert_eq!(primes_below(1_000_000_000), 50_847_534);
+        // assert_eq!(primes_below(1_000_000_000_000), 37_607_912_018);
+        // assert_eq!(primes_below(1_000_000_000_000_000), 29_844_570_422_669);
     }
 }
 
 mod prime_count;
 mod util;
-pub use prime_count::num_primes_less_than_main;
+pub use prime_count::primes_below;
