@@ -141,6 +141,5 @@ pub fn primes_below(bound: usize) -> usize {
     let mut meissel_cache = HashMap::new();
     println!("Primes initialised...");
     let value = num_primes_less_than_memoized(bound, &primes, &mut value_cache, &mut meissel_cache);
-    println!("Value = {}", value_cache[&bound]);
     return value;
 }
