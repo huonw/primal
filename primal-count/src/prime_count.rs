@@ -96,17 +96,18 @@ fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache:
             
             let sqrt_bound = integer_square_root(bound);
 
-            let a = num_primes_less_than_memoized(integer_quartic_root(bound), primes, prime_cache, meissel_cache);
-            let c = num_primes_less_than_memoized(integer_cubic_root(bound), primes, prime_cache, meissel_cache);
-            let b = num_primes_less_than_memoized(sqrt_bound, primes, prime_cache, meissel_cache);
+            let nprimes_below_4thr = num_primes_less_than_memoized(integer_quartic_root(bound), primes, prime_cache, meissel_cache);
+            let nprimes_below_3rdr = num_primes_less_than_memoized(integer_cubic_root(bound), primes, prime_cache, meissel_cache);
+            let nprimes_below_2ndr = num_primes_less_than_memoized(sqrt_bound, primes, prime_cache, meissel_cache);
 
-            // Issues with underflow here if b + a < 2
-            let mut result = meissel_fn(bound, a, &primes, meissel_cache) + ((b + a - 2) * (b - a + 1)) / 2;
+            // Issues with underflow here if nprimes_below_2ndr + nprimes_below_4thr < 2
+            let mut result = ((nprimes_below_2ndr + nprimes_below_4thr - 2) * (nprimes_below_2ndr - nprimes_below_4thr + 1)) / 2;
+            result += meissel_fn(bound, nprimes_below_4thr, &primes, meissel_cache);
 
-            for i in a..b {
+            for i in nprimes_below_4thr..nprimes_below_2ndr {
                 let ith_prime = primes[i];
                 result -= num_primes_less_than_memoized(bound / ith_prime, primes, prime_cache, meissel_cache);
-                if i < c {
+                if i < nprimes_below_3rdr {
                     let bi = num_primes_less_than_memoized(integer_square_root(bound / ith_prime), primes, prime_cache, meissel_cache);
                     for j in i..bi {
                         let jth_prime = primes[j];

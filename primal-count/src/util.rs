@@ -22,5 +22,6 @@ pub fn integer_cubic_root(value: usize) -> usize {
 
 pub fn integer_quartic_root(value: usize) -> usize {
     // Returns the largest integer at least n^(1/4) using our fast integer sqrt
+    // N.b. it's faster to use two sqrts than naively apply Newton here
     return integer_square_root(integer_square_root(value));
 }
