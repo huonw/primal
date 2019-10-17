@@ -45,6 +45,7 @@ pub fn meissel_fn(m: usize, n: usize, prime_array: &Vec<usize>, meissel_cache: &
 fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache: &mut HashMap<usize, usize>, meissel_cache: &mut HashMap<(usize, usize), usize>) -> usize {
     // Memoized combinatorial prime counting function
     // Basic idea here: https://en.wikipedia.org/wiki/Meissel%E2%80%93Lehmer_algorithm
+    // What I've called the "Meissel Function" is phi on that Wikipedia page
     match prime_cache.get(&bound).map(|entry| entry.clone()){
         Some(value) => value,
         None => { // The meat of the function
