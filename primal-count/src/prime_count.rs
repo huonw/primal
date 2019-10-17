@@ -6,8 +6,6 @@ fn create_prime_array(bound: usize) -> Vec<usize> {
     let mut vec = Vec::new();
     let max_value_to_check = integer_square_root(bound);
     let mut sieve = vec![true; bound + 1];
-    sieve[0] = false;
-    sieve[1] = false;
     for value in 2..=bound {
         if sieve[value] {
             // Add the prime to our vector
@@ -27,57 +25,26 @@ fn create_prime_array(bound: usize) -> Vec<usize> {
     return vec;
 }
 
-// def _meissel_function_large(self, m, n):
-//     """The number of numbers <= m that are coprime to the first n prime numbers.
-//     Run for larger values where repeating isn't going to happen often. Use for n > 1000 or so"""
-//     m = int(m)
-//     # if m <= 10000: return meis104[n][m]
-//     if n == 0:
-//         return m
-//     result = self.meissel_memoize[n].get(m, None)
-//     if result is None:
-//         result = 0
-//         primes_gen = (p for p in self.prime_array[:n:-1])
-//         stacks = defaultdict(lambda: defaultdict(int))
-//         stacks[n][m] = 1
-//         for N in range(n, 0, -1):
-//             prime_dividing = next(primes_gen)
-//             for M in stacks[N]:
-//                 # Marginal speed improvement?
-//                 # if M <= 10000 and n<1229:
-//                     # res += meis104[N][M]*stacks[N][M]
-//                     # continue
-//                 stacks[N-1][M] += stacks[N][M]
-//                 stacks[N-1][M//prime_dividing] -= stacks[N][M]
-//             del stacks[N]
-//         for M in stacks[0]:
-//             result += M*stacks[0][M]
-//     return result
-fn meissel_fn_large(m: usize, n: usize, prime_array: &Vec<usize>, meissel_cache: &mut HashMap<(usize, usize), usize>) -> usize {
-    meissel_fn_small(m, n, &prime_array, meissel_cache)
-}
-
-fn meissel_fn_small(m: usize, n: usize, prime_array: &Vec<usize>, meissel_cache: &mut HashMap<(usize, usize), usize>) -> usize {
+pub fn meissel_fn(m: usize, n: usize, prime_array: &Vec<usize>, meissel_cache: &mut HashMap<(usize, usize), usize>) -> usize {
+    // The number of numbers less than m that are coprime to the first n prime numbers
+    // Get recurrence m_fn(m, n) = m_fn(m, n - 1) - m_fn(m/p_n, n-1) by thinking about p_n, the nth prime
     if n == 0 {
         return m;
     }
     match meissel_cache.get(&(m, n)).map(|entry| entry.clone()){
         Some(result) => result,
         None => {
-            let value = meissel_fn_small(m, n-1, &prime_array, meissel_cache) 
-                        - meissel_fn_small(m / prime_array[n-1], n-1, &prime_array, meissel_cache);
+            let value = meissel_fn(m, n-1, &prime_array, meissel_cache) 
+                        - meissel_fn(m / prime_array[n-1], n-1, &prime_array, meissel_cache);
             meissel_cache.insert((m, n), value);
             return value;
         }
     }
 }
 
-pub fn meissel_fn(m: usize, n: usize, prime_array: &Vec<usize>, meissel_cache: &mut HashMap<(usize, usize), usize>) -> usize {
-    meissel_fn_small(m, n, &prime_array, meissel_cache)
-}
-
 fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache: &mut HashMap<usize, usize>, meissel_cache: &mut HashMap<(usize, usize), usize>) -> usize {
-    // Initialise prime array:
+    // Memoized combinatorial prime counting function
+    // Basic idea here: https://en.wikipedia.org/wiki/Meissel%E2%80%93Lehmer_algorithm
     match prime_cache.get(&bound).map(|entry| entry.clone()){
         Some(value) => value,
         None => { // The meat of the function
@@ -101,6 +68,7 @@ fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache:
             let nprimes_below_2ndr = num_primes_less_than_memoized(sqrt_bound, primes, prime_cache, meissel_cache);
 
             // Issues with underflow here if nprimes_below_2ndr + nprimes_below_4thr < 2
+            // Dealt with by populating the offending (small) values in the cache at the top level
             let mut result = ((nprimes_below_2ndr + nprimes_below_4thr - 2) * (nprimes_below_2ndr - nprimes_below_4thr + 1)) / 2;
             result += meissel_fn(bound, nprimes_below_4thr, &primes, meissel_cache);
 
@@ -116,7 +84,7 @@ fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache:
                 }
             }
 
-            // Caching and shit
+            // Caching
             prime_cache.insert(bound, result);
             return result;
         }
@@ -125,6 +93,11 @@ fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache:
 
 // Top level function
 pub fn primes_below(bound: usize) -> usize {
+    // Designed for one call
+    // Should refactor into a class so that multiple calls share the caches
+
+    // N.b. we generate primes by a naive sieve, because it doesn't take much time and
+    //  it's speed of access of primes that really matters, not generation
     let primes = create_prime_array(integer_square_root(bound));
     let mut value_cache = HashMap::new();
 
