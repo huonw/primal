@@ -120,7 +120,10 @@ impl PrimeCounter {
         PrimeCounter {limit, primes, prime_cache, meissel_cache}
     }
 
-    /// Bla
+    /// Updates the limit - to be used when you want to make the prime cache larger
+    /// May be slow for large values of limit - it's recommended that you don't call
+    /// this and instead ensure that your first call to construct the PrimeCounter
+    /// object is large enough.
     pub fn update_limit(&mut self, limit: usize) {
         self.limit = limit;
         self.primes = generate_primes(int_square_root(limit));
@@ -131,7 +134,16 @@ impl PrimeCounter {
         primes_less_than(bound, &self.primes, &mut self.prime_cache, &mut self.meissel_cache)
     }
 
-    /// Bla
+    /// The number of numbers less than m that are coprime to the first n prime numbers
+    /// 
+    /// # Examples
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// let pc = primal::Sieve::PrimeCounter(10_000);
+    /// assert_eq!(pc.meissel_fn(100, 10), 30)
+    /// assert_eq!(pc.meissel_fn(1234, 5), 300)
+    /// ```
     pub fn meissel_fn(&mut self, m: usize, n: usize) -> usize {
         meissel_fn(m, n, &self.primes, &mut self.meissel_cache)
     }
