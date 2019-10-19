@@ -102,17 +102,57 @@ pub fn primes_below(bound: usize) -> usize {
     let primes = create_prime_array(integer_square_root(bound));
     let mut value_cache = HashMap::new();
 
-    // Insert some basic primes - this is mainly to deal with underflow issues later
-    value_cache.insert(0, 0);
-    value_cache.insert(1, 0);
-    value_cache.insert(2, 1);
-    value_cache.insert(3, 2);
-    value_cache.insert(4, 2);
-    value_cache.insert(5, 3);
-    value_cache.insert(6, 3);
-    value_cache.insert(7, 4);
-    value_cache.insert(8, 4);
+    // Insert primes <= 10 - this is mainly to deal with underflow issues later
+    for n in 0..=10 {
+        let nprimes = match n {
+            2         => 1,
+            3..=4     => 2,
+            5..=6     => 3,
+            7..=10    => 4,
+            0..=1 | _ => 0,  // N.B. _ never hit
+        };
+        value_cache.insert(n, nprimes);
+    }
+
     let mut meissel_cache = HashMap::new();
     let value = num_primes_less_than_memoized(bound, &primes, &mut value_cache, &mut meissel_cache);
     return value;
+}
+
+pub struct PrimeCounter {
+    limit: usize,
+    primes: Vec<usize>,
+    prime_cache: HashMap<usize, usize>,
+    meissel_cache: HashMap<(usize, usize), usize>
+}
+
+impl PrimeCounter {
+    pub fn new(limit: usize) -> PrimeCounter {
+        let primes = create_prime_array(integer_square_root(limit));
+        let mut prime_cache = HashMap::new();
+
+        // Insert primes <= 10 - this is mainly to deal with underflow issues later
+        for n in 0..=10 {
+            let nprimes = match n {
+                2         => 1,
+                3..=4     => 2,
+                5..=6     => 3,
+                7..=10    => 4,
+                0..=1 | _ => 0,  // N.B. _ never hit
+            };
+            prime_cache.insert(n, nprimes);
+        }
+        let meissel_cache = HashMap::new();
+
+        PrimeCounter {limit, primes, prime_cache, meissel_cache}
+    }
+
+    pub fn update_limit(&mut self, limit: usize) {
+        self.limit = limit;
+        self.primes = create_prime_array(integer_square_root(limit));
+    }
+
+    pub fn primes_below(&mut self, bound: usize) -> usize {
+        num_primes_less_than_memoized(bound, &self.primes, &mut self.prime_cache, &mut self.meissel_cache)
+    }
 }
