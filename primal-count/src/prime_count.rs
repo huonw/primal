@@ -1,3 +1,6 @@
+extern crate primal_sieve;
+use std::iter::FromIterator;
+
 use crate::util::{integer_square_root, integer_cubic_root, integer_quartic_root};
 use std::collections::HashMap;
 
@@ -128,7 +131,13 @@ pub struct PrimeCounter {
 
 impl PrimeCounter {
     pub fn new(limit: usize) -> PrimeCounter {
-        let primes = create_prime_array(integer_square_root(limit));
+        // let primes = create_prime_array(integer_square_root(limit));
+        let int_sqrt = integer_square_root(limit);
+        let sieve = primal_sieve::Sieve::new(int_sqrt);
+        let sieve_iter = sieve.primes_from(2).take_while(|x| *x <= int_sqrt);
+        let primes = Vec::from_iter(sieve_iter);
+        // let primes = primal_sieve::Primes::all().take_while(|x| *x <= integer_square_root(limit));
+
         let mut prime_cache = HashMap::new();
 
         // Insert primes <= 10 - this is mainly to deal with underflow issues later
@@ -153,6 +162,6 @@ impl PrimeCounter {
     }
 
     pub fn primes_below(&mut self, bound: usize) -> usize {
-        num_primes_less_than_memoized(bound, &self.primes, &mut self.prime_cache, &mut self.meissel_cache)
+        num_primes_less_than_memoized2(bound, &self.primes, &mut self.prime_cache, &mut self.meissel_cache)
     }
 }
