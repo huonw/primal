@@ -1,36 +1,25 @@
 extern crate primal_sieve;
 use std::iter::FromIterator;
 
-use crate::util::{integer_square_root, integer_cubic_root, integer_quartic_root};
+use crate::util::{int_square_root, int_cubic_root, int_quartic_root};
 use std::collections::HashMap;
 
-fn create_prime_array(bound: usize) -> Vec<usize> {
-    // Returns an array of primes up to and including bound
-    let mut vec = Vec::new();
-    let max_value_to_check = integer_square_root(bound);
-    let mut sieve = vec![true; bound + 1];
-    for value in 2..=bound {
-        if sieve[value] {
-            // Add the prime to our vector
-            vec.push(value);
-
-            // Filter primes more if we're below the bound
-            if value <= max_value_to_check {
-                // Anything smaller than this already filtered
-                let mut idx = value * value;
-                while idx <= bound {
-                    sieve[idx] = false;
-                    idx += value;
-                }
-            }
-        }
-    }
-    return vec;
+/// Generate a vec of primes from 2 up to and including limit
+/// Leverages the fast sieve in primal to do so
+fn generate_primes(limit: usize) -> Vec<usize> {
+    let sieve = primal_sieve::Sieve::new(limit);
+    let sieve_iter = sieve.primes_from(2).take_while(|x| *x <= limit);
+    // Note that we put the primes into a vec here because later we want to have both
+    //  1) Very quick access to the nth prime
+    //  2) Quick counting of number of primes below a value, achieved with a binary search
+    // Experiments replacing 1) or 2) with the methods in sieve seem to significantly
+    //   slow things down for larger numbers
+    return Vec::from_iter(sieve_iter);
 }
 
-pub fn meissel_fn(m: usize, n: usize, prime_array: &Vec<usize>, meissel_cache: &mut HashMap<(usize, usize), usize>) -> usize {
-    // The number of numbers less than m that are coprime to the first n prime numbers
-    // Get recurrence m_fn(m, n) = m_fn(m, n - 1) - m_fn(m/p_n, n-1) by thinking about p_n, the nth prime
+/// The number of numbers less than m that are coprime to the first n prime numbers
+/// Get recurrence m_fn(m, n) = m_fn(m, n - 1) - m_fn(m/p_n, n-1) by thinking about p_n, the nth prime
+fn meissel_fn(m: usize, n: usize, prime_array: &Vec<usize>, meissel_cache: &mut HashMap<(usize, usize), usize>) -> usize {
     if n == 0 {
         return m;
     }
@@ -45,13 +34,14 @@ pub fn meissel_fn(m: usize, n: usize, prime_array: &Vec<usize>, meissel_cache: &
     }
 }
 
-fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache: &mut HashMap<usize, usize>, meissel_cache: &mut HashMap<(usize, usize), usize>) -> usize {
-    // Memoized combinatorial prime counting function
-    // Basic idea here: https://en.wikipedia.org/wiki/Meissel%E2%80%93Lehmer_algorithm
-    // What I've called the "Meissel Function" is phi on that Wikipedia page
+/// Find the number of primes less than bound using the Meissel-Lehmer method
+/// Leverages caching to speed up the recursive calls
+fn primes_less_than(bound: usize, primes: &Vec<usize>, prime_cache: &mut HashMap<usize, usize>, meissel_cache: &mut HashMap<(usize, usize), usize>) -> usize {
+    // First check if it's in the cache already
     match prime_cache.get(&bound).map(|entry| entry.clone()){
         Some(value) => value,
-        None => { // The meat of the function
+        None => {
+            // The meat of the function
             if bound < 2 {
                 return 0;
             } else if bound <= primes[primes.len()-1] {
@@ -65,11 +55,11 @@ fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache:
                 return result;
             }
             
-            let sqrt_bound = integer_square_root(bound);
+            let sqrt_bound = int_square_root(bound);
 
-            let nprimes_below_4thr = num_primes_less_than_memoized(integer_quartic_root(bound), primes, prime_cache, meissel_cache);
-            let nprimes_below_3rdr = num_primes_less_than_memoized(integer_cubic_root(bound), primes, prime_cache, meissel_cache);
-            let nprimes_below_2ndr = num_primes_less_than_memoized(sqrt_bound, primes, prime_cache, meissel_cache);
+            let nprimes_below_4thr = primes_less_than(int_quartic_root(bound), primes, prime_cache, meissel_cache);
+            let nprimes_below_3rdr = primes_less_than(int_cubic_root(bound), primes, prime_cache, meissel_cache);
+            let nprimes_below_2ndr = primes_less_than(sqrt_bound, primes, prime_cache, meissel_cache);
 
             // Issues with underflow here if nprimes_below_2ndr + nprimes_below_4thr < 2
             // Dealt with by populating the offending (small) values in the cache at the top level
@@ -78,12 +68,12 @@ fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache:
 
             for i in nprimes_below_4thr..nprimes_below_2ndr {
                 let ith_prime = primes[i];
-                result -= num_primes_less_than_memoized(bound / ith_prime, primes, prime_cache, meissel_cache);
+                result -= primes_less_than(bound / ith_prime, primes, prime_cache, meissel_cache);
                 if i < nprimes_below_3rdr {
-                    let bi = num_primes_less_than_memoized(integer_square_root(bound / ith_prime), primes, prime_cache, meissel_cache);
+                    let bi = primes_less_than(int_square_root(bound / ith_prime), primes, prime_cache, meissel_cache);
                     for j in i..bi {
                         let jth_prime = primes[j];
-                        result -= num_primes_less_than_memoized(bound / ith_prime / jth_prime, primes, prime_cache, meissel_cache) - j;
+                        result -= primes_less_than(bound / ith_prime / jth_prime, primes, prime_cache, meissel_cache) - j;
                     }
                 }
             }
@@ -95,33 +85,12 @@ fn num_primes_less_than_memoized(bound: usize, primes: &Vec<usize>, prime_cache:
     }
 }
 
-// Top level function
-pub fn primes_below(bound: usize) -> usize {
-    // Designed for one call
-    // Should refactor into a class so that multiple calls share the caches
-
-    // N.b. we generate primes by a naive sieve, because it doesn't take much time and
-    //  it's speed of access of primes that really matters, not generation
-    let primes = create_prime_array(integer_square_root(bound));
-    let mut value_cache = HashMap::new();
-
-    // Insert primes <= 10 - this is mainly to deal with underflow issues later
-    for n in 0..=10 {
-        let nprimes = match n {
-            2         => 1,
-            3..=4     => 2,
-            5..=6     => 3,
-            7..=10    => 4,
-            0..=1 | _ => 0,  // N.B. _ never hit
-        };
-        value_cache.insert(n, nprimes);
-    }
-
-    let mut meissel_cache = HashMap::new();
-    let value = num_primes_less_than_memoized(bound, &primes, &mut value_cache, &mut meissel_cache);
-    return value;
-}
-
+/// Memoized combinatorial prime counting function
+/// Basic idea here: https://en.wikipedia.org/wiki/Meissel%E2%80%93Lehmer_algorithm
+/// The "Meissel Function" here is phi on that Wikipedia page
+///
+/// # Examples
+///
 pub struct PrimeCounter {
     limit: usize,
     primes: Vec<usize>,
@@ -130,15 +99,10 @@ pub struct PrimeCounter {
 }
 
 impl PrimeCounter {
+    /// Create a new PrimeCounter instance, which generates all the primes up to sqrt(limit)
     pub fn new(limit: usize) -> PrimeCounter {
-        // let primes = create_prime_array(integer_square_root(limit));
-        let int_sqrt = integer_square_root(limit);
-        let sieve = primal_sieve::Sieve::new(int_sqrt);
-        let sieve_iter = sieve.primes_from(2).take_while(|x| *x <= int_sqrt);
-        let primes = Vec::from_iter(sieve_iter);
-        // let primes = primal_sieve::Primes::all().take_while(|x| *x <= integer_square_root(limit));
-
         let mut prime_cache = HashMap::new();
+        let primes = generate_primes(limit);
 
         // Insert primes <= 10 - this is mainly to deal with underflow issues later
         for n in 0..=10 {
@@ -152,16 +116,51 @@ impl PrimeCounter {
             prime_cache.insert(n, nprimes);
         }
         let meissel_cache = HashMap::new();
-
+        
         PrimeCounter {limit, primes, prime_cache, meissel_cache}
     }
 
+    /// Bla
     pub fn update_limit(&mut self, limit: usize) {
         self.limit = limit;
-        self.primes = create_prime_array(integer_square_root(limit));
+        self.primes = generate_primes(int_square_root(limit));
+    }
+    
+    /// Bla
+    pub fn primes_below(&mut self, bound: usize) -> usize {
+        primes_less_than(bound, &self.primes, &mut self.prime_cache, &mut self.meissel_cache)
     }
 
-    pub fn primes_below(&mut self, bound: usize) -> usize {
-        num_primes_less_than_memoized2(bound, &self.primes, &mut self.prime_cache, &mut self.meissel_cache)
+    /// Bla
+    pub fn meissel_fn(&mut self, m: usize, n: usize) -> usize {
+        meissel_fn(m, n, &self.primes, &mut self.meissel_cache)
+    }
+}
+
+#[cfg(test)]
+mod tests {        
+    #[test]
+    fn test_meissel_fn() {
+        use prime_count::meissel_fn;
+        use std::collections::HashMap;
+        let prime_array = vec![2, 3, 5, 7, 11, 13, 17, 19];
+        let mut meissel_cache = HashMap::new();
+        assert_eq!(meissel_fn(30, 8, &prime_array, &mut meissel_cache), 3);
+        assert_eq!(meissel_fn(100, 1, &prime_array, &mut meissel_cache), 50);
+    }
+
+    #[test]
+    fn test_primes_below() {
+        use crate::prime_count::PrimeCounter;
+        let mut pc = PrimeCounter::new(10_000);
+        assert_eq!(pc.primes_below(7), 4);
+        assert_eq!(pc.primes_below(100), 25);
+        assert_eq!(pc.primes_below(2143), 324);
+
+        pc.update_limit(1_000_000_000);
+        assert_eq!(pc.primes_below(1_000_000), 78_498);
+        assert_eq!(pc.primes_below(1_000_000_000), 50_847_534);
+        // assert_eq!(primes_below(1_000_000_000_000), 37_607_912_018);
+        // assert_eq!(primes_below(1_000_000_000_000_000), 29_844_570_422_669);
     }
 }

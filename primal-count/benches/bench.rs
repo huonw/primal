@@ -44,16 +44,6 @@ create_benchmarks! {
                 s.primes_below(*upto)
                 });
         },
-
-        "PrimesBelow" => |b, upto: &usize| {
-            b.iter(|| primes_below(*upto));
-        },
-        // "Sieve with init" => |b, upto: &usize| {
-        //     b.iter(|| {
-        //         let s = Sieve::new(*upto + 1);
-        //         s.prime_pi(*upto)
-        //     });
-        // },
     }
 }
 
