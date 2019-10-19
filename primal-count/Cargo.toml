@@ -2,9 +2,16 @@
 name = "primal-count"
 version = "0.1.0"
 authors = ["Kaimyn Chapman <kchap21@hotmail.com>"]
-edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+homepage = "https://github.com/huonw/primal"
+repository = "https://github.com/huonw/primal"
+documentation = "http://docs.rs/primal-sieve/"
+license = "MIT/Apache-2.0"
+keywords = ["math", "mathematics", "primes", "number-theory"]
+
+description = """
+A combinatorial prime counting library
+"""
 
 [dependencies]
 primal-sieve = { path = "../primal-sieve", version = "0.2.9" }
@@ -12,6 +19,7 @@ primal-sieve = { path = "../primal-sieve", version = "0.2.9" }
 [dev-dependencies]
 primal = { path = "..", version = "0.2" }
 bencher = "0.1.5"
+criterion = "0.2"
 
 [[bench]]
 name = "bench"

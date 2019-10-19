@@ -1,66 +1,61 @@
 #[macro_use]
-extern crate bencher;
-
-use bencher::Bencher;
-
+extern crate criterion;
+extern crate primal_count;
 use primal_count::primes_below;
 use primal_count::PrimeCounter;
+use criterion::{Criterion, ParameterizedBenchmark};
 
-const LARGE_VAL: usize = 10_000_000_000;
+const SIZES: [usize; 6] = [100, 10_000, 100_000, 1_000_000, 10_000_000, 10_000_000_000];
 
-fn a(bench: &mut Bencher) {
-    bench.iter(|| {
-        primes_below(7)
-    })
+macro_rules! create_benchmarks {
+    ($(
+        fn $group_id: ident($input: expr) {
+            $first_name: expr => $first_func: expr,
+            $($rest_name: expr => $rest_func: expr,)*
+        }
+    )*) => {
+        $(
+            fn $group_id(c: &mut Criterion) {
+                let input = $input;
+
+                let bench = ParameterizedBenchmark::new(
+                    $first_name, $first_func, input.into_iter().cloned())
+                    $( .with_function($rest_name, $rest_func) )*;
+                c.bench(stringify!($group_id), bench);
+            }
+        )*
+    }
 }
 
-fn b(bench: &mut Bencher) {
-    bench.iter(|| {
-        primes_below(1_000)
-    });
+create_benchmarks! {
+    fn new(SIZES) {
+        "PrimeCounter" => |b, upto: &usize| b.iter(|| PrimeCounter::new(*upto)),
+    }
+
+    fn prime_pi(SIZES) {
+        "PrimeCounter" => |b, upto: &usize| {
+            let mut s = PrimeCounter::new(*upto + 1);
+            b.iter(|| s.primes_below(*upto));
+        },
+  
+        "PrimeCounter with init" => |b, upto: &usize| {
+            b.iter(|| {
+                let mut s = PrimeCounter::new(*upto + 1);
+                s.primes_below(*upto)
+                });
+        },
+
+        "PrimesBelow" => |b, upto: &usize| {
+            b.iter(|| primes_below(*upto));
+        },
+        // "Sieve with init" => |b, upto: &usize| {
+        //     b.iter(|| {
+        //         let s = Sieve::new(*upto + 1);
+        //         s.prime_pi(*upto)
+        //     });
+        // },
+    }
 }
 
-fn c(bench: &mut Bencher) {
-    bench.iter(|| {
-        primes_below(LARGE_VAL)
-    });
-}
-
-fn d(bench: &mut Bencher) {
-    bench.iter(|| {
-        let mut pc = PrimeCounter::new(LARGE_VAL);
-        pc.primes_below(LARGE_VAL);
-    });
-}
-
-fn e(bench: &mut Bencher) {
-    bench.iter(|| {
-        primes_below(LARGE_VAL);
-        primes_below(LARGE_VAL >> 4);
-    });
-}
-
-fn f(bench: &mut Bencher) {
-    bench.iter(|| {
-        let mut pc = PrimeCounter::new(LARGE_VAL);
-        pc.primes_below(LARGE_VAL);
-        pc.primes_below(LARGE_VAL >> 4);
-    });
-}
-
-fn g(bench: &mut Bencher) {
-    bench.iter(|| {
-        primes_below(LARGE_VAL * 100);
-    });
-}
-
-fn h(bench: &mut Bencher) {
-    bench.iter(|| {
-        primes_below(1_000_000_000_000_000);
-    });
-}
-
-
-
-benchmark_group!(benches, a, b, c, d, e, f, g, h);
-benchmark_main!(benches);
+criterion_group!(benches, new, prime_pi);
+criterion_main!(benches);
