@@ -1,7 +1,7 @@
 [package]
 name = "primal-count"
 version = "0.1.0"
-authors = ["Kaimyn Chapman <kchap21@hotmail.com>"]
+authors = ["Kaimyn Chapman <kaimync@gmail.com>"]
 
 homepage = "https://github.com/huonw/primal"
 repository = "https://github.com/huonw/primal"
