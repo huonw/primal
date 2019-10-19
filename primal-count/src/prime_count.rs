@@ -88,9 +88,6 @@ fn primes_less_than(bound: usize, primes: &Vec<usize>, prime_cache: &mut HashMap
 /// Memoized combinatorial prime counting function
 /// Basic idea here: https://en.wikipedia.org/wiki/Meissel%E2%80%93Lehmer_algorithm
 /// The "Meissel Function" here is phi on that Wikipedia page
-///
-/// # Examples
-///
 pub struct PrimeCounter {
     limit: usize,
     primes: Vec<usize>,
@@ -102,7 +99,7 @@ impl PrimeCounter {
     /// Create a new PrimeCounter instance, which generates all the primes up to sqrt(limit)
     pub fn new(limit: usize) -> PrimeCounter {
         let mut prime_cache = HashMap::new();
-        let primes = generate_primes(limit);
+        let primes = generate_primes(int_square_root(limit));
 
         // Insert primes <= 10 - this is mainly to deal with underflow issues later
         for n in 0..=10 {
@@ -129,20 +126,38 @@ impl PrimeCounter {
         self.primes = generate_primes(int_square_root(limit));
     }
     
-    /// Bla
+    /// The number of primes that are at least `bound`
+    /// 
+    /// # Panics
+    ///
+    /// If the limit in the constructor is smaller than the input of primes_below
+    /// (Unless it's later been updated with update_limit)
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # extern crate primal;
+    /// let mut pc = primal::PrimeCounter::new(10_000);
+    /// assert_eq!(pc.primes_below(100), 25);
+    /// assert_eq!(pc.primes_below(8166), 1024);
+    /// ```
     pub fn primes_below(&mut self, bound: usize) -> usize {
         primes_less_than(bound, &self.primes, &mut self.prime_cache, &mut self.meissel_cache)
     }
 
-    /// The number of numbers less than m that are coprime to the first n prime numbers
+    /// The number of numbers less than `m` that are coprime to the first `n` prime numbers
+    ///
+    /// # Panics
+    ///
+    /// If the `n`th prime is larger than `limit`
     /// 
     /// # Examples
     ///
     /// ```rust
     /// # extern crate primal;
-    /// let pc = primal::Sieve::PrimeCounter(10_000);
-    /// assert_eq!(pc.meissel_fn(100, 10), 30)
-    /// assert_eq!(pc.meissel_fn(1234, 5), 300)
+    /// let mut pc = primal::PrimeCounter::new(10_000);
+    /// assert_eq!(pc.meissel_fn(100, 10), 16);
+    /// assert_eq!(pc.meissel_fn(1234, 5), 256);
     /// ```
     pub fn meissel_fn(&mut self, m: usize, n: usize) -> usize {
         meissel_fn(m, n, &self.primes, &mut self.meissel_cache)
@@ -154,7 +169,7 @@ mod tests {
     #[test]
     fn test_meissel_fn() {
         use crate::prime_count::PrimeCounter;
-        let mut pc = PrimeCounter::new(100);
+        let mut pc = PrimeCounter::new(10_000);
         assert_eq!(pc.meissel_fn(30, 8), 3);
         assert_eq!(pc.meissel_fn(100, 1), 50);
         assert_eq!(pc.meissel_fn(100, 25), 1);

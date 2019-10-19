@@ -1,8 +1,7 @@
 #[macro_use]
 extern crate criterion;
 extern crate primal_count;
-use primal_count::primes_below;
-use primal_count::PrimeCounter;
+use primal_count::{PrimeCounter, int_quartic_root};
 use criterion::{Criterion, ParameterizedBenchmark};
 
 const SIZES: [usize; 6] = [100, 10_000, 100_000, 1_000_000, 10_000_000, 10_000_000_000];
@@ -45,7 +44,23 @@ create_benchmarks! {
                 });
         },
     }
+
+    fn meissel_fn(SIZES) {
+        "PrimeCounter with init, n=10" => |b, upto: &usize| {
+            b.iter(|| {
+                let mut s = PrimeCounter::new(*upto + 1);
+                s.meissel_fn(*upto, 10)
+            });
+        },
+
+        "PrimeCounter with init, n=4th root" => |b, upto: &usize| {
+            b.iter(|| {
+                let mut s = PrimeCounter::new(*upto + 1);
+                s.meissel_fn(*upto, int_quartic_root(*upto))
+            });
+        },
+    }
 }
 
-criterion_group!(benches, new, prime_pi);
+criterion_group!(benches, new, prime_pi, meissel_fn);
 criterion_main!(benches);
