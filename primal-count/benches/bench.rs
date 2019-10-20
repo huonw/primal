@@ -44,23 +44,7 @@ create_benchmarks! {
                 });
         },
     }
-
-    fn meissel_fn(SIZES) {
-        "PrimeCounter with init, n=10" => |b, upto: &usize| {
-            b.iter(|| {
-                let mut s = PrimeCounter::new(*upto + 1);
-                s.meissel_fn(*upto, 10)
-            });
-        },
-
-        "PrimeCounter with init, n=4th root" => |b, upto: &usize| {
-            b.iter(|| {
-                let mut s = PrimeCounter::new(*upto + 1);
-                s.meissel_fn(*upto, int_quartic_root(*upto))
-            });
-        },
-    }
 }
 
-criterion_group!(benches, new, prime_pi, meissel_fn);
+criterion_group!(benches, new, prime_pi);
 criterion_main!(benches);
