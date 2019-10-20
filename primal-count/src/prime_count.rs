@@ -6,7 +6,7 @@ use std::collections::HashMap;
 
 const MEISSEL_LOOKUP_SIZE: usize = 8;  // Number of primes we do the reduce trick for
 const SMALL_PRIME_PRODUCTS: [usize; MEISSEL_LOOKUP_SIZE + 1] = [1, 2, 6, 30, 210, 2310, 30030, 510510, 9699690];
-const SMALL_TOTIENT_VALUES: [usize; MEISSEL_LOOKUP_SIZE + 1] = [0, 1, 2,  8,  48,  480,  5760,  92160, 1658880];
+const SMALL_TOTIENT_VALUES: [usize; MEISSEL_LOOKUP_SIZE + 1] = [1, 1, 2,  8,  48,  480,  5760,  92160, 1658880];
 
 /// Generate a vec of primes from 2 up to and including limit
 /// Leverages the fast sieve in primal to do so
