@@ -254,6 +254,7 @@
 extern crate primal_estimate;
 extern crate primal_check;
 extern crate primal_sieve;
+extern crate primal_count;
 
 pub use primal_estimate::prime_pi as estimate_prime_pi;
 pub use primal_estimate::nth_prime as estimate_nth_prime;
@@ -261,3 +262,4 @@ pub use primal_check::miller_rabin as is_prime;
 pub use primal_check::{as_perfect_power, as_prime_power};
 
 pub use primal_sieve::{StreamingSieve, Sieve, SievePrimes, Primes};
+pub use primal_count::PrimeCounter;
