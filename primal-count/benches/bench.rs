@@ -1,7 +1,7 @@
 #[macro_use]
 extern crate criterion;
 extern crate primal_count;
-use primal_count::{PrimeCounter, int_quartic_root};
+use primal_count::PrimeCounter;
 use criterion::{Criterion, ParameterizedBenchmark};
 
 const SIZES: [usize; 6] = [100, 10_000, 100_000, 1_000_000, 10_000_000, 10_000_000_000];
