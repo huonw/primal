@@ -27,6 +27,9 @@ fn meissel_fn(m: usize, n: usize, prime_array: &Vec<usize>, meissel_cache: &mut 
     if n == 0 || m < 2 {
         return m;
     }
+    if prime_array[n-1] >= m {
+        return 1;
+    }
     match meissel_cache.get(&(m, n)).map(|entry| entry.clone()){
         Some(result) => result,
         None => {
