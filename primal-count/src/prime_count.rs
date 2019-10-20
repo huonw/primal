@@ -66,7 +66,6 @@ fn primes_less_than(bound: usize, primes: &Vec<usize>, prime_cache: &mut HashMap
                     Ok(idx) => idx+1,
                     Err(idx) => idx,
                 };
-                let result = result;
                 prime_cache.insert(bound, result);
                 return result;
             }
