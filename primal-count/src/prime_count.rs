@@ -146,7 +146,7 @@ impl PrimeCounter {
     /// 
     /// # Panics
     ///
-    /// If the limit in the constructor is smaller than the input of primes_below
+    /// If the limit in the constructor is smaller than the input of prime_pi
     /// (Unless it's later been updated with update_limit)
     ///
     /// # Examples
@@ -154,10 +154,10 @@ impl PrimeCounter {
     /// ```rust
     /// # extern crate primal;
     /// let mut pc = primal::PrimeCounter::new(10_000);
-    /// assert_eq!(pc.primes_below(100), 25);
-    /// assert_eq!(pc.primes_below(8166), 1024);
+    /// assert_eq!(pc.prime_pi(100), 25);
+    /// assert_eq!(pc.prime_pi(8166), 1024);
     /// ```
-    pub fn primes_below(&mut self, bound: usize) -> usize {
+    pub fn prime_pi(&mut self, bound: usize) -> usize {
         primes_less_than(bound, &self.primes, &mut self.prime_cache, &mut self.meissel_cache)
     }
 
@@ -192,17 +192,17 @@ mod tests {
     }
 
     #[test]
-    fn test_primes_below() {
+    fn test_prime_pi() {
         use crate::prime_count::PrimeCounter;
         let mut pc = PrimeCounter::new(10_000);
-        assert_eq!(pc.primes_below(7), 4);
-        assert_eq!(pc.primes_below(100), 25);
-        assert_eq!(pc.primes_below(2143), 324);
+        assert_eq!(pc.prime_pi(7), 4);
+        assert_eq!(pc.prime_pi(100), 25);
+        assert_eq!(pc.prime_pi(2143), 324);
 
         pc.update_limit(1_000_000_000);
-        assert_eq!(pc.primes_below(1_000_000), 78_498);
-        assert_eq!(pc.primes_below(1_000_000_000), 50_847_534);
-        // assert_eq!(primes_below(1_000_000_000_000), 37_607_912_018);
-        // assert_eq!(primes_below(1_000_000_000_000_000), 29_844_570_422_669);
+        assert_eq!(pc.prime_pi(1_000_000), 78_498);
+        assert_eq!(pc.prime_pi(1_000_000_000), 50_847_534);
+        // assert_eq!(prime_pi(1_000_000_000_000), 37_607_912_018);
+        // assert_eq!(prime_pi(1_000_000_000_000_000), 29_844_570_422_669);
     }
 }

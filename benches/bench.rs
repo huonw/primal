@@ -60,7 +60,7 @@ create_benchmarks!{
     fn prime_pi(SIZES) {
         "PrimeCounter" => |b, upto: &usize| {
             let mut s = primal::PrimeCounter::new(*upto + 1);
-            b.iter(|| s.primes_below(*upto));
+            b.iter(|| s.prime_pi(*upto));
         },
         "Sieve" => |b, upto: &usize| {
             let s = primal::Sieve::new(*upto + 1);
@@ -70,7 +70,7 @@ create_benchmarks!{
         "PrimeCounter with init" => |b, upto: &usize| {
             b.iter(|| {
                 let mut s = primal::PrimeCounter::new(*upto + 1);
-                s.primes_below(*upto)
+                s.prime_pi(*upto)
             });
         },
         "Sieve with init" => |b, upto: &usize| {

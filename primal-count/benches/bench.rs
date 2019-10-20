@@ -34,13 +34,13 @@ create_benchmarks! {
     fn prime_pi(SIZES) {
         "PrimeCounter" => |b, upto: &usize| {
             let mut s = PrimeCounter::new(*upto + 1);
-            b.iter(|| s.primes_below(*upto));
+            b.iter(|| s.prime_pi(*upto));
         },
   
         "PrimeCounter with init" => |b, upto: &usize| {
             b.iter(|| {
                 let mut s = PrimeCounter::new(*upto + 1);
-                s.primes_below(*upto)
+                s.prime_pi(*upto)
                 });
         },
     }
