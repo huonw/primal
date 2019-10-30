@@ -130,10 +130,10 @@ impl PrimeCounter {
         }
     }
 
-    // Here we make use of the fact that m_fn(m, n) can be evaluated with fewer calls by 
+    // Here we make use of the fact that m_fn(m, n) can be evaluated with fewer calls by
     // taking advantage of n being large
     fn meissel_fn_large(&mut self, m: usize, n: usize) -> usize {
-        if n <= MEISSEL_LOOKUP_SIZE { 
+        if n <= MEISSEL_LOOKUP_SIZE {
             return self.meissel_fn_small(m, n);
         }
         if self.primes[n-1] >= m {
@@ -176,7 +176,7 @@ impl PrimeCounter {
                     self.pi_cache.insert(bound, result);
                     return result;
                 }
-                
+
                 let sqrt_bound = util::int_square_root(bound);
                 let quartic_bound = util::int_quartic_root(bound);
 
@@ -198,7 +198,7 @@ impl PrimeCounter {
                         for j in i..bi {
                             let jth_prime = self.primes[j];
                             // p_i, p_j > bound^(1/4), so bound / (p_i * p_j) < bound ^ (1/2)
-                            // Hence, this is a cheap lookup, and thus why we don't bother 
+                            // Hence, this is a cheap lookup, and thus why we don't bother
                             //  optimising this further...
                             result -= self.primes_less_than(bound / ith_prime / jth_prime) - j;
                         }
