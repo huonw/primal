@@ -22,6 +22,7 @@ prime).
 primal-check = { path = "primal-check", version = "0.2" }
 primal-estimate = { path = "primal-estimate", version = "0.2" }
 primal-sieve = { path = "primal-sieve", version = "0.2" }
+primal-count = { path = "primal-count", version = "0.1" }
 
 [dev-dependencies]
 primal-slowsieve = { path = "primal-slowsieve", version = "0.2" }
@@ -42,5 +43,6 @@ members = [
     "primal-estimate",
     "primal-sieve",
     "primal-slowsieve",
+    "primal-count",
     "generators",
 ]

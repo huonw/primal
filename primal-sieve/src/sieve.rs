@@ -183,11 +183,11 @@ impl Sieve {
     pub fn prime_pi(&self, n: usize) -> usize {
         assert!(n <= self.upper_bound());
         match n {
-            0...1 => 0,
+            0..=1 => 0,
             2 => 1,
-            3...4 => 2,
-            5...6 => 3,
-            7...10 => 4,
+            3..=4 => 2,
+            5..=6 => 3,
+            7..=10 => 4,
             _ => {
                 let (includes, base, tweak) = self.index_for(n);
                 let mut count = match wheel::BYTE_MODULO {
@@ -354,9 +354,9 @@ impl Sieve {
     pub fn primes_from<'a>(&'a self, n: usize) -> SievePrimes<'a> {
         assert!(n <= self.upper_bound());
         let early = match n {
-            0...2 => Early::Two,
+            0..=2 => Early::Two,
             3 => Early::Three,
-            4...5 => Early::Five,
+            4..=5 => Early::Five,
             _ => Early::Done
         };
         let (_, base, tweak) = self.index_for(n);

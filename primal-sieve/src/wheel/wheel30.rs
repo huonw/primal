@@ -195,7 +195,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
 
     'outer: loop {
     match wi {
-        0...7 => { // 30 * x + 1
+        0..=7 => { // 30 * x + 1
             loop {
              'label7: loop {
               'label6: loop {
@@ -286,7 +286,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
              wi = 0
             }
         }
-        8...15 => { // 30 * x + 7
+        8..=15 => { // 30 * x + 7
             loop {
              'label15: loop {
               'label14: loop {
@@ -377,7 +377,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
              wi = 8
             }
         }
-        16...23 => { // 30 * x + 11
+        16..=23 => { // 30 * x + 11
             loop {
              'label23: loop {
               'label22: loop {
@@ -468,7 +468,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
              wi = 16
             }
         }
-        24...31 => { // 30 * x + 13
+        24..=31 => { // 30 * x + 13
             loop {
              'label31: loop {
               'label30: loop {
@@ -559,7 +559,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
              wi = 24
             }
         }
-        32...39 => { // 30 * x + 17
+        32..=39 => { // 30 * x + 17
             loop {
              'label39: loop {
               'label38: loop {
@@ -650,7 +650,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
              wi = 32
             }
         }
-        40...47 => { // 30 * x + 19
+        40..=47 => { // 30 * x + 19
             loop {
              'label47: loop {
               'label46: loop {
@@ -741,7 +741,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
              wi = 40
             }
         }
-        48...55 => { // 30 * x + 23
+        48..=55 => { // 30 * x + 23
             loop {
              'label55: loop {
               'label54: loop {
@@ -832,7 +832,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
              wi = 48
             }
         }
-        56...63 => { // 30 * x + 29
+        56..=63 => { // 30 * x + 29
             loop {
              'label63: loop {
               'label62: loop {
