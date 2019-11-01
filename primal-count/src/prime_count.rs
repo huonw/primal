@@ -1,5 +1,4 @@
 extern crate primal_sieve;
-use std::iter::FromIterator;
 
 use super::util;
 use std::cmp;
