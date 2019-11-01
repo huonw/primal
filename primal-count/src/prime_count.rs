@@ -21,7 +21,7 @@ fn generate_primes(limit: usize) -> Vec<usize> {
     //  2) Quick counting of number of primes below a value, achieved with a binary search
     // Experiments replacing 1) or 2) with the methods in sieve seem to significantly
     //   slow things down for larger numbers
-    return Vec::from_iter(sieve_iter);
+    sieve_iter.collect()
 }
 
 /// Memoized combinatorial prime counting function
@@ -132,8 +132,9 @@ impl PrimeCounter {
                 // After shrinkage, just apply the recursion
                 value += self.meissel_fn_small(m_shrunk, n - 1)
                     - self.meissel_fn_small(m_shrunk / self.primes[n - 1], n - 1);
+
                 self.meissel_cache.insert((m, n), value);
-                return value;
+                value
             }
         }
     }
@@ -159,8 +160,9 @@ impl PrimeCounter {
                 for idx in MEISSEL_LOOKUP_SIZE..largest_prime_index {
                     result -= self.meissel_fn_large(m / self.primes[idx], idx);
                 }
+
                 self.meissel_cache.insert((m, n), result);
-                return result;
+                result
             }
         }
     }
@@ -216,7 +218,7 @@ impl PrimeCounter {
 
                 // Caching
                 self.pi_cache.insert(bound, result);
-                return result;
+                result
             }
         }
     }
