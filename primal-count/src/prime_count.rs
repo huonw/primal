@@ -2,12 +2,14 @@ extern crate primal_sieve;
 use std::iter::FromIterator;
 
 use super::util;
-use std::collections::HashMap;
 use std::cmp;
+use std::collections::HashMap;
 
-const MEISSEL_LOOKUP_SIZE: usize = 8;  // Number of primes we do the reduce trick for
-const SMALL_PRIME_PRODUCTS: [usize; MEISSEL_LOOKUP_SIZE + 1] = [1, 2, 6, 30, 210, 2310, 30030, 510510, 9699690];
-const SMALL_TOTIENT_VALUES: [usize; MEISSEL_LOOKUP_SIZE + 1] = [1, 1, 2,  8,  48,  480,  5760,  92160, 1658880];
+const MEISSEL_LOOKUP_SIZE: usize = 8; // Number of primes we do the reduce trick for
+const SMALL_PRIME_PRODUCTS: [usize; MEISSEL_LOOKUP_SIZE + 1] =
+    [1, 2, 6, 30, 210, 2310, 30030, 510510, 9699690];
+const SMALL_TOTIENT_VALUES: [usize; MEISSEL_LOOKUP_SIZE + 1] =
+    [1, 1, 2, 8, 48, 480, 5760, 92160, 1658880];
 
 /// Generate a vec of primes from 2 up to and including limit
 /// Leverages the fast sieve in primal to do so
@@ -29,7 +31,7 @@ pub struct PrimeCounter {
     limit: usize,
     primes: Vec<usize>,
     pi_cache: HashMap<usize, usize>,
-    meissel_cache: HashMap<(usize, usize), usize>
+    meissel_cache: HashMap<(usize, usize), usize>,
 }
 
 impl PrimeCounter {
@@ -41,18 +43,23 @@ impl PrimeCounter {
         // Insert primes <= 10 - this is mainly to deal with underflow issues later
         for n in 0..=10 {
             let nprimes = match n {
-                2         => 1,
-                3..=4     => 2,
-                5..=6     => 3,
-                7..=10    => 4,
-                0..=1 | _ => 0,  // N.B. _ never hit
+                2 => 1,
+                3..=4 => 2,
+                5..=6 => 3,
+                7..=10 => 4,
+                0..=1 | _ => 0, // N.B. _ never hit
             };
             pi_cache.insert(n, nprimes);
         }
         // let meissel_cache = meissel::generate_meissel_lookup(6);
         let meissel_cache = HashMap::new();
-        
-        PrimeCounter {limit, primes, pi_cache, meissel_cache}
+
+        PrimeCounter {
+            limit,
+            primes,
+            pi_cache,
+            meissel_cache,
+        }
     }
 
     /// Updates the limit - to be used when you want to make the prime cache larger
@@ -63,9 +70,9 @@ impl PrimeCounter {
         self.limit = limit;
         self.primes = generate_primes(util::int_square_root(limit));
     }
-    
+
     /// The number of primes that are at least `bound`
-    /// 
+    ///
     /// # Panics
     ///
     /// If the limit in the constructor is smaller than the input of prime_pi
@@ -88,7 +95,7 @@ impl PrimeCounter {
     /// # Panics
     ///
     /// If the `n`th prime is larger than `limit`
-    /// 
+    ///
     /// # Examples
     ///
     /// ```rust
@@ -107,10 +114,10 @@ impl PrimeCounter {
         if n == 0 || m < 2 {
             return m;
         }
-        if self.primes[n-1] >= m {
+        if self.primes[n - 1] >= m {
             return 1;
         }
-        match self.meissel_cache.get(&(m, n)).map(|entry| entry.clone()){
+        match self.meissel_cache.get(&(m, n)).map(|entry| entry.clone()) {
             Some(result) => result,
             None => {
                 // For small values of n, we can decrease the size of m by noting that
@@ -123,7 +130,8 @@ impl PrimeCounter {
                 }
 
                 // After shrinkage, just apply the recursion
-                value += self.meissel_fn_small(m_shrunk, n-1) - self.meissel_fn_small(m_shrunk / self.primes[n-1], n-1);
+                value += self.meissel_fn_small(m_shrunk, n - 1)
+                    - self.meissel_fn_small(m_shrunk / self.primes[n - 1], n - 1);
                 self.meissel_cache.insert((m, n), value);
                 return value;
             }
@@ -136,10 +144,10 @@ impl PrimeCounter {
         if n <= MEISSEL_LOOKUP_SIZE {
             return self.meissel_fn_small(m, n);
         }
-        if self.primes[n-1] >= m {
+        if self.primes[n - 1] >= m {
             return 1;
         }
-        match self.meissel_cache.get(&(m, n)).map(|entry| entry.clone()){
+        match self.meissel_cache.get(&(m, n)).map(|entry| entry.clone()) {
             Some(result) => result,
             None => {
                 let mut result = self.meissel_fn_small(m, MEISSEL_LOOKUP_SIZE);
@@ -161,16 +169,15 @@ impl PrimeCounter {
     /// Leverages caching to speed up the recursive calls
     fn primes_less_than(&mut self, bound: usize) -> usize {
         // First check if it's in the cache already
-        match self.pi_cache.get(&bound).map(|entry| entry.clone()){
+        match self.pi_cache.get(&bound).map(|entry| entry.clone()) {
             Some(value) => value,
             None => {
                 // The meat of the function
                 if bound < 2 {
                     return 0;
-                } else if bound <= self.primes[self.primes.len()-1] {
-                    let result = match self.primes.binary_search(&bound)
-                    {
-                        Ok(idx) => idx+1,
+                } else if bound <= self.primes[self.primes.len() - 1] {
+                    let result = match self.primes.binary_search(&bound) {
+                        Ok(idx) => idx + 1,
                         Err(idx) => idx,
                     };
                     self.pi_cache.insert(bound, result);
@@ -186,7 +193,9 @@ impl PrimeCounter {
 
                 // Issues with underflow here if nprimes_below_2ndr + nprimes_below_4thr < 2
                 // Dealt with by populating the offending (small) values in the cache at the top level
-                let mut result = ((nprimes_below_2ndr + nprimes_below_4thr - 2) * (nprimes_below_2ndr - nprimes_below_4thr + 1)) / 2;
+                let mut result = ((nprimes_below_2ndr + nprimes_below_4thr - 2)
+                    * (nprimes_below_2ndr - nprimes_below_4thr + 1))
+                    / 2;
                 result += self.meissel_fn_large(bound, nprimes_below_4thr);
 
                 for i in nprimes_below_4thr..nprimes_below_2ndr {
@@ -214,7 +223,7 @@ impl PrimeCounter {
 }
 
 #[cfg(test)]
-mod tests {        
+mod tests {
     #[test]
     fn test_meissel_fn() {
         use crate::prime_count::PrimeCounter;

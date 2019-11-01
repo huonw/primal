@@ -1,10 +1,18 @@
 #[macro_use]
 extern crate criterion;
 extern crate primal_count;
-use primal_count::PrimeCounter;
 use criterion::{Criterion, ParameterizedBenchmark};
+use primal_count::PrimeCounter;
 
-const SIZES: [usize; 6] = [100, 10_000, 100_000, 1_000_000, 10_000_000, 10_000_000_000];
+const SIZES: [usize; 7] = [
+    100,
+    10_000,
+    100_000,
+    1_000_000,
+    10_000_000,
+    10_000_000_000,
+    100_000_000_000,
+];
 
 macro_rules! create_benchmarks {
     ($(
@@ -36,7 +44,7 @@ create_benchmarks! {
             let mut s = PrimeCounter::new(*upto + 1);
             b.iter(|| s.prime_pi(*upto));
         },
-  
+
         "PrimeCounter with init" => |b, upto: &usize| {
             b.iter(|| {
                 let mut s = PrimeCounter::new(*upto + 1);

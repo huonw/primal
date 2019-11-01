@@ -11,7 +11,6 @@ pub fn int_square_root(value: usize) -> usize {
 
 /// Returns the largest integer at least cbrt(n) using Newton's method
 pub fn int_cubic_root(value: usize) -> usize {
-    
     let mut x = value;
     let mut y = (2 * value + 1) / 3; // Plus 1 only to protect against division by 0 later
     while y < x {
