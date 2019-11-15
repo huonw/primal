@@ -315,7 +315,7 @@ impl Clone for BitVec {
 impl fmt::Debug for BitVec {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         for bit in self {
-            try!(write!(fmt, "{}", if bit { 1 } else { 0 }));
+            write!(fmt, "{}", if bit { 1 } else { 0 })?;
         }
         Ok(())
     }
