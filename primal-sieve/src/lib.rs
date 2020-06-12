@@ -2,13 +2,12 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
-#![cfg_attr(feature = "unstable", feature(asm))]
+#![cfg_attr(feature = "unstable", feature(llvm_asm))]
 #![deny(warnings)]
 
 #[cfg(test)] extern crate primal_slowsieve;
 extern crate primal_bit;
 extern crate primal_estimate;
-extern crate hamming;
 extern crate smallvec;
 
 // black boxes for pointers; LLVM isn't so happy without
@@ -16,7 +15,7 @@ extern crate smallvec;
 // *too* much slower without them.
 #[cfg(feature = "unstable")]
 #[inline(always)]
-fn b<T>(mut p: *mut T) -> *mut T { unsafe { asm!("": "+r"(p)) } p }
+fn b<T>(mut p: *mut T) -> *mut T { unsafe { llvm_asm!("": "+r"(p)) } p }
 #[cfg(not(feature = "unstable"))]
 #[inline(always)]
 fn b<T>(p: *mut T) -> *mut T { p }

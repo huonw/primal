@@ -1,13 +1,6 @@
-extern crate time;
 extern crate primal;
 use std::env;
-use time::Duration;
-
-fn fmt_time(time: &Duration) -> String {
-    let ns = time.num_nanoseconds().unwrap();
-    let (s, ns) = (ns / 1_000_000_000, ns % 1_000_000_000);
-    format!("{}.{:06}", s, ns / 1000)
-}
+use std::time::Instant;
 
 fn main() {
     let mut args = env::args();
@@ -15,14 +8,10 @@ fn main() {
         .nth(1).and_then(|s| s.parse::<f64>().ok().map(|x| x as usize))
         .unwrap_or(1_000_000);
 
-    let mut prime = None;
-    let time = Duration::span(|| {
-        prime = Some(primal::Primes::all().nth(n - 1).unwrap())
-    });
+    let start = Instant::now();
+    let prime = primal::Primes::all().nth(n - 1).unwrap();
+    let time = start.elapsed();
 
-    println!("{}th prime is {} (est: {:?})\ntotal: {}s",
-             n,
-             prime.unwrap(),
-             primal::estimate_nth_prime(n as u64),
-             fmt_time(&time));
+    println!("{}th prime is {} (est: {:?})\ntotal: {:?}",
+             n, prime, primal::estimate_nth_prime(n as u64), time);
 }

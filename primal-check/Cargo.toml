@@ -1,6 +1,6 @@
 [package]
 name = "primal-check"
-version = "0.2.3"
+version = "0.3.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 homepage = "https://github.com/huonw/primal"
@@ -17,7 +17,7 @@ Fast standalone primality testing.
 num-integer = "0.1"
 
 [dev-dependencies]
-primal = { path = "..", version = "0.2" }
+primal = { path = "..", version = "0.3" }
 
 [features]
 unstable = []

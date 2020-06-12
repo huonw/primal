@@ -122,7 +122,7 @@ fn main() {
                     let diff = diff_to_next[&cc];
                     Info {
                         total_mult_factor: cc,
-                        total_add_factor: total_add_factor,
+                        total_add_factor,
                         diff_mult_factor: diff,
                         correction: (total_add_factor + diff * c) / BYTE_WHEEL - total_add_factor / BYTE_WHEEL,
                         unset_bit: !(1 << (bit_index(total_add_factor) % 8))
@@ -165,24 +165,29 @@ pub const MODULO: usize = {modulo};
              size = count,
              modulo = wheel);
 
-    let length_u64s = div_up(SMALL_LIMIT * count, wheel * 64);
-    let length_bits = length_u64s * 64;
+    let length_bytes = div_up(SMALL_LIMIT * count, wheel * 8);
+    let length_bits = length_bytes * 8;
     let sieve = primal_slowsieve::Primes::sieve(length_bits * wheel / count);
-    println!("\
+    print!("\
 #[allow(dead_code)]
 pub const SMALL_BITS: usize = {};
 #[allow(dead_code)]
-pub const SMALL: &'static [u64; SMALL_BITS / 64] = &[", length_bits);
+pub const SMALL: &'static [u8; SMALL_BITS / 8] = &[", length_bits);
     let mut bit = 0;
     // precompute the sieve for a little while.
-    for _ in 0..length_u64s {
+    for byte in 0..length_bytes {
         let mut val = 0;
-        for i in 0..64 {
-            val |= (sieve.is_prime(from_bit_index(bit, &byte_coprime)) as u64) << i;
+        for i in 0..8 {
+            val |= (sieve.is_prime(from_bit_index(bit, &byte_coprime)) as u8) << i;
             bit += 1;
         }
-        println!("    0b{:064b},", val);
+        if byte % 8 == 0 {
+            print!("\n    0b{:08b},", val);
+        } else {
+            print!(" 0b{:08b},", val);
+        }
     }
+    println!();
     println!("];");
 
     // compute the initialisers: push an arbitrary number up to the
@@ -240,7 +245,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
     for (i, (&c, cur_infos)) in coprime.iter().zip(&infos).enumerate() {
         let wheel_start = i * count;
         let wheel_end = (i + 1) * count;
-        println!("        {}...{} => {{ // {} * x + {}",
+        println!("        {}..={} => {{ // {} * x + {}",
                  wheel_start, wheel_end - 1,
                  BYTE_WHEEL, c);
         let mut indent: String = "            ".into();

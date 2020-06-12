@@ -6,7 +6,6 @@
 
 extern crate primal_bit;
 extern crate primal_estimate;
-extern crate hamming;
 
 use primal_bit::BitVec;
 use std::{iter, cmp};
@@ -142,7 +141,7 @@ impl Primes {
         if n != 1 {
             let b = self.upper_bound();
             if b * b >= n {
-                // n is not divisible by anything from 1...sqrt(n), so
+                // n is not divisible by anything from 1..=sqrt(n), so
                 // must be prime itself! (That is, even though we
                 // don't know this prime specifically, we can infer
                 // that it must be prime.)
@@ -164,17 +163,8 @@ impl Primes {
         if n < 2 { return 0 }
 
         assert!(n <= self.upper_bound());
-        let bit_index = n / 2;
-        let byte = bit_index / 8;
-        let bit = bit_index % 8;
-        let mut mask = (1 << bit) - 1;
-        if n % 2 == 1 {
-            mask = (mask << 1) | 1;
-        }
-        let bytes = self.v.as_bytes();
-        let primes = 8 * byte - hamming::weight(&bytes[..byte]) as usize;
-        let tweak = bytes.get(byte).map_or(0, |b| (!b & mask).count_ones()) as usize;
-        1 + primes + tweak
+        let bit = (n + 1) / 2;
+        1 + (bit - self.v.count_ones_before(bit))
     }
 }
 

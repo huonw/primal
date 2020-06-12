@@ -1,8 +1,8 @@
 [package]
 name = "generators"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 [dependencies]
-primal-slowsieve = { path = "../primal-slowsieve", version = "0.2" }
-primal-check = { path = "../primal-check", version = "0.2" }
+primal-slowsieve = { path = "../primal-slowsieve", version = "0.3" }
+primal-check = { path = "../primal-check", version = "0.3" }

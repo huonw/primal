@@ -19,7 +19,7 @@ macro_rules! create_benchmarks {
                 let input = $input;
 
                 let bench = ParameterizedBenchmark::new(
-                    $first_name, $first_func, input.into_iter().cloned())
+                    $first_name, $first_func, input.iter().copied())
                     $( .with_function($rest_name, $rest_func) )*;
                 c.bench(stringify!($group_id), bench);
             }

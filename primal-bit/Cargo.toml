@@ -1,6 +1,6 @@
 [package]
 name = "primal-bit"
-version = "0.2.4"
+version = "0.3.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>",
            "The Rust Project Developers"]
 

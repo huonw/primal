@@ -1,9 +1,9 @@
 use primal_bit::BitVec;
 use wheel;
-use streaming;
-use hamming;
+use streaming::StreamingSieve;
 
 use std::cmp;
+use std::slice;
 
 type SmallVec1<T> = ::smallvec::SmallVec<[T; 1]>;
 
@@ -42,7 +42,7 @@ struct Item {
 }
 impl Item {
     fn new(x: BitVec, so_far: &mut usize) -> Item {
-        *so_far += hamming::weight(x.as_bytes()) as usize;
+        *so_far += x.count_ones();
         Item {
             count: *so_far,
             bits: x,
@@ -65,9 +65,9 @@ impl Sieve {
                 seg_bits = Some(nbits)
             }
             None => {
-                let mut stream = streaming::new(limit);
+                let mut stream = StreamingSieve::new(limit);
 
-                while let Some((n, bits)) = streaming::next(&mut stream) {
+                while let Some((n, bits)) = stream.next() {
                     let bits_limit = wheel::bit_index((limit - n).saturating_add(1)).1;
                     seen.push(Item::new(bits.clone(), &mut so_far));
                     nbits += cmp::min(bits.len(), bits_limit);
@@ -90,8 +90,8 @@ impl Sieve {
 
         Sieve {
             seg_bits: seg_bits.unwrap() + seg_bits_adjust,
-            nbits: nbits,
-            seen: seen,
+            nbits,
+            seen,
         }
     }
     fn split_index(&self, idx: usize) -> (usize, usize) {
@@ -183,11 +183,11 @@ impl Sieve {
     pub fn prime_pi(&self, n: usize) -> usize {
         assert!(n <= self.upper_bound());
         match n {
-            0...1 => 0,
+            0..=1 => 0,
             2 => 1,
-            3...4 => 2,
-            5...6 => 3,
-            7...10 => 4,
+            3..=4 => 2,
+            5..=6 => 3,
+            7..=10 => 4,
             _ => {
                 let (includes, base, tweak) = self.index_for(n);
                 let mut count = match wheel::BYTE_MODULO {
@@ -253,21 +253,19 @@ impl Sieve {
 
         let mut ret = Vec::new();
 
-        for p in self.primes_from(0) {
-            let mut count = 0;
-            while n % p == 0 {
+        self.primes_from(0).all(|p| {
+            if n % p == 0 {
                 n /= p;
-                count += 1;
-            }
-            if count > 0 {
+                let mut count = 1;
+                while n % p == 0 {
+                    n /= p;
+                    count += 1;
+                }
                 ret.push((p,count));
             }
 
-            if let Some(pp) = p.checked_mul(p) {
-                if pp < n { continue }
-            }
-            break
-        }
+            p.saturating_mul(p) < n
+        });
 
         if n != 1 {
             let b = self.upper_bound();
@@ -278,7 +276,7 @@ impl Sieve {
                 }
             }
 
-            // n is not divisible by anything from 1...sqrt(n), so
+            // n is not divisible by anything from 1..=sqrt(n), so
             // must be prime itself! (That is, even though we
             // don't know this prime specifically, we can infer
             // that it must be prime.)
@@ -354,33 +352,30 @@ impl Sieve {
     pub fn primes_from<'a>(&'a self, n: usize) -> SievePrimes<'a> {
         assert!(n <= self.upper_bound());
         let early = match n {
-            0...2 => Early::Two,
+            0..=2 => Early::Two,
             3 => Early::Three,
-            4...5 => Early::Five,
+            4..=5 => Early::Five,
             _ => Early::Done
         };
         let (_, base, tweak) = self.index_for(n);
-        let (tweak_u64, tweak_bit) = (tweak / 64, tweak % 64);
-        let tweak_mask = (!0) << tweak_bit;
-        assert!(self.seen.len() == 1 || self.seg_bits % 64 == 0);
-        let base_u64_count = base * self.seg_bits / 64 + tweak_u64;
+        assert!(self.seen.len() == 1 || self.seg_bits % 8 == 0);
+        let base_byte_count = base * self.seg_bits / 8;
 
-        let mut elems = self.seen[base].bits.as_u64s()[tweak_u64..].iter();
-        let current = elems.next().unwrap() & tweak_mask;
+        let bits = &self.seen[base].bits;
+
+        let current_base = base_byte_count * wheel::BYTE_MODULO;
+        let next_base = current_base + bits.len() * wheel::BYTE_MODULO / 8;
 
         SievePrimes {
-            early: early,
-            base: base_u64_count * ITER_BASE_STEP,
-            current: current,
-            elems: elems,
+            early,
+            base: current_base,
+            next_base,
+            ones: bits.ones_from(tweak),
             limit: self.upper_bound(),
             bits: self.seen[base + 1..].iter(),
         }
     }
 }
-
-use std::slice;
-const ITER_BASE_STEP: usize = 8 * wheel::BYTE_MODULO;
 
 #[derive(Clone)]
 enum Early {
@@ -395,15 +390,39 @@ enum Early {
 pub struct SievePrimes<'a> {
     early: Early,
     base: usize,
-    current: u64,
+    next_base: usize,
     limit: usize,
-    elems: slice::Iter<'a, u64>,
+    ones: primal_bit::Ones<'a>,
     bits: slice::Iter<'a, Item>,
+}
+
+impl<'a> SievePrimes<'a> {
+    #[inline]
+    fn from_bit_index(&self, i: usize) -> Option<usize> {
+        let w = wheel::from_bit_index(i);
+        match self.base.checked_add(w) {
+            Some(p) if p <= self.limit => Some(p),
+            _ => None,
+        }
+    }
+
+    fn advance_ones(&mut self) -> bool {
+        match self.bits.next() {
+            Some(Item { bits, .. }) => {
+                self.base = self.next_base;
+                self.next_base += bits.len() * wheel::BYTE_MODULO / 8;
+                self.ones = bits.ones_from(0);
+                true
+            },
+            None => false,
+        }
+    }
 }
 
 impl<'a> Iterator for SievePrimes<'a> {
     type Item = usize;
 
+    #[inline]
     fn next(&mut self) -> Option<usize> {
         match self.early {
             Early::Done => {}
@@ -420,32 +439,73 @@ impl<'a> Iterator for SievePrimes<'a> {
                 return Some(5)
             }
         }
-        let mut c = self.current;
-        'find_c: while c == 0 {
-            for &next in &mut self.elems {
-                self.base += ITER_BASE_STEP;
-                if next != 0 {
-                    c = next;
-                    break 'find_c
+        loop {
+            if let Some(i) = self.ones.next() {
+                return self.from_bit_index(i);
+            }
+            if !self.advance_ones() {
+                return None;
+            }
+        }
+    }
+
+    fn fold<Acc, F>(mut self, mut acc: Acc, mut f: F) -> Acc
+    where
+        F: FnMut(Acc, Self::Item) -> Acc
+    {
+        match self.early {
+            Early::Done => {}
+            Early::Two => {
+                acc = f(acc, 2);
+                acc = f(acc, 3);
+                acc = f(acc, 5);
+            }
+            Early::Three => {
+                acc = f(acc, 3);
+                acc = f(acc, 5);
+            }
+            Early::Five => {
+                acc = f(acc, 5);
+            }
+        }
+        loop {
+            while let Some(i) = self.ones.next() {
+                match self.from_bit_index(i) {
+                    Some(p) => acc = f(acc, p),
+                    None => return acc,
                 }
             }
-            match self.bits.next() {
-                Some(bits) => self.elems = bits.bits.as_u64s().iter(),
-                None => return None,
+            if !self.advance_ones() {
+                return acc;
             }
         }
+    }
 
-        let lsb = c.trailing_zeros();
-        self.current = c & (c - 1);
-
-        let w = wheel::TRUE_AT_BIT_64[lsb as usize];
-        if let Some(p) = self.base.checked_add(w) {
-            if p <= self.limit {
-                return Some(p);
+    // Overridden specifically to get internal iteration in `factor`.
+    // When `Try` is stable, we could more generally override `try_fold`.
+    fn all<F>(&mut self, mut f: F) -> bool
+    where
+        F: FnMut(Self::Item) -> bool,
+    {
+        if !match self.early {
+            Early::Done => true,
+            Early::Two => f(2) && f(3) && f(5),
+            Early::Three => f(3) && f(5),
+            Early::Five => f(5),
+        } {
+            return false;
+        }
+        loop {
+            while let Some(i) = self.ones.next() {
+                match self.from_bit_index(i) {
+                    Some(p) => if !f(p) { return false },
+                    None => return true,
+                }
+            }
+            if !self.advance_ones() {
+                return true;
             }
         }
-        self.current = 0;
-        None
     }
 }
 
