@@ -206,4 +206,77 @@ mod tests {
         assert_eq!(BitVec::new().find_nth_bit(0), None);
         assert_eq!(BitVec::from_elem(len, false).find_nth_bit(0), None);
     }
+
+    #[test]
+    fn get() {
+        let len = 10000;
+
+        let mut halves = BitVec::from_elem(len, false);
+        for i in 0..len {
+            assert_eq!(halves.get(i), Some(false));
+        }
+        for i in 0..len / 2 {
+            halves.set(i * 2, true);
+        }
+        for i in 0..len {
+            assert_eq!(halves.get(i), Some(i % 2 == 0));
+        }
+        assert_eq!(halves.get(len), None);
+    }
+
+    #[test]
+    fn clone() {
+        let len = 10000;
+
+        let ones = BitVec::from_elem(len, true);
+        let zeros = BitVec::from_elem(len, false);
+        let mut halves = zeros.clone();
+        for i in 0..len / 2 {
+            halves.set(i * 2, true);
+        }
+
+        assert_eq!(ones.clone(), ones);
+        assert_eq!(zeros.clone(), zeros);
+        assert_eq!(halves.clone(), halves);
+
+        let mut bv = BitVec::from_elem(len, false);
+        bv.clone_from(&ones);
+        assert_eq!(bv, ones);
+        bv.clone_from(&zeros);
+        assert_eq!(bv, zeros);
+        bv.clone_from(&halves);
+        assert_eq!(bv, halves);
+    }
+
+    #[test]
+    fn len_is_empty() {
+        let len = 10000;
+
+        let ones = BitVec::from_elem(len, true);
+        let zeros = BitVec::from_elem(len, false);
+        let default = BitVec::default();
+
+        assert_eq!(ones.len(), len);
+        assert_eq!(zeros.len(), len);
+        assert_eq!(default.len(), 0);
+
+        assert!(!ones.is_empty());
+        assert!(!zeros.is_empty());
+        assert!(default.is_empty());
+    }
+
+    #[test]
+    fn clear_set_all() {
+        let len = 10000;
+
+        let ones = BitVec::from_elem(len, true);
+        let zeros = BitVec::from_elem(len, false);
+
+        let mut bv = ones.clone();
+        assert_eq!(bv, ones);
+        bv.clear();
+        assert_eq!(bv, zeros);
+        bv.set_all();
+        assert_eq!(bv, ones);
+    }
 }
