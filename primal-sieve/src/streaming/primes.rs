@@ -214,4 +214,16 @@ mod tests {
         };
         check_equality(limit);
     }
+
+    #[test]
+    #[should_panic = "123456791"]
+    fn fold() {
+        // There's no termination until we exceed `usize::MAX`, which
+        // will take too long, but we can cut it short by unwinding.
+        Primes::all().fold((), |(), p| {
+            if p > 123456789 {
+                panic!(format!("{}", p));
+            }
+        })
+    }
 }
