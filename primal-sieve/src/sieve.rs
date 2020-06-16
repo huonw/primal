@@ -759,6 +759,22 @@ mod tests {
     }
 
     #[test]
+    fn sum_primes() {
+        let primes = Sieve::new(2_000_000);
+
+        let mut manual_sum = 0u64;
+        for p in primes.primes_from(0) {
+            manual_sum += p as u64;
+        }
+        dbg!(manual_sum);
+
+        let folded_sum = primes.primes_from(0).fold(0u64, |acc, p| acc + p as u64);
+        let trait_sum = primes.primes_from(0).map(|p| p as u64).sum::<u64>();
+        assert_eq!(manual_sum, folded_sum);
+        assert_eq!(manual_sum, trait_sum);
+    }
+
+    #[test]
     #[cfg_attr(not(feature = "slow_tests"), ignore)]
     fn u32_primes() {
         const COUNT: usize = 203_280_221; // number of 32-bit primes
