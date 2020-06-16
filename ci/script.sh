@@ -29,6 +29,11 @@ if [ ! -z "$COVERAGE" ]; then
         exit 1
     fi
 
+    # Rust 1.41 changed the default lock format, which cargo-travis doesn't understand.
+    # https://github.com/roblabla/cargo-travis/issues/66
+    rustup install --profile minimal 1.40.0
+    cargo +1.40.0 generate-lockfile
+
     cargo install -v cargo-travis || echo "cargo-travis already installed"
     cargo coverage -v --all -m coverage-reports --kcov-build-location "$PWD/target" --features "$features"
     bash <(curl -s https://codecov.io/bash) -c -X gcov -X coveragepy -s coverage-reports
