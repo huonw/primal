@@ -3,7 +3,7 @@ set -ex
 
 cargo=cargo
 target_param=""
-features=""
+features=" "
 if [ ! -z "$UNSTABLE" ]; then
     features+=" unstable"
 fi
