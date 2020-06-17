@@ -20,7 +20,7 @@ fn from_bools(bools: &[bool]) -> BitVec {
 }
 trait Methods {
     fn eq_vec(&self, v: &[bool]) -> bool;
-    fn from_bytes(x: &[u8]) -> BitVec;
+    fn from_slice(x: &[u8]) -> BitVec;
     fn all(&self) -> bool;
     fn none(&self) -> bool;
     fn any(&self) -> bool;
@@ -30,7 +30,7 @@ impl Methods for BitVec {
         self.len() == v.len() &&
             self.iter().zip(v).all(|(a, &b)| a == b)
     }
-    fn from_bytes(bytes: &[u8]) -> BitVec {
+    fn from_slice(bytes: &[u8]) -> BitVec {
         let len = bytes.len().checked_mul(8).expect("capacity overflow");
         let mut bit_vec = BitVec::from_elem(len, false);
 
@@ -420,7 +420,7 @@ fn test_equal_sneaky_big() {
 
 #[test]
 fn test_from_bytes() {
-    let bit_vec = BitVec::from_bytes(&[0b10110110, 0b00000000, 0b11111111]);
+    let bit_vec = BitVec::from_slice(&[0b10110110, 0b00000000, 0b11111111]);
     let str = concat!("10110110", "00000000", "11111111");
     assert_eq!(format!("{:?}", bit_vec), str);
 }
@@ -428,7 +428,7 @@ fn test_from_bytes() {
 #[test]
 fn test_to_bools() {
     let bools = vec![false, false, true, false, false, true, true, false];
-    assert_eq!(BitVec::from_bytes(&[0b00100110]).iter().collect::<Vec<bool>>(), bools);
+    assert_eq!(BitVec::from_slice(&[0b00100110]).iter().collect::<Vec<bool>>(), bools);
 }
 
 #[test]
@@ -461,17 +461,17 @@ fn test_big_clear() {
 
 #[test]
 fn test_small_bit_vec_tests() {
-    let v = BitVec::from_bytes(&[0]);
+    let v = BitVec::from_slice(&[0]);
     assert!(!v.all());
     assert!(!v.any());
     assert!(v.none());
 
-    let v = BitVec::from_bytes(&[0b00010100]);
+    let v = BitVec::from_slice(&[0b00010100]);
     assert!(!v.all());
     assert!(v.any());
     assert!(!v.none());
 
-    let v = BitVec::from_bytes(&[0xFF]);
+    let v = BitVec::from_slice(&[0xFF]);
     assert!(v.all());
     assert!(v.any());
     assert!(!v.none());
@@ -479,7 +479,7 @@ fn test_small_bit_vec_tests() {
 
 #[test]
 fn test_big_bit_vec_tests() {
-    let v = BitVec::from_bytes(&[ // 88 bits
+    let v = BitVec::from_slice(&[ // 88 bits
         0, 0, 0, 0,
         0, 0, 0, 0,
         0, 0, 0]);
@@ -487,7 +487,7 @@ fn test_big_bit_vec_tests() {
     assert!(!v.any());
     assert!(v.none());
 
-    let v = BitVec::from_bytes(&[ // 88 bits
+    let v = BitVec::from_slice(&[ // 88 bits
         0, 0, 0b00010100, 0,
         0, 0, 0, 0b00110100,
         0, 0, 0]);
@@ -495,7 +495,7 @@ fn test_big_bit_vec_tests() {
     assert!(v.any());
     assert!(!v.none());
 
-    let v = BitVec::from_bytes(&[ // 88 bits
+    let v = BitVec::from_slice(&[ // 88 bits
         0xFF, 0xFF, 0xFF, 0xFF,
         0xFF, 0xFF, 0xFF, 0xFF,
         0xFF, 0xFF, 0xFF]);

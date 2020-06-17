@@ -1,6 +1,6 @@
 [package]
 name = "primal-sieve"
-version = "0.2.9"
+version = "0.3.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 homepage = "https://github.com/huonw/primal"
@@ -14,15 +14,14 @@ A high performance prime sieve.
 """
 
 [dependencies]
-primal-bit = { path = "../primal-bit", version = "0.2.2" }
-primal-estimate = { path = "../primal-estimate", version = "0.2" }
-smallvec = "0.6"
-hamming = "0.1"
+primal-bit = { path = "../primal-bit", version = "0.3" }
+primal-estimate = { path = "../primal-estimate", version = "0.3" }
+smallvec = "1"
 
 [dev-dependencies]
-primal-slowsieve = { path = "../primal-slowsieve", version = "0.2" }
-primal = { path = "..", version = "0.2" }
-criterion = "0.2"
+primal-slowsieve = { path = "../primal-slowsieve", version = "0.3" }
+primal = { path = "..", version = "0.3" }
+criterion = "0.3"
 
 [[bench]]
 name = "bench"

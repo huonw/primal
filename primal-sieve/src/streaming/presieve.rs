@@ -1,8 +1,8 @@
 use primal_bit::BitVec;
-use std::{cmp, ptr};
+use std::cmp;
 
 use wheel;
-use super::{StreamingSieve};
+use super::StreamingSieve;
 
 const MINIMUM_PRESIEVE: usize = 2 * 3 * 5;
 const PRESIEVE_PRIMES: &'static [usize] = &[7, 11, 13, 17, 19, 23, 29];
@@ -47,7 +47,7 @@ impl Presieve {
             StreamingSieve::small_primes_sieve(&mut sieve, &mut sievers);
 
             Presieve {
-                sieve: sieve,
+                sieve,
                 presieve_prod: prod,
                 presieve_idx: idx,
             }
@@ -91,9 +91,7 @@ impl Presieve {
         }
         fn memcpy<'d>(dst: &'d mut [u8], src: &[u8]) -> usize {
             let l = cmp::min(dst.len(), src.len());
-            unsafe {
-                ptr::copy(src.as_ptr(), dst.as_mut_ptr(), l);
-            }
+            dst[..l].copy_from_slice(&src[..l]);
             l
         }
     }

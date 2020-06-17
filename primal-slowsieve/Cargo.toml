@@ -1,6 +1,6 @@
 [package]
 name = "primal-slowsieve"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 
 homepage = "https://github.com/huonw/primal"
@@ -15,12 +15,11 @@ probably want `primal-sieve`, or even just `primal` itself.
 """
 
 [dependencies]
-primal-bit = { path = "../primal-bit", version = "0.2" }
-primal-estimate = { path = "../primal-estimate", version = "0.2" }
-hamming = "0.1"
+primal-bit = { path = "../primal-bit", version = "0.3" }
+primal-estimate = { path = "../primal-estimate", version = "0.3" }
 
 [dev-dependencies]
-criterion = "0.2"
+criterion = "0.3"
 
 [[bench]]
 name = "bench"

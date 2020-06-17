@@ -1,7 +1,6 @@
 use primal_estimate;
-use primal_bit::{BitVec};
-use std::{cmp};
-use hamming;
+use primal_bit::BitVec;
+use std::cmp;
 
 use wheel;
 
@@ -55,7 +54,7 @@ fn isqrt(x: usize) -> usize {
 impl StreamingSieve {
     /// Create a new instance of the streaming sieve that will
     /// correctly progressively filter primes up to `limit`.
-    fn new(limit: usize) -> StreamingSieve {
+    pub(crate) fn new(limit: usize) -> StreamingSieve {
         let low = 0;
 
         let elems = cmp::min(wheel::bits_for(limit), SEG_ELEMS);
@@ -69,16 +68,16 @@ impl StreamingSieve {
         };
 
         StreamingSieve {
-            small: small,
+            small,
             sieve: BitVec::from_elem(elems, true),
             primes: vec![],
             small_primes: vec![],
             large_primes: vec![],
-            presieve: presieve,
+            presieve,
 
-            low: low,
-            current: current,
-            limit: limit
+            low,
+            current,
+            limit
         }
     }
     fn split_index(&self, idx: usize) -> (usize, usize) {
@@ -108,11 +107,11 @@ impl StreamingSieve {
     /// ```
     pub fn prime_pi(n: usize) -> usize {
         match n {
-            0...1 => 0,
+            0..=1 => 0,
             2 => 1,
-            3...4 => 2,
-            5...6 => 3,
-            7...10 => 4,
+            3..=4 => 2,
+            5..=6 => 3,
+            7..=10 => 4,
             _ => {
                 let mut sieve = StreamingSieve::new(n);
                 let (includes, base, tweak) = sieve.index_for(n);
@@ -123,8 +122,7 @@ impl StreamingSieve {
 
                 for _ in 0..base {
                     let (_, bitv) = sieve.next().unwrap();
-                    let bytes = bitv.as_bytes();
-                    count += hamming::weight(bytes) as usize;
+                    count += bitv.count_ones();
                 }
 
                 let (_, last) = sieve.next().unwrap();
@@ -160,7 +158,7 @@ impl StreamingSieve {
                 let (_, hi) = primal_estimate::nth_prime(n as u64);
                 let mut sieve = StreamingSieve::new(hi as usize);
                 while let Some((low, bits)) = sieve.next() {
-                    let count = hamming::weight(bits.as_bytes()) as usize;
+                    let count = bits.count_ones();
                     if count >= bit_n {
                         let bit_idx = bits.find_nth_bit(bit_n - 1).unwrap();
                         return low + wheel::from_bit_index(bit_idx)
@@ -209,37 +207,27 @@ impl StreamingSieve {
 
     fn direct_sieve(&mut self) {
         let bytes = self.sieve.as_bytes_mut();
+        let mut chunks = self.primes.chunks_exact_mut(3);
 
-        let mut iter = self.primes.iter_mut();
-
-        while iter.size_hint().0 >= 3 {
-            match (iter.next(), iter.next(), iter.next()) {
-                (Some(wi1), Some(wi2), Some(wi3)) => {
-                    wi1.sieve_triple(wi2, wi3, bytes);
-                }
-                _ => unreachable!()
-            }
+        while let Some([wi1, wi2, wi3]) = chunks.next() {
+            wi1.sieve_triple(wi2, wi3, bytes);
         }
-        for wi in iter {
-            wi.sieve(bytes)
+
+        for wi in chunks.into_remainder() {
+            wi.sieve(bytes);
         }
     }
 
     fn large_primes_sieve(&mut self) {
         let bytes = self.sieve.as_bytes_mut();
+        let mut chunks = self.large_primes.chunks_exact_mut(2);
 
-        let mut iter = self.large_primes.iter_mut();
-
-        while iter.size_hint().0 >= 2 {
-            match (iter.next(), iter.next()) {
-                (Some(wi1), Some(wi2)) => {
-                    wi1.sieve_pair(wi2, bytes);
-                }
-                _ => unreachable!()
-            }
+        while let Some([wi1, wi2]) = chunks.next() {
+            wi1.sieve_pair(wi2, bytes);
         }
-        for wi in iter {
-            wi.sieve(bytes)
+
+        for wi in chunks.into_remainder() {
+            wi.sieve(bytes);
         }
     }
 
@@ -252,7 +240,7 @@ impl StreamingSieve {
     ///
     /// NB. the prime 2 is not included in any of these sieves and so
     /// needs special handling.
-    fn next(&mut self) -> Option<(usize, &BitVec)> {
+    pub(crate) fn next(&mut self) -> Option<(usize, &BitVec)> {
         if self.low >= self.limit {
             return None
         }
@@ -276,14 +264,6 @@ impl StreamingSieve {
 
         Some((low, &self.sieve))
     }
-}
-
-// module-public but crate-private wrappers, to allow `Sieve` to call these functions.
-pub fn new(limit: usize) -> StreamingSieve {
-    StreamingSieve::new(limit)
-}
-pub fn next(sieve: &mut StreamingSieve) -> Option<(usize, &BitVec)> {
-    sieve.next()
 }
 
 #[cfg(test)]

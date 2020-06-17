@@ -1,8 +1,5 @@
 use wheel;
 use streaming::{self, StreamingSieve};
-use std::vec;
-
-const ITER_BASE_STEP: usize = 8 * wheel::BYTE_MODULO;
 
 #[cfg(target_pointer_width = "32")]
 const SQRT: usize = 1 << 16;
@@ -36,8 +33,7 @@ enum Early {
 pub struct Primes {
     early: Early,
     base: usize,
-    current: u64,
-    elems: vec::IntoIter<u64>,
+    ones: primal_bit::IntoOnes,
     streaming: StreamingSieve,
     sieving_primes: Option<Box<Primes>>,
     left_over: Option<usize>,
@@ -68,10 +64,11 @@ impl Primes {
         };
         let mut streaming = StreamingSieve::new(limit);
 
-        let mut iter = {
+        let ones = {
             let (_, bits) = streaming.next().unwrap();
-            bits.as_u64s().to_owned().into_iter()
+            bits.clone().into_ones()
         };
+
         // we manually add the primes
         streaming.small = None;
         // go to the end.
@@ -80,18 +77,49 @@ impl Primes {
         Primes {
             early: Early::Two,
             base: 0,
-            current: iter.next().unwrap(),
-            elems: iter,
-            streaming: streaming,
+            ones,
+            streaming,
             sieving_primes: sieving,
             left_over: None,
         }
     }
+
+    #[inline]
+    fn from_bit_index(&self, i: usize) -> Option<usize> {
+        let w = wheel::from_bit_index(i);
+        self.base.checked_add(w)
+    }
+
+    fn advance_ones(&mut self) -> bool {
+        let low = self.streaming.low;
+        let high = low.saturating_add(streaming::SEG_LEN);
+
+        for q in self.left_over.into_iter().chain(self.sieving_primes.as_mut().unwrap()) {
+            if q.saturating_mul(q) >= high {
+                self.left_over = Some(q);
+                break
+            }
+            if q > streaming::isqrt(streaming::SEG_LEN) {
+                self.streaming.add_sieving_prime(q, low);
+            }
+        }
+
+        match self.streaming.next() {
+            Some((_, bits)) => {
+                self.base = low;
+                self.ones = bits.clone().into_ones();
+                true
+            },
+            None => false,
+        }
+    }
 }
 
+// See also `Iterator for SievePrimes` with nearly identical code.
 impl Iterator for Primes {
     type Item = usize;
 
+    #[inline]
     fn next(&mut self) -> Option<usize> {
         match self.early {
             Early::Done => {}
@@ -109,40 +137,46 @@ impl Iterator for Primes {
             }
         }
 
-        let mut c = self.current;
-        'find_c: while c == 0 {
-            for next in &mut self.elems {
-                self.base += ITER_BASE_STEP;
-                if next != 0 {
-                    c = next;
-                    break 'find_c
-                }
+        loop {
+            if let Some(i) = self.ones.next() {
+                return self.from_bit_index(i);
             }
-            let low = self.streaming.low;
-            let high = low.saturating_add(streaming::SEG_LEN);
-
-            for q in self.left_over.into_iter().chain(self.sieving_primes.as_mut().unwrap()) {
-                if q.saturating_mul(q) >= high {
-                    self.left_over = Some(q);
-                    break
-                }
-                if q > streaming::isqrt(streaming::SEG_LEN) {
-                    self.streaming.add_sieving_prime(q, low);
-                }
+            if !self.advance_ones() {
+                return None;
             }
-
-            match self.streaming.next() {
-                Some((_, bits)) => self.elems = bits.as_u64s().to_owned().into_iter(),
-                None => return None,
-            }
-
-
         }
+    }
 
-        let lsb = c.trailing_zeros();
-        self.current = c & (c - 1);
-        let p = self.base + wheel::TRUE_AT_BIT_64[lsb as usize];
-        Some(p)
+    fn fold<Acc, F>(mut self, mut acc: Acc, mut f: F) -> Acc
+    where
+        F: FnMut(Acc, Self::Item) -> Acc
+    {
+        match self.early {
+            Early::Done => {}
+            Early::Two => {
+                acc = f(acc, 2);
+                acc = f(acc, 3);
+                acc = f(acc, 5);
+            }
+            Early::Three => {
+                acc = f(acc, 3);
+                acc = f(acc, 5);
+            }
+            Early::Five => {
+                acc = f(acc, 5);
+            }
+        }
+        loop {
+            while let Some(i) = self.ones.next() {
+                match self.from_bit_index(i) {
+                    Some(p) => acc = f(acc, p),
+                    None => return acc,
+                }
+            }
+            if !self.advance_ones() {
+                return acc;
+            }
+        }
     }
 }
 
@@ -179,5 +213,17 @@ mod tests {
             100_000_000
         };
         check_equality(limit);
+    }
+
+    #[test]
+    #[should_panic = "123456791"]
+    fn fold() {
+        // There's no termination until we exceed `usize::MAX`, which
+        // will take too long, but we can cut it short by unwinding.
+        Primes::all().fold((), |(), p| {
+            if p > 123456789 {
+                panic!(format!("{}", p));
+            }
+        })
     }
 }
