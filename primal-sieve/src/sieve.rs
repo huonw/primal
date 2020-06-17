@@ -253,7 +253,8 @@ impl Sieve {
 
         let mut ret = Vec::new();
 
-        self.primes_from(0).all(|p| {
+        // Using optimized internal iteration
+        self.primes_from(0).for_each_while(|p| {
             if n % p == 0 {
                 n /= p;
                 let mut count = 1;
@@ -417,6 +418,34 @@ impl<'a> SievePrimes<'a> {
             None => false,
         }
     }
+
+    // Private method specifically to get internal iteration in `factor`.
+    // When `Try` is stable, we could more generally override `try_fold`, but
+    // that also requires keeping all state consistent, like `self.early`.
+    fn for_each_while<F>(mut self, mut f: F)
+    where
+        F: FnMut(usize) -> bool,
+    {
+        if !match self.early {
+            Early::Done => true,
+            Early::Two => f(2) && f(3) && f(5),
+            Early::Three => f(3) && f(5),
+            Early::Five => f(5),
+        } {
+            return;
+        }
+        loop {
+            while let Some(i) = self.ones.next() {
+                match self.from_bit_index(i) {
+                    Some(p) => if !f(p) { return },
+                    None => return,
+                }
+            }
+            if !self.advance_ones() {
+                return;
+            }
+        }
+    }
 }
 
 impl<'a> Iterator for SievePrimes<'a> {
@@ -477,33 +506,6 @@ impl<'a> Iterator for SievePrimes<'a> {
             }
             if !self.advance_ones() {
                 return acc;
-            }
-        }
-    }
-
-    // Overridden specifically to get internal iteration in `factor`.
-    // When `Try` is stable, we could more generally override `try_fold`.
-    fn all<F>(&mut self, mut f: F) -> bool
-    where
-        F: FnMut(Self::Item) -> bool,
-    {
-        if !match self.early {
-            Early::Done => true,
-            Early::Two => f(2) && f(3) && f(5),
-            Early::Three => f(3) && f(5),
-            Early::Five => f(5),
-        } {
-            return false;
-        }
-        loop {
-            while let Some(i) = self.ones.next() {
-                match self.from_bit_index(i) {
-                    Some(p) => if !f(p) { return false },
-                    None => return true,
-                }
-            }
-            if !self.advance_ones() {
-                return true;
             }
         }
     }
