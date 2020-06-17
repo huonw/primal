@@ -115,7 +115,7 @@ impl Primes {
     }
 }
 
-
+// See also `Iterator for SievePrimes` with nearly identical code.
 impl Iterator for Primes {
     type Item = usize;
 

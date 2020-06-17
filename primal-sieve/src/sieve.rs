@@ -448,6 +448,7 @@ impl<'a> SievePrimes<'a> {
     }
 }
 
+// See also `Iterator for Primes` with nearly identical code.
 impl<'a> Iterator for SievePrimes<'a> {
     type Item = usize;
 
