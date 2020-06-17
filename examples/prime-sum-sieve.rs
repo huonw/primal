@@ -12,6 +12,6 @@ fn main() {
     // now we can efficiently sum them up
     let sum = ns.iter()
                 .map(|n| sieve.nth_prime(*n))
-                .fold(0, |a, b| a + b);
+                .fold(0u64, |a, b| a + b as u64);
     println!("the sum is {}", sum);
 }
