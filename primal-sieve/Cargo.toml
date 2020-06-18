@@ -21,7 +21,7 @@ smallvec = "1"
 
 [dev-dependencies]
 primal-slowsieve = { path = "../primal-slowsieve", version = "0.3" }
-primal = { path = "..", version = "0.3" }
+primal = { path = "..", version = "0.2" }
 criterion = "0.3"
 
 [[bench]]
