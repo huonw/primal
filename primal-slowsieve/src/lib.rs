@@ -90,7 +90,7 @@ impl Primes {
     }
 
     /// Iterator over the primes stored in this map.
-    pub fn primes<'a>(&'a self) -> PrimeIterator<'a> {
+    pub fn primes(&self) -> PrimeIterator<'_> {
         PrimeIterator {
             two: true,
             iter: self.v.iter().enumerate()

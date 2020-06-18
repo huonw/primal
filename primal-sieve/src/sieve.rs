@@ -343,7 +343,7 @@ impl Sieve {
     ///     println!("{}", p);
     /// }
     /// ```
-    pub fn primes_from<'a>(&'a self, n: usize) -> SievePrimes<'a> {
+    pub fn primes_from(&self, n: usize) -> SievePrimes<'_> {
         assert!(n <= self.upper_bound());
         let early = match n {
             0..=2 => Early::Two,
