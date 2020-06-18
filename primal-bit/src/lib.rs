@@ -22,8 +22,8 @@ use std::ops::Index;
 mod inner;
 mod iter;
 
-pub use inner::BitVec;
-pub use iter::{Iter, IntoOnes, Ones};
+pub use crate::inner::BitVec;
+pub use crate::iter::{Iter, IntoOnes, Ones};
 
 const BITS: usize = 8;
 

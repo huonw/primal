@@ -1,5 +1,5 @@
-use wheel;
-use streaming::{self, StreamingSieve};
+use crate::wheel;
+use crate::streaming::{self, StreamingSieve};
 
 #[cfg(target_pointer_width = "32")]
 const SQRT: usize = 1 << 16;
@@ -182,7 +182,7 @@ impl Iterator for Primes {
 
 #[cfg(test)]
 mod tests {
-    use Sieve;
+    use crate::Sieve;
     use super::Primes;
 
     fn check_equality(limit: usize) {

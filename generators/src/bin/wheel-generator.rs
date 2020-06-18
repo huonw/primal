@@ -134,7 +134,7 @@ fn main() {
 
 
     println!("// automatically generated
-use wheel::{{WheelInit, Wheel, WheelElem}};
+use crate::wheel::{{WheelInit, Wheel, WheelElem}};
 
 #[derive(Debug, Clone)]
 pub struct Wheel{modulo};
@@ -267,7 +267,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
         println!("{}}}", indent);
         println!("\
 {indent}while p < loop_end {{
-{indent}    p = ::b(p);",
+{indent}    p = crate::b(p);",
                  indent = indent);
 
         for info in cur_infos {

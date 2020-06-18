@@ -32,11 +32,11 @@ macro_rules! safe_assert {
 }
 
 mod streaming;
-pub use streaming::StreamingSieve;
-pub use streaming::primes::Primes;
+pub use crate::streaming::StreamingSieve;
+pub use crate::streaming::primes::Primes;
 
 // mod wheel6;
 mod wheel;
 mod sieve;
 
-pub use sieve::{Sieve, SievePrimes};
+pub use crate::sieve::{Sieve, SievePrimes};

@@ -1,6 +1,6 @@
 use primal_bit::BitVec;
-use wheel;
-use streaming::StreamingSieve;
+use crate::wheel;
+use crate::streaming::StreamingSieve;
 
 use std::cmp;
 use std::slice;

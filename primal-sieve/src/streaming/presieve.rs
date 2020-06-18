@@ -1,7 +1,7 @@
 use primal_bit::BitVec;
 use std::cmp;
 
-use wheel;
+use crate::wheel;
 use super::StreamingSieve;
 
 const MINIMUM_PRESIEVE: usize = 2 * 3 * 5;

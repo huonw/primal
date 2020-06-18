@@ -2,7 +2,7 @@ use primal_estimate;
 use primal_bit::BitVec;
 use std::cmp;
 
-use wheel;
+use crate::wheel;
 
 pub mod primes;
 mod presieve;
@@ -31,7 +31,7 @@ mod presieve;
 /// ```
 #[derive(Debug)]
 pub struct StreamingSieve {
-    small: Option<::Sieve>,
+    small: Option<crate::Sieve>,
     sieve: BitVec,
     primes: Vec<wheel::State<wheel::Wheel210>>,
     small_primes: Vec<wheel::State<wheel::Wheel30>>,
@@ -64,7 +64,7 @@ impl StreamingSieve {
         let small = if limit < current * current {
             None
         } else {
-            Some(::Sieve::new(isqrt(limit) + 1))
+            Some(crate::Sieve::new(isqrt(limit) + 1))
         };
 
         StreamingSieve {
@@ -268,9 +268,9 @@ impl StreamingSieve {
 
 #[cfg(test)]
 mod tests {
-    use Sieve;
+    use crate::Sieve;
     use primal_slowsieve::Primes;
-    use wheel;
+    use crate::wheel;
     use super::StreamingSieve;
     fn gcd(x: usize, y: usize) -> usize {
         if y == 0 { x }

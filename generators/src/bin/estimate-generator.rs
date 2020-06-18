@@ -36,11 +36,11 @@ macro_rules! estimates {
         }
     )*) => {
         $(
-            pub const $group: ::EstimateGroup = ::EstimateGroup {
-                bound_type: ::BoundType::$group,
+            pub const $group: crate::EstimateGroup = crate::EstimateGroup {
+                bound_type: crate::BoundType::$group,
                 estimators: &[
                     $(
-                        ::Estimate {
+                        crate::Estimate {
                             valid_from: $from as f64,
                             source: $source,
                             expression: stringify!($e),

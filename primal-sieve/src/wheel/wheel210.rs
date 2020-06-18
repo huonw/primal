@@ -1,5 +1,5 @@
 // automatically generated
-use wheel::{WheelInit, Wheel, WheelElem};
+use crate::wheel::{WheelInit, Wheel, WheelElem};
 
 #[derive(Debug, Clone)]
 pub struct Wheel210;
@@ -791,7 +791,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                              }
                                                             }
                                                             while p < loop_end {
-                                                                p = ::b(p);
+                                                                p = crate::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
                                                                 *p.offset(prime_ * 0 + 0) &= 254;
@@ -1282,7 +1282,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                              }
                                                             }
                                                             while p < loop_end {
-                                                                p = ::b(p);
+                                                                p = crate::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
                                                                 *p.offset(prime_ * 0 + 0) &= 253;
@@ -1773,7 +1773,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                              }
                                                             }
                                                             while p < loop_end {
-                                                                p = ::b(p);
+                                                                p = crate::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
                                                                 *p.offset(prime_ * 0 + 0) &= 251;
@@ -2264,7 +2264,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                              }
                                                             }
                                                             while p < loop_end {
-                                                                p = ::b(p);
+                                                                p = crate::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
                                                                 *p.offset(prime_ * 0 + 0) &= 247;
@@ -2755,7 +2755,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                              }
                                                             }
                                                             while p < loop_end {
-                                                                p = ::b(p);
+                                                                p = crate::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
                                                                 *p.offset(prime_ * 0 + 0) &= 239;
@@ -3246,7 +3246,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                              }
                                                             }
                                                             while p < loop_end {
-                                                                p = ::b(p);
+                                                                p = crate::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
                                                                 *p.offset(prime_ * 0 + 0) &= 223;
@@ -3737,7 +3737,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                              }
                                                             }
                                                             while p < loop_end {
-                                                                p = ::b(p);
+                                                                p = crate::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
                                                                 *p.offset(prime_ * 0 + 0) &= 191;
@@ -4228,7 +4228,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                              }
                                                             }
                                                             while p < loop_end {
-                                                                p = ::b(p);
+                                                                p = crate::b(p);
                                                                 safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                                                              p.offset(prime_ * 0 + 0) < end);
                                                                 *p.offset(prime_ * 0 + 0) &= 127;
