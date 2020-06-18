@@ -1,6 +1,6 @@
 [package]
 name = "primal-sieve"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 edition = "2018"
 
@@ -21,7 +21,7 @@ smallvec = "1"
 
 [dev-dependencies]
 primal-slowsieve = { path = "../primal-slowsieve", version = "0.3" }
-primal = { path = "..", version = "0.2" }
+primal = { path = "..", version = "0.3" }
 criterion = "0.3"
 
 [[bench]]

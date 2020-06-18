@@ -1,7 +1,7 @@
 [package]
 
 name = "primal"
-version = "0.2.3"
+version = "0.3.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 edition = "2018"
 
