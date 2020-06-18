@@ -1,12 +1,5 @@
-use std::io::prelude::*;
-use std::{io, env};
 use std::collections::{BTreeMap, HashSet};
-
-macro_rules! errln {
-    ($($fmt: tt)*) => {
-        (writeln!(&mut io::stderr(), $($fmt)*).unwrap())
-    }
-}
+use std::env;
 
 fn div_up(x: usize, y: usize) -> usize {
     (x + y - 1) / y
@@ -52,7 +45,7 @@ fn main() {
     let wheel = primes.iter().fold(1, |x, y| x * *y);
     let count = primes.iter().fold(1, |x, y| x * (*y - 1));
 
-    errln!("wheel for {} (count {})", wheel, count);
+    eprintln!("wheel for {} (count {})", wheel, count);
     let byte_coprime = coprime_to(BYTE_WHEEL, BYTE_WHEEL);
     let coprime = coprime_to(wheel, wheel);
     let mut diff_to_next = BTreeMap::new();
