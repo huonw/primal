@@ -1,5 +1,3 @@
-extern crate primal;
-
 fn main() {
     let ns = (1..100 + 1).map(|x| x * 100_000).collect::<Vec<_>>();
 

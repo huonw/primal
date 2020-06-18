@@ -4,9 +4,6 @@
 
 #![deny(warnings)]
 
-extern crate primal_bit;
-extern crate primal_estimate;
-
 use primal_bit::BitVec;
 use std::{iter, cmp};
 

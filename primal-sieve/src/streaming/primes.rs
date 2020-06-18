@@ -26,7 +26,6 @@ enum Early {
 /// # Examples
 ///
 /// ```rust
-/// # extern crate primal;
 /// let count = primal::Primes::all().take_while(|p| *p < 1_000_000).count();
 /// println!("{}", count);
 /// ```
@@ -45,7 +44,6 @@ impl Primes {
     /// # Examples
     ///
     /// ```rust
-    /// # extern crate primal;
     /// // print the first 20 primes
     /// for p in primal::Primes::all().take(20) {
     ///     println!("{}", p);

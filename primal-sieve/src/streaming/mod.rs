@@ -1,4 +1,3 @@
-use primal_estimate;
 use primal_bit::BitVec;
 use std::cmp;
 
@@ -25,7 +24,6 @@ mod presieve;
 /// # Examples
 ///
 /// ```rust
-/// # extern crate primal;
 /// let count = primal::StreamingSieve::prime_pi(123456);
 /// println!("𝜋(123456) = {}", count);
 /// ```
@@ -97,7 +95,6 @@ impl StreamingSieve {
     /// # Examples
     ///
     /// ```rust
-    /// # extern crate primal;
     /// assert_eq!(primal::StreamingSieve::prime_pi(10), 4);
     /// // the endpoint is included
     /// assert_eq!(primal::StreamingSieve::prime_pi(11), 5);
@@ -144,7 +141,6 @@ impl StreamingSieve {
     /// # Example
     ///
     /// ```rust
-    /// # extern crate primal;
     /// assert_eq!(primal::StreamingSieve::nth_prime(1_000), 7919);
     /// ```
     pub fn nth_prime(n: usize) -> usize {

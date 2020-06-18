@@ -13,8 +13,6 @@
 #![deny(unsafe_code)]
 #![deny(warnings)]
 
-extern crate hamming;
-
 use std::fmt;
 use std::hash;
 use std::ops::Index;

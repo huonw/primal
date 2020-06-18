@@ -32,7 +32,6 @@ mod tables;
 /// # Examples
 ///
 /// ```rust
-/// # extern crate primal;
 /// // the number of primes below 1e9
 /// let count_billion = 50_847_534;
 ///
@@ -108,7 +107,6 @@ pub fn prime_pi(n: u64) -> (u64, u64) {
 /// # Examples
 ///
 /// ```rust
-/// # extern crate primal;
 /// // the 1e9-th prime
 /// let billionth = 22_801_763_489;
 ///
@@ -160,8 +158,7 @@ pub fn nth_prime(n: u64) -> (u64, u64) {
 
 #[cfg(test)]
 mod tests {
-    extern crate primal;
-    use self::primal::Sieve;
+    use primal::Sieve;
 
     #[test]
     fn prime_pi() {

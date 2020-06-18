@@ -88,7 +88,6 @@ fn mod_exp(mut x: u64, mut d: u64, n: u64) -> u64 {
 /// # Examples
 ///
 /// ```rust
-/// # extern crate primal;
 /// assert_eq!(primal::is_prime(1), false);
 /// assert_eq!(primal::is_prime(2), true);
 /// assert_eq!(primal::is_prime(3), true);

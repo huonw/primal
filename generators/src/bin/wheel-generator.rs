@@ -1,6 +1,3 @@
-extern crate primal_slowsieve;
-extern crate primal_check;
-
 use std::io::prelude::*;
 use std::{io, env};
 use std::collections::{BTreeMap, HashSet};

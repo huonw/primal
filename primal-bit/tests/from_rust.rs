@@ -8,7 +8,6 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-extern crate primal_bit;
 use primal_bit::BitVec;
 
 fn from_bools(bools: &[bool]) -> BitVec {
