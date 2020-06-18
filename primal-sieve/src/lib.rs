@@ -3,12 +3,6 @@
 //! This is designed to be used via the `primal` crate.
 
 #![cfg_attr(feature = "unstable", feature(llvm_asm))]
-#![deny(warnings)]
-
-#[cfg(test)] extern crate primal_slowsieve;
-extern crate primal_bit;
-extern crate primal_estimate;
-extern crate smallvec;
 
 // black boxes for pointers; LLVM isn't so happy without
 // them. Unfortunately only usable with unstable, but the code isn't
@@ -32,11 +26,11 @@ macro_rules! safe_assert {
 }
 
 mod streaming;
-pub use streaming::StreamingSieve;
-pub use streaming::primes::Primes;
+pub use crate::streaming::StreamingSieve;
+pub use crate::streaming::primes::Primes;
 
 // mod wheel6;
 mod wheel;
 mod sieve;
 
-pub use sieve::{Sieve, SievePrimes};
+pub use crate::sieve::{Sieve, SievePrimes};

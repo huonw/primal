@@ -18,7 +18,7 @@ fn wrapping_pow(mut base: u64, mut exp: u32) -> u64 {
 /// # Examples
 ///
 /// ```rust
-/// # extern crate primal_check as primal;
+/// # use primal_check as primal;
 /// assert_eq!(primal::as_perfect_power(2), (2, 1));
 /// assert_eq!(primal::as_perfect_power(4), (2, 2));
 /// assert_eq!(primal::as_perfect_power(8), (2, 3));
@@ -70,7 +70,7 @@ pub fn as_perfect_power(x: u64) -> (u64, u8) {
 /// # Examples
 ///
 /// ```rust
-/// # extern crate primal_check as primal;
+/// # use primal_check as primal;
 /// assert_eq!(primal::as_prime_power(2), Some((2, 1)));
 /// assert_eq!(primal::as_prime_power(4), Some((2, 2)));
 /// assert_eq!(primal::as_prime_power(8), Some((2, 3)));
@@ -82,7 +82,7 @@ pub fn as_perfect_power(x: u64) -> (u64, u8) {
 /// ```
 pub fn as_prime_power(x: u64) -> Option<(u64, u8)> {
     let (y, k) = as_perfect_power(x);
-    if ::miller_rabin(y) {
+    if crate::miller_rabin(y) {
         Some((y, k))
     } else {
         None

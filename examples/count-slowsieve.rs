@@ -1,5 +1,3 @@
-extern crate primal;
-extern crate primal_slowsieve;
 use std::env;
 use std::time::Instant;
 

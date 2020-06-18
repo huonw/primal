@@ -249,12 +249,6 @@
 //! This takes 6 <em>micro</em>seconds: more than 500,000&times;
 //! faster than the iterator!
 
-#![deny(warnings)]
-
-extern crate primal_estimate;
-extern crate primal_check;
-extern crate primal_sieve;
-
 pub use primal_estimate::prime_pi as estimate_prime_pi;
 pub use primal_estimate::nth_prime as estimate_nth_prime;
 pub use primal_check::miller_rabin as is_prime;

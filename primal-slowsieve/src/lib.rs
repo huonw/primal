@@ -2,11 +2,6 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
-#![deny(warnings)]
-
-extern crate primal_bit;
-extern crate primal_estimate;
-
 use primal_bit::BitVec;
 use std::{iter, cmp};
 
@@ -95,7 +90,7 @@ impl Primes {
     }
 
     /// Iterator over the primes stored in this map.
-    pub fn primes<'a>(&'a self) -> PrimeIterator<'a> {
+    pub fn primes(&self) -> PrimeIterator<'_> {
         PrimeIterator {
             two: true,
             iter: self.v.iter().enumerate()

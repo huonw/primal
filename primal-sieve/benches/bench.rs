@@ -1,7 +1,6 @@
 #[macro_use]
 extern crate criterion;
-extern crate primal_sieve;
-extern crate primal_estimate;
+
 use primal_sieve::{StreamingSieve, Sieve, Primes};
 use criterion::{Criterion, ParameterizedBenchmark};
 

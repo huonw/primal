@@ -1,5 +1,6 @@
 // automatically generated
-use wheel::{WheelInit, Wheel, WheelElem};
+#![allow(clippy::all)]
+use crate::wheel::{WheelInit, Wheel, WheelElem};
 
 #[derive(Debug, Clone)]
 pub struct Wheel30;
@@ -30,7 +31,7 @@ pub const MODULO: usize = 30;
 #[allow(dead_code)]
 pub const SMALL_BITS: usize = 2672;
 #[allow(dead_code)]
-pub const SMALL: &'static [u8; SMALL_BITS / 8] = &[
+pub const SMALL: &[u8; SMALL_BITS / 8] = &[
     0b11111110, 0b11011111, 0b11101111, 0b01111110, 0b10110110, 0b11011011, 0b00111101, 0b11111001,
     0b11010101, 0b01001111, 0b00011110, 0b11110011, 0b11101010, 0b10100110, 0b11101101, 0b10011110,
     0b11100110, 0b00001100, 0b11010011, 0b11010011, 0b00111011, 0b11011101, 0b01011001, 0b10100101,
@@ -74,7 +75,7 @@ pub const SMALL: &'static [u8; SMALL_BITS / 8] = &[
     0b11101001, 0b00101001, 0b10110001, 0b10000010, 0b11101001, 0b00110000, 0b01000111, 0b11100011,
     0b00110100, 0b00011001, 0b11000011, 0b00100101, 0b00001010, 0b00110000,
 ];
-const INIT: &'static [WheelInit; 30] = &[
+const INIT: &[WheelInit; 30] = &[
     WheelInit { next_mult_factor: 1, wheel_index: 0 }, // 0
     WheelInit { next_mult_factor: 0, wheel_index: 0 }, // 1
     WheelInit { next_mult_factor: 5, wheel_index: 1 }, // 2
@@ -106,7 +107,7 @@ const INIT: &'static [WheelInit; 30] = &[
     WheelInit { next_mult_factor: 1, wheel_index: 7 }, // 28
     WheelInit { next_mult_factor: 0, wheel_index: 7 }, // 29
 ];
-const WHEEL: &'static [WheelElem; 64] = &[
+const WHEEL: &[WheelElem; 64] = &[
     // remainder 1
     WheelElem { unset_bit: 254, next_mult_factor: 6, correction: 0, next: 1 },
     WheelElem { unset_bit: 253, next_mult_factor: 4, correction: 0, next: 1 },
@@ -217,7 +218,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                      }
                     }
                     while p < loop_end {
-                        p = ::b(p);
+                        p = crate::b(p);
                         safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                      p.offset(prime_ * 0 + 0) < end);
                         *p.offset(prime_ * 0 + 0) &= 254;
@@ -308,7 +309,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                      }
                     }
                     while p < loop_end {
-                        p = ::b(p);
+                        p = crate::b(p);
                         safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                      p.offset(prime_ * 0 + 0) < end);
                         *p.offset(prime_ * 0 + 0) &= 253;
@@ -399,7 +400,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                      }
                     }
                     while p < loop_end {
-                        p = ::b(p);
+                        p = crate::b(p);
                         safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                      p.offset(prime_ * 0 + 0) < end);
                         *p.offset(prime_ * 0 + 0) &= 251;
@@ -490,7 +491,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                      }
                     }
                     while p < loop_end {
-                        p = ::b(p);
+                        p = crate::b(p);
                         safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                      p.offset(prime_ * 0 + 0) < end);
                         *p.offset(prime_ * 0 + 0) &= 247;
@@ -581,7 +582,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                      }
                     }
                     while p < loop_end {
-                        p = ::b(p);
+                        p = crate::b(p);
                         safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                      p.offset(prime_ * 0 + 0) < end);
                         *p.offset(prime_ * 0 + 0) &= 239;
@@ -672,7 +673,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                      }
                     }
                     while p < loop_end {
-                        p = ::b(p);
+                        p = crate::b(p);
                         safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                      p.offset(prime_ * 0 + 0) < end);
                         *p.offset(prime_ * 0 + 0) &= 223;
@@ -763,7 +764,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                      }
                     }
                     while p < loop_end {
-                        p = ::b(p);
+                        p = crate::b(p);
                         safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                      p.offset(prime_ * 0 + 0) < end);
                         *p.offset(prime_ * 0 + 0) &= 191;
@@ -854,7 +855,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                      }
                     }
                     while p < loop_end {
-                        p = ::b(p);
+                        p = crate::b(p);
                         safe_assert!(start <= p.offset(prime_ * 0 + 0) &&
                                      p.offset(prime_ * 0 + 0) < end);
                         *p.offset(prime_ * 0 + 0) &= 127;

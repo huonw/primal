@@ -1,4 +1,3 @@
-extern crate primal;
 use std::env;
 use std::time::Instant;
 

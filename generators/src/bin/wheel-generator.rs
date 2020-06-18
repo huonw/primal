@@ -1,15 +1,5 @@
-extern crate primal_slowsieve;
-extern crate primal_check;
-
-use std::io::prelude::*;
-use std::{io, env};
 use std::collections::{BTreeMap, HashSet};
-
-macro_rules! errln {
-    ($($fmt: tt)*) => {
-        (writeln!(&mut io::stderr(), $($fmt)*).unwrap())
-    }
-}
+use std::env;
 
 fn div_up(x: usize, y: usize) -> usize {
     (x + y - 1) / y
@@ -29,7 +19,7 @@ fn bit_index(x: usize) -> usize {
     let bits = (1..rem).filter(|y| gcd(*y, BYTE_WHEEL) == 1).count();
     wheel + bits
 }
-fn from_bit_index(x: usize, byte_coprime: &Vec<usize>) -> usize {
+fn from_bit_index(x: usize, byte_coprime: &[usize]) -> usize {
     let (byte, bit) = (x / BYTE_COUNT, x % BYTE_COUNT);
     byte * BYTE_WHEEL + byte_coprime[bit]
 }
@@ -45,7 +35,7 @@ fn main() {
         .map(|x| x.parse::<usize>().expect(&format!("could not parse `{}` as a positive integer", x)))
         .collect::<Vec<_>>();
 
-    assert!(primes.len() > 0, "need at least one prime to make a wheel");
+    assert!(!primes.is_empty(), "need at least one prime to make a wheel");
     for p in &primes {
         assert!(primal_check::miller_rabin(*p as u64), "{} is not prime", p);
     }
@@ -55,7 +45,7 @@ fn main() {
     let wheel = primes.iter().fold(1, |x, y| x * *y);
     let count = primes.iter().fold(1, |x, y| x * (*y - 1));
 
-    errln!("wheel for {} (count {})", wheel, count);
+    eprintln!("wheel for {} (count {})", wheel, count);
     let byte_coprime = coprime_to(BYTE_WHEEL, BYTE_WHEEL);
     let coprime = coprime_to(wheel, wheel);
     let mut diff_to_next = BTreeMap::new();
@@ -134,7 +124,8 @@ fn main() {
 
 
     println!("// automatically generated
-use wheel::{{WheelInit, Wheel, WheelElem}};
+#![allow(clippy::all)]
+use crate::wheel::{{WheelInit, Wheel, WheelElem}};
 
 #[derive(Debug, Clone)]
 pub struct Wheel{modulo};
@@ -172,7 +163,7 @@ pub const MODULO: usize = {modulo};
 #[allow(dead_code)]
 pub const SMALL_BITS: usize = {};
 #[allow(dead_code)]
-pub const SMALL: &'static [u8; SMALL_BITS / 8] = &[", length_bits);
+pub const SMALL: &[u8; SMALL_BITS / 8] = &[", length_bits);
     let mut bit = 0;
     // precompute the sieve for a little while.
     for byte in 0..length_bytes {
@@ -194,7 +185,7 @@ pub const SMALL: &'static [u8; SMALL_BITS / 8] = &[", length_bits);
     // next one that isn't eliminated by the wheel, indicating which
     // multiple it is (for indexing into the next one, which is
     // ordered by multiple)
-    println!("const INIT: &'static [WheelInit; {}] = &[", wheel);
+    println!("const INIT: &[WheelInit; {}] = &[", wheel);
     let mut next = 0;
     for (i, &y) in coprime_to(wheel, wheel).iter().enumerate() {
         for x in next..y + 1 {
@@ -206,7 +197,7 @@ pub const SMALL: &'static [u8; SMALL_BITS / 8] = &[", length_bits);
     println!("];");
 
     // now print the full wheel!
-    println!("const WHEEL: &'static [WheelElem; {}] = &[", BYTE_COUNT * count);
+    println!("const WHEEL: &[WheelElem; {}] = &[", BYTE_COUNT * count);
     for (c, cur_infos) in byte_coprime.iter().zip(&infos) {
         println!("    // remainder {}", c);
 
@@ -267,7 +258,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
         println!("{}}}", indent);
         println!("\
 {indent}while p < loop_end {{
-{indent}    p = ::b(p);",
+{indent}    p = crate::b(p);",
                  indent = indent);
 
         for info in cur_infos {

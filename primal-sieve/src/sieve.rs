@@ -1,6 +1,6 @@
 use primal_bit::BitVec;
-use wheel;
-use streaming::StreamingSieve;
+use crate::wheel;
+use crate::streaming::StreamingSieve;
 
 use std::cmp;
 use std::slice;
@@ -21,7 +21,6 @@ type SmallVec1<T> = ::smallvec::SmallVec<[T; 1]>;
 /// # Examples
 ///
 /// ```rust
-/// # extern crate primal;
 /// let sieve = primal::Sieve::new(10_000_000);
 /// assert_eq!(sieve.prime_pi(123456), 11601);
 ///
@@ -118,7 +117,6 @@ impl Sieve {
     /// # Examples
     ///
     /// ```rust
-    /// # extern crate primal;
     /// let sieve = primal::Sieve::new(1000);
     ///
     /// assert!(sieve.upper_bound() >= 1000);
@@ -137,7 +135,6 @@ impl Sieve {
     /// # Examples
     ///
     /// ```rust
-    /// # extern crate primal;
     /// let sieve = primal::Sieve::new(1000);
     ///
     /// assert_eq!(sieve.is_prime(0), false);
@@ -170,7 +167,6 @@ impl Sieve {
     /// # Examples
     ///
     /// ```rust
-    /// # extern crate primal;
     /// let sieve = primal::Sieve::new(1000);
     ///
     /// assert_eq!(sieve.prime_pi(10), 4);
@@ -224,7 +220,6 @@ impl Sieve {
     /// # Examples
     ///
     /// ```rust
-    /// # extern crate primal;
     /// let sieve = primal::Sieve::new(100);
     ///
     /// assert_eq!(sieve.factor(2), Ok(vec![(2, 1)]));
@@ -298,7 +293,6 @@ impl Sieve {
     /// # Example
     ///
     /// ```rust
-    /// # extern crate primal;
     /// let (_, hi) = primal::estimate_nth_prime(1_000);
     ///
     /// let sieve = primal::Sieve::new(hi as usize);
@@ -342,7 +336,6 @@ impl Sieve {
     /// # Examples
     ///
     /// ```rust
-    /// # extern crate primal;
     /// let sieve = primal::Sieve::new(1_000);
     ///
     /// // print the three digit primes
@@ -350,7 +343,7 @@ impl Sieve {
     ///     println!("{}", p);
     /// }
     /// ```
-    pub fn primes_from<'a>(&'a self, n: usize) -> SievePrimes<'a> {
+    pub fn primes_from(&self, n: usize) -> SievePrimes<'_> {
         assert!(n <= self.upper_bound());
         let early = match n {
             0..=2 => Early::Two,

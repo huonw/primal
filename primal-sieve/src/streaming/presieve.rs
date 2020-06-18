@@ -1,11 +1,11 @@
 use primal_bit::BitVec;
 use std::cmp;
 
-use wheel;
+use crate::wheel;
 use super::StreamingSieve;
 
 const MINIMUM_PRESIEVE: usize = 2 * 3 * 5;
-const PRESIEVE_PRIMES: &'static [usize] = &[7, 11, 13, 17, 19, 23, 29];
+const PRESIEVE_PRIMES: &[usize] = &[7, 11, 13, 17, 19, 23, 29];
 
 #[derive(Debug)]
 pub struct Presieve {

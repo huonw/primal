@@ -1,5 +1,3 @@
-extern crate primal;
-
 use std::cmp;
 
 // prints two Rust statics:

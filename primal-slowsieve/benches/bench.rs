@@ -1,6 +1,5 @@
 #[macro_use]
 extern crate criterion;
-extern crate primal_slowsieve;
 
 use primal_slowsieve::Primes;
 use criterion::Criterion;

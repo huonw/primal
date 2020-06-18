@@ -4,7 +4,7 @@ use primal_bit::BitVec;
 pub const BYTE_SIZE: usize = 8;
 pub const BYTE_MODULO: usize = 30;
 
-const WHEEL_OFFSETS: &'static [usize; BYTE_MODULO] = &[
+const WHEEL_OFFSETS: &[usize; BYTE_MODULO] = &[
     0, 0, 0, 0, 0, 0,
     0, 1, 0, 0, 0, 2,
     0, 3, 0, 0, 0, 4,
@@ -31,7 +31,7 @@ pub fn bits_for(x: usize) -> usize {
 }
 
 pub fn bit_index(n: usize) -> (bool, usize) {
-    const POS: &'static [(bool, u8); BYTE_MODULO] = &[
+    const POS: &[(bool, u8); BYTE_MODULO] = &[
         // 0
         (false, 0), (true, 0), (false, 1), (false, 1), (false, 1), (false, 1),
         // 6
@@ -59,7 +59,7 @@ pub fn from_bit_index(bit: usize) -> usize {
     (bit / BYTE_SIZE) * BYTE_MODULO + TRUE_AT_BIT[bit % BYTE_SIZE]
 }
 
-const TRUE_AT_BIT: &'static [usize; 8] = &[1, 7, 11, 13, 17, 19, 23, 29];
+const TRUE_AT_BIT: &[usize; 8] = &[1, 7, 11, 13, 17, 19, 23, 29];
 
 pub use self::wheel30::Wheel30;
 pub use self::wheel210::Wheel210;

@@ -1,8 +1,7 @@
-use primal_estimate;
 use primal_bit::BitVec;
 use std::cmp;
 
-use wheel;
+use crate::wheel;
 
 pub mod primes;
 mod presieve;
@@ -25,13 +24,12 @@ mod presieve;
 /// # Examples
 ///
 /// ```rust
-/// # extern crate primal;
 /// let count = primal::StreamingSieve::prime_pi(123456);
 /// println!("𝜋(123456) = {}", count);
 /// ```
 #[derive(Debug)]
 pub struct StreamingSieve {
-    small: Option<::Sieve>,
+    small: Option<crate::Sieve>,
     sieve: BitVec,
     primes: Vec<wheel::State<wheel::Wheel210>>,
     small_primes: Vec<wheel::State<wheel::Wheel30>>,
@@ -64,7 +62,7 @@ impl StreamingSieve {
         let small = if limit < current * current {
             None
         } else {
-            Some(::Sieve::new(isqrt(limit) + 1))
+            Some(crate::Sieve::new(isqrt(limit) + 1))
         };
 
         StreamingSieve {
@@ -97,7 +95,6 @@ impl StreamingSieve {
     /// # Examples
     ///
     /// ```rust
-    /// # extern crate primal;
     /// assert_eq!(primal::StreamingSieve::prime_pi(10), 4);
     /// // the endpoint is included
     /// assert_eq!(primal::StreamingSieve::prime_pi(11), 5);
@@ -144,7 +141,6 @@ impl StreamingSieve {
     /// # Example
     ///
     /// ```rust
-    /// # extern crate primal;
     /// assert_eq!(primal::StreamingSieve::nth_prime(1_000), 7919);
     /// ```
     pub fn nth_prime(n: usize) -> usize {
@@ -268,9 +264,9 @@ impl StreamingSieve {
 
 #[cfg(test)]
 mod tests {
-    use Sieve;
+    use crate::Sieve;
     use primal_slowsieve::Primes;
-    use wheel;
+    use crate::wheel;
     use super::StreamingSieve;
     fn gcd(x: usize, y: usize) -> usize {
         if y == 0 { x }

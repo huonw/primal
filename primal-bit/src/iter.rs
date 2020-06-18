@@ -4,8 +4,8 @@ use std::ops::Range;
 use std::slice;
 use std::vec;
 
-use BitVec;
-use BITS;
+use crate::BitVec;
+use crate::BITS;
 
 impl BitVec {
     /// Returns an iterator over the elements of the vector in order.

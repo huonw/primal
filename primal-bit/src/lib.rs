@@ -11,9 +11,6 @@
 //! A very simple bit-vector that serves the needs of `primal`.
 
 #![deny(unsafe_code)]
-#![deny(warnings)]
-
-extern crate hamming;
 
 use std::fmt;
 use std::hash;
@@ -22,8 +19,8 @@ use std::ops::Index;
 mod inner;
 mod iter;
 
-pub use inner::BitVec;
-pub use iter::{Iter, IntoOnes, Ones};
+pub use crate::inner::BitVec;
+pub use crate::iter::{Iter, IntoOnes, Ones};
 
 const BITS: usize = 8;
 

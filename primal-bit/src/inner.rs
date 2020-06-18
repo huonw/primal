@@ -2,7 +2,7 @@
 //! encapsulated in a module to reduce scope.
 #![allow(unsafe_code)]
 
-use BITS;
+use crate::BITS;
 
 /// The bitvector type.
 pub struct BitVec {
