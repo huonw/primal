@@ -11,7 +11,6 @@
 //! A very simple bit-vector that serves the needs of `primal`.
 
 #![deny(unsafe_code)]
-#![deny(warnings)]
 
 use std::fmt;
 use std::hash;

@@ -3,7 +3,6 @@
 //! This is designed to be used via the `primal` crate.
 
 #![cfg_attr(feature = "unstable", feature(llvm_asm))]
-#![deny(warnings)]
 
 // black boxes for pointers; LLVM isn't so happy without
 // them. Unfortunately only usable with unstable, but the code isn't

@@ -3,8 +3,6 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
-#![deny(warnings)]
-
 #[allow(dead_code)]
 mod tables;
 

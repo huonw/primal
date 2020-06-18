@@ -2,8 +2,6 @@
 //!
 //! This crate is designed to be used via `primal`.
 
-#![deny(warnings)]
-
 pub use crate::is_prime::miller_rabin;
 pub use crate::perfect_power::{as_perfect_power, as_prime_power};
 

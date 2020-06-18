@@ -2,8 +2,6 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
-#![deny(warnings)]
-
 use primal_bit::BitVec;
 use std::{iter, cmp};
 
