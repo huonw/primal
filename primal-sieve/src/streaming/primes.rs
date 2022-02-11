@@ -220,7 +220,7 @@ mod tests {
         // will take too long, but we can cut it short by unwinding.
         Primes::all().fold((), |(), p| {
             if p > 123456789 {
-                panic!(format!("{}", p));
+                panic!("{}", p);
             }
         })
     }
