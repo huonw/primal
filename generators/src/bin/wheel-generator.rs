@@ -263,8 +263,8 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
 
         for info in cur_infos {
             println!("\
-{indent}    safe_assert!(start <= p.offset(prime_ * {sl} + {off}) &&
-{indent}                 p.offset(prime_ * {sl} + {off}) < end);
+{indent}    safe_assert!(start <= p.wrapping_offset(prime_ * {sl} + {off}) &&
+{indent}                 p.wrapping_offset(prime_ * {sl} + {off}) < end);
 {indent}    *p.offset(prime_ * {sl} + {off}) &= {bit};",
                      // p starts at offset 1 * prime_, so strip off
                      // that factor.
@@ -273,7 +273,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                      bit = info.unset_bit, indent = indent);
         }
         println!("
-{indent}    p = p.offset(prime_ * {} + {})
+{indent}    p = (p as usize).saturating_add(prime * {} + {}) as *mut u8;
 {indent}}}",
                  wheel, c,
                  indent = indent);
@@ -288,7 +288,7 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
             println!("\
 {indent} if p >= end {{ wi = {val}; break 'outer; }}
 {indent} safe_assert!(start <= p && p < end);
-{indent} *p &= {}; p = p.offset(prime_ * {} + {});
+{indent} *p &= {}; p = (p as usize).saturating_add(prime * {} + {}) as *mut u8;
 {indent} {}
 {indent}}}",
 
