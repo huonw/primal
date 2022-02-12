@@ -938,246 +938,343 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                              p.wrapping_offset(prime_ * 208 + 0) < end);
                                                                 *p.offset(prime_ * 208 + 0) &= 127;
 
-                                                                p = (p as usize).saturating_add(prime * 210 + 1) as *mut u8;
+                                                                let p2 = p.wrapping_offset(prime_ * 210 + 1);
+                                                                p = if p <= p2 { p2 } else { end };
                                                             }
                                                             if p >= end { wi = 0; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 254; p = (p as usize).saturating_add(prime * 10 + 0) as *mut u8;
+                                                            *p &= 254;
+                                                            let p2 = p.wrapping_offset(prime_ * 10 + 0);
+                                                            p = if p <= p2 { p2 } else { end };
                                                             break 'label1
                                                            }
                                                            if p >= end { wi = 1; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 251; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                                                           *p &= 251;
+                                                           let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                                                           p = if p <= p2 { p2 } else { end };
                                                            break 'label2
                                                           }
                                                           if p >= end { wi = 2; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 247; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                                                          *p &= 247;
+                                                          let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                                                          p = if p <= p2 { p2 } else { end };
                                                           break 'label3
                                                          }
                                                          if p >= end { wi = 3; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 239; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                                                         *p &= 239;
+                                                         let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                                                         p = if p <= p2 { p2 } else { end };
                                                          break 'label4
                                                         }
                                                         if p >= end { wi = 4; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 223; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                                                        *p &= 223;
+                                                        let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                                                        p = if p <= p2 { p2 } else { end };
                                                         break 'label5
                                                        }
                                                        if p >= end { wi = 5; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 191; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                                                       *p &= 191;
+                                                       let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                                                       p = if p <= p2 { p2 } else { end };
                                                        break 'label6
                                                       }
                                                       if p >= end { wi = 6; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 127; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                      *p &= 127;
+                                                      let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                      p = if p <= p2 { p2 } else { end };
                                                       break 'label7
                                                      }
                                                      if p >= end { wi = 7; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 254; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                                                     *p &= 254;
+                                                     let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                                                     p = if p <= p2 { p2 } else { end };
                                                      break 'label8
                                                     }
                                                     if p >= end { wi = 8; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 253; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                                                    *p &= 253;
+                                                    let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                                                    p = if p <= p2 { p2 } else { end };
                                                     break 'label9
                                                    }
                                                    if p >= end { wi = 9; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 251; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                                                   *p &= 251;
+                                                   let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                                                   p = if p <= p2 { p2 } else { end };
                                                    break 'label10
                                                   }
                                                   if p >= end { wi = 10; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 247; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                                                  *p &= 247;
+                                                  let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                                                  p = if p <= p2 { p2 } else { end };
                                                   break 'label11
                                                  }
                                                  if p >= end { wi = 11; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 239; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                                                 *p &= 239;
+                                                 let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                                                 p = if p <= p2 { p2 } else { end };
                                                  break 'label12
                                                 }
                                                 if p >= end { wi = 12; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 191; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                                                *p &= 191;
+                                                let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                                                p = if p <= p2 { p2 } else { end };
                                                 break 'label13
                                                }
                                                if p >= end { wi = 13; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 127; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                               *p &= 127;
+                                               let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                               p = if p <= p2 { p2 } else { end };
                                                break 'label14
                                               }
                                               if p >= end { wi = 14; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 254; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                                              *p &= 254;
+                                              let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                                              p = if p <= p2 { p2 } else { end };
                                               break 'label15
                                              }
                                              if p >= end { wi = 15; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 253; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                                             *p &= 253;
+                                             let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                                             p = if p <= p2 { p2 } else { end };
                                              break 'label16
                                             }
                                             if p >= end { wi = 16; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 251; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                                            *p &= 251;
+                                            let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                                            p = if p <= p2 { p2 } else { end };
                                             break 'label17
                                            }
                                            if p >= end { wi = 17; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 247; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                                           *p &= 247;
+                                           let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                                           p = if p <= p2 { p2 } else { end };
                                            break 'label18
                                           }
                                           if p >= end { wi = 18; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 223; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                                          *p &= 223;
+                                          let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                                          p = if p <= p2 { p2 } else { end };
                                           break 'label19
                                          }
                                          if p >= end { wi = 19; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 191; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                                         *p &= 191;
+                                         let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                                         p = if p <= p2 { p2 } else { end };
                                          break 'label20
                                         }
                                         if p >= end { wi = 20; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 127; p = (p as usize).saturating_add(prime * 8 + 1) as *mut u8;
+                                        *p &= 127;
+                                        let p2 = p.wrapping_offset(prime_ * 8 + 1);
+                                        p = if p <= p2 { p2 } else { end };
                                         break 'label21
                                        }
                                        if p >= end { wi = 21; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 253; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                                       *p &= 253;
+                                       let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                                       p = if p <= p2 { p2 } else { end };
                                        break 'label22
                                       }
                                       if p >= end { wi = 22; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 251; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                                      *p &= 251;
+                                      let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                                      p = if p <= p2 { p2 } else { end };
                                       break 'label23
                                      }
                                      if p >= end { wi = 23; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 247; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                                     *p &= 247;
+                                     let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                                     p = if p <= p2 { p2 } else { end };
                                      break 'label24
                                     }
                                     if p >= end { wi = 24; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 239; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                                    *p &= 239;
+                                    let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                                    p = if p <= p2 { p2 } else { end };
                                     break 'label25
                                    }
                                    if p >= end { wi = 25; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 223; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                                   *p &= 223;
+                                   let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                                   p = if p <= p2 { p2 } else { end };
                                    break 'label26
                                   }
                                   if p >= end { wi = 26; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 191; p = (p as usize).saturating_add(prime * 8 + 1) as *mut u8;
+                                  *p &= 191;
+                                  let p2 = p.wrapping_offset(prime_ * 8 + 1);
+                                  p = if p <= p2 { p2 } else { end };
                                   break 'label27
                                  }
                                  if p >= end { wi = 27; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 254; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                                 *p &= 254;
+                                 let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                                 p = if p <= p2 { p2 } else { end };
                                  break 'label28
                                 }
                                 if p >= end { wi = 28; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 253; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                                *p &= 253;
+                                let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                                p = if p <= p2 { p2 } else { end };
                                 break 'label29
                                }
                                if p >= end { wi = 29; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 251; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                               *p &= 251;
+                               let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                               p = if p <= p2 { p2 } else { end };
                                break 'label30
                               }
                               if p >= end { wi = 30; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 239; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                              *p &= 239;
+                              let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                              p = if p <= p2 { p2 } else { end };
                               break 'label31
                              }
                              if p >= end { wi = 31; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 223; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                             *p &= 223;
+                             let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                             p = if p <= p2 { p2 } else { end };
                              break 'label32
                             }
                             if p >= end { wi = 32; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 191; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                            *p &= 191;
+                            let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                            p = if p <= p2 { p2 } else { end };
                             break 'label33
                            }
                            if p >= end { wi = 33; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 127; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                           *p &= 127;
+                           let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                           p = if p <= p2 { p2 } else { end };
                            break 'label34
                           }
                           if p >= end { wi = 34; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 254; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                          *p &= 254;
+                          let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                          p = if p <= p2 { p2 } else { end };
                           break 'label35
                          }
                          if p >= end { wi = 35; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 253; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                         *p &= 253;
+                         let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                         p = if p <= p2 { p2 } else { end };
                          break 'label36
                         }
                         if p >= end { wi = 36; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 247; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                        *p &= 247;
+                        let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                        p = if p <= p2 { p2 } else { end };
                         break 'label37
                        }
                        if p >= end { wi = 37; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 239; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                       *p &= 239;
+                       let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                       p = if p <= p2 { p2 } else { end };
                        break 'label38
                       }
                       if p >= end { wi = 38; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 223; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                      *p &= 223;
+                      let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                      p = if p <= p2 { p2 } else { end };
                       break 'label39
                      }
                      if p >= end { wi = 39; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 191; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                     *p &= 191;
+                     let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                     p = if p <= p2 { p2 } else { end };
                      break 'label40
                     }
                     if p >= end { wi = 40; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 127; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                    *p &= 127;
+                    let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                    p = if p <= p2 { p2 } else { end };
                     break 'label41
                    }
                    if p >= end { wi = 41; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 254; p = (p as usize).saturating_add(prime * 6 + 0) as *mut u8;
+                   *p &= 254;
+                   let p2 = p.wrapping_offset(prime_ * 6 + 0);
+                   p = if p <= p2 { p2 } else { end };
                    break 'label42
                   }
                   if p >= end { wi = 42; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 253; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                  *p &= 253;
+                  let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                  p = if p <= p2 { p2 } else { end };
                   break 'label43
                  }
                  if p >= end { wi = 43; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 251; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                 *p &= 251;
+                 let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                 p = if p <= p2 { p2 } else { end };
                  break 'label44
                 }
                 if p >= end { wi = 44; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 247; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                *p &= 247;
+                let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                p = if p <= p2 { p2 } else { end };
                 break 'label45
                }
                if p >= end { wi = 45; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 239; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+               *p &= 239;
+               let p2 = p.wrapping_offset(prime_ * 2 + 0);
+               p = if p <= p2 { p2 } else { end };
                break 'label46
               }
               if p >= end { wi = 46; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 223; p = (p as usize).saturating_add(prime * 10 + 0) as *mut u8;
+              *p &= 223;
+              let p2 = p.wrapping_offset(prime_ * 10 + 0);
+              p = if p <= p2 { p2 } else { end };
               break 'label47
              }
              if p >= end { wi = 47; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 127; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+             *p &= 127;
+             let p2 = p.wrapping_offset(prime_ * 2 + 1);
+             p = if p <= p2 { p2 } else { end };
              wi = 0
             }
         }
@@ -1429,246 +1526,343 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                              p.wrapping_offset(prime_ * 208 + 6) < end);
                                                                 *p.offset(prime_ * 208 + 6) &= 191;
 
-                                                                p = (p as usize).saturating_add(prime * 210 + 11) as *mut u8;
+                                                                let p2 = p.wrapping_offset(prime_ * 210 + 11);
+                                                                p = if p <= p2 { p2 } else { end };
                                                             }
                                                             if p >= end { wi = 48; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 253; p = (p as usize).saturating_add(prime * 10 + 2) as *mut u8;
+                                                            *p &= 253;
+                                                            let p2 = p.wrapping_offset(prime_ * 10 + 2);
+                                                            p = if p <= p2 { p2 } else { end };
                                                             break 'label49
                                                            }
                                                            if p >= end { wi = 49; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 239; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                           *p &= 239;
+                                                           let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                           p = if p <= p2 { p2 } else { end };
                                                            break 'label50
                                                           }
                                                           if p >= end { wi = 50; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 254; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                                                          *p &= 254;
+                                                          let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                                                          p = if p <= p2 { p2 } else { end };
                                                           break 'label51
                                                          }
                                                          if p >= end { wi = 51; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 127; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                         *p &= 127;
+                                                         let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                         p = if p <= p2 { p2 } else { end };
                                                          break 'label52
                                                         }
                                                         if p >= end { wi = 52; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 247; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                                        *p &= 247;
+                                                        let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                                        p = if p <= p2 { p2 } else { end };
                                                         break 'label53
                                                        }
                                                        if p >= end { wi = 53; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 251; p = (p as usize).saturating_add(prime * 6 + 1) as *mut u8;
+                                                       *p &= 251;
+                                                       let p2 = p.wrapping_offset(prime_ * 6 + 1);
+                                                       p = if p <= p2 { p2 } else { end };
                                                        break 'label54
                                                       }
                                                       if p >= end { wi = 54; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 191; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                      *p &= 191;
+                                                      let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                      p = if p <= p2 { p2 } else { end };
                                                       break 'label55
                                                      }
                                                      if p >= end { wi = 55; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 253; p = (p as usize).saturating_add(prime * 6 + 1) as *mut u8;
+                                                     *p &= 253;
+                                                     let p2 = p.wrapping_offset(prime_ * 6 + 1);
+                                                     p = if p <= p2 { p2 } else { end };
                                                      break 'label56
                                                     }
                                                     if p >= end { wi = 56; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 223; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                                    *p &= 223;
+                                                    let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                                    p = if p <= p2 { p2 } else { end };
                                                     break 'label57
                                                    }
                                                    if p >= end { wi = 57; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 239; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                   *p &= 239;
+                                                   let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                   p = if p <= p2 { p2 } else { end };
                                                    break 'label58
                                                   }
                                                   if p >= end { wi = 58; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 254; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                                                  *p &= 254;
+                                                  let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                                                  p = if p <= p2 { p2 } else { end };
                                                   break 'label59
                                                  }
                                                  if p >= end { wi = 59; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 127; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                                                 *p &= 127;
+                                                 let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                                                 p = if p <= p2 { p2 } else { end };
                                                  break 'label60
                                                 }
                                                 if p >= end { wi = 60; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 251; p = (p as usize).saturating_add(prime * 6 + 1) as *mut u8;
+                                                *p &= 251;
+                                                let p2 = p.wrapping_offset(prime_ * 6 + 1);
+                                                p = if p <= p2 { p2 } else { end };
                                                 break 'label61
                                                }
                                                if p >= end { wi = 61; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 191; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                               *p &= 191;
+                                               let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                               p = if p <= p2 { p2 } else { end };
                                                break 'label62
                                               }
                                               if p >= end { wi = 62; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 253; p = (p as usize).saturating_add(prime * 6 + 1) as *mut u8;
+                                              *p &= 253;
+                                              let p2 = p.wrapping_offset(prime_ * 6 + 1);
+                                              p = if p <= p2 { p2 } else { end };
                                               break 'label63
                                              }
                                              if p >= end { wi = 63; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 223; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                             *p &= 223;
+                                             let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                             p = if p <= p2 { p2 } else { end };
                                              break 'label64
                                             }
                                             if p >= end { wi = 64; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 239; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                            *p &= 239;
+                                            let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                            p = if p <= p2 { p2 } else { end };
                                             break 'label65
                                            }
                                            if p >= end { wi = 65; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 254; p = (p as usize).saturating_add(prime * 6 + 1) as *mut u8;
+                                           *p &= 254;
+                                           let p2 = p.wrapping_offset(prime_ * 6 + 1);
+                                           p = if p <= p2 { p2 } else { end };
                                            break 'label66
                                           }
                                           if p >= end { wi = 66; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 247; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                          *p &= 247;
+                                          let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                          p = if p <= p2 { p2 } else { end };
                                           break 'label67
                                          }
                                          if p >= end { wi = 67; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 251; p = (p as usize).saturating_add(prime * 6 + 1) as *mut u8;
+                                         *p &= 251;
+                                         let p2 = p.wrapping_offset(prime_ * 6 + 1);
+                                         p = if p <= p2 { p2 } else { end };
                                          break 'label68
                                         }
                                         if p >= end { wi = 68; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 191; p = (p as usize).saturating_add(prime * 8 + 2) as *mut u8;
+                                        *p &= 191;
+                                        let p2 = p.wrapping_offset(prime_ * 8 + 2);
+                                        p = if p <= p2 { p2 } else { end };
                                         break 'label69
                                        }
                                        if p >= end { wi = 69; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 223; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                       *p &= 223;
+                                       let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                       p = if p <= p2 { p2 } else { end };
                                        break 'label70
                                       }
                                       if p >= end { wi = 70; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 239; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                      *p &= 239;
+                                      let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                      p = if p <= p2 { p2 } else { end };
                                       break 'label71
                                      }
                                      if p >= end { wi = 71; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 254; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                                     *p &= 254;
+                                     let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                                     p = if p <= p2 { p2 } else { end };
                                      break 'label72
                                     }
                                     if p >= end { wi = 72; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 127; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                    *p &= 127;
+                                    let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                    p = if p <= p2 { p2 } else { end };
                                     break 'label73
                                    }
                                    if p >= end { wi = 73; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 247; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                   *p &= 247;
+                                   let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                   p = if p <= p2 { p2 } else { end };
                                    break 'label74
                                   }
                                   if p >= end { wi = 74; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 251; p = (p as usize).saturating_add(prime * 8 + 2) as *mut u8;
+                                  *p &= 251;
+                                  let p2 = p.wrapping_offset(prime_ * 8 + 2);
+                                  p = if p <= p2 { p2 } else { end };
                                   break 'label75
                                  }
                                  if p >= end { wi = 75; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 253; p = (p as usize).saturating_add(prime * 6 + 1) as *mut u8;
+                                 *p &= 253;
+                                 let p2 = p.wrapping_offset(prime_ * 6 + 1);
+                                 p = if p <= p2 { p2 } else { end };
                                  break 'label76
                                 }
                                 if p >= end { wi = 76; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 223; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                *p &= 223;
+                                let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                p = if p <= p2 { p2 } else { end };
                                 break 'label77
                                }
                                if p >= end { wi = 77; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 239; p = (p as usize).saturating_add(prime * 6 + 1) as *mut u8;
+                               *p &= 239;
+                               let p2 = p.wrapping_offset(prime_ * 6 + 1);
+                               p = if p <= p2 { p2 } else { end };
                                break 'label78
                               }
                               if p >= end { wi = 78; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 127; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                              *p &= 127;
+                              let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                              p = if p <= p2 { p2 } else { end };
                               break 'label79
                              }
                              if p >= end { wi = 79; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 247; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                             *p &= 247;
+                             let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                             p = if p <= p2 { p2 } else { end };
                              break 'label80
                             }
                             if p >= end { wi = 80; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 251; p = (p as usize).saturating_add(prime * 6 + 1) as *mut u8;
+                            *p &= 251;
+                            let p2 = p.wrapping_offset(prime_ * 6 + 1);
+                            p = if p <= p2 { p2 } else { end };
                             break 'label81
                            }
                            if p >= end { wi = 81; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 191; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                           *p &= 191;
+                           let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                           p = if p <= p2 { p2 } else { end };
                            break 'label82
                           }
                           if p >= end { wi = 82; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 253; p = (p as usize).saturating_add(prime * 6 + 1) as *mut u8;
+                          *p &= 253;
+                          let p2 = p.wrapping_offset(prime_ * 6 + 1);
+                          p = if p <= p2 { p2 } else { end };
                           break 'label83
                          }
                          if p >= end { wi = 83; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 223; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                         *p &= 223;
+                         let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                         p = if p <= p2 { p2 } else { end };
                          break 'label84
                         }
                         if p >= end { wi = 84; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 254; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                        *p &= 254;
+                        let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                        p = if p <= p2 { p2 } else { end };
                         break 'label85
                        }
                        if p >= end { wi = 85; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 127; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                       *p &= 127;
+                       let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                       p = if p <= p2 { p2 } else { end };
                        break 'label86
                       }
                       if p >= end { wi = 86; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 247; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                      *p &= 247;
+                      let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                      p = if p <= p2 { p2 } else { end };
                       break 'label87
                      }
                      if p >= end { wi = 87; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 251; p = (p as usize).saturating_add(prime * 6 + 1) as *mut u8;
+                     *p &= 251;
+                     let p2 = p.wrapping_offset(prime_ * 6 + 1);
+                     p = if p <= p2 { p2 } else { end };
                      break 'label88
                     }
                     if p >= end { wi = 88; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 191; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                    *p &= 191;
+                    let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                    p = if p <= p2 { p2 } else { end };
                     break 'label89
                    }
                    if p >= end { wi = 89; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 253; p = (p as usize).saturating_add(prime * 6 + 1) as *mut u8;
+                   *p &= 253;
+                   let p2 = p.wrapping_offset(prime_ * 6 + 1);
+                   p = if p <= p2 { p2 } else { end };
                    break 'label90
                   }
                   if p >= end { wi = 90; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 223; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                  *p &= 223;
+                  let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                  p = if p <= p2 { p2 } else { end };
                   break 'label91
                  }
                  if p >= end { wi = 91; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 239; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                 *p &= 239;
+                 let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                 p = if p <= p2 { p2 } else { end };
                  break 'label92
                 }
                 if p >= end { wi = 92; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 254; p = (p as usize).saturating_add(prime * 4 + 0) as *mut u8;
+                *p &= 254;
+                let p2 = p.wrapping_offset(prime_ * 4 + 0);
+                p = if p <= p2 { p2 } else { end };
                 break 'label93
                }
                if p >= end { wi = 93; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 127; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+               *p &= 127;
+               let p2 = p.wrapping_offset(prime_ * 2 + 1);
+               p = if p <= p2 { p2 } else { end };
                break 'label94
               }
               if p >= end { wi = 94; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 247; p = (p as usize).saturating_add(prime * 10 + 2) as *mut u8;
+              *p &= 247;
+              let p2 = p.wrapping_offset(prime_ * 10 + 2);
+              p = if p <= p2 { p2 } else { end };
               break 'label95
              }
              if p >= end { wi = 95; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 191; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+             *p &= 191;
+             let p2 = p.wrapping_offset(prime_ * 2 + 1);
+             p = if p <= p2 { p2 } else { end };
              wi = 48
             }
         }
@@ -1920,246 +2114,343 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                              p.wrapping_offset(prime_ * 208 + 10) < end);
                                                                 *p.offset(prime_ * 208 + 10) &= 223;
 
-                                                                p = (p as usize).saturating_add(prime * 210 + 13) as *mut u8;
+                                                                let p2 = p.wrapping_offset(prime_ * 210 + 13);
+                                                                p = if p <= p2 { p2 } else { end };
                                                             }
                                                             if p >= end { wi = 96; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 251; p = (p as usize).saturating_add(prime * 10 + 4) as *mut u8;
+                                                            *p &= 251;
+                                                            let p2 = p.wrapping_offset(prime_ * 10 + 4);
+                                                            p = if p <= p2 { p2 } else { end };
                                                             break 'label97
                                                            }
                                                            if p >= end { wi = 97; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 254; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                                                           *p &= 254;
+                                                           let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                                                           p = if p <= p2 { p2 } else { end };
                                                            break 'label98
                                                           }
                                                           if p >= end { wi = 98; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 191; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                                          *p &= 191;
+                                                          let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                                          p = if p <= p2 { p2 } else { end };
                                                           break 'label99
                                                          }
                                                          if p >= end { wi = 99; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 253; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                                                         *p &= 253;
+                                                         let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                                                         p = if p <= p2 { p2 } else { end };
                                                          break 'label100
                                                         }
                                                         if p >= end { wi = 100; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 127; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                                        *p &= 127;
+                                                        let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                                        p = if p <= p2 { p2 } else { end };
                                                         break 'label101
                                                        }
                                                        if p >= end { wi = 101; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 247; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                                                       *p &= 247;
+                                                       let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                                                       p = if p <= p2 { p2 } else { end };
                                                        break 'label102
                                                       }
                                                       if p >= end { wi = 102; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 223; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                      *p &= 223;
+                                                      let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                      p = if p <= p2 { p2 } else { end };
                                                       break 'label103
                                                      }
                                                      if p >= end { wi = 103; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 251; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                                                     *p &= 251;
+                                                     let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                                                     p = if p <= p2 { p2 } else { end };
                                                      break 'label104
                                                     }
                                                     if p >= end { wi = 104; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 239; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                                    *p &= 239;
+                                                    let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                                    p = if p <= p2 { p2 } else { end };
                                                     break 'label105
                                                    }
                                                    if p >= end { wi = 105; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 254; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                                                   *p &= 254;
+                                                   let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                                                   p = if p <= p2 { p2 } else { end };
                                                    break 'label106
                                                   }
                                                   if p >= end { wi = 106; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 191; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                                  *p &= 191;
+                                                  let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                                  p = if p <= p2 { p2 } else { end };
                                                   break 'label107
                                                  }
                                                  if p >= end { wi = 107; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 253; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                                                 *p &= 253;
+                                                 let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                                                 p = if p <= p2 { p2 } else { end };
                                                  break 'label108
                                                 }
                                                 if p >= end { wi = 108; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 247; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                                                *p &= 247;
+                                                let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                                                p = if p <= p2 { p2 } else { end };
                                                 break 'label109
                                                }
                                                if p >= end { wi = 109; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 223; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                               *p &= 223;
+                                               let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                               p = if p <= p2 { p2 } else { end };
                                                break 'label110
                                               }
                                               if p >= end { wi = 110; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 251; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                                              *p &= 251;
+                                              let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                                              p = if p <= p2 { p2 } else { end };
                                               break 'label111
                                              }
                                              if p >= end { wi = 111; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 239; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                             *p &= 239;
+                                             let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                             p = if p <= p2 { p2 } else { end };
                                              break 'label112
                                             }
                                             if p >= end { wi = 112; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 254; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                                            *p &= 254;
+                                            let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                                            p = if p <= p2 { p2 } else { end };
                                             break 'label113
                                            }
                                            if p >= end { wi = 113; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 191; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                                           *p &= 191;
+                                           let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                                           p = if p <= p2 { p2 } else { end };
                                            break 'label114
                                           }
                                           if p >= end { wi = 114; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 127; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                          *p &= 127;
+                                          let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                          p = if p <= p2 { p2 } else { end };
                                           break 'label115
                                          }
                                          if p >= end { wi = 115; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 247; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                                         *p &= 247;
+                                         let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                                         p = if p <= p2 { p2 } else { end };
                                          break 'label116
                                         }
                                         if p >= end { wi = 116; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 223; p = (p as usize).saturating_add(prime * 8 + 3) as *mut u8;
+                                        *p &= 223;
+                                        let p2 = p.wrapping_offset(prime_ * 8 + 3);
+                                        p = if p <= p2 { p2 } else { end };
                                         break 'label117
                                        }
                                        if p >= end { wi = 117; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 239; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                       *p &= 239;
+                                       let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                       p = if p <= p2 { p2 } else { end };
                                        break 'label118
                                       }
                                       if p >= end { wi = 118; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 254; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                                      *p &= 254;
+                                      let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                                      p = if p <= p2 { p2 } else { end };
                                       break 'label119
                                      }
                                      if p >= end { wi = 119; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 191; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                     *p &= 191;
+                                     let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                     p = if p <= p2 { p2 } else { end };
                                      break 'label120
                                     }
                                     if p >= end { wi = 120; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 253; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                                    *p &= 253;
+                                    let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                                    p = if p <= p2 { p2 } else { end };
                                     break 'label121
                                    }
                                    if p >= end { wi = 121; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 127; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                   *p &= 127;
+                                   let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                   p = if p <= p2 { p2 } else { end };
                                    break 'label122
                                   }
                                   if p >= end { wi = 122; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 247; p = (p as usize).saturating_add(prime * 8 + 3) as *mut u8;
+                                  *p &= 247;
+                                  let p2 = p.wrapping_offset(prime_ * 8 + 3);
+                                  p = if p <= p2 { p2 } else { end };
                                   break 'label123
                                  }
                                  if p >= end { wi = 123; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 251; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                                 *p &= 251;
+                                 let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                                 p = if p <= p2 { p2 } else { end };
                                  break 'label124
                                 }
                                 if p >= end { wi = 124; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 239; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                *p &= 239;
+                                let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                p = if p <= p2 { p2 } else { end };
                                 break 'label125
                                }
                                if p >= end { wi = 125; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 254; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                               *p &= 254;
+                               let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                               p = if p <= p2 { p2 } else { end };
                                break 'label126
                               }
                               if p >= end { wi = 126; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 253; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                              *p &= 253;
+                              let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                              p = if p <= p2 { p2 } else { end };
                               break 'label127
                              }
                              if p >= end { wi = 127; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 127; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                             *p &= 127;
+                             let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                             p = if p <= p2 { p2 } else { end };
                              break 'label128
                             }
                             if p >= end { wi = 128; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 247; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                            *p &= 247;
+                            let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                            p = if p <= p2 { p2 } else { end };
                             break 'label129
                            }
                            if p >= end { wi = 129; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 223; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                           *p &= 223;
+                           let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                           p = if p <= p2 { p2 } else { end };
                            break 'label130
                           }
                           if p >= end { wi = 130; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 251; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                          *p &= 251;
+                          let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                          p = if p <= p2 { p2 } else { end };
                           break 'label131
                          }
                          if p >= end { wi = 131; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 239; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                         *p &= 239;
+                         let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                         p = if p <= p2 { p2 } else { end };
                          break 'label132
                         }
                         if p >= end { wi = 132; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 191; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                        *p &= 191;
+                        let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                        p = if p <= p2 { p2 } else { end };
                         break 'label133
                        }
                        if p >= end { wi = 133; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 253; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                       *p &= 253;
+                       let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                       p = if p <= p2 { p2 } else { end };
                        break 'label134
                       }
                       if p >= end { wi = 134; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 127; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                      *p &= 127;
+                      let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                      p = if p <= p2 { p2 } else { end };
                       break 'label135
                      }
                      if p >= end { wi = 135; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 247; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                     *p &= 247;
+                     let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                     p = if p <= p2 { p2 } else { end };
                      break 'label136
                     }
                     if p >= end { wi = 136; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 223; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                    *p &= 223;
+                    let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                    p = if p <= p2 { p2 } else { end };
                     break 'label137
                    }
                    if p >= end { wi = 137; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 251; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                   *p &= 251;
+                   let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                   p = if p <= p2 { p2 } else { end };
                    break 'label138
                   }
                   if p >= end { wi = 138; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 239; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                  *p &= 239;
+                  let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                  p = if p <= p2 { p2 } else { end };
                   break 'label139
                  }
                  if p >= end { wi = 139; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 254; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+                 *p &= 254;
+                 let p2 = p.wrapping_offset(prime_ * 2 + 0);
+                 p = if p <= p2 { p2 } else { end };
                  break 'label140
                 }
                 if p >= end { wi = 140; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 191; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                *p &= 191;
+                let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                p = if p <= p2 { p2 } else { end };
                 break 'label141
                }
                if p >= end { wi = 141; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 253; p = (p as usize).saturating_add(prime * 2 + 0) as *mut u8;
+               *p &= 253;
+               let p2 = p.wrapping_offset(prime_ * 2 + 0);
+               p = if p <= p2 { p2 } else { end };
                break 'label142
               }
               if p >= end { wi = 142; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 127; p = (p as usize).saturating_add(prime * 10 + 4) as *mut u8;
+              *p &= 127;
+              let p2 = p.wrapping_offset(prime_ * 10 + 4);
+              p = if p <= p2 { p2 } else { end };
               break 'label143
              }
              if p >= end { wi = 143; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 223; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+             *p &= 223;
+             let p2 = p.wrapping_offset(prime_ * 2 + 1);
+             p = if p <= p2 { p2 } else { end };
              wi = 96
             }
         }
@@ -2411,246 +2702,343 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                              p.wrapping_offset(prime_ * 208 + 12) < end);
                                                                 *p.offset(prime_ * 208 + 12) &= 239;
 
-                                                                p = (p as usize).saturating_add(prime * 210 + 17) as *mut u8;
+                                                                let p2 = p.wrapping_offset(prime_ * 210 + 17);
+                                                                p = if p <= p2 { p2 } else { end };
                                                             }
                                                             if p >= end { wi = 144; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 247; p = (p as usize).saturating_add(prime * 10 + 4) as *mut u8;
+                                                            *p &= 247;
+                                                            let p2 = p.wrapping_offset(prime_ * 10 + 4);
+                                                            p = if p <= p2 { p2 } else { end };
                                                             break 'label145
                                                            }
                                                            if p >= end { wi = 145; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 191; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                           *p &= 191;
+                                                           let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                           p = if p <= p2 { p2 } else { end };
                                                            break 'label146
                                                           }
                                                           if p >= end { wi = 146; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 223; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                                          *p &= 223;
+                                                          let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                                          p = if p <= p2 { p2 } else { end };
                                                           break 'label147
                                                          }
                                                          if p >= end { wi = 147; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 251; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                         *p &= 251;
+                                                         let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                         p = if p <= p2 { p2 } else { end };
                                                          break 'label148
                                                         }
                                                         if p >= end { wi = 148; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 253; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                                        *p &= 253;
+                                                        let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                                        p = if p <= p2 { p2 } else { end };
                                                         break 'label149
                                                        }
                                                        if p >= end { wi = 149; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 127; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                                       *p &= 127;
+                                                       let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                                       p = if p <= p2 { p2 } else { end };
                                                        break 'label150
                                                       }
                                                       if p >= end { wi = 150; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 239; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                      *p &= 239;
+                                                      let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                      p = if p <= p2 { p2 } else { end };
                                                       break 'label151
                                                      }
                                                      if p >= end { wi = 151; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 247; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                                     *p &= 247;
+                                                     let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                                     p = if p <= p2 { p2 } else { end };
                                                      break 'label152
                                                     }
                                                     if p >= end { wi = 152; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 254; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                                    *p &= 254;
+                                                    let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                                    p = if p <= p2 { p2 } else { end };
                                                     break 'label153
                                                    }
                                                    if p >= end { wi = 153; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 191; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                   *p &= 191;
+                                                   let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                   p = if p <= p2 { p2 } else { end };
                                                    break 'label154
                                                   }
                                                   if p >= end { wi = 154; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 223; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                                  *p &= 223;
+                                                  let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                                  p = if p <= p2 { p2 } else { end };
                                                   break 'label155
                                                  }
                                                  if p >= end { wi = 155; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 251; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                                                 *p &= 251;
+                                                 let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                                                 p = if p <= p2 { p2 } else { end };
                                                  break 'label156
                                                 }
                                                 if p >= end { wi = 156; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 127; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                                *p &= 127;
+                                                let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                                p = if p <= p2 { p2 } else { end };
                                                 break 'label157
                                                }
                                                if p >= end { wi = 157; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 239; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                               *p &= 239;
+                                               let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                               p = if p <= p2 { p2 } else { end };
                                                break 'label158
                                               }
                                               if p >= end { wi = 158; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 247; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                              *p &= 247;
+                                              let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                              p = if p <= p2 { p2 } else { end };
                                               break 'label159
                                              }
                                              if p >= end { wi = 159; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 254; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                             *p &= 254;
+                                             let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                             p = if p <= p2 { p2 } else { end };
                                              break 'label160
                                             }
                                             if p >= end { wi = 160; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 191; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                            *p &= 191;
+                                            let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                            p = if p <= p2 { p2 } else { end };
                                             break 'label161
                                            }
                                            if p >= end { wi = 161; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 223; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                           *p &= 223;
+                                           let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                           p = if p <= p2 { p2 } else { end };
                                            break 'label162
                                           }
                                           if p >= end { wi = 162; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 253; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                          *p &= 253;
+                                          let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                          p = if p <= p2 { p2 } else { end };
                                           break 'label163
                                          }
                                          if p >= end { wi = 163; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 127; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                         *p &= 127;
+                                         let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                         p = if p <= p2 { p2 } else { end };
                                          break 'label164
                                         }
                                         if p >= end { wi = 164; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 239; p = (p as usize).saturating_add(prime * 8 + 4) as *mut u8;
+                                        *p &= 239;
+                                        let p2 = p.wrapping_offset(prime_ * 8 + 4);
+                                        p = if p <= p2 { p2 } else { end };
                                         break 'label165
                                        }
                                        if p >= end { wi = 165; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 254; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                       *p &= 254;
+                                       let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                       p = if p <= p2 { p2 } else { end };
                                        break 'label166
                                       }
                                       if p >= end { wi = 166; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 191; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                      *p &= 191;
+                                      let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                      p = if p <= p2 { p2 } else { end };
                                       break 'label167
                                      }
                                      if p >= end { wi = 167; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 223; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                     *p &= 223;
+                                     let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                     p = if p <= p2 { p2 } else { end };
                                      break 'label168
                                     }
                                     if p >= end { wi = 168; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 251; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                    *p &= 251;
+                                    let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                    p = if p <= p2 { p2 } else { end };
                                     break 'label169
                                    }
                                    if p >= end { wi = 169; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 253; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                   *p &= 253;
+                                   let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                   p = if p <= p2 { p2 } else { end };
                                    break 'label170
                                   }
                                   if p >= end { wi = 170; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 127; p = (p as usize).saturating_add(prime * 8 + 4) as *mut u8;
+                                  *p &= 127;
+                                  let p2 = p.wrapping_offset(prime_ * 8 + 4);
+                                  p = if p <= p2 { p2 } else { end };
                                   break 'label171
                                  }
                                  if p >= end { wi = 171; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 247; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                 *p &= 247;
+                                 let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                 p = if p <= p2 { p2 } else { end };
                                  break 'label172
                                 }
                                 if p >= end { wi = 172; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 254; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                                *p &= 254;
+                                let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                                p = if p <= p2 { p2 } else { end };
                                 break 'label173
                                }
                                if p >= end { wi = 173; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 191; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                               *p &= 191;
+                               let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                               p = if p <= p2 { p2 } else { end };
                                break 'label174
                               }
                               if p >= end { wi = 174; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 251; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                              *p &= 251;
+                              let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                              p = if p <= p2 { p2 } else { end };
                               break 'label175
                              }
                              if p >= end { wi = 175; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 253; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                             *p &= 253;
+                             let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                             p = if p <= p2 { p2 } else { end };
                              break 'label176
                             }
                             if p >= end { wi = 176; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 127; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                            *p &= 127;
+                            let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                            p = if p <= p2 { p2 } else { end };
                             break 'label177
                            }
                            if p >= end { wi = 177; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 239; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                           *p &= 239;
+                           let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                           p = if p <= p2 { p2 } else { end };
                            break 'label178
                           }
                           if p >= end { wi = 178; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 247; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                          *p &= 247;
+                          let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                          p = if p <= p2 { p2 } else { end };
                           break 'label179
                          }
                          if p >= end { wi = 179; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 254; p = (p as usize).saturating_add(prime * 6 + 2) as *mut u8;
+                         *p &= 254;
+                         let p2 = p.wrapping_offset(prime_ * 6 + 2);
+                         p = if p <= p2 { p2 } else { end };
                          break 'label180
                         }
                         if p >= end { wi = 180; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 223; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                        *p &= 223;
+                        let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                        p = if p <= p2 { p2 } else { end };
                         break 'label181
                        }
                        if p >= end { wi = 181; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 251; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                       *p &= 251;
+                       let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                       p = if p <= p2 { p2 } else { end };
                        break 'label182
                       }
                       if p >= end { wi = 182; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 253; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                      *p &= 253;
+                      let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                      p = if p <= p2 { p2 } else { end };
                       break 'label183
                      }
                      if p >= end { wi = 183; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 127; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                     *p &= 127;
+                     let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                     p = if p <= p2 { p2 } else { end };
                      break 'label184
                     }
                     if p >= end { wi = 184; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 239; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                    *p &= 239;
+                    let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                    p = if p <= p2 { p2 } else { end };
                     break 'label185
                    }
                    if p >= end { wi = 185; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 247; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                   *p &= 247;
+                   let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                   p = if p <= p2 { p2 } else { end };
                    break 'label186
                   }
                   if p >= end { wi = 186; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 254; p = (p as usize).saturating_add(prime * 4 + 1) as *mut u8;
+                  *p &= 254;
+                  let p2 = p.wrapping_offset(prime_ * 4 + 1);
+                  p = if p <= p2 { p2 } else { end };
                   break 'label187
                  }
                  if p >= end { wi = 187; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 191; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                 *p &= 191;
+                 let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                 p = if p <= p2 { p2 } else { end };
                  break 'label188
                 }
                 if p >= end { wi = 188; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 223; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                *p &= 223;
+                let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                p = if p <= p2 { p2 } else { end };
                 break 'label189
                }
                if p >= end { wi = 189; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 251; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+               *p &= 251;
+               let p2 = p.wrapping_offset(prime_ * 2 + 1);
+               p = if p <= p2 { p2 } else { end };
                break 'label190
               }
               if p >= end { wi = 190; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 253; p = (p as usize).saturating_add(prime * 10 + 4) as *mut u8;
+              *p &= 253;
+              let p2 = p.wrapping_offset(prime_ * 10 + 4);
+              p = if p <= p2 { p2 } else { end };
               break 'label191
              }
              if p >= end { wi = 191; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 239; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+             *p &= 239;
+             let p2 = p.wrapping_offset(prime_ * 2 + 1);
+             p = if p <= p2 { p2 } else { end };
              wi = 144
             }
         }
@@ -2902,246 +3290,343 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                              p.wrapping_offset(prime_ * 208 + 16) < end);
                                                                 *p.offset(prime_ * 208 + 16) &= 247;
 
-                                                                p = (p as usize).saturating_add(prime * 210 + 19) as *mut u8;
+                                                                let p2 = p.wrapping_offset(prime_ * 210 + 19);
+                                                                p = if p <= p2 { p2 } else { end };
                                                             }
                                                             if p >= end { wi = 192; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 239; p = (p as usize).saturating_add(prime * 10 + 6) as *mut u8;
+                                                            *p &= 239;
+                                                            let p2 = p.wrapping_offset(prime_ * 10 + 6);
+                                                            p = if p <= p2 { p2 } else { end };
                                                             break 'label193
                                                            }
                                                            if p >= end { wi = 193; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 253; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                           *p &= 253;
+                                                           let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                           p = if p <= p2 { p2 } else { end };
                                                            break 'label194
                                                           }
                                                           if p >= end { wi = 194; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 251; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                                          *p &= 251;
+                                                          let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                                          p = if p <= p2 { p2 } else { end };
                                                           break 'label195
                                                          }
                                                          if p >= end { wi = 195; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 223; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                         *p &= 223;
+                                                         let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                         p = if p <= p2 { p2 } else { end };
                                                          break 'label196
                                                         }
                                                         if p >= end { wi = 196; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 191; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                                        *p &= 191;
+                                                        let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                                        p = if p <= p2 { p2 } else { end };
                                                         break 'label197
                                                        }
                                                        if p >= end { wi = 197; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 254; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                                       *p &= 254;
+                                                       let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                                       p = if p <= p2 { p2 } else { end };
                                                        break 'label198
                                                       }
                                                       if p >= end { wi = 198; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 247; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                      *p &= 247;
+                                                      let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                      p = if p <= p2 { p2 } else { end };
                                                       break 'label199
                                                      }
                                                      if p >= end { wi = 199; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 239; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                                     *p &= 239;
+                                                     let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                                     p = if p <= p2 { p2 } else { end };
                                                      break 'label200
                                                     }
                                                     if p >= end { wi = 200; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 127; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                                    *p &= 127;
+                                                    let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                                    p = if p <= p2 { p2 } else { end };
                                                     break 'label201
                                                    }
                                                    if p >= end { wi = 201; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 253; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                   *p &= 253;
+                                                   let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                   p = if p <= p2 { p2 } else { end };
                                                    break 'label202
                                                   }
                                                   if p >= end { wi = 202; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 251; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                                  *p &= 251;
+                                                  let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                                  p = if p <= p2 { p2 } else { end };
                                                   break 'label203
                                                  }
                                                  if p >= end { wi = 203; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 223; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                                                 *p &= 223;
+                                                 let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                                                 p = if p <= p2 { p2 } else { end };
                                                  break 'label204
                                                 }
                                                 if p >= end { wi = 204; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 254; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                                *p &= 254;
+                                                let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                                p = if p <= p2 { p2 } else { end };
                                                 break 'label205
                                                }
                                                if p >= end { wi = 205; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 247; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                               *p &= 247;
+                                               let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                               p = if p <= p2 { p2 } else { end };
                                                break 'label206
                                               }
                                               if p >= end { wi = 206; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 239; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                              *p &= 239;
+                                              let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                              p = if p <= p2 { p2 } else { end };
                                               break 'label207
                                              }
                                              if p >= end { wi = 207; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 127; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                             *p &= 127;
+                                             let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                             p = if p <= p2 { p2 } else { end };
                                              break 'label208
                                             }
                                             if p >= end { wi = 208; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 253; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                            *p &= 253;
+                                            let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                            p = if p <= p2 { p2 } else { end };
                                             break 'label209
                                            }
                                            if p >= end { wi = 209; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 251; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                           *p &= 251;
+                                           let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                           p = if p <= p2 { p2 } else { end };
                                            break 'label210
                                           }
                                           if p >= end { wi = 210; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 191; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                          *p &= 191;
+                                          let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                          p = if p <= p2 { p2 } else { end };
                                           break 'label211
                                          }
                                          if p >= end { wi = 211; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 254; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                         *p &= 254;
+                                         let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                         p = if p <= p2 { p2 } else { end };
                                          break 'label212
                                         }
                                         if p >= end { wi = 212; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 247; p = (p as usize).saturating_add(prime * 8 + 4) as *mut u8;
+                                        *p &= 247;
+                                        let p2 = p.wrapping_offset(prime_ * 8 + 4);
+                                        p = if p <= p2 { p2 } else { end };
                                         break 'label213
                                        }
                                        if p >= end { wi = 213; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 127; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                       *p &= 127;
+                                       let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                       p = if p <= p2 { p2 } else { end };
                                        break 'label214
                                       }
                                       if p >= end { wi = 214; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 253; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                      *p &= 253;
+                                      let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                      p = if p <= p2 { p2 } else { end };
                                       break 'label215
                                      }
                                      if p >= end { wi = 215; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 251; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                     *p &= 251;
+                                     let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                     p = if p <= p2 { p2 } else { end };
                                      break 'label216
                                     }
                                     if p >= end { wi = 216; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 223; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                    *p &= 223;
+                                    let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                    p = if p <= p2 { p2 } else { end };
                                     break 'label217
                                    }
                                    if p >= end { wi = 217; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 191; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                   *p &= 191;
+                                   let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                   p = if p <= p2 { p2 } else { end };
                                    break 'label218
                                   }
                                   if p >= end { wi = 218; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 254; p = (p as usize).saturating_add(prime * 8 + 4) as *mut u8;
+                                  *p &= 254;
+                                  let p2 = p.wrapping_offset(prime_ * 8 + 4);
+                                  p = if p <= p2 { p2 } else { end };
                                   break 'label219
                                  }
                                  if p >= end { wi = 219; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 239; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                                 *p &= 239;
+                                 let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                                 p = if p <= p2 { p2 } else { end };
                                  break 'label220
                                 }
                                 if p >= end { wi = 220; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 127; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                *p &= 127;
+                                let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                p = if p <= p2 { p2 } else { end };
                                 break 'label221
                                }
                                if p >= end { wi = 221; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 253; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                               *p &= 253;
+                               let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                               p = if p <= p2 { p2 } else { end };
                                break 'label222
                               }
                               if p >= end { wi = 222; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 223; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                              *p &= 223;
+                              let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                              p = if p <= p2 { p2 } else { end };
                               break 'label223
                              }
                              if p >= end { wi = 223; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 191; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                             *p &= 191;
+                             let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                             p = if p <= p2 { p2 } else { end };
                              break 'label224
                             }
                             if p >= end { wi = 224; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 254; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                            *p &= 254;
+                            let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                            p = if p <= p2 { p2 } else { end };
                             break 'label225
                            }
                            if p >= end { wi = 225; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 247; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                           *p &= 247;
+                           let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                           p = if p <= p2 { p2 } else { end };
                            break 'label226
                           }
                           if p >= end { wi = 226; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 239; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                          *p &= 239;
+                          let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                          p = if p <= p2 { p2 } else { end };
                           break 'label227
                          }
                          if p >= end { wi = 227; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 127; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                         *p &= 127;
+                         let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                         p = if p <= p2 { p2 } else { end };
                          break 'label228
                         }
                         if p >= end { wi = 228; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 251; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                        *p &= 251;
+                        let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                        p = if p <= p2 { p2 } else { end };
                         break 'label229
                        }
                        if p >= end { wi = 229; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 223; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                       *p &= 223;
+                       let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                       p = if p <= p2 { p2 } else { end };
                        break 'label230
                       }
                       if p >= end { wi = 230; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 191; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                      *p &= 191;
+                      let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                      p = if p <= p2 { p2 } else { end };
                       break 'label231
                      }
                      if p >= end { wi = 231; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 254; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                     *p &= 254;
+                     let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                     p = if p <= p2 { p2 } else { end };
                      break 'label232
                     }
                     if p >= end { wi = 232; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 247; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                    *p &= 247;
+                    let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                    p = if p <= p2 { p2 } else { end };
                     break 'label233
                    }
                    if p >= end { wi = 233; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 239; p = (p as usize).saturating_add(prime * 6 + 3) as *mut u8;
+                   *p &= 239;
+                   let p2 = p.wrapping_offset(prime_ * 6 + 3);
+                   p = if p <= p2 { p2 } else { end };
                    break 'label234
                   }
                   if p >= end { wi = 234; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 127; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                  *p &= 127;
+                  let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                  p = if p <= p2 { p2 } else { end };
                   break 'label235
                  }
                  if p >= end { wi = 235; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 253; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                 *p &= 253;
+                 let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                 p = if p <= p2 { p2 } else { end };
                  break 'label236
                 }
                 if p >= end { wi = 236; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 251; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                *p &= 251;
+                let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                p = if p <= p2 { p2 } else { end };
                 break 'label237
                }
                if p >= end { wi = 237; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 223; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+               *p &= 223;
+               let p2 = p.wrapping_offset(prime_ * 2 + 1);
+               p = if p <= p2 { p2 } else { end };
                break 'label238
               }
               if p >= end { wi = 238; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 191; p = (p as usize).saturating_add(prime * 10 + 6) as *mut u8;
+              *p &= 191;
+              let p2 = p.wrapping_offset(prime_ * 10 + 6);
+              p = if p <= p2 { p2 } else { end };
               break 'label239
              }
              if p >= end { wi = 239; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 247; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+             *p &= 247;
+             let p2 = p.wrapping_offset(prime_ * 2 + 1);
+             p = if p <= p2 { p2 } else { end };
              wi = 192
             }
         }
@@ -3393,246 +3878,343 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                              p.wrapping_offset(prime_ * 208 + 18) < end);
                                                                 *p.offset(prime_ * 208 + 18) &= 251;
 
-                                                                p = (p as usize).saturating_add(prime * 210 + 23) as *mut u8;
+                                                                let p2 = p.wrapping_offset(prime_ * 210 + 23);
+                                                                p = if p <= p2 { p2 } else { end };
                                                             }
                                                             if p >= end { wi = 240; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 223; p = (p as usize).saturating_add(prime * 10 + 6) as *mut u8;
+                                                            *p &= 223;
+                                                            let p2 = p.wrapping_offset(prime_ * 10 + 6);
+                                                            p = if p <= p2 { p2 } else { end };
                                                             break 'label241
                                                            }
                                                            if p >= end { wi = 241; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 127; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                                                           *p &= 127;
+                                                           let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                                                           p = if p <= p2 { p2 } else { end };
                                                            break 'label242
                                                           }
                                                           if p >= end { wi = 242; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 253; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                                          *p &= 253;
+                                                          let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                                          p = if p <= p2 { p2 } else { end };
                                                           break 'label243
                                                          }
                                                          if p >= end { wi = 243; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 191; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                                                         *p &= 191;
+                                                         let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                                                         p = if p <= p2 { p2 } else { end };
                                                          break 'label244
                                                         }
                                                         if p >= end { wi = 244; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 254; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                                        *p &= 254;
+                                                        let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                                        p = if p <= p2 { p2 } else { end };
                                                         break 'label245
                                                        }
                                                        if p >= end { wi = 245; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 239; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                                                       *p &= 239;
+                                                       let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                                                       p = if p <= p2 { p2 } else { end };
                                                        break 'label246
                                                       }
                                                       if p >= end { wi = 246; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 251; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                      *p &= 251;
+                                                      let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                      p = if p <= p2 { p2 } else { end };
                                                       break 'label247
                                                      }
                                                      if p >= end { wi = 247; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 223; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                                                     *p &= 223;
+                                                     let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                                                     p = if p <= p2 { p2 } else { end };
                                                      break 'label248
                                                     }
                                                     if p >= end { wi = 248; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 247; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                                    *p &= 247;
+                                                    let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                                    p = if p <= p2 { p2 } else { end };
                                                     break 'label249
                                                    }
                                                    if p >= end { wi = 249; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 127; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                                                   *p &= 127;
+                                                   let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                                                   p = if p <= p2 { p2 } else { end };
                                                    break 'label250
                                                   }
                                                   if p >= end { wi = 250; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 253; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                                  *p &= 253;
+                                                  let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                                  p = if p <= p2 { p2 } else { end };
                                                   break 'label251
                                                  }
                                                  if p >= end { wi = 251; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 191; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                                                 *p &= 191;
+                                                 let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                                                 p = if p <= p2 { p2 } else { end };
                                                  break 'label252
                                                 }
                                                 if p >= end { wi = 252; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 239; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                                                *p &= 239;
+                                                let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                                                p = if p <= p2 { p2 } else { end };
                                                 break 'label253
                                                }
                                                if p >= end { wi = 253; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 251; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                               *p &= 251;
+                                               let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                               p = if p <= p2 { p2 } else { end };
                                                break 'label254
                                               }
                                               if p >= end { wi = 254; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 223; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                                              *p &= 223;
+                                              let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                                              p = if p <= p2 { p2 } else { end };
                                               break 'label255
                                              }
                                              if p >= end { wi = 255; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 247; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                             *p &= 247;
+                                             let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                             p = if p <= p2 { p2 } else { end };
                                              break 'label256
                                             }
                                             if p >= end { wi = 256; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 127; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                                            *p &= 127;
+                                            let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                                            p = if p <= p2 { p2 } else { end };
                                             break 'label257
                                            }
                                            if p >= end { wi = 257; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 253; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                                           *p &= 253;
+                                           let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                                           p = if p <= p2 { p2 } else { end };
                                            break 'label258
                                           }
                                           if p >= end { wi = 258; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 254; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                          *p &= 254;
+                                          let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                          p = if p <= p2 { p2 } else { end };
                                           break 'label259
                                          }
                                          if p >= end { wi = 259; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 239; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                                         *p &= 239;
+                                         let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                                         p = if p <= p2 { p2 } else { end };
                                          break 'label260
                                         }
                                         if p >= end { wi = 260; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 251; p = (p as usize).saturating_add(prime * 8 + 5) as *mut u8;
+                                        *p &= 251;
+                                        let p2 = p.wrapping_offset(prime_ * 8 + 5);
+                                        p = if p <= p2 { p2 } else { end };
                                         break 'label261
                                        }
                                        if p >= end { wi = 261; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 247; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                       *p &= 247;
+                                       let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                       p = if p <= p2 { p2 } else { end };
                                        break 'label262
                                       }
                                       if p >= end { wi = 262; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 127; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                                      *p &= 127;
+                                      let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                                      p = if p <= p2 { p2 } else { end };
                                       break 'label263
                                      }
                                      if p >= end { wi = 263; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 253; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                     *p &= 253;
+                                     let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                     p = if p <= p2 { p2 } else { end };
                                      break 'label264
                                     }
                                     if p >= end { wi = 264; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 191; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                                    *p &= 191;
+                                    let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                                    p = if p <= p2 { p2 } else { end };
                                     break 'label265
                                    }
                                    if p >= end { wi = 265; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 254; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                   *p &= 254;
+                                   let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                   p = if p <= p2 { p2 } else { end };
                                    break 'label266
                                   }
                                   if p >= end { wi = 266; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 239; p = (p as usize).saturating_add(prime * 8 + 5) as *mut u8;
+                                  *p &= 239;
+                                  let p2 = p.wrapping_offset(prime_ * 8 + 5);
+                                  p = if p <= p2 { p2 } else { end };
                                   break 'label267
                                  }
                                  if p >= end { wi = 267; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 223; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                                 *p &= 223;
+                                 let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                                 p = if p <= p2 { p2 } else { end };
                                  break 'label268
                                 }
                                 if p >= end { wi = 268; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 247; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                                *p &= 247;
+                                let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                                p = if p <= p2 { p2 } else { end };
                                 break 'label269
                                }
                                if p >= end { wi = 269; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 127; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                               *p &= 127;
+                               let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                               p = if p <= p2 { p2 } else { end };
                                break 'label270
                               }
                               if p >= end { wi = 270; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 191; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                              *p &= 191;
+                              let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                              p = if p <= p2 { p2 } else { end };
                               break 'label271
                              }
                              if p >= end { wi = 271; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 254; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                             *p &= 254;
+                             let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                             p = if p <= p2 { p2 } else { end };
                              break 'label272
                             }
                             if p >= end { wi = 272; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 239; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                            *p &= 239;
+                            let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                            p = if p <= p2 { p2 } else { end };
                             break 'label273
                            }
                            if p >= end { wi = 273; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 251; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                           *p &= 251;
+                           let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                           p = if p <= p2 { p2 } else { end };
                            break 'label274
                           }
                           if p >= end { wi = 274; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 223; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                          *p &= 223;
+                          let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                          p = if p <= p2 { p2 } else { end };
                           break 'label275
                          }
                          if p >= end { wi = 275; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 247; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                         *p &= 247;
+                         let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                         p = if p <= p2 { p2 } else { end };
                          break 'label276
                         }
                         if p >= end { wi = 276; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 253; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                        *p &= 253;
+                        let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                        p = if p <= p2 { p2 } else { end };
                         break 'label277
                        }
                        if p >= end { wi = 277; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 191; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                       *p &= 191;
+                       let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                       p = if p <= p2 { p2 } else { end };
                        break 'label278
                       }
                       if p >= end { wi = 278; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 254; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                      *p &= 254;
+                      let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                      p = if p <= p2 { p2 } else { end };
                       break 'label279
                      }
                      if p >= end { wi = 279; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 239; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                     *p &= 239;
+                     let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                     p = if p <= p2 { p2 } else { end };
                      break 'label280
                     }
                     if p >= end { wi = 280; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 251; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                    *p &= 251;
+                    let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                    p = if p <= p2 { p2 } else { end };
                     break 'label281
                    }
                    if p >= end { wi = 281; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 223; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                   *p &= 223;
+                   let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                   p = if p <= p2 { p2 } else { end };
                    break 'label282
                   }
                   if p >= end { wi = 282; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 247; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                  *p &= 247;
+                  let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                  p = if p <= p2 { p2 } else { end };
                   break 'label283
                  }
                  if p >= end { wi = 283; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 127; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                 *p &= 127;
+                 let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                 p = if p <= p2 { p2 } else { end };
                  break 'label284
                 }
                 if p >= end { wi = 284; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 253; p = (p as usize).saturating_add(prime * 4 + 2) as *mut u8;
+                *p &= 253;
+                let p2 = p.wrapping_offset(prime_ * 4 + 2);
+                p = if p <= p2 { p2 } else { end };
                 break 'label285
                }
                if p >= end { wi = 285; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 191; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+               *p &= 191;
+               let p2 = p.wrapping_offset(prime_ * 2 + 2);
+               p = if p <= p2 { p2 } else { end };
                break 'label286
               }
               if p >= end { wi = 286; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 254; p = (p as usize).saturating_add(prime * 10 + 6) as *mut u8;
+              *p &= 254;
+              let p2 = p.wrapping_offset(prime_ * 10 + 6);
+              p = if p <= p2 { p2 } else { end };
               break 'label287
              }
              if p >= end { wi = 287; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 251; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+             *p &= 251;
+             let p2 = p.wrapping_offset(prime_ * 2 + 1);
+             p = if p <= p2 { p2 } else { end };
              wi = 240
             }
         }
@@ -3884,246 +4466,343 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                              p.wrapping_offset(prime_ * 208 + 22) < end);
                                                                 *p.offset(prime_ * 208 + 22) &= 253;
 
-                                                                p = (p as usize).saturating_add(prime * 210 + 29) as *mut u8;
+                                                                let p2 = p.wrapping_offset(prime_ * 210 + 29);
+                                                                p = if p <= p2 { p2 } else { end };
                                                             }
                                                             if p >= end { wi = 288; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 191; p = (p as usize).saturating_add(prime * 10 + 8) as *mut u8;
+                                                            *p &= 191;
+                                                            let p2 = p.wrapping_offset(prime_ * 10 + 8);
+                                                            p = if p <= p2 { p2 } else { end };
                                                             break 'label289
                                                            }
                                                            if p >= end { wi = 289; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 247; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                           *p &= 247;
+                                                           let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                           p = if p <= p2 { p2 } else { end };
                                                            break 'label290
                                                           }
                                                           if p >= end { wi = 290; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 127; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                                                          *p &= 127;
+                                                          let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                                                          p = if p <= p2 { p2 } else { end };
                                                           break 'label291
                                                          }
                                                          if p >= end { wi = 291; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 254; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                         *p &= 254;
+                                                         let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                         p = if p <= p2 { p2 } else { end };
                                                          break 'label292
                                                         }
                                                         if p >= end { wi = 292; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 239; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                                        *p &= 239;
+                                                        let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                                        p = if p <= p2 { p2 } else { end };
                                                         break 'label293
                                                        }
                                                        if p >= end { wi = 293; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 223; p = (p as usize).saturating_add(prime * 6 + 5) as *mut u8;
+                                                       *p &= 223;
+                                                       let p2 = p.wrapping_offset(prime_ * 6 + 5);
+                                                       p = if p <= p2 { p2 } else { end };
                                                        break 'label294
                                                       }
                                                       if p >= end { wi = 294; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 253; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                      *p &= 253;
+                                                      let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                      p = if p <= p2 { p2 } else { end };
                                                       break 'label295
                                                      }
                                                      if p >= end { wi = 295; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 191; p = (p as usize).saturating_add(prime * 6 + 5) as *mut u8;
+                                                     *p &= 191;
+                                                     let p2 = p.wrapping_offset(prime_ * 6 + 5);
+                                                     p = if p <= p2 { p2 } else { end };
                                                      break 'label296
                                                     }
                                                     if p >= end { wi = 296; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 251; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                                    *p &= 251;
+                                                    let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                                    p = if p <= p2 { p2 } else { end };
                                                     break 'label297
                                                    }
                                                    if p >= end { wi = 297; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 247; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                   *p &= 247;
+                                                   let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                   p = if p <= p2 { p2 } else { end };
                                                    break 'label298
                                                   }
                                                   if p >= end { wi = 298; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 127; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                                                  *p &= 127;
+                                                  let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                                                  p = if p <= p2 { p2 } else { end };
                                                   break 'label299
                                                  }
                                                  if p >= end { wi = 299; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 254; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                                                 *p &= 254;
+                                                 let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                                                 p = if p <= p2 { p2 } else { end };
                                                  break 'label300
                                                 }
                                                 if p >= end { wi = 300; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 223; p = (p as usize).saturating_add(prime * 6 + 5) as *mut u8;
+                                                *p &= 223;
+                                                let p2 = p.wrapping_offset(prime_ * 6 + 5);
+                                                p = if p <= p2 { p2 } else { end };
                                                 break 'label301
                                                }
                                                if p >= end { wi = 301; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 253; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                               *p &= 253;
+                                               let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                               p = if p <= p2 { p2 } else { end };
                                                break 'label302
                                               }
                                               if p >= end { wi = 302; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 191; p = (p as usize).saturating_add(prime * 6 + 5) as *mut u8;
+                                              *p &= 191;
+                                              let p2 = p.wrapping_offset(prime_ * 6 + 5);
+                                              p = if p <= p2 { p2 } else { end };
                                               break 'label303
                                              }
                                              if p >= end { wi = 303; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 251; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                             *p &= 251;
+                                             let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                             p = if p <= p2 { p2 } else { end };
                                              break 'label304
                                             }
                                             if p >= end { wi = 304; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 247; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                            *p &= 247;
+                                            let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                            p = if p <= p2 { p2 } else { end };
                                             break 'label305
                                            }
                                            if p >= end { wi = 305; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 127; p = (p as usize).saturating_add(prime * 6 + 5) as *mut u8;
+                                           *p &= 127;
+                                           let p2 = p.wrapping_offset(prime_ * 6 + 5);
+                                           p = if p <= p2 { p2 } else { end };
                                            break 'label306
                                           }
                                           if p >= end { wi = 306; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 239; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                          *p &= 239;
+                                          let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                          p = if p <= p2 { p2 } else { end };
                                           break 'label307
                                          }
                                          if p >= end { wi = 307; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 223; p = (p as usize).saturating_add(prime * 6 + 5) as *mut u8;
+                                         *p &= 223;
+                                         let p2 = p.wrapping_offset(prime_ * 6 + 5);
+                                         p = if p <= p2 { p2 } else { end };
                                          break 'label308
                                         }
                                         if p >= end { wi = 308; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 253; p = (p as usize).saturating_add(prime * 8 + 6) as *mut u8;
+                                        *p &= 253;
+                                        let p2 = p.wrapping_offset(prime_ * 8 + 6);
+                                        p = if p <= p2 { p2 } else { end };
                                         break 'label309
                                        }
                                        if p >= end { wi = 309; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 251; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                       *p &= 251;
+                                       let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                       p = if p <= p2 { p2 } else { end };
                                        break 'label310
                                       }
                                       if p >= end { wi = 310; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 247; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                      *p &= 247;
+                                      let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                      p = if p <= p2 { p2 } else { end };
                                       break 'label311
                                      }
                                      if p >= end { wi = 311; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 127; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                                     *p &= 127;
+                                     let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                                     p = if p <= p2 { p2 } else { end };
                                      break 'label312
                                     }
                                     if p >= end { wi = 312; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 254; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                    *p &= 254;
+                                    let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                    p = if p <= p2 { p2 } else { end };
                                     break 'label313
                                    }
                                    if p >= end { wi = 313; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 239; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                   *p &= 239;
+                                   let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                   p = if p <= p2 { p2 } else { end };
                                    break 'label314
                                   }
                                   if p >= end { wi = 314; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 223; p = (p as usize).saturating_add(prime * 8 + 6) as *mut u8;
+                                  *p &= 223;
+                                  let p2 = p.wrapping_offset(prime_ * 8 + 6);
+                                  p = if p <= p2 { p2 } else { end };
                                   break 'label315
                                  }
                                  if p >= end { wi = 315; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 191; p = (p as usize).saturating_add(prime * 6 + 5) as *mut u8;
+                                 *p &= 191;
+                                 let p2 = p.wrapping_offset(prime_ * 6 + 5);
+                                 p = if p <= p2 { p2 } else { end };
                                  break 'label316
                                 }
                                 if p >= end { wi = 316; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 251; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                                *p &= 251;
+                                let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                                p = if p <= p2 { p2 } else { end };
                                 break 'label317
                                }
                                if p >= end { wi = 317; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 247; p = (p as usize).saturating_add(prime * 6 + 5) as *mut u8;
+                               *p &= 247;
+                               let p2 = p.wrapping_offset(prime_ * 6 + 5);
+                               p = if p <= p2 { p2 } else { end };
                                break 'label318
                               }
                               if p >= end { wi = 318; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 254; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                              *p &= 254;
+                              let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                              p = if p <= p2 { p2 } else { end };
                               break 'label319
                              }
                              if p >= end { wi = 319; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 239; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                             *p &= 239;
+                             let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                             p = if p <= p2 { p2 } else { end };
                              break 'label320
                             }
                             if p >= end { wi = 320; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 223; p = (p as usize).saturating_add(prime * 6 + 5) as *mut u8;
+                            *p &= 223;
+                            let p2 = p.wrapping_offset(prime_ * 6 + 5);
+                            p = if p <= p2 { p2 } else { end };
                             break 'label321
                            }
                            if p >= end { wi = 321; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 253; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                           *p &= 253;
+                           let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                           p = if p <= p2 { p2 } else { end };
                            break 'label322
                           }
                           if p >= end { wi = 322; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 191; p = (p as usize).saturating_add(prime * 6 + 5) as *mut u8;
+                          *p &= 191;
+                          let p2 = p.wrapping_offset(prime_ * 6 + 5);
+                          p = if p <= p2 { p2 } else { end };
                           break 'label323
                          }
                          if p >= end { wi = 323; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 251; p = (p as usize).saturating_add(prime * 6 + 4) as *mut u8;
+                         *p &= 251;
+                         let p2 = p.wrapping_offset(prime_ * 6 + 4);
+                         p = if p <= p2 { p2 } else { end };
                          break 'label324
                         }
                         if p >= end { wi = 324; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 127; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                        *p &= 127;
+                        let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                        p = if p <= p2 { p2 } else { end };
                         break 'label325
                        }
                        if p >= end { wi = 325; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 254; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                       *p &= 254;
+                       let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                       p = if p <= p2 { p2 } else { end };
                        break 'label326
                       }
                       if p >= end { wi = 326; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 239; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                      *p &= 239;
+                      let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                      p = if p <= p2 { p2 } else { end };
                       break 'label327
                      }
                      if p >= end { wi = 327; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 223; p = (p as usize).saturating_add(prime * 6 + 5) as *mut u8;
+                     *p &= 223;
+                     let p2 = p.wrapping_offset(prime_ * 6 + 5);
+                     p = if p <= p2 { p2 } else { end };
                      break 'label328
                     }
                     if p >= end { wi = 328; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 253; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                    *p &= 253;
+                    let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                    p = if p <= p2 { p2 } else { end };
                     break 'label329
                    }
                    if p >= end { wi = 329; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 191; p = (p as usize).saturating_add(prime * 6 + 5) as *mut u8;
+                   *p &= 191;
+                   let p2 = p.wrapping_offset(prime_ * 6 + 5);
+                   p = if p <= p2 { p2 } else { end };
                    break 'label330
                   }
                   if p >= end { wi = 330; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 251; p = (p as usize).saturating_add(prime * 4 + 3) as *mut u8;
+                  *p &= 251;
+                  let p2 = p.wrapping_offset(prime_ * 4 + 3);
+                  p = if p <= p2 { p2 } else { end };
                   break 'label331
                  }
                  if p >= end { wi = 331; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 247; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                 *p &= 247;
+                 let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                 p = if p <= p2 { p2 } else { end };
                  break 'label332
                 }
                 if p >= end { wi = 332; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 127; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                *p &= 127;
+                let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                p = if p <= p2 { p2 } else { end };
                 break 'label333
                }
                if p >= end { wi = 333; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 254; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+               *p &= 254;
+               let p2 = p.wrapping_offset(prime_ * 2 + 1);
+               p = if p <= p2 { p2 } else { end };
                break 'label334
               }
               if p >= end { wi = 334; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 239; p = (p as usize).saturating_add(prime * 10 + 8) as *mut u8;
+              *p &= 239;
+              let p2 = p.wrapping_offset(prime_ * 10 + 8);
+              p = if p <= p2 { p2 } else { end };
               break 'label335
              }
              if p >= end { wi = 335; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 253; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+             *p &= 253;
+             let p2 = p.wrapping_offset(prime_ * 2 + 1);
+             p = if p <= p2 { p2 } else { end };
              wi = 288
             }
         }
@@ -4375,246 +5054,343 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                                                                              p.wrapping_offset(prime_ * 208 + 28) < end);
                                                                 *p.offset(prime_ * 208 + 28) &= 254;
 
-                                                                p = (p as usize).saturating_add(prime * 210 + 31) as *mut u8;
+                                                                let p2 = p.wrapping_offset(prime_ * 210 + 31);
+                                                                p = if p <= p2 { p2 } else { end };
                                                             }
                                                             if p >= end { wi = 336; break 'outer; }
                                                             safe_assert!(start <= p && p < end);
-                                                            *p &= 127; p = (p as usize).saturating_add(prime * 10 + 10) as *mut u8;
+                                                            *p &= 127;
+                                                            let p2 = p.wrapping_offset(prime_ * 10 + 10);
+                                                            p = if p <= p2 { p2 } else { end };
                                                             break 'label337
                                                            }
                                                            if p >= end { wi = 337; break 'outer; }
                                                            safe_assert!(start <= p && p < end);
-                                                           *p &= 223; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                                                           *p &= 223;
+                                                           let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                                                           p = if p <= p2 { p2 } else { end };
                                                            break 'label338
                                                           }
                                                           if p >= end { wi = 338; break 'outer; }
                                                           safe_assert!(start <= p && p < end);
-                                                          *p &= 239; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                                                          *p &= 239;
+                                                          let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                                                          p = if p <= p2 { p2 } else { end };
                                                           break 'label339
                                                          }
                                                          if p >= end { wi = 339; break 'outer; }
                                                          safe_assert!(start <= p && p < end);
-                                                         *p &= 247; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                                                         *p &= 247;
+                                                         let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                                                         p = if p <= p2 { p2 } else { end };
                                                          break 'label340
                                                         }
                                                         if p >= end { wi = 340; break 'outer; }
                                                         safe_assert!(start <= p && p < end);
-                                                        *p &= 251; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                                                        *p &= 251;
+                                                        let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                                                        p = if p <= p2 { p2 } else { end };
                                                         break 'label341
                                                        }
                                                        if p >= end { wi = 341; break 'outer; }
                                                        safe_assert!(start <= p && p < end);
-                                                       *p &= 253; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                                                       *p &= 253;
+                                                       let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                                                       p = if p <= p2 { p2 } else { end };
                                                        break 'label342
                                                       }
                                                       if p >= end { wi = 342; break 'outer; }
                                                       safe_assert!(start <= p && p < end);
-                                                      *p &= 254; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                                      *p &= 254;
+                                                      let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                                      p = if p <= p2 { p2 } else { end };
                                                       break 'label343
                                                      }
                                                      if p >= end { wi = 343; break 'outer; }
                                                      safe_assert!(start <= p && p < end);
-                                                     *p &= 127; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                                                     *p &= 127;
+                                                     let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                                                     p = if p <= p2 { p2 } else { end };
                                                      break 'label344
                                                     }
                                                     if p >= end { wi = 344; break 'outer; }
                                                     safe_assert!(start <= p && p < end);
-                                                    *p &= 191; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                                                    *p &= 191;
+                                                    let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                                                    p = if p <= p2 { p2 } else { end };
                                                     break 'label345
                                                    }
                                                    if p >= end { wi = 345; break 'outer; }
                                                    safe_assert!(start <= p && p < end);
-                                                   *p &= 223; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                                                   *p &= 223;
+                                                   let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                                                   p = if p <= p2 { p2 } else { end };
                                                    break 'label346
                                                   }
                                                   if p >= end { wi = 346; break 'outer; }
                                                   safe_assert!(start <= p && p < end);
-                                                  *p &= 239; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                                                  *p &= 239;
+                                                  let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                                                  p = if p <= p2 { p2 } else { end };
                                                   break 'label347
                                                  }
                                                  if p >= end { wi = 347; break 'outer; }
                                                  safe_assert!(start <= p && p < end);
-                                                 *p &= 247; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                                                 *p &= 247;
+                                                 let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                                                 p = if p <= p2 { p2 } else { end };
                                                  break 'label348
                                                 }
                                                 if p >= end { wi = 348; break 'outer; }
                                                 safe_assert!(start <= p && p < end);
-                                                *p &= 253; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                                                *p &= 253;
+                                                let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                                                p = if p <= p2 { p2 } else { end };
                                                 break 'label349
                                                }
                                                if p >= end { wi = 349; break 'outer; }
                                                safe_assert!(start <= p && p < end);
-                                               *p &= 254; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                                               *p &= 254;
+                                               let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                                               p = if p <= p2 { p2 } else { end };
                                                break 'label350
                                               }
                                               if p >= end { wi = 350; break 'outer; }
                                               safe_assert!(start <= p && p < end);
-                                              *p &= 127; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                                              *p &= 127;
+                                              let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                                              p = if p <= p2 { p2 } else { end };
                                               break 'label351
                                              }
                                              if p >= end { wi = 351; break 'outer; }
                                              safe_assert!(start <= p && p < end);
-                                             *p &= 191; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                                             *p &= 191;
+                                             let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                                             p = if p <= p2 { p2 } else { end };
                                              break 'label352
                                             }
                                             if p >= end { wi = 352; break 'outer; }
                                             safe_assert!(start <= p && p < end);
-                                            *p &= 223; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                                            *p &= 223;
+                                            let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                                            p = if p <= p2 { p2 } else { end };
                                             break 'label353
                                            }
                                            if p >= end { wi = 353; break 'outer; }
                                            safe_assert!(start <= p && p < end);
-                                           *p &= 239; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                                           *p &= 239;
+                                           let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                                           p = if p <= p2 { p2 } else { end };
                                            break 'label354
                                           }
                                           if p >= end { wi = 354; break 'outer; }
                                           safe_assert!(start <= p && p < end);
-                                          *p &= 251; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                                          *p &= 251;
+                                          let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                                          p = if p <= p2 { p2 } else { end };
                                           break 'label355
                                          }
                                          if p >= end { wi = 355; break 'outer; }
                                          safe_assert!(start <= p && p < end);
-                                         *p &= 253; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                                         *p &= 253;
+                                         let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                                         p = if p <= p2 { p2 } else { end };
                                          break 'label356
                                         }
                                         if p >= end { wi = 356; break 'outer; }
                                         safe_assert!(start <= p && p < end);
-                                        *p &= 254; p = (p as usize).saturating_add(prime * 8 + 7) as *mut u8;
+                                        *p &= 254;
+                                        let p2 = p.wrapping_offset(prime_ * 8 + 7);
+                                        p = if p <= p2 { p2 } else { end };
                                         break 'label357
                                        }
                                        if p >= end { wi = 357; break 'outer; }
                                        safe_assert!(start <= p && p < end);
-                                       *p &= 191; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                                       *p &= 191;
+                                       let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                                       p = if p <= p2 { p2 } else { end };
                                        break 'label358
                                       }
                                       if p >= end { wi = 358; break 'outer; }
                                       safe_assert!(start <= p && p < end);
-                                      *p &= 223; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                                      *p &= 223;
+                                      let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                                      p = if p <= p2 { p2 } else { end };
                                       break 'label359
                                      }
                                      if p >= end { wi = 359; break 'outer; }
                                      safe_assert!(start <= p && p < end);
-                                     *p &= 239; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                                     *p &= 239;
+                                     let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                                     p = if p <= p2 { p2 } else { end };
                                      break 'label360
                                     }
                                     if p >= end { wi = 360; break 'outer; }
                                     safe_assert!(start <= p && p < end);
-                                    *p &= 247; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                                    *p &= 247;
+                                    let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                                    p = if p <= p2 { p2 } else { end };
                                     break 'label361
                                    }
                                    if p >= end { wi = 361; break 'outer; }
                                    safe_assert!(start <= p && p < end);
-                                   *p &= 251; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                                   *p &= 251;
+                                   let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                                   p = if p <= p2 { p2 } else { end };
                                    break 'label362
                                   }
                                   if p >= end { wi = 362; break 'outer; }
                                   safe_assert!(start <= p && p < end);
-                                  *p &= 253; p = (p as usize).saturating_add(prime * 8 + 7) as *mut u8;
+                                  *p &= 253;
+                                  let p2 = p.wrapping_offset(prime_ * 8 + 7);
+                                  p = if p <= p2 { p2 } else { end };
                                   break 'label363
                                  }
                                  if p >= end { wi = 363; break 'outer; }
                                  safe_assert!(start <= p && p < end);
-                                 *p &= 127; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                                 *p &= 127;
+                                 let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                                 p = if p <= p2 { p2 } else { end };
                                  break 'label364
                                 }
                                 if p >= end { wi = 364; break 'outer; }
                                 safe_assert!(start <= p && p < end);
-                                *p &= 191; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                                *p &= 191;
+                                let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                                p = if p <= p2 { p2 } else { end };
                                 break 'label365
                                }
                                if p >= end { wi = 365; break 'outer; }
                                safe_assert!(start <= p && p < end);
-                               *p &= 223; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                               *p &= 223;
+                               let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                               p = if p <= p2 { p2 } else { end };
                                break 'label366
                               }
                               if p >= end { wi = 366; break 'outer; }
                               safe_assert!(start <= p && p < end);
-                              *p &= 247; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                              *p &= 247;
+                              let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                              p = if p <= p2 { p2 } else { end };
                               break 'label367
                              }
                              if p >= end { wi = 367; break 'outer; }
                              safe_assert!(start <= p && p < end);
-                             *p &= 251; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                             *p &= 251;
+                             let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                             p = if p <= p2 { p2 } else { end };
                              break 'label368
                             }
                             if p >= end { wi = 368; break 'outer; }
                             safe_assert!(start <= p && p < end);
-                            *p &= 253; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                            *p &= 253;
+                            let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                            p = if p <= p2 { p2 } else { end };
                             break 'label369
                            }
                            if p >= end { wi = 369; break 'outer; }
                            safe_assert!(start <= p && p < end);
-                           *p &= 254; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                           *p &= 254;
+                           let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                           p = if p <= p2 { p2 } else { end };
                            break 'label370
                           }
                           if p >= end { wi = 370; break 'outer; }
                           safe_assert!(start <= p && p < end);
-                          *p &= 127; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                          *p &= 127;
+                          let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                          p = if p <= p2 { p2 } else { end };
                           break 'label371
                          }
                          if p >= end { wi = 371; break 'outer; }
                          safe_assert!(start <= p && p < end);
-                         *p &= 191; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                         *p &= 191;
+                         let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                         p = if p <= p2 { p2 } else { end };
                          break 'label372
                         }
                         if p >= end { wi = 372; break 'outer; }
                         safe_assert!(start <= p && p < end);
-                        *p &= 239; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                        *p &= 239;
+                        let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                        p = if p <= p2 { p2 } else { end };
                         break 'label373
                        }
                        if p >= end { wi = 373; break 'outer; }
                        safe_assert!(start <= p && p < end);
-                       *p &= 247; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                       *p &= 247;
+                       let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                       p = if p <= p2 { p2 } else { end };
                        break 'label374
                       }
                       if p >= end { wi = 374; break 'outer; }
                       safe_assert!(start <= p && p < end);
-                      *p &= 251; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                      *p &= 251;
+                      let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                      p = if p <= p2 { p2 } else { end };
                       break 'label375
                      }
                      if p >= end { wi = 375; break 'outer; }
                      safe_assert!(start <= p && p < end);
-                     *p &= 253; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                     *p &= 253;
+                     let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                     p = if p <= p2 { p2 } else { end };
                      break 'label376
                     }
                     if p >= end { wi = 376; break 'outer; }
                     safe_assert!(start <= p && p < end);
-                    *p &= 254; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+                    *p &= 254;
+                    let p2 = p.wrapping_offset(prime_ * 2 + 1);
+                    p = if p <= p2 { p2 } else { end };
                     break 'label377
                    }
                    if p >= end { wi = 377; break 'outer; }
                    safe_assert!(start <= p && p < end);
-                   *p &= 127; p = (p as usize).saturating_add(prime * 6 + 6) as *mut u8;
+                   *p &= 127;
+                   let p2 = p.wrapping_offset(prime_ * 6 + 6);
+                   p = if p <= p2 { p2 } else { end };
                    break 'label378
                   }
                   if p >= end { wi = 378; break 'outer; }
                   safe_assert!(start <= p && p < end);
-                  *p &= 191; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                  *p &= 191;
+                  let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                  p = if p <= p2 { p2 } else { end };
                   break 'label379
                  }
                  if p >= end { wi = 379; break 'outer; }
                  safe_assert!(start <= p && p < end);
-                 *p &= 223; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+                 *p &= 223;
+                 let p2 = p.wrapping_offset(prime_ * 2 + 2);
+                 p = if p <= p2 { p2 } else { end };
                  break 'label380
                 }
                 if p >= end { wi = 380; break 'outer; }
                 safe_assert!(start <= p && p < end);
-                *p &= 239; p = (p as usize).saturating_add(prime * 4 + 4) as *mut u8;
+                *p &= 239;
+                let p2 = p.wrapping_offset(prime_ * 4 + 4);
+                p = if p <= p2 { p2 } else { end };
                 break 'label381
                }
                if p >= end { wi = 381; break 'outer; }
                safe_assert!(start <= p && p < end);
-               *p &= 247; p = (p as usize).saturating_add(prime * 2 + 2) as *mut u8;
+               *p &= 247;
+               let p2 = p.wrapping_offset(prime_ * 2 + 2);
+               p = if p <= p2 { p2 } else { end };
                break 'label382
               }
               if p >= end { wi = 382; break 'outer; }
               safe_assert!(start <= p && p < end);
-              *p &= 251; p = (p as usize).saturating_add(prime * 10 + 10) as *mut u8;
+              *p &= 251;
+              let p2 = p.wrapping_offset(prime_ * 10 + 10);
+              p = if p <= p2 { p2 } else { end };
               break 'label383
              }
              if p >= end { wi = 383; break 'outer; }
              safe_assert!(start <= p && p < end);
-             *p &= 254; p = (p as usize).saturating_add(prime * 2 + 1) as *mut u8;
+             *p &= 254;
+             let p2 = p.wrapping_offset(prime_ * 2 + 1);
+             p = if p <= p2 { p2 } else { end };
              wi = 336
             }
         }
