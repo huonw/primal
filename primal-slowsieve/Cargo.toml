@@ -20,7 +20,7 @@ primal-bit = { path = "../primal-bit", version = "0.3" }
 primal-estimate = { path = "../primal-estimate", version = "0.3" }
 
 [dev-dependencies]
-criterion = "0.3"
+criterion = { version = "0.3.4", features = ["html_reports"] }
 
 [[bench]]
 name = "bench"
