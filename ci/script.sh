@@ -4,8 +4,11 @@ set -ex
 cargo=cargo
 target_param=""
 features=" "
-if [ ! -z "$UNSTABLE" ]; then
+if rustc -V | grep -qF 'nightly' ; then
     features+=" unstable"
+fi
+if rustc -V | grep -qF 'rustc 1.36' ; then
+    cp ./ci/compat-Cargo.lock ./Cargo.lock
 fi
 if [ ! -z "$TARGET" ]; then
     rustup target add "$TARGET"
