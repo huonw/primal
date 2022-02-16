@@ -1,6 +1,8 @@
 # primal
 
-[![Build Status](https://travis-ci.org/huonw/primal.png)](https://travis-ci.org/huonw/primal) [![codecov](https://codecov.io/gh/huonw/primal/branch/master/graph/badge.svg)](https://codecov.io/gh/huonw/primal) [![crates.io](https://img.shields.io/crates/v/primal.svg)](https://crates.io/crates/primal)
+[![crates.io](https://img.shields.io/crates/v/primal.svg)](https://crates.io/crates/primal)
+[![documentation](https://docs.rs/primal/badge.svg)](https://docs.rs/primal)
+![minimum rustc 1.36](https://img.shields.io/badge/rustc-1.36+-red.svg)
 
 `primal` puts raw power into prime numbers.
 

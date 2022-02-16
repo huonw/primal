@@ -2,14 +2,12 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
-#![cfg_attr(feature = "unstable", feature(llvm_asm))]
-
 // black boxes for pointers; LLVM isn't so happy without
-// them. Unfortunately only usable with unstable, but the code isn't
+// them. Unfortunately only usable with 1.59+ asm!, but the code isn't
 // *too* much slower without them.
 #[cfg(feature = "unstable")]
 #[inline(always)]
-fn b<T>(mut p: *mut T) -> *mut T { unsafe { llvm_asm!("": "+r"(p)) } p }
+fn b<T>(mut p: *mut T) -> *mut T { unsafe { core::arch::asm!("/* {0} */", inout(reg) p) } p }
 #[cfg(not(feature = "unstable"))]
 #[inline(always)]
 fn b<T>(p: *mut T) -> *mut T { p }
