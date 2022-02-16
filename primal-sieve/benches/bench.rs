@@ -1,26 +1,30 @@
 #[macro_use]
 extern crate criterion;
 
-use primal_sieve::{StreamingSieve, Sieve, Primes};
-use criterion::{Criterion, ParameterizedBenchmark};
+use criterion::{BenchmarkId, Criterion};
+use primal_sieve::{Primes, Sieve, StreamingSieve};
 
 const SIZES: [usize; 5] = [100, 10_000, 100_000, 1_000_000, 10_000_000];
 
 macro_rules! create_benchmarks {
     ($(
         fn $group_id: ident($input: expr) {
-            $first_name: expr => $first_func: expr,
-            $($rest_name: expr => $rest_func: expr,)*
+            $($name: expr => $func: expr,)*
         }
     )*) => {
         $(
             fn $group_id(c: &mut Criterion) {
                 let input = $input;
+                let mut group = c.benchmark_group(stringify!($group_id));
 
-                let bench = ParameterizedBenchmark::new(
-                    $first_name, $first_func, input.iter().copied())
-                    $( .with_function($rest_name, $rest_func) )*;
-                c.bench(stringify!($group_id), bench);
+                $(
+                    for i in &input {
+                        let id = BenchmarkId::new($name, i);
+                        group.bench_with_input(id, i, $func);
+                    }
+                )*
+
+                group.finish();
             }
         )*
     }

@@ -26,7 +26,7 @@ primal-sieve = { path = "primal-sieve", version = "0.3" }
 
 [dev-dependencies]
 primal-slowsieve = { path = "primal-slowsieve", version = "0.3" }
-criterion = "0.3"
+criterion = { version = "0.3.4", features = ["html_reports"] }
 
 [[bench]]
 name = "bench"

@@ -263,8 +263,8 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
 
         for info in cur_infos {
             println!("\
-{indent}    safe_assert!(start <= p.offset(prime_ * {sl} + {off}) &&
-{indent}                 p.offset(prime_ * {sl} + {off}) < end);
+{indent}    safe_assert!(start <= p.wrapping_offset(prime_ * {sl} + {off}) &&
+{indent}                 p.wrapping_offset(prime_ * {sl} + {off}) < end);
 {indent}    *p.offset(prime_ * {sl} + {off}) &= {bit};",
                      // p starts at offset 1 * prime_, so strip off
                      // that factor.
@@ -272,8 +272,12 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
                      off = info.total_add_factor / wheel,
                      bit = info.unset_bit, indent = indent);
         }
+        // We can't use `p.offset(_)` here because this might go past `end`, which would be UB.
+        // That's fine with `wrapping_offset` as long as it's not dereferenced, but we also need to
+        // guard against the (unlikely) possibility of wrapping the entire address space.
         println!("
-{indent}    p = p.offset(prime_ * {} + {})
+{indent}    let p2 = p.wrapping_offset(prime_ * {} + {});
+{indent}    p = if p <= p2 {{ p2 }} else {{ end }};
 {indent}}}",
                  wheel, c,
                  indent = indent);
@@ -288,7 +292,9 @@ pub unsafe fn hardcoded_sieve(bytes: &mut [u8], si_: &mut usize, wi_: &mut usize
             println!("\
 {indent} if p >= end {{ wi = {val}; break 'outer; }}
 {indent} safe_assert!(start <= p && p < end);
-{indent} *p &= {}; p = p.offset(prime_ * {} + {});
+{indent} *p &= {};
+{indent} let p2 = p.wrapping_offset(prime_ * {} + {});
+{indent} p = if p <= p2 {{ p2 }} else {{ end }};
 {indent} {}
 {indent}}}",
 
