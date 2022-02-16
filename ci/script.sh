@@ -4,8 +4,11 @@ set -ex
 cargo=cargo
 target_param=""
 features=" "
-if [ ! -z "$UNSTABLE" ]; then
+if rustc -V | grep -qF 'nightly' ; then
     features+=" unstable"
+fi
+if rustc -V | grep -qF 'rustc 1.36' ; then
+    cp ./ci/compat-Cargo.lock ./Cargo.lock
 fi
 if [ ! -z "$TARGET" ]; then
     rustup target add "$TARGET"
@@ -16,7 +19,11 @@ fi
 
 $cargo build -v --all $target_param --features "$features"
 $cargo test -v --all $target_param --features "$features"
-$cargo bench -v --all $target_param --features "$features" -- --test # don't actually record numbers
+# Temporarily ignoring bench on other targets due to an i686 regression in rustc
+# https://github.com/rust-lang/rust/issues/94032
+if [ -z "$TARGET" ]; then
+    $cargo bench -v --all $target_param --features "$features" -- --test # don't actually record numbers
+fi
 $cargo doc -v --all $target_param --features "$features"
 
 $cargo test -v -p primal-sieve --features "$features primal-sieve/safe"
