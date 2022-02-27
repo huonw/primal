@@ -331,7 +331,7 @@ impl Sieve {
     /// # Panics
     ///
     /// If `n` is out of range (greater than `self.upper_bound()`),
-    /// `prime_pi` will panic.
+    /// `primes_from` will panic.
     ///
     /// # Examples
     ///
