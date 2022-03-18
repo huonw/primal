@@ -19,11 +19,7 @@ fi
 
 $cargo build -v --all $target_param --features "$features"
 $cargo test -v --all $target_param --features "$features"
-# Temporarily ignoring bench on other targets due to an i686 regression in rustc
-# https://github.com/rust-lang/rust/issues/94032
-if [ -z "$TARGET" ]; then
-    $cargo bench -v --all $target_param --features "$features" -- --test # don't actually record numbers
-fi
+$cargo bench -v --all $target_param --features "$features" -- --test # don't actually record numbers
 $cargo doc -v --all $target_param --features "$features"
 
 $cargo test -v -p primal-sieve --features "$features primal-sieve/safe"
