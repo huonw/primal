@@ -44,3 +44,11 @@ members = [
     "primal-slowsieve",
     "generators",
 ]
+
+[workspace.metadata.release]
+sign-tag = true
+tag-name = "{{crate_name}}-{{version}}"
+
+[package.metadata.release]
+sign-tag = true
+tag-name = "{{crate_name}}-{{version}}"

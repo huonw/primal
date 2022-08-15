@@ -8,3 +8,6 @@ publish = false
 [dependencies]
 primal-slowsieve = { path = "../primal-slowsieve", version = "0.3" }
 primal-check = { path = "../primal-check", version = "0.3" }
+
+[package.metadata.release]
+release = false
