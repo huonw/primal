@@ -1,13 +1,13 @@
 [package]
 name = "primal-check"
-version = "0.3.1"
+version = "0.3.2"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 edition = "2018"
 
 homepage = "https://github.com/huonw/primal"
 repository = "https://github.com/huonw/primal"
 documentation = "http://docs.rs/primal-check/"
-license = "MIT/Apache-2.0"
+license = "MIT OR Apache-2.0"
 keywords = ["math", "mathematics", "primes", "number-theory"]
 
 description = """
