@@ -101,10 +101,15 @@ fn mod_exp(mut x: u64, mut d: u64, n: u64) -> u64 {
 pub fn miller_rabin(n: u64) -> bool {
     const HINT: &[u64] = &[2];
 
-    // we have a strict upper bound, so we can just use the witness
-    // table of Pomerance, Selfridge & Wagstaff and Jeaschke to be as
-    // efficient as possible, without having to fall back to
-    // randomness.
+    /*
+     As we are only evaluating in the interval 0;2^64 we can implement a relatively efficient check 
+     using a constant list of witnesses that is correct against all inputs in the interval. 
+     This list is partially due to Pomerance, Selfridge & Wagstaff, extended by Gerhard Jaeschke, 
+     and corrected by J.A Sory
+     
+     ~ J.A Sory
+    
+    */
     const WITNESSES: &[(u64, &[u64])] =
         &[(2_046, HINT),
           (1_373_652, &[2, 3]),
@@ -115,7 +120,7 @@ pub fn miller_rabin(n: u64) -> bool {
           (2_152_302_898_746, &[2, 3, 5, 7, 11]),
           (3_474_749_660_382, &[2, 3, 5, 7, 11, 13]),
           (341_550_071_728_320, &[2, 3, 5, 7, 11, 13, 17]),
-          (0xFFFF_FFFF_FFFF_FFFF, &[2, 3, 5, 7, 11, 13, 17, 19, 23])
+          (0xFFFF_FFFF_FFFF_FFFF, &[2, 3, 5, 7, 11, 13, 17, 19, 193])
          ];
 
     if n % 2 == 0 { return n == 2 }
@@ -197,6 +202,17 @@ mod tests {
         assert_eq!(super::mod_mul(1 << 32, 1 << 32, !0), 1);
     }
 
+   /* Possibly remove these tests? Counterexamples to Strong Fermat (MR) tests are integers of specific form, 
+     (a large subset being (x+1)(ax+1) where  0 < a < 64) simply sequentially enumerating integers is not an 
+     effective way of  detecting counterexamples. Detecting false flags can be done by ensuring that primes 
+     are checked using a witness k such that gcd(prime, k) = 1. These are the primary actual concerns, 
+     (and the points of failure for most primality test implementations). 
+     
+     Such tests have not been implemented here as they have already been run, and it is left to the maintainers. 
+     
+     ~J.A Sory
+  */
+    
     #[test]
     fn miller_rabin() {
         const LIMIT: usize = 1_000_000;
@@ -209,12 +225,18 @@ mod tests {
                     mr, s, x)
         }
     }
+    
     #[test]
     fn miller_rabin_large() {
         let tests = &[
-            (4_294_967_311, true),
             (4_294_967_291, true),
+            (18_446_744_073_709_551_557, true),
+            // Perfect squares are an extremely rare counterexample, 
+            // 1093^2 & 3511^2 are the only two perfect square 2-SPRPs in 0;2^64
             (4_294_967_291 * 4_294_967_291, false),
+             // Carmichael numbers on the other hand are not, 
+             // Note that the previous implementation flags this composite number as prime. 
+            (149491 * 747451 * 34233211, false),  
             (!0, false),
             ];
         for &(n, is_prime) in tests {
