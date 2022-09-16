@@ -1,6 +1,6 @@
 [package]
 name = "primal-check"
-version = "0.3.2"
+version = "0.3.3"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 edition = "2018"
 
