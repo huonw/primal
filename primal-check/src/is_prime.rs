@@ -1,49 +1,5 @@
-#[derive(Copy, Clone, PartialEq, PartialOrd, Ord, Eq, Debug)]
-struct U128 {
-    hi: u64,
-    lo: u64,
-}
-
-fn modulo(mut a: U128, m: u64) -> u64 {
-    if a.hi >= m {
-        a.hi -= (a.hi / m) * m;
-    }
-    let mut x = a.hi;
-    let mut y = a.lo;
-    for _ in 0..64 {
-        let t = (x as i64 >> 63) as u64;
-        x = (x << 1) | (y >> 63);
-        y <<= 1;
-        if (x | t) >= m {
-            x = x.wrapping_sub(m);
-            y += 1;
-        }
-    }
-    x
-}
-fn mul128(u: u64, v: u64) -> U128 {
-    let u1 = u >> 32;
-    let u0 = u & (!0 >> 32);
-    let v1 = v >> 32;
-    let v0 = v & (!0 >> 32);
-
-    let t = u0 * v0;
-    let w0 = t & (!0 >> 32);
-    let k = t >> 32;
-
-    let t = u1 * v0 + k;
-    let w1 = t & (!0 >> 32);
-    let w2 = t >> 32;
-
-    let t = u0 * v1 + w1;
-    let k = t >> 32;
-    U128 {
-        lo: (t << 32) + w0,
-        hi: u1*v1 + w2 + k
-    }
-}
 fn mod_mul_(a: u64, b: u64, m: u64) -> u64 {
-    modulo(mul128(a, b), m)
+    (u128::from(a) * u128::from(b) % u128::from(m)) as u64
 }
 
 fn mod_mul(a: u64, b: u64, m: u64) -> u64 {
@@ -151,41 +107,6 @@ pub fn miller_rabin(n: u64) -> bool {
 mod tests {
     use primal::Sieve;
 
-    #[test]
-    fn modulo() {
-        for i in 0..64 {
-            let x = 1 << i;
-            for j in 0..10 {
-                let m = 11 + j * 2;
-                assert_eq!(super::modulo(super::U128 { lo: x, hi: 0}, m), x % m);
-            }
-        }
-
-        let x = 1 << 63;
-        assert_eq!(super::modulo(super::U128 { lo: 0, hi: x}, x + 1), 2);
-        assert_eq!(super::modulo(super::U128 { lo: 0, hi: x}, x + 3), 18);
-        assert_eq!(super::modulo(super::U128 { lo: 0, hi: x}, x + 5), 50);
-    }
-
-    #[test]
-    fn mul() {
-        for i in 1..64 {
-            for j in 1..64 {
-                let res = super::mul128((1 << i) + 1, (1 << j) + 1);
-                let shift = i + j;
-                let high_twiddle = i == 63 && j == 63;
-                let mut real = if shift >= 64 {
-                    super::U128 { lo: 0, hi: (1 << (shift - 64)) + high_twiddle as u64 }
-                } else {
-                    super::U128 { lo: 1 << shift, hi: 0 }
-                };
-                real.lo += if high_twiddle { 0 } else { (1 << i) + (1 << j) } + 1;
-                assert!(res == real,
-                        "(2**{} + 1)*(2**{} + 1): {:?} should be {:?}",
-                        i, j, res, real);
-            }
-        }
-    }
     #[test]
     fn mod_mul() {
         assert_eq!(super::mod_mul(1 << 63, 1 << 32, 3), 2);
