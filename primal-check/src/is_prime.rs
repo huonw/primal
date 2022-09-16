@@ -60,19 +60,22 @@ pub fn miller_rabin(n: u64) -> bool {
     // we have a strict upper bound, so we can just use the witness
     // table of Pomerance, Selfridge & Wagstaff and Jeaschke to be as
     // efficient as possible, without having to fall back to
-    // randomness.
-    const WITNESSES: &[(u64, &[u64])] =
-        &[(2_046, HINT),
-          (1_373_652, &[2, 3]),
-          (9_080_190, &[31, 73]),
-          (25_326_000, &[2, 3, 5]),
-          (4_759_123_140, &[2, 7, 61]),
-          (1_112_004_669_632, &[2, 13, 23, 1662803]),
-          (2_152_302_898_746, &[2, 3, 5, 7, 11]),
-          (3_474_749_660_382, &[2, 3, 5, 7, 11, 13]),
-          (341_550_071_728_320, &[2, 3, 5, 7, 11, 13, 17]),
-          (0xFFFF_FFFF_FFFF_FFFF, &[2, 3, 5, 7, 11, 13, 17, 19, 23])
-         ];
+    // randomness. Additional limits from Feitsma and Galway complete
+    // the entire range of `u64`. See also:
+    // https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Testing_against_small_sets_of_bases
+    const WITNESSES: &[(u64, &[u64])] = &[
+        (2_046, HINT),
+        (1_373_652, &[2, 3]),
+        (9_080_190, &[31, 73]),
+        (25_326_000, &[2, 3, 5]),
+        (4_759_123_140, &[2, 7, 61]),
+        (1_112_004_669_632, &[2, 13, 23, 1662803]),
+        (2_152_302_898_746, &[2, 3, 5, 7, 11]),
+        (3_474_749_660_382, &[2, 3, 5, 7, 11, 13]),
+        (341_550_071_728_320, &[2, 3, 5, 7, 11, 13, 17]),
+        (3_825_123_056_546_413_050, &[2, 3, 5, 7, 11, 13, 17, 19, 23]),
+        (std::u64::MAX, &[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]),
+    ];
 
     if n % 2 == 0 { return n == 2 }
     if n == 1 { return false }
@@ -141,6 +144,29 @@ mod tests {
         for &(n, is_prime) in tests {
             assert!(super::miller_rabin(n) == is_prime,
                     "mismatch for {} (should be {})", n, is_prime);
+        }
+    }
+
+    #[test]
+    fn oeis_a014233() {
+        // https://oeis.org/A014233
+        const A014233: [u64; 9] = [
+            2047,
+            1373653,
+            25326001,
+            3215031751,
+            2152302898747,
+            3474749660383,
+            341550071728321,
+            341550071728321,
+            3825123056546413051,
+            // 3825123056546413051,
+            // 3825123056546413051,
+            // 318665857834031151167461,
+            // 3317044064679887385961981,
+        ];
+        for &n in &A014233 {
+            assert!(!super::miller_rabin(n), "{} is composite!", n);
         }
     }
 }
