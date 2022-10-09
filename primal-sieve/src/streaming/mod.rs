@@ -183,7 +183,7 @@ impl StreamingSieve {
     fn find_new_sieving_primes(&mut self, low: usize, high: usize) {
         if let Some(small) = self.small.take() {
             for p in small.primes_from(self.current) {
-                if p * p >= high {
+                if p * p > high {
                     self.current = p;
                     break
                 }
@@ -314,6 +314,17 @@ mod tests {
             let true_ = real.primes().take_while(|p| *p <= i).count();
             assert!(val == true_, "failed for {}, true {}, computed {}",
                     i, true_, val)
+        }
+    }
+
+    #[test]
+    fn prime_pi_issue_48() {
+        // Expected values independently confirmed on Wolfram|Alpha.
+        let limits = [49, 121, 289, 961, 11_047, 32_611, 230_907, 455_166_135];
+        let expected = [15, 30, 61, 162, 1_338, 3_501, 20_513, 24_112_077];
+        for (&limit, &expected) in limits.iter().zip(&expected) {
+            let val = StreamingSieve::prime_pi(limit);
+            assert_eq!(val, expected, "failed for limit {}", limit);
         }
     }
 
