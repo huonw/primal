@@ -1,6 +1,6 @@
 [package]
 name = "primal-sieve"
-version = "0.3.3"
+version = "0.3.4"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 edition = "2018"
 
