@@ -122,8 +122,11 @@ impl StreamingSieve {
                     count += bitv.count_ones();
                 }
 
-                let (_, last) = sieve.next().unwrap();
-                count += last.count_ones_before(tweak + includes as usize);
+                let tail = tweak + includes as usize;
+                if tail != 0 {
+                    let (_, last) = sieve.next().unwrap();
+                    count += last.count_ones_before(tail);
+                }
                 count
             }
         }
@@ -326,6 +329,19 @@ mod tests {
             let val = StreamingSieve::prime_pi(limit);
             assert_eq!(val, expected, "failed for limit {}", limit);
         }
+    }
+
+    #[test]
+    fn prime_pi_seg_len() {
+        const PRIME1: usize = 982_981;
+        const PRIME2: usize = 983_063;
+        const EXPECTED: usize = 77_279;
+        assert!((PRIME1..PRIME2).contains(&super::SEG_LEN));
+        assert_eq!(StreamingSieve::prime_pi(PRIME1 - 1), EXPECTED - 1);
+        for limit in PRIME1..PRIME2 {
+            assert_eq!(StreamingSieve::prime_pi(limit), EXPECTED);
+        }
+        assert_eq!(StreamingSieve::prime_pi(PRIME2), EXPECTED + 1);
     }
 
     #[test]
