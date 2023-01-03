@@ -111,9 +111,9 @@
 //! // now we can efficiently sum them up
 //! let sum = ns.iter()
 //!             .map(|n| sieve.nth_prime(*n))
-//!             .fold(0, |a, b| a + b);
+//!             .fold(0u64, |a, b| a + b as u64);
 //! println!("the sum is {}", sum);
-//! # assert_eq!(sum, 8795091674);
+//! # assert_eq!(sum, 8_795_091_674);
 //! ```
 //!
 //! This takes around 40 milliseconds, and gives the same output: much
