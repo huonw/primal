@@ -28,6 +28,9 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.rust }}
+      - name: Install packages
+        if: matrix.rust == 'nightly-i686-unknown-linux-gnu'
+        run: sudo apt-get install -y gcc-multilib
       - name: Tests
         env:
           TARGET: ${{ matrix.target }}
