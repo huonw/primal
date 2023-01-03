@@ -3,6 +3,6 @@ status = [
   "tests (stable)",
   "tests (beta)",
   "tests (nightly)",
-  "tests (nightly, i686-unknown-linux-gnu)",
+  "tests (nightly-i686-unknown-linux-gnu)",
   "tests (stable, mips64-unknown-linux-gnuabi64)",
 ]

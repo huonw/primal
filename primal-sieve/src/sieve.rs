@@ -237,8 +237,8 @@ impl Sieve {
     /// // too many large factors is problematic
     /// assert_eq!(sieve.factor(991 * 991),
     ///            Err((991 * 991, vec![])));
-    /// assert_eq!(sieve.factor(2 * 3 * 97 * 97 * 991 * 991),
-    ///            Err((991 * 991, vec![(2, 1), (3, 1), (97, 2)])));
+    /// assert_eq!(sieve.factor(2 * 3 * 17 * 17 * 991 * 991),
+    ///            Err((991 * 991, vec![(2, 1), (3, 1), (17, 2)])));
     /// ```
     pub fn factor(&self, mut n: usize) -> Result<Vec<(usize,usize)>,
                                                  (usize, Vec<(usize, usize)>)>

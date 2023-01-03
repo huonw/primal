@@ -19,8 +19,7 @@ jobs:
           - rust: stable
           - rust: beta
           - rust: nightly
-          - rust: nightly
-            target: i686-unknown-linux-gnu
+          - rust: nightly-i686-unknown-linux-gnu
           - rust: stable
             target: mips64-unknown-linux-gnuabi64
 
