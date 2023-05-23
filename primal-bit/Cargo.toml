@@ -7,7 +7,7 @@ edition = "2018"
 
 homepage = "https://github.com/huonw/primal"
 repository = "https://github.com/huonw/primal"
-documentation = "http://docs.rs/primal-bit/"
+documentation = "https://docs.rs/primal-bit/"
 license = "MIT OR Apache-2.0"
 keywords = ["math", "mathematics", "primes", "number-theory"]
 
