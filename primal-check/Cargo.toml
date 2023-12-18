@@ -15,10 +15,11 @@ Fast standalone primality testing.
 """
 
 [dependencies]
-num-integer = "0.1"
+num-integer = { version = "0.1", default_features = false }
 
 [dev-dependencies]
 primal = { path = "..", version = "0.3" }
 
 [features]
+no-std = []
 unstable = []

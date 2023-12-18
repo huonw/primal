@@ -3,6 +3,8 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
+#![cfg_attr(feature = "no-std", no_std)]
+
 #[allow(dead_code)]
 mod tables;
 

@@ -10,6 +10,7 @@
 
 //! A very simple bit-vector that serves the needs of `primal`.
 
+#![cfg_attr(feature = "no-std", no_std)]
 #![deny(unsafe_code)]
 
 use std::fmt;

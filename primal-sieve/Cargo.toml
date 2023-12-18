@@ -29,6 +29,7 @@ name = "bench"
 harness = false
 
 [features]
+no-std = ["primal-bit/no-std", "primal-estimate/no-std"]
 unstable = []
 safe = []
 slow_tests = []

@@ -2,6 +2,8 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
+#![cfg_attr(feature = "no-std", no_std)]
+
 use primal_bit::BitVec;
 use std::{iter, cmp};
 

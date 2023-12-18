@@ -18,4 +18,5 @@ State-of-the-art estimation of upper and lower bounds for π(n)
 primal = { path = "..", version = "0.3" }
 
 [features]
+no-std = []
 unstable = []

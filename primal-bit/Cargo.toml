@@ -19,4 +19,5 @@ Bit-vector specialised to the prime-number-related needs of `primal`.
 hamming = "0.1"
 
 [features]
+no-std = []
 unstable = []
