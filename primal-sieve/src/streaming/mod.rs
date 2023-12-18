@@ -1,5 +1,8 @@
 use primal_bit::BitVec;
-use std::cmp;
+use core::cmp;
+
+#[cfg(feature = "no-std")]
+use alloc::{vec, vec::Vec};
 
 use crate::wheel;
 

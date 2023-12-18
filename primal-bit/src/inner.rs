@@ -2,6 +2,9 @@
 //! encapsulated in a module to reduce scope.
 #![allow(unsafe_code)]
 
+#[cfg(feature = "no-std")]
+use alloc::{vec, vec::Vec};
+
 use crate::BITS;
 
 /// The bitvector type.

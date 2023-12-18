@@ -2,8 +2,11 @@ use primal_bit::BitVec;
 use crate::wheel;
 use crate::streaming::StreamingSieve;
 
-use std::cmp;
-use std::slice;
+use core::cmp;
+use core::slice;
+
+#[cfg(feature = "no-std")]
+use alloc::{vec, vec::Vec};
 
 type SmallVec1<T> = ::smallvec::SmallVec<[T; 1]>;
 
@@ -777,7 +780,7 @@ mod tests {
         const LAST: usize = 4_294_967_291; // last 32-bit prime
         const SUM: u64 = 425_649_736_193_687_430; // sum of 32-bit primes
 
-        let sieve = Sieve::new(::std::u32::MAX as usize);
+        let sieve = Sieve::new(core::u32::MAX as usize);
         assert!(sieve.upper_bound() >= LAST);
         assert_eq!(sieve.primes_from(LAST - 100).last(), Some(LAST));
 

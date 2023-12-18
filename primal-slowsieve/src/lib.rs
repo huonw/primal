@@ -4,8 +4,14 @@
 
 #![cfg_attr(feature = "no-std", no_std)]
 
+#[cfg(feature = "no-std")]
+extern crate alloc;
+
 use primal_bit::BitVec;
-use std::{iter, cmp};
+use core::{iter, cmp};
+
+#[cfg(feature = "no-std")]
+use alloc::{vec, vec::Vec};
 
 /// Stores information about primes up to some limit.
 ///

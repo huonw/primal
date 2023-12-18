@@ -4,6 +4,9 @@
 
 #![cfg_attr(feature = "no-std", no_std)]
 
+#[cfg(feature = "no-std")]
+extern crate alloc;
+
 // black boxes for pointers; LLVM isn't so happy without
 // them. Unfortunately only usable with 1.59+ asm!, but the code isn't
 // *too* much slower without them.

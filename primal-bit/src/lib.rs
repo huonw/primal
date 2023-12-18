@@ -13,9 +13,12 @@
 #![cfg_attr(feature = "no-std", no_std)]
 #![deny(unsafe_code)]
 
-use std::fmt;
-use std::hash;
-use std::ops::Index;
+#[cfg(feature = "no-std")]
+extern crate alloc;
+
+use core::fmt;
+use core::hash;
+use core::ops::Index;
 
 mod inner;
 mod iter;
