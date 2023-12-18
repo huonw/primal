@@ -16,6 +16,7 @@ probably want `primal-sieve`, or even just `primal` itself.
 """
 
 [dependencies]
+libm = { version = "0.2.8", optional = true }
 primal-bit = { path = "../primal-bit", version = "0.3" }
 primal-estimate = { path = "../primal-estimate", version = "0.3" }
 
@@ -27,6 +28,6 @@ name = "bench"
 harness = false
 
 [features]
-no-std = ["primal-bit/no-std", "primal-estimate/no-std"]
+no-std = ["dep:libm", "primal-bit/no-std", "primal-estimate/no-std"]
 unstable = []
 slow_tests = []

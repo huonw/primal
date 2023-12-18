@@ -63,7 +63,10 @@ impl Primes {
         // the ticking works properly)
         filter(&mut is_prime, limit, 3);
 
+        #[cfg(not(feature = "no-std"))]
         let bound = (limit as f64).sqrt() as usize + 1;
+        #[cfg(feature = "no-std")]
+        let bound = libm::sqrt(limit as f64) as usize + 1;
         // skip 2.
         let mut check = 2;
         let mut tick = if check % 3 == 1 {2} else {1};
