@@ -1,5 +1,8 @@
 use primal_bit::BitVec;
-use std::cmp;
+use core::cmp;
+
+#[cfg(feature = "no-std")]
+use alloc::{vec, vec::Vec};
 
 use crate::wheel;
 
@@ -46,7 +49,11 @@ const SEG_ELEMS: usize = 8 * CACHE;
 const SEG_LEN: usize = SEG_ELEMS * wheel::BYTE_MODULO / wheel::BYTE_SIZE;
 
 fn isqrt(x: usize) -> usize {
-    (x as f64).sqrt() as usize
+    #[cfg(not(feature = "no-std"))]
+    let ret = (x as f64).sqrt() as usize;
+    #[cfg(feature = "no-std")]
+    let ret = libm::sqrt(x as f64) as usize;
+    ret
 }
 
 impl StreamingSieve {

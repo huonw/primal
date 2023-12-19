@@ -1,5 +1,8 @@
-use std::cmp;
+use core::cmp;
 use primal_bit::BitVec;
+
+#[cfg(feature = "no-std")]
+use alloc::borrow::ToOwned;
 
 pub const BYTE_SIZE: usize = 8;
 pub const BYTE_MODULO: usize = 30;
