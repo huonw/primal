@@ -30,7 +30,7 @@ name = "bench"
 harness = false
 
 [features]
-no-std = ["dep:libm", "primal-bit/no-std", "primal-estimate/no-std"]
+no-std = ["libm", "primal-bit/no-std", "primal-estimate/no-std"]
 unstable = []
 safe = []
 slow_tests = []
