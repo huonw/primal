@@ -21,7 +21,7 @@ jobs:
           - rust: nightly
           - rust: nightly-i686-unknown-linux-gnu
           - rust: stable
-            target: mips64-unknown-linux-gnuabi64
+            target: s390x-unknown-linux-gnu
 
     steps:
       - uses: actions/checkout@v3
