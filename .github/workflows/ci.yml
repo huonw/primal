@@ -2,8 +2,8 @@ name: Continuous integration
 on:
   push:
     branches:
-      - staging
-      - trying
+      - master
+  pull_request:
 
 env:
   CARGO_TERM_COLOR: always
