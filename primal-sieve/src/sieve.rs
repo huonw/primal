@@ -358,7 +358,7 @@ impl Sieve {
         let bits = &self.seen[base].bits;
 
         let current_base = base_byte_count * wheel::BYTE_MODULO;
-        let next_base = current_base + bits.len() * wheel::BYTE_MODULO / 8;
+        let next_base = current_base.saturating_add(bits.len() * wheel::BYTE_MODULO / 8);
 
         SievePrimes {
             early,
@@ -404,7 +404,9 @@ impl<'a> SievePrimes<'a> {
         match self.bits.next() {
             Some(Item { bits, .. }) => {
                 self.base = self.next_base;
-                self.next_base += bits.len() * wheel::BYTE_MODULO / 8;
+                self.next_base = self
+                    .next_base
+                    .saturating_add(bits.len() * wheel::BYTE_MODULO / 8);
                 self.ones = bits.ones_from(0);
                 true
             },
