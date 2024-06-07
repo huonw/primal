@@ -1,6 +1,6 @@
 [package]
 name = "primal-slowsieve"
-version = "0.3.1"
+version = "0.3.2"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 edition = "2018"
 
