@@ -52,3 +52,8 @@ tag-name = "{{crate_name}}-{{version}}"
 [package.metadata.release]
 sign-tag = true
 tag-name = "{{crate_name}}-{{version}}"
+
+# Make sure all our slow_tests still check overflows in --release tests.
+# (This doesn't affect downstream dependents building these libraries.)
+[profile.release]
+overflow-checks = true
