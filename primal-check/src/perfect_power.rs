@@ -43,7 +43,10 @@ pub fn as_perfect_power(x: u64) -> (u64, u8) {
     let mut expn: u32 = 2;
     let mut step = 1;
     while expn <= floor_log_2 {
+        #[cfg(not(feature = "no-std"))]
         let factor = x_.powf(1.0/expn as f64).round() as u64;
+        #[cfg(feature = "no-std")]
+        let factor = libm::round(libm::pow(x_, 1.0/expn as f64)) as u64;
         // the only case this will wrap is if x is close to 2^64 and
         // the round() rounds up, pushing this calculation over the
         // edge, however, the overflow will be well away from x, so we

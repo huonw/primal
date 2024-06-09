@@ -3,6 +3,8 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
+#![cfg_attr(feature = "no-std", no_std)]
+
 #[allow(dead_code)]
 mod tables;
 
@@ -43,7 +45,10 @@ pub fn prime_pi(n: u64) -> (u64, u64) {
         (x, x)
     } else {
         let n_ = n as f64;
+        #[cfg(not(feature = "no-std"))]
         let lg = n_.ln();
+        #[cfg(feature = "no-std")]
+        let lg = libm::log(n_);
         let inv_lg = 1.0 / lg;
         let n_inv_lg = n_ * inv_lg;
 
@@ -124,8 +129,16 @@ pub fn nth_prime(n: u64) -> (u64, u64) {
         (x, x)
     } else {
         let n_ = n as f64;
+
+        #[cfg(not(feature = "no-std"))]
         let lg = n_.ln();
+        #[cfg(not(feature = "no-std"))]
         let lglg = lg.ln();
+
+        #[cfg(feature = "no-std")]
+        let lg = libm::log(n_);
+        #[cfg(feature = "no-std")]
+        let lglg = libm::log(lg);
 
         let lo = match () {
             // [2] Theorem 1.6

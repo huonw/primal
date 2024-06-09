@@ -2,8 +2,16 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
+#![cfg_attr(feature = "no-std", no_std)]
+
+#[cfg(feature = "no-std")]
+extern crate alloc;
+
 use primal_bit::BitVec;
-use std::{iter, cmp};
+use core::{iter, cmp};
+
+#[cfg(feature = "no-std")]
+use alloc::{vec, vec::Vec};
 
 /// Stores information about primes up to some limit.
 ///
@@ -55,7 +63,10 @@ impl Primes {
         // the ticking works properly)
         filter(&mut is_prime, limit, 3);
 
+        #[cfg(not(feature = "no-std"))]
         let bound = (limit as f64).sqrt() as usize + 1;
+        #[cfg(feature = "no-std")]
+        let bound = libm::sqrt(limit as f64) as usize + 1;
         // skip 2.
         let mut check = 2;
         let mut tick = if check % 3 == 1 {2} else {1};

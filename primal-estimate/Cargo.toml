@@ -14,8 +14,12 @@ State-of-the-art estimation of upper and lower bounds for π(n)
 (the number of primes below n) and p_k (the k-th prime).
 """
 
+[dependencies]
+libm = { version = "0.2.8", optional = true }
+
 [dev-dependencies]
 primal = { path = "..", version = "0.3" }
 
 [features]
+no-std = ["libm"]
 unstable = []

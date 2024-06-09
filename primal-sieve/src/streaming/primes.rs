@@ -1,3 +1,6 @@
+#[cfg(feature = "no-std")]
+use alloc::boxed::Box;
+
 use crate::wheel;
 use crate::streaming::{self, StreamingSieve};
 
@@ -206,7 +209,7 @@ mod tests {
     fn equality_huge() {
         let limit = if cfg!(feature = "slow_tests") {
             // This takes a minute or so in debug mode, but it does work!
-            ::std::u32::MAX as usize
+            core::u32::MAX as usize
         } else {
             100_000_000
         };
