@@ -2,7 +2,7 @@
 name = "primal-sieve"
 version = "0.4.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 homepage = "https://github.com/huonw/primal"
 repository = "https://github.com/huonw/primal"
