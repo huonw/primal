@@ -3,9 +3,6 @@ use core::mem;
 use core::ops::Range;
 use core::slice;
 
-#[cfg(not(feature = "no-std"))]
-use std::vec;
-#[cfg(feature = "no-std")]
 use alloc::vec;
 
 use crate::BitVec;

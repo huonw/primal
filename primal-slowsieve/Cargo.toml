@@ -1,6 +1,6 @@
 [package]
 name = "primal-slowsieve"
-version = "0.3.1"
+version = "0.4.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 edition = "2018"
 
@@ -17,8 +17,8 @@ probably want `primal-sieve`, or even just `primal` itself.
 
 [dependencies]
 libm = { version = "0.2.8", optional = true }
-primal-bit = { path = "../primal-bit", version = "0.3" }
-primal-estimate = { path = "../primal-estimate", version = "0.3" }
+primal-bit = { path = "../primal-bit", version = "0.4" }
+primal-estimate = { path = "../primal-estimate", version = "0.4" }
 
 [dev-dependencies]
 criterion = { version = "0.3.4", features = ["html_reports"] }
@@ -28,6 +28,6 @@ name = "bench"
 harness = false
 
 [features]
-no-std = ["libm", "primal-bit/no-std", "primal-estimate/no-std"]
+no-std = ["libm", "primal-estimate/no-std"]
 unstable = []
 slow_tests = []

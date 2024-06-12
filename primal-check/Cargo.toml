@@ -1,6 +1,6 @@
 [package]
 name = "primal-check"
-version = "0.3.3"
+version = "0.4.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
 edition = "2018"
 
@@ -19,8 +19,8 @@ libm = { version = "0.2.8", optional = true }
 num-integer = { version = "0.1", default_features = false }
 
 [dev-dependencies]
-primal = { path = "..", version = "0.3" }
+primal = { path = "..", version = "0.4" }
 
 [features]
-no-std = ["libm"]
+no-std = ["dep:libm"]
 unstable = []

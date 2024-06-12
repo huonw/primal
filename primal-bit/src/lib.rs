@@ -10,10 +10,10 @@
 
 //! A very simple bit-vector that serves the needs of `primal`.
 
-#![cfg_attr(feature = "no-std", no_std)]
-#![deny(unsafe_code)]
+#![no_std]
+//can't deny unsafe due to to the use of `align_to` in `weight` function
+//#![deny(unsafe_code)]
 
-#[cfg(feature = "no-std")]
 extern crate alloc;
 
 use core::fmt;
@@ -22,10 +22,11 @@ use core::ops::Index;
 
 mod inner;
 mod iter;
+mod util;
 
 pub use crate::inner::BitVec;
-pub use crate::iter::{Iter, IntoOnes, Ones};
-
+pub use crate::iter::{IntoOnes, Iter, Ones};
+use crate::util as hamming;
 const BITS: usize = 8;
 
 impl Index<usize> for BitVec {
@@ -59,7 +60,9 @@ impl BitVec {
         let bytes = self.as_bytes();
 
         hamming::weight(&bytes[..byte]) as usize
-            + bytes.get(byte).map_or(0, |b| (b & mask).count_ones() as usize)
+            + bytes
+                .get(byte)
+                .map_or(0, |b| (b & mask).count_ones() as usize)
     }
 
     /// Find the index of the `n`th (0-indexed) set bit.
@@ -122,24 +125,32 @@ impl BitVec {
     /// ```
     #[inline]
     pub fn set_all(&mut self) {
-        for w in self.as_bytes_mut() { *w = !0; }
+        for w in self.as_bytes_mut() {
+            *w = !0;
+        }
         self.fix_last_block();
     }
 
     /// Clears all bits in this vector.
     #[inline]
     pub fn clear(&mut self) {
-        for w in self.as_bytes_mut() { *w = 0; }
+        for w in self.as_bytes_mut() {
+            *w = 0;
+        }
     }
 
     /// Returns true if there are no bits in this vector
     #[inline]
-    pub fn is_empty(&self) -> bool { self.len() == 0 }
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
 }
 
 impl Default for BitVec {
     #[inline]
-    fn default() -> BitVec { BitVec::new() }
+    fn default() -> BitVec {
+        BitVec::new()
+    }
 }
 
 impl fmt::Debug for BitVec {
