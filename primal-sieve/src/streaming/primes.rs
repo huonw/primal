@@ -1,8 +1,8 @@
-#[cfg(feature = "no-std")]
+#[cfg(not(feature = "std"))]
 use alloc::boxed::Box;
 
-use crate::wheel;
 use crate::streaming::{self, StreamingSieve};
+use crate::wheel;
 
 #[cfg(target_pointer_width = "32")]
 const SQRT: usize = 1 << 16;
@@ -60,8 +60,10 @@ impl Primes {
         let (sieving, limit) = if sqrt < streaming::isqrt(streaming::SEG_LEN) {
             (None, sqrt * sqrt)
         } else {
-            (Some(Box::new(Primes::sqrt(streaming::isqrt(sqrt)))),
-             streaming::SEG_LEN)
+            (
+                Some(Box::new(Primes::sqrt(streaming::isqrt(sqrt)))),
+                streaming::SEG_LEN,
+            )
         };
         let mut streaming = StreamingSieve::new(limit);
 
@@ -95,10 +97,14 @@ impl Primes {
         let low = self.streaming.low;
         let high = low.saturating_add(streaming::SEG_LEN);
 
-        for q in self.left_over.into_iter().chain(self.sieving_primes.as_mut().unwrap()) {
+        for q in self
+            .left_over
+            .into_iter()
+            .chain(self.sieving_primes.as_mut().unwrap())
+        {
             if q.saturating_mul(q) >= high {
                 self.left_over = Some(q);
-                break
+                break;
             }
             if q > streaming::isqrt(streaming::SEG_LEN) {
                 self.streaming.add_sieving_prime(q, low);
@@ -110,7 +116,7 @@ impl Primes {
                 self.base = low;
                 self.ones = bits.clone().into_ones();
                 true
-            },
+            }
             None => false,
         }
     }
@@ -126,15 +132,15 @@ impl Iterator for Primes {
             Early::Done => {}
             Early::Two => {
                 self.early = Early::Three;
-                return Some(2)
+                return Some(2);
             }
             Early::Three => {
                 self.early = Early::Five;
-                return Some(3)
+                return Some(3);
             }
             Early::Five => {
                 self.early = Early::Done;
-                return Some(5)
+                return Some(5);
             }
         }
 
@@ -150,7 +156,7 @@ impl Iterator for Primes {
 
     fn fold<Acc, F>(mut self, mut acc: Acc, mut f: F) -> Acc
     where
-        F: FnMut(Acc, Self::Item) -> Acc
+        F: FnMut(Acc, Self::Item) -> Acc,
     {
         match self.early {
             Early::Done => {}
@@ -183,8 +189,8 @@ impl Iterator for Primes {
 
 #[cfg(test)]
 mod tests {
-    use crate::Sieve;
     use super::Primes;
+    use crate::Sieve;
 
     fn check_equality(limit: usize) {
         let sieve = Sieve::new(limit);

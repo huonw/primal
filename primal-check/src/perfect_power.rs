@@ -30,7 +30,7 @@ fn wrapping_pow(mut base: u64, mut exp: u32) -> u64 {
 /// ```
 pub fn as_perfect_power(x: u64) -> (u64, u8) {
     if x == 0 || x == 1 {
-        return (x, 1)
+        return (x, 1);
     }
 
     let floor_log_2 = 64 - x.leading_zeros() as u32 - 1;
@@ -43,10 +43,10 @@ pub fn as_perfect_power(x: u64) -> (u64, u8) {
     let mut expn: u32 = 2;
     let mut step = 1;
     while expn <= floor_log_2 {
-        #[cfg(not(feature = "no-std"))]
-        let factor = x_.powf(1.0/expn as f64).round() as u64;
-        #[cfg(feature = "no-std")]
-        let factor = libm::round(libm::pow(x_, 1.0/expn as f64)) as u64;
+        #[cfg(feature = "std")]
+        let factor = x_.powf(1.0 / expn as f64).round() as u64;
+        #[cfg(feature = "libm")]
+        let factor = libm::round(libm::pow(x_, 1.0 / expn as f64)) as u64;
         // the only case this will wrap is if x is close to 2^64 and
         // the round() rounds up, pushing this calculation over the
         // edge, however, the overflow will be well away from x, so we
@@ -116,12 +116,14 @@ mod tests {
             (36, (6, 2), false),
             (100, (10, 2), false),
             (1000, (10, 3), false),
-                ];
+        ];
 
         for &(x, expected, is_prime) in tests.iter() {
             assert_eq!(as_perfect_power(x), expected);
-            assert_eq!(as_prime_power(x),
-                       if is_prime { Some(expected)} else { None })
+            assert_eq!(
+                as_prime_power(x),
+                if is_prime { Some(expected) } else { None }
+            )
         }
 
         let sieve = Sieve::new(200);
@@ -131,7 +133,7 @@ mod tests {
         loop {
             let p = match primes.next() {
                 Some(p) => p as u64,
-                None => break
+                None => break,
             };
 
             let subprimes = primes.clone().map(|x| (x, false));
@@ -143,8 +145,10 @@ mod tests {
 
                     let expected = (pq, n as u8);
                     assert_eq!(as_perfect_power(x), expected);
-                    assert_eq!(as_prime_power(x),
-                               if is_prime { Some(expected) } else { None });
+                    assert_eq!(
+                        as_prime_power(x),
+                        if is_prime { Some(expected) } else { None }
+                    );
                 }
             }
         }

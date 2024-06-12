@@ -21,5 +21,7 @@ libm = { version = "0.2.8", optional = true }
 primal = { path = "..", version = "0.4" }
 
 [features]
-no-std = ["dep:libm"]
+libm = ["dep:libm"]
+std = []
+default = ["std"]
 unstable = []

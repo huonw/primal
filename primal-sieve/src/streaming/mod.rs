@@ -1,13 +1,15 @@
-use primal_bit::BitVec;
-use core::cmp;
+#![cfg(any(feature = "std", feature = "libm"))]
 
-#[cfg(feature = "no-std")]
+use core::cmp;
+use primal_bit::BitVec;
+
+#[cfg(not(feature = "std"))]
 use alloc::{vec, vec::Vec};
 
 use crate::wheel;
 
-pub mod primes;
 mod presieve;
+pub mod primes;
 
 /// A heavily optimised prime sieve.
 ///
@@ -47,11 +49,10 @@ pub struct StreamingSieve {
 const CACHE: usize = 32 << 10;
 const SEG_ELEMS: usize = 8 * CACHE;
 const SEG_LEN: usize = SEG_ELEMS * wheel::BYTE_MODULO / wheel::BYTE_SIZE;
-
 fn isqrt(x: usize) -> usize {
-    #[cfg(not(feature = "no-std"))]
+    #[cfg(feature = "std")]
     let ret = (x as f64).sqrt() as usize;
-    #[cfg(feature = "no-std")]
+    #[cfg(feature = "libm")]
     let ret = libm::sqrt(x as f64) as usize;
     ret
 }
@@ -82,12 +83,12 @@ impl StreamingSieve {
 
             low,
             current,
-            limit
+            limit,
         }
     }
     fn split_index(&self, idx: usize) -> (usize, usize) {
         let len = SEG_ELEMS;
-        (idx / len,idx % len)
+        (idx / len, idx % len)
     }
     fn index_for(&self, n: usize) -> (bool, usize, usize) {
         let (b, idx) = wheel::bit_index(n);
@@ -121,7 +122,7 @@ impl StreamingSieve {
                 let (includes, base, tweak) = sieve.index_for(n);
                 let mut count = match wheel::BYTE_MODULO {
                     30 => 3,
-                    _ => unimplemented!()
+                    _ => unimplemented!(),
                 };
 
                 for _ in 0..base {
@@ -139,6 +140,7 @@ impl StreamingSieve {
         }
     }
 
+    #[cfg(any(feature = "libm", feature = "std"))]
     /// Compute *p<sub>n</sub>*, the `n` prime number, 1-indexed
     /// (i.e. *p<sub>1</sub>* = 2, *p<sub>2</sub>* = 3).
     ///
@@ -167,7 +169,7 @@ impl StreamingSieve {
                     let count = bits.count_ones();
                     if count >= bit_n {
                         let bit_idx = bits.find_nth_bit(bit_n - 1).unwrap();
-                        return low + wheel::from_bit_index(bit_idx)
+                        return low + wheel::from_bit_index(bit_idx);
                     }
 
                     bit_n -= count
@@ -179,7 +181,8 @@ impl StreamingSieve {
 
     fn add_sieving_prime(&mut self, p: usize, low: usize) {
         if p <= CACHE / 2 {
-            self.small_primes.push(wheel::State::new(wheel::Wheel30, p, low));
+            self.small_primes
+                .push(wheel::State::new(wheel::Wheel30, p, low));
         } else {
             let elem = wheel::State::new(wheel::Wheel210, p, low);
             if p < CACHE * 5 / 2 {
@@ -195,7 +198,7 @@ impl StreamingSieve {
             for p in small.primes_from(self.current) {
                 if p * p > high {
                     self.current = p;
-                    break
+                    break;
                 }
                 self.add_sieving_prime(p, low);
             }
@@ -203,8 +206,10 @@ impl StreamingSieve {
         }
     }
 
-    fn small_primes_sieve<W: wheel::Wheel>(sieve: &mut BitVec,
-                                           small_primes: &mut [wheel::State<W>]) {
+    fn small_primes_sieve<W: wheel::Wheel>(
+        sieve: &mut BitVec,
+        small_primes: &mut [wheel::State<W>],
+    ) {
         let bytes = sieve.as_bytes_mut();
         for wi in small_primes {
             wi.sieve_hardcoded(bytes);
@@ -248,7 +253,7 @@ impl StreamingSieve {
     /// needs special handling.
     pub(crate) fn next(&mut self) -> Option<(usize, &BitVec)> {
         if self.low >= self.limit {
-            return None
+            return None;
         }
 
         let low = self.low;
@@ -274,13 +279,16 @@ impl StreamingSieve {
 
 #[cfg(test)]
 mod tests {
+    use super::StreamingSieve;
+    use crate::wheel;
     use crate::Sieve;
     use primal_slowsieve::Primes;
-    use crate::wheel;
-    use super::StreamingSieve;
     fn gcd(x: usize, y: usize) -> usize {
-        if y == 0 { x }
-        else { gcd(y, x % y) }
+        if y == 0 {
+            x
+        } else {
+            gcd(y, x % y)
+        }
     }
     fn coprime_to(x: usize) -> Vec<usize> {
         (1..x).filter(|&n| gcd(n, x) == 1).collect()
@@ -298,9 +306,15 @@ mod tests {
         while let Some((_low, next)) = sieve.next() {
             for val in next {
                 let i = wheel::BYTE_MODULO * base + coprime[index];
-                if i >= LIMIT { break }
-                assert!(primes.is_prime(i) == val,
-                        "failed for {} (is prime = {})", i, primes.is_prime(i));
+                if i >= LIMIT {
+                    break;
+                }
+                assert!(
+                    primes.is_prime(i) == val,
+                    "failed for {} (is prime = {})",
+                    i,
+                    primes.is_prime(i)
+                );
 
                 index += 1;
                 if index == wheel::BYTE_SIZE {
@@ -322,8 +336,13 @@ mod tests {
         for i in (0..20).chain((0..100).map(|n| n * mult + 1)) {
             let val = StreamingSieve::prime_pi(i);
             let true_ = real.primes().take_while(|p| *p <= i).count();
-            assert!(val == true_, "failed for {}, true {}, computed {}",
-                    i, true_, val)
+            assert!(
+                val == true_,
+                "failed for {}, true {}, computed {}",
+                i,
+                true_,
+                val
+            )
         }
     }
 
@@ -376,7 +395,6 @@ mod tests {
 
         assert_eq!(StreamingSieve::prime_pi(LIMIT_RESULT.0), LIMIT_RESULT.1);
     }
-
 
     #[test]
     fn nth_prime_huge() {

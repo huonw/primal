@@ -1,5 +1,3 @@
-use ::core::slice;
-
 fn naive(x: &[u8]) -> u64 {
     x.iter().fold(0, |a, b| a + b.count_ones() as u64)
 }

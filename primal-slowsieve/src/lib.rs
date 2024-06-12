@@ -2,15 +2,15 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
-#![cfg_attr(feature = "no-std", no_std)]
+#![cfg_attr(not(feature = "std"), no_std)]
 
-#[cfg(feature = "no-std")]
+#[cfg(not(feature = "std"))]
 extern crate alloc;
 
+use core::{cmp, iter};
 use primal_bit::BitVec;
-use core::{iter, cmp};
 
-#[cfg(feature = "no-std")]
+#[cfg(not(feature = "std"))]
 use alloc::{vec, vec::Vec};
 
 /// Stores information about primes up to some limit.
@@ -22,7 +22,7 @@ pub struct Primes {
     // non-prime.
     //
     // This indicates which numbers are composite.
-    v: BitVec
+    v: BitVec,
 }
 
 /// Iterator over the primes stored in a sieve.
@@ -63,13 +63,13 @@ impl Primes {
         // the ticking works properly)
         filter(&mut is_prime, limit, 3);
 
-        #[cfg(not(feature = "no-std"))]
+        #[cfg(feature = "std")]
         let bound = (limit as f64).sqrt() as usize + 1;
-        #[cfg(feature = "no-std")]
+        #[cfg(feature = "libm")]
         let bound = libm::sqrt(limit as f64) as usize + 1;
         // skip 2.
         let mut check = 2;
-        let mut tick = if check % 3 == 1 {2} else {1};
+        let mut tick = if check % 3 == 1 { 2 } else { 1 };
 
         while check <= bound {
             if !is_prime[check] {
@@ -104,7 +104,7 @@ impl Primes {
     pub fn primes(&self) -> PrimeIterator<'_> {
         PrimeIterator {
             two: true,
-            iter: self.v.iter().enumerate()
+            iter: self.v.iter().enumerate(),
         }
     }
 
@@ -125,15 +125,20 @@ impl Primes {
     /// Notably, any number between `U` and `U^2` can always be fully
     /// factored, since these numbers are guaranteed to only have zero
     /// or one prime factors larger than `U`.
-    pub fn factor(&self, mut n: usize) -> Result<Vec<(usize,usize)>,
-                                                 (usize, Vec<(usize, usize)>)>
-    {
-        if n == 0 { return Err((0, vec![])) }
+    pub fn factor(
+        &self,
+        mut n: usize,
+    ) -> Result<Vec<(usize, usize)>, (usize, Vec<(usize, usize)>)> {
+        if n == 0 {
+            return Err((0, vec![]));
+        }
 
         let mut ret = Vec::new();
 
         for p in self.primes() {
-            if n == 1 { break }
+            if n == 1 {
+                break;
+            }
 
             let mut count = 0;
             while n % p == 0 {
@@ -141,7 +146,7 @@ impl Primes {
                 count += 1;
             }
             if count > 0 {
-                ret.push((p,count));
+                ret.push((p, count));
             }
         }
         if n != 1 {
@@ -154,7 +159,7 @@ impl Primes {
                 ret.push((n, 1));
             } else {
                 // large factors :(
-                return Err((n, ret))
+                return Err((n, ret));
             }
         }
         Ok(ret)
@@ -166,7 +171,9 @@ impl Primes {
     ///
     /// `count_upto` panics if `n > self.upper_bound()`.
     pub fn count_upto(&self, n: usize) -> usize {
-        if n < 2 { return 0 }
+        if n < 2 {
+            return 0;
+        }
 
         assert!(n <= self.upper_bound());
         let bit = (n + 1) / 2;
@@ -184,7 +191,7 @@ impl<'a> Iterator for PrimeIterator<'a> {
         } else {
             for (i, is_not_prime) in &mut self.iter {
                 if !is_not_prime {
-                    return Some(2 * i + 1)
+                    return Some(2 * i + 1);
                 }
             }
             None
@@ -199,11 +206,13 @@ impl<'a> Iterator for PrimeIterator<'a> {
                 let (below_hi, above_hi) = primal_estimate::prime_pi(hi as u64);
                 let (below_lo, above_lo) = primal_estimate::prime_pi(lo as u64);
 
-                ((below_hi - cmp::min(above_lo, below_hi)) as usize,
-                 Some((above_hi - below_lo + 1) as usize))
+                (
+                    (below_hi - cmp::min(above_lo, below_hi)) as usize,
+                    Some((above_hi - below_lo + 1) as usize),
+                )
             }
             (Some(_), None) => (1, Some(1)),
-            (None, _) => (0, Some(0))
+            (None, _) => (0, Some(0)),
         }
     }
 }
@@ -214,17 +223,16 @@ impl<'a> DoubleEndedIterator for PrimeIterator<'a> {
         loop {
             match self.iter.next_back() {
                 Some((i, false)) => return Some(2 * i + 1),
-                Some((_, true)) => {/* continue */}
+                Some((_, true)) => { /* continue */ }
                 None if self.two => {
                     self.two = false;
-                    return Some(2)
+                    return Some(2);
                 }
-                None => return None
+                None => return None,
             }
         }
     }
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -245,8 +253,8 @@ mod tests {
             (8, false),
             (9, false),
             (10, false),
-            (11, true)
-                ];
+            (11, true),
+        ];
 
         for &(n, expected) in tests.iter() {
             assert_eq!(primes.is_prime(n), expected);
@@ -298,14 +306,25 @@ mod tests {
             (8, &[(2, 3)]),
             (9, &[(3, 2)]),
             (10, &[(2, 1), (5, 1)]),
-
-            (2*2*2*2*2 * 3*3*3*3*3, &[(2, 5), (3,5)]),
-            (2*3*5*7*11*13*17*19, &[(2,1), (3,1), (5,1), (7,1), (11,1), (13,1), (17,1), (19,1)]),
+            (2 * 2 * 2 * 2 * 2 * 3 * 3 * 3 * 3 * 3, &[(2, 5), (3, 5)]),
+            (
+                2 * 3 * 5 * 7 * 11 * 13 * 17 * 19,
+                &[
+                    (2, 1),
+                    (3, 1),
+                    (5, 1),
+                    (7, 1),
+                    (11, 1),
+                    (13, 1),
+                    (17, 1),
+                    (19, 1),
+                ],
+            ),
             // a factor larger than that stored in the map
             (7561, &[(7561, 1)]),
-            (2*7561, &[(2, 1), (7561, 1)]),
-            (4*5*7561, &[(2, 2), (5,1), (7561, 1)]),
-            ];
+            (2 * 7561, &[(2, 1), (7561, 1)]),
+            (4 * 5 * 7561, &[(2, 2), (5, 1), (7561, 1)]),
+        ];
         for &(n, expected) in tests.iter() {
             assert_eq!(primes.factor(n), Ok(expected.to_vec()));
         }
@@ -329,7 +348,7 @@ mod tests {
             let real = long.factor(n).ok().unwrap();
 
             let mut seen_small = None;
-            for (this_idx, &(p,i)) in real.iter().enumerate() {
+            for (this_idx, &(p, i)) in real.iter().enumerate() {
                 let last_short_prime = if p >= short_lim {
                     this_idx
                 } else if p > short.upper_bound() {
@@ -339,12 +358,12 @@ mod tests {
                         None => {
                             // we can cope with one
                             seen_small = Some(this_idx);
-                            continue
+                            continue;
                         }
                     }
                 } else {
                     // small enough
-                    continue
+                    continue;
                 };
 
                 // break into the two parts
@@ -364,19 +383,20 @@ mod tests {
     fn factor_failures() {
         let primes = Primes::sieve(30);
 
-        assert_eq!(primes.factor(0),
-                   Err((0, vec![])));
+        assert_eq!(primes.factor(0), Err((0, vec![])));
         // can only handle one large factor
-        assert_eq!(primes.factor(31 * 31),
-                   Err((31 * 31, vec![])));
-        assert_eq!(primes.factor(2 * 3 * 31 * 31),
-                   Err((31 * 31, vec![(2, 1), (3, 1)])));
+        assert_eq!(primes.factor(31 * 31), Err((31 * 31, vec![])));
+        assert_eq!(
+            primes.factor(2 * 3 * 31 * 31),
+            Err((31 * 31, vec![(2, 1), (3, 1)]))
+        );
 
         // prime that's too large (bigger than 30*30).
-        assert_eq!(primes.factor(7561),
-                   Err((7561, vec![])));
-        assert_eq!(primes.factor(2 * 3 * 7561),
-                   Err((7561, vec![(2, 1), (3, 1)])));
+        assert_eq!(primes.factor(7561), Err((7561, vec![])));
+        assert_eq!(
+            primes.factor(2 * 3 * 7561),
+            Err((7561, vec![(2, 1), (3, 1)]))
+        );
     }
 
     #[test]
@@ -396,12 +416,18 @@ mod tests {
 
                 let next = primes.next();
 
-                assert!(lo <= len && len <= hi.unwrap(),
-                        "found failing size_hint for {:?} to {}, should satisfy: {} <= {} <= {:?}",
-                        next, i, lo, len, hi);
+                assert!(
+                    lo <= len && len <= hi.unwrap(),
+                    "found failing size_hint for {:?} to {}, should satisfy: {} <= {} <= {:?}",
+                    next,
+                    i,
+                    lo,
+                    len,
+                    hi
+                );
 
                 if next.is_none() {
-                    break
+                    break;
                 }
             }
 
@@ -421,8 +447,13 @@ mod tests {
         for i in (0..20).chain((0..100).map(|n| n * mult + 1)) {
             let val = sieve.count_upto(i);
             let true_ = sieve.primes().take_while(|p| *p <= i).count();
-            assert!(val == true_, "failed for {}, true {}, computed {}",
-                    i, true_, val)
+            assert!(
+                val == true_,
+                "failed for {}, true {}, computed {}",
+                i,
+                true_,
+                val
+            )
         }
     }
 }

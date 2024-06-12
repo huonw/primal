@@ -33,11 +33,8 @@ name = "bench"
 harness = false
 
 [features]
-no-std = [
-    "primal-check/no-std",
-    "primal-estimate/no-std",
-    "primal-sieve/no-std",
-]
+libm = ["primal-sieve/libm"]
+std = ["primal-sieve/std"]
 unstable = ["primal-sieve/unstable"]
 
 [workspace]

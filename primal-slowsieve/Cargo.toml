@@ -28,6 +28,8 @@ name = "bench"
 harness = false
 
 [features]
-no-std = ["libm", "primal-estimate/no-std"]
+libm = ["dep:libm", "primal-estimate/libm"]
+std = ["primal-estimate/std"]
+default = ["std"]
 unstable = []
 slow_tests = []

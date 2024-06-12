@@ -1,7 +1,7 @@
 use core::cmp;
 use primal_bit::BitVec;
 
-#[cfg(feature = "no-std")]
+#[cfg(not(feature = "std"))]
 use alloc::borrow::ToOwned;
 
 pub const BYTE_SIZE: usize = 8;
