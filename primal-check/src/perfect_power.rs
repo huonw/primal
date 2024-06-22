@@ -44,7 +44,7 @@ pub fn as_perfect_power(x: u64) -> (u64, u8) {
     let mut expn: u32 = 2;
     let mut step = 1;
     while expn <= floor_log_2 {
-        #[cfg(feature = "libm")]
+        #[cfg(all(feature = "libm", not(feature = "std")))]
         let factor = libm::round(libm::pow(x_, 1.0 / expn as f64)) as u64;
         #[cfg(feature = "std")]
         let factor = x_.powf(1.0 / expn as f64).round() as u64;

@@ -2,7 +2,7 @@
 //!
 //! This crate is designed to be used via `primal`.
 
-#![no_std]
+#![cfg_attr(not(feature = "std"), no_std)]
 
 pub use crate::is_prime::miller_rabin;
 pub use crate::perfect_power::{as_perfect_power, as_prime_power};

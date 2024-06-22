@@ -8,6 +8,7 @@
 #[allow(dead_code)]
 mod tables;
 
+#[cfg(any(feature = "std", feature = "libm"))]
 /// Returns estimated bounds for π(*n*), the number of primes less
 /// than or equal to `n`.
 ///
@@ -45,10 +46,12 @@ pub fn prime_pi(n: u64) -> (u64, u64) {
         (x, x)
     } else {
         let n_ = n as f64;
+
+        #[cfg(all(not(feature = "std"), feature = "libm"))]
+        let lg = libm::log(n_);
         #[cfg(feature = "std")]
         let lg = n_.ln();
-        #[cfg(feature = "libm")]
-        let lg = libm::log(n_);
+
         let inv_lg = 1.0 / lg;
         let n_inv_lg = n_ * inv_lg;
 
@@ -135,9 +138,9 @@ pub fn nth_prime(n: u64) -> (u64, u64) {
         #[cfg(feature = "std")]
         let lglg = lg.ln();
 
-        #[cfg(feature = "libm")]
+        #[cfg(all(not(feature = "std"), feature = "libm"))]
         let lg = libm::log(n_);
-        #[cfg(feature = "libm")]
+        #[cfg(all(not(feature = "std"), feature = "libm"))]
         let lglg = libm::log(lg);
 
         let lo = match () {

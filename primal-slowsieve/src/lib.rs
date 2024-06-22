@@ -33,6 +33,7 @@ pub struct PrimeIterator<'a> {
 }
 
 impl Primes {
+    #[cfg(any(feature = "std", feature = "libm"))]
     /// Construct a `Primes` via a sieve up to at least `limit`.
     ///
     /// This stores all primes less than `limit` (and possibly some
@@ -63,10 +64,11 @@ impl Primes {
         // the ticking works properly)
         filter(&mut is_prime, limit, 3);
 
+        #[cfg(all(not(feature = "std"), feature = "libm"))]
+        let bound = libm::sqrt(limit as f64) as usize + 1;
         #[cfg(feature = "std")]
         let bound = (limit as f64).sqrt() as usize + 1;
-        #[cfg(feature = "libm")]
-        let bound = libm::sqrt(limit as f64) as usize + 1;
+
         // skip 2.
         let mut check = 2;
         let mut tick = if check % 3 == 1 { 2 } else { 1 };
