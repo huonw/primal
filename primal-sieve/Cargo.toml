@@ -15,7 +15,7 @@ A high performance prime sieve.
 """
 
 [dependencies]
-#libm = { version = "0.2.8", optional = true }
+libm = { version = "0.2.8", optional = true }
 primal-bit = { path = "../primal-bit", version = "0.4" }
 primal-estimate = { path = "../primal-estimate", version = "0.4" }
 smallvec = "1"
@@ -30,7 +30,7 @@ name = "bench"
 harness = false
 
 [features]
-libm = ["primal-estimate/libm"]
+libm = ["primal-estimate/libm", "dep:libm"]
 std = ["primal-estimate/std"]
 default = ["std"]
 unstable = []

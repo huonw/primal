@@ -12,6 +12,7 @@ fn wrapping_pow(mut base: u64, mut exp: u32) -> u64 {
     acc
 }
 
+#[cfg(any(feature = "std", feature = "libm"))]
 /// Returns integers `(y, k)` such that `x = y^k` with `k` maximised
 /// (other than for `x = 0, 1`, in which case `y = x`, `k = 1`).
 ///
@@ -43,10 +44,10 @@ pub fn as_perfect_power(x: u64) -> (u64, u8) {
     let mut expn: u32 = 2;
     let mut step = 1;
     while expn <= floor_log_2 {
-        #[cfg(feature = "std")]
-        let factor = x_.powf(1.0 / expn as f64).round() as u64;
         #[cfg(feature = "libm")]
         let factor = libm::round(libm::pow(x_, 1.0 / expn as f64)) as u64;
+        #[cfg(feature = "std")]
+        let factor = x_.powf(1.0 / expn as f64).round() as u64;
         // the only case this will wrap is if x is close to 2^64 and
         // the round() rounds up, pushing this calculation over the
         // edge, however, the overflow will be well away from x, so we

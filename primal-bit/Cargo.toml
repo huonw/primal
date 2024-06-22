@@ -14,9 +14,5 @@ description = """
 Bit-vector specialised to the prime-number-related needs of `primal`.
 """
 
-#[dependencies]
-# last update to crates.io was 8 years ago and the crate did not support no-std then
-#hamming = { git = "https://github.com/huonw/hamming.git", rev = "4b528d75cfa2e102b6edc6c60b629cd986215437" }
-
 [features]
 unstable = []

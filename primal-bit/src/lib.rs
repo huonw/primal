@@ -11,8 +11,7 @@
 //! A very simple bit-vector that serves the needs of `primal`.
 
 #![no_std]
-//can't deny unsafe due to to the use of `align_to` in `weight` function
-//#![deny(unsafe_code)]
+#![deny(unsafe_code)]
 
 extern crate alloc;
 

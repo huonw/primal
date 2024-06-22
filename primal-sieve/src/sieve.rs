@@ -1,3 +1,4 @@
+#![cfg(any(feature = "std", feature = "libm"))]
 use crate::streaming::StreamingSieve;
 use crate::wheel;
 use primal_bit::BitVec;

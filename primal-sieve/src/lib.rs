@@ -4,7 +4,7 @@
 
 #![cfg_attr(not(feature = "std"), no_std)]
 
-#[cfg(feature = "std")]
+#[cfg(not(feature = "std"))]
 extern crate alloc;
 
 // black boxes for pointers; LLVM isn't so happy without
@@ -36,11 +36,15 @@ macro_rules! safe_assert {
 }
 
 mod streaming;
+#[cfg(any(feature = "std", feature = "libm"))]
 pub use crate::streaming::primes::Primes;
+#[cfg(any(feature = "std", feature = "libm"))]
 pub use crate::streaming::StreamingSieve;
 
 // mod wheel6;
+
 mod sieve;
 mod wheel;
 
+#[cfg(any(feature = "std", feature = "libm"))]
 pub use crate::sieve::{Sieve, SievePrimes};

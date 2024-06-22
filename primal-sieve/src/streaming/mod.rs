@@ -3,10 +3,11 @@
 use core::cmp;
 use primal_bit::BitVec;
 
+use crate::wheel;
 #[cfg(not(feature = "std"))]
 use alloc::{vec, vec::Vec};
-
-use crate::wheel;
+#[cfg(feature = "libm")]
+use libm;
 
 mod presieve;
 pub mod primes;
@@ -49,11 +50,12 @@ pub struct StreamingSieve {
 const CACHE: usize = 32 << 10;
 const SEG_ELEMS: usize = 8 * CACHE;
 const SEG_LEN: usize = SEG_ELEMS * wheel::BYTE_MODULO / wheel::BYTE_SIZE;
+#[cfg(any(feature = "libm", feature = "std"))]
 fn isqrt(x: usize) -> usize {
-    #[cfg(feature = "std")]
-    let ret = (x as f64).sqrt() as usize;
     #[cfg(feature = "libm")]
     let ret = libm::sqrt(x as f64) as usize;
+    #[cfg(feature = "std")]
+    let ret = (x as f64).sqrt() as usize;
     ret
 }
 
