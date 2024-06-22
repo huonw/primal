@@ -35,6 +35,7 @@ harness = false
 [features]
 libm = ["primal-sieve/libm"]
 std = ["primal-sieve/std"]
+default = ["std"]
 unstable = ["primal-sieve/unstable"]
 
 [workspace]

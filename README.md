@@ -27,4 +27,9 @@ on the author's laptop (i7-3517U).
 [**Documentation**](http://docs.rs/primal/)
 
 ### no_std
-This crate can be built for no_std environments by enabling the no-std feature.
+
+This crate can be built for no_std environments by disabling the default features, and optionally enabling `libm` for functions like `perfect_primes`
+```
+[dependencies]
+primal = { version = "0.4", default-features = false, features = ["libm"] }
+```
