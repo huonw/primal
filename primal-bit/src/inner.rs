@@ -2,6 +2,8 @@
 //! encapsulated in a module to reduce scope.
 #![allow(unsafe_code)]
 
+use alloc::{vec, vec::Vec};
+
 use crate::BITS;
 
 /// The bitvector type.

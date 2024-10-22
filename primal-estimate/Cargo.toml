@@ -1,8 +1,8 @@
 [package]
 name = "primal-estimate"
-version = "0.3.3"
+version = "0.4.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 homepage = "https://github.com/huonw/primal"
 repository = "https://github.com/huonw/primal"
@@ -14,8 +14,14 @@ State-of-the-art estimation of upper and lower bounds for π(n)
 (the number of primes below n) and p_k (the k-th prime).
 """
 
+[dependencies]
+libm = { version = "0.2.8", optional = true }
+
 [dev-dependencies]
-primal = { path = "..", version = "0.3" }
+primal = { path = "..", version = "0.4" }
 
 [features]
+libm = ["dep:libm"]
+std = []
+default = ["std"]
 unstable = []

@@ -1,8 +1,9 @@
-use std::iter;
-use std::mem;
-use std::ops::Range;
-use std::slice;
-use std::vec;
+use core::iter;
+use core::mem;
+use core::ops::Range;
+use core::slice;
+
+use alloc::vec;
 
 use crate::BitVec;
 use crate::BITS;

@@ -3,9 +3,12 @@
 //!
 //! This is designed to be used via the `primal` crate.
 
+#![cfg_attr(not(feature = "std"), no_std)]
+
 #[allow(dead_code)]
 mod tables;
 
+#[cfg(any(feature = "std", feature = "libm"))]
 /// Returns estimated bounds for π(*n*), the number of primes less
 /// than or equal to `n`.
 ///
@@ -43,7 +46,12 @@ pub fn prime_pi(n: u64) -> (u64, u64) {
         (x, x)
     } else {
         let n_ = n as f64;
+
+        #[cfg(all(not(feature = "std"), feature = "libm"))]
+        let lg = libm::log(n_);
+        #[cfg(feature = "std")]
         let lg = n_.ln();
+
         let inv_lg = 1.0 / lg;
         let n_inv_lg = n_ * inv_lg;
 
@@ -124,8 +132,16 @@ pub fn nth_prime(n: u64) -> (u64, u64) {
         (x, x)
     } else {
         let n_ = n as f64;
+
+        #[cfg(feature = "std")]
         let lg = n_.ln();
+        #[cfg(feature = "std")]
         let lglg = lg.ln();
+
+        #[cfg(all(not(feature = "std"), feature = "libm"))]
+        let lg = libm::log(n_);
+        #[cfg(all(not(feature = "std"), feature = "libm"))]
+        let lglg = libm::log(lg);
 
         let lo = match () {
             // [2] Theorem 1.6
@@ -162,9 +178,14 @@ mod tests {
     fn prime_pi() {
         fn check(n: u64, pi: u64) {
             let (lo, hi) = super::prime_pi(n);
-            assert!(lo <= pi && pi <= hi,
-                    "found failing estimate at {}, should satisfy: {} <= {} <= {}",
-                    n, lo, pi, hi)
+            assert!(
+                lo <= pi && pi <= hi,
+                "found failing estimate at {}, should satisfy: {} <= {} <= {}",
+                n,
+                lo,
+                pi,
+                hi
+            )
         }
         let primes = Sieve::new(1_000_000);
 
@@ -194,7 +215,7 @@ mod tests {
             (15, 29844570422669),
             (16, 279238341033925),
             (17, 2623557157654233),
-            ];
+        ];
         for &(exponent, real) in sporadic.iter() {
             let n = 10u64.pow(exponent);
             check(n, real);
@@ -205,9 +226,14 @@ mod tests {
     fn nth_prime() {
         fn check(n: u64, p: u64) {
             let (lo, hi) = super::nth_prime(n);
-            assert!(lo <= p && p <= hi,
-                    "found failing estimate at {}, should satisfy: {} <= {} <= {}",
-                    n, lo, p, hi);
+            assert!(
+                lo <= p && p <= hi,
+                "found failing estimate at {}, should satisfy: {} <= {} <= {}",
+                n,
+                lo,
+                p,
+                hi
+            );
         }
         let sieve = Sieve::new(1_000_000);
 
@@ -233,7 +259,7 @@ mod tests {
             (13, 323780508946331),
             (14, 3475385758524527),
             (15, 37124508045065437),
-            ];
+        ];
 
         for &(exponent, nth_prime) in sporadic.iter() {
             let n = 10u64.pow(exponent);

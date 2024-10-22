@@ -1,8 +1,11 @@
+use core::cmp;
 use primal_bit::BitVec;
-use std::cmp;
 
-use crate::wheel;
+#[cfg(not(feature = "std"))]
+use alloc::vec;
+
 use super::StreamingSieve;
+use crate::wheel;
 
 const MINIMUM_PRESIEVE: usize = 2 * 3 * 5;
 const PRESIEVE_PRIMES: &[usize] = &[7, 11, 13, 17, 19, 23, 29];
@@ -21,7 +24,7 @@ impl Presieve {
         for (i, &x) in PRESIEVE_PRIMES.iter().enumerate() {
             let new_prod = prod * x;
             if wheel::bits_for(new_prod) > limit_bits {
-                break
+                break;
             }
             prod = new_prod;
             idx = i;
@@ -43,7 +46,7 @@ impl Presieve {
                     sievers.push(wheel::State::new(wheel::Wheel30, x, prod));
                 }
             }
-            let mut sieve =  BitVec::from_elem(len, true);
+            let mut sieve = BitVec::from_elem(len, true);
             StreamingSieve::small_primes_sieve(&mut sieve, &mut sievers);
 
             Presieve {
@@ -66,21 +69,23 @@ impl Presieve {
     }
     pub fn apply(&self, sieve: &mut BitVec, low: usize) {
         if self.sieve.len() == 0 {
-            return
+            return;
         }
         let offset = (low % self.presieve_prod) * wheel::BYTE_SIZE / wheel::BYTE_MODULO / 8;
 
-        copy_all(sieve.as_bytes_mut(),
-                 self.sieve.as_bytes(),
-                 offset);
+        copy_all(sieve.as_bytes_mut(), self.sieve.as_bytes(), offset);
         fn copy_all(dst: &mut [u8], src: &[u8], init_offset: usize) {
             let mut pos = 0;
             // pre-fill data at the start, as a rotation of `src`.
             pos += memcpy(&mut dst[pos..], &src[init_offset..]);
-            if pos >= dst.len() { return }
+            if pos >= dst.len() {
+                return;
+            }
 
             pos += memcpy(&mut dst[pos..], &src[..init_offset]);
-            if pos >= dst.len() { return }
+            if pos >= dst.len() {
+                return;
+            }
 
             // progressively copy the prefix to the rest of the
             // vector, doubling each time.

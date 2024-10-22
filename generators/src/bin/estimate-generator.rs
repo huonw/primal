@@ -9,7 +9,8 @@ ensure that primal-estimate is as tight as possible.
 enum BoundType {
     // Unconventional upper case to allow using the static's name
     // directly to construct this.
-    HIGH, LOW
+    HIGH,
+    LOW,
 }
 
 #[derive(Clone, Debug)]
@@ -27,12 +28,11 @@ pub struct EstimateGroup {
     estimators: &'static [Estimate],
 }
 
-
 macro_rules! estimates {
     ($(
         $group: ident: {
             $($from: expr, $source: expr =>
-              |$n_: pat, $lg: pat, $lglg: pat, $inv_lg: pat, $n_inv_lg: pat| { $e: expr },)*
+              | $n_: pat, $lg: pat, $lglg: pat, $inv_lg: pat, $n_inv_lg: pat_param | { $e: expr },)*
         }
     )*) => {
         $(
@@ -154,7 +154,6 @@ mod nth_prime {
     }
 }
 
-
 fn non_nan_cmp(x: f64, y: f64) -> std::cmp::Ordering {
     x.partial_cmp(&y).unwrap()
 }
@@ -204,8 +203,8 @@ fn analyse(group: &EstimateGroup) {
             // yet up to estimators[i + 1].valid_from, so the prefix
             // up to our current estimator will be valid at
             // n_. Compute those estimators' estimates at this point.
-            let estimates =
-                estimators[..i + 1].iter()
+            let estimates = estimators[..i + 1]
+                .iter()
                 .map(|e| (e, (e.compute)(n_, lg, lglg, inv_lg, n_inv_lg)));
 
             // The "best" of the estimates depends whether this is
@@ -218,20 +217,26 @@ fn analyse(group: &EstimateGroup) {
             // Does the estimate overflow?
             if limit == MAX && estimate > MAX {
                 upper_limit = Some(n_ / MULT);
-                break
+                break;
             }
 
             // If the best one at this point is different to the best
             // at the previous points, we've switched into a new
             // segment, so we need to record the old one.
             if best.expression != current.expression {
-                subranges.push(Subrange { estimate: current, from: current_first });
+                subranges.push(Subrange {
+                    estimate: current,
+                    from: current_first,
+                });
                 current = best;
                 current_first = n_;
             }
         }
     }
-    subranges.push(Subrange { estimate: current, from: current_first });
+    subranges.push(Subrange {
+        estimate: current,
+        from: current_first,
+    });
 
     if let Some(limit) = upper_limit {
         println!("const MAX_VALID_INPUT: u64 = {:.0};", limit);
@@ -243,7 +248,10 @@ fn analyse(group: &EstimateGroup) {
             format!(" if n >= {:.0}_u64", sr.from)
         };
 
-        println!("// {}\n_{} => {},", sr.estimate.source, guard, sr.estimate.expression)
+        println!(
+            "// {}\n_{} => {},",
+            sr.estimate.source, guard, sr.estimate.expression
+        )
     }
 }
 

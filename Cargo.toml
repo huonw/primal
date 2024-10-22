@@ -1,9 +1,9 @@
 [package]
 
 name = "primal"
-version = "0.3.3"
+version = "0.4.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 homepage = "https://github.com/huonw/primal"
 repository = "https://github.com/huonw/primal"
@@ -20,12 +20,12 @@ prime).
 """
 
 [dependencies]
-primal-check = { path = "primal-check", version = "0.3" }
-primal-estimate = { path = "primal-estimate", version = "0.3" }
-primal-sieve = { path = "primal-sieve", version = "0.3" }
+primal-check = { path = "primal-check", version = "0.4" }
+primal-estimate = { path = "primal-estimate", version = "0.4" }
+primal-sieve = { path = "primal-sieve", version = "0.4" }
 
 [dev-dependencies]
-primal-slowsieve = { path = "primal-slowsieve", version = "0.3" }
+primal-slowsieve = { path = "primal-slowsieve", version = "0.4" }
 criterion = { version = "0.3.4", features = ["html_reports"] }
 
 [[bench]]
@@ -33,6 +33,9 @@ name = "bench"
 harness = false
 
 [features]
+libm = ["primal-sieve/libm"]
+std = ["primal-sieve/std"]
+default = ["std"]
 unstable = ["primal-sieve/unstable"]
 
 [workspace]

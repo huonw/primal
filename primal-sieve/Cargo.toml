@@ -1,8 +1,8 @@
 [package]
 name = "primal-sieve"
-version = "0.3.7"
+version = "0.4.0"
 authors = ["Huon Wilson <dbau.pp@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 homepage = "https://github.com/huonw/primal"
 repository = "https://github.com/huonw/primal"
@@ -15,13 +15,14 @@ A high performance prime sieve.
 """
 
 [dependencies]
-primal-bit = { path = "../primal-bit", version = "0.3" }
-primal-estimate = { path = "../primal-estimate", version = "0.3" }
+libm = { version = "0.2.8", optional = true }
+primal-bit = { path = "../primal-bit", version = "0.4" }
+primal-estimate = { path = "../primal-estimate", version = "0.4" }
 smallvec = "1"
 
 [dev-dependencies]
-primal-slowsieve = { path = "../primal-slowsieve", version = "0.3" }
-primal = { path = "..", version = "0.3" }
+primal-slowsieve = { path = "../primal-slowsieve", version = "0.4" }
+primal = { path = "..", version = "0.4" }
 criterion = { version = "0.3.4", features = ["html_reports"] }
 
 [[bench]]
@@ -29,6 +30,9 @@ name = "bench"
 harness = false
 
 [features]
+libm = ["primal-estimate/libm", "dep:libm"]
+std = ["primal-estimate/std"]
+default = ["std"]
 unstable = []
 safe = []
 slow_tests = []
